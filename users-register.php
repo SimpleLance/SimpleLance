@@ -2,10 +2,10 @@
 // initialise script
 include('includes/template/header.php');
 // only allow access to admins
-/*if ($_SESSION['access_level'] !== '1') {
+if ($_SESSION['access_level'] !== '1') {
     header('Location: access-denied.php');
     exit();
-} */
+}
 ?>
 <!-- html -->
 <br><br>
