@@ -24,30 +24,6 @@ class Users {
         }
     }
 
-    
-    public function fetch_info($what, $field, $value) {
-
-        $allowed = array('id', 'username', 'first_name', 'last_name', 'email'); // I have only added few, but you can add more. However do not add 'password' eventhough the parameters will only be given by you and not the user, in our system.
-        if (!in_array($what, $allowed, true) || !in_array($field, $allowed, true)) {
-            throw new InvalidArgumentException;
-        } else {
-
-            $query = $this->db->prepare("SELECT $what FROM `users` WHERE $field = ?");
-
-            $query->bindValue(1, $value);
-
-            try {
-
-                $query->execute();
-            } catch (PDOException $e) {
-
-                die($e->getMessage());
-            }
-
-            return $query->fetchColumn();
-        }
-    }
-
     public function user_exists($email) {
 
         $query = $this->db->prepare("SELECT COUNT(`id`) FROM `users` WHERE `email`= ?");
@@ -68,18 +44,27 @@ class Users {
         }
     }
 
-    public function register($email, $first_name, $last_name, $display_name, $password, $access_level) {
+    public function register($email, $password, $first_name, $last_name, $company, $display_name, $address_1, $address_2, $city, $county, $state, $country, $post_code, $phone, $access_level) {
 
         $password = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = $this->db->prepare("INSERT INTO `users` (`email`, `first_name`, `last_name`, `display_name`, `password`, `access_level`) VALUES (?, ?, ?, ?, ?, ?) ");
+        $query = $this->db->prepare("INSERT INTO `users` (`email`, `password`, `first_name`, `last_name`, `company`, `display_name`, `address_1`, `address_2`, `city`, `county`, `state`, `country`, `post_code`, `phone`, `access_level`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
 
         $query->bindValue(1, $email);
-        $query->bindValue(2, $first_name);
-        $query->bindValue(3, $last_name);
-        $query->bindValue(4, $display_name);
-        $query->bindValue(5, $password);
-        $query->bindValue(6, $access_level);
+        $query->bindValue(2, $password);
+        $query->bindValue(3, $first_name);
+        $query->bindValue(4, $last_name);
+        $query->bindValue(5, $company);
+        $query->bindValue(6, $display_name);
+        $query->bindValue(7, $address_1);
+        $query->bindValue(8, $address_2);
+        $query->bindValue(9, $city);
+        $query->bindValue(10, $county);
+        $query->bindValue(11, $state);
+        $query->bindValue(12, $country);
+        $query->bindValue(13, $post_code);
+        $query->bindValue(14, $phone);
+        $query->bindValue(15, $access_level);
 
         try {
             $query->execute();
@@ -169,16 +154,16 @@ class Users {
         return $query->fetch();
     }
 
-    public function update_profile($email, $first_name, $last_name, $display_name, $password, $id) {
-        $query = $this->db->prepare("UPDATE `users` SET `email` = ?, `first_name` = ?, `last_name` = ?, `display_name` = ?, `password` = ? WHERE `id` = ?");
+    public function update_profile($email, $password, $first_name, $last_name, $display_name, $id) {
+        $query = $this->db->prepare("UPDATE `users` SET `email` = ?, `password` = ?, `first_name` = ?, `last_name` = ?, `display_name` = ? WHERE `id` = ?");
 
         $password = password_hash($password, PASSWORD_DEFAULT);
 
         $query->bindValue(1, $email);
-        $query->bindValue(2, $first_name);
-        $query->bindValue(3, $last_name);
-        $query->bindValue(4, $display_name);
-        $query->bindValue(5, $password);
+        $query->bindValue(2, $password);
+        $query->bindValue(3, $first_name);
+        $query->bindValue(4, $last_name);
+        $query->bindValue(5, $display_name);
         $query->bindValue(6, $id);
 
         try {

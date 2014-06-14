@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.6.17)
 # Database: simplelance
-# Generation Time: 2014-06-14 16:55:10 +0000
+# Generation Time: 2014-06-14 20:09:11 +0000
 # ************************************************************
 
 
@@ -20,18 +20,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-# Dump of table projects
+# Dump of table users
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `projects`;
-
-CREATE TABLE `projects` (
+CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
-  `description` text,
-  `created_on` datetime DEFAULT NULL,
-  `customer` int(11) DEFAULT NULL,
-  `status` varchar(16) DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varchar(32) NOT NULL DEFAULT '',
+  `last_name` varchar(32) NOT NULL DEFAULT '',
+  `company` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `display_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `address_1` varchar(100) NOT NULL DEFAULT '',
+  `address_2` varchar(100) DEFAULT NULL,
+  `city` varchar(100) NOT NULL DEFAULT '',
+  `county` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `state` varchar(100) DEFAULT NULL,
+  `country` varchar(100) NOT NULL DEFAULT '',
+  `post_code` varchar(12) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `access_level` varchar(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `generated_string` varchar(35) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
