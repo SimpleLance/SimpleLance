@@ -29,8 +29,8 @@ $users = $users->get_users();
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Display Name</th>
                 <th>Email Address</th>
+                <th>Phone Number</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -39,8 +39,8 @@ $users = $users->get_users();
                 <tr>
                     <td><?php echo htmlentities($user['first_name']); ?></td>
                     <td><?php echo htmlentities($user['last_name']); ?></td>
-                    <td><?php echo htmlentities($user['display_name']); ?></td>
                     <td><?php echo htmlentities($user['email']); ?></td>
+                    <td><?php echo htmlentities($user['phone']); ?></td>
                     <td><a href="/users/edit.php?id=<?php echo htmlentities($user['id']); ?>">Edit</a> : <a class="delete_row" href="/users/delete.php?id=<?php echo htmlentities($user['id']); ?>" onclick="return confirm('Are you sure?')">Delete</a></td>
                 </tr>
             <?php } ?>
