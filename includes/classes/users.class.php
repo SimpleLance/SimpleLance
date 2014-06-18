@@ -44,27 +44,24 @@ class Users {
         }
     }
 
-    public function register($email, $password, $first_name, $last_name, $company, $display_name, $address_1, $address_2, $city, $county, $state, $country, $post_code, $phone, $access_level) {
+    public function register($first_name, $last_name, $email, $password, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone) {
 
         $password = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = $this->db->prepare("INSERT INTO `users` (`email`, `password`, `first_name`, `last_name`, `company`, `display_name`, `address_1`, `address_2`, `city`, `county`, `state`, `country`, `post_code`, `phone`, `access_level`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
+        $query = $this->db->prepare("INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`, `access_level`, `address_1`, `address_2`, `city`, `state`, `post_code`, `country`, `phone`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
 
-        $query->bindValue(1, $email);
-        $query->bindValue(2, $password);
-        $query->bindValue(3, $first_name);
-        $query->bindValue(4, $last_name);
-        $query->bindValue(5, $company);
-        $query->bindValue(6, $display_name);
-        $query->bindValue(7, $address_1);
-        $query->bindValue(8, $address_2);
-        $query->bindValue(9, $city);
-        $query->bindValue(10, $county);
-        $query->bindValue(11, $state);
-        $query->bindValue(12, $country);
-        $query->bindValue(13, $post_code);
-        $query->bindValue(14, $phone);
-        $query->bindValue(15, $access_level);
+        $query->bindValue(1, $first_name);
+        $query->bindValue(2, $last_name);
+        $query->bindValue(3, $email);
+        $query->bindValue(4, $password);
+        $query->bindValue(5, $access_level);
+        $query->bindValue(6, $address_1);
+        $query->bindValue(7, $address_2);
+        $query->bindValue(8, $city);
+        $query->bindValue(9, $state);
+        $query->bindValue(10, $post_code);
+        $query->bindValue(11, $country);
+        $query->bindValue(12, $phone);
 
         try {
             $query->execute();
