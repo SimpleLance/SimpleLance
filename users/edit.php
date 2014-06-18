@@ -29,8 +29,12 @@ if (isset($_POST['save'])) {
 
         if (empty($error_message) == TRUE){
             $users->update_profile($first_name, $last_name, $email, $password, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id);
-            header('Location: /users/?editsuccess');
-            exit();
+            if ($_SESSION['access_level'] == '1') {
+                header('Location: /users/?editsuccess');
+                exit();
+            } else {
+                header('Location: /?editsuccess');
+            }
         }
     }
 }
@@ -87,6 +91,8 @@ if (isset($_POST['save'])) {
                                 </select>
                             </div>
                         </div>
+                    <?php } else { ?>
+                    <input type="hidden" id="access_level" name="access_level" value="<?php echo $user_details['access_level'];?>">
                     <?php } ?>
                     <br>
                     <legend>Address Details</legend>

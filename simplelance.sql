@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.6.17)
 # Database: simplelance
-# Generation Time: 2014-06-14 20:09:11 +0000
+# Generation Time: 2014-06-18 19:23:56 +0000
 # ************************************************************
 
 
@@ -23,27 +23,36 @@
 # Dump of table users
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `users`;
+
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `first_name` varchar(32) NOT NULL DEFAULT '',
-  `last_name` varchar(32) NOT NULL DEFAULT '',
-  `company` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `display_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `access_level` varchar(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `address_1` varchar(100) NOT NULL DEFAULT '',
   `address_2` varchar(100) DEFAULT NULL,
   `city` varchar(100) NOT NULL DEFAULT '',
-  `county` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `state` varchar(100) DEFAULT NULL,
+  `post_code` varchar(12) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `country` varchar(100) NOT NULL DEFAULT '',
-  `post_code` varchar(12) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
-  `access_level` varchar(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `generated_string` varchar(35) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `access_level`, `address_1`, `address_2`, `city`, `state`, `post_code`, `country`, `phone`, `generated_string`)
+VALUES
+	(1,'Admin','User','admin@simplelance.com','$2y$10$eQmpgslNp8VOFr2aIg/Q2OSJK91Tv4CqYvWorSh7.lh.aMEbIDryW','1','123 Any Street','','Any Town','','','Ireland','',NULL),
+	(2,'Test','Customer','customer@simplelance.com','$2y$10$ot0BM0IWIXCWk8hrZkROIOSlwxAIjXom/jTOT695Oc7APYT55hUMy','2','123 Any Street','','Any Town','','','Ireland','',NULL);
+
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 

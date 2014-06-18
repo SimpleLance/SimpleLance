@@ -9,8 +9,8 @@ At present only basic user management is working.
 
 2 Accounts exist, 1 admin and 1 cust.
 
-admin - email = admin@simplelance.com / password = admin <br>
-customer - email = customer@simplelance.com / password = customer
+admin - email = admin@simplelance.com / password = admin123 <br>
+customer - email = customer@simplelance.com / password = customer123
 
 Development is ongoing and updates will be released as regular as possible.
 
