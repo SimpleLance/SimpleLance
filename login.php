@@ -1,11 +1,10 @@
 <?php
 // initialise script
-require_once('includes/init.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 // check to make sure user is not logged in
 $users->logged_in_protect();
 
 // process login form if submitted
-
 if (empty($_POST) === false) {
 
     $email = trim($_POST['email']);
@@ -27,7 +26,7 @@ if (empty($_POST) === false) {
             session_regenerate_id(true); // destroying the old session id and creating a new one
 
             $_SESSION['id'] = $login;
-            header('Location: index.php');
+            header('Location: /');
             exit();
         }
     }
@@ -35,25 +34,15 @@ if (empty($_POST) === false) {
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>SimpleLance</title>
-
-    <!-- Core CSS - Include with every page -->
+    <title><?php echo(SITE_NAME); ?></title>
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-
-    <!-- SB Admin CSS - Include with every page -->
-    <link href="/assets/css/sb-admin.css" rel="stylesheet">
-
+    <link href="/assets/css/style.css" rel="stylesheet">
 </head>
-
 <body>
-
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
@@ -70,7 +59,6 @@ if (empty($_POST) === false) {
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
                                 </div>
-                                <!-- Change this to a button or input when using this as a form -->
                                 <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
                             </fieldset>
                         </form>
@@ -79,15 +67,9 @@ if (empty($_POST) === false) {
             </div>
         </div>
     </div>
-
-    <!-- Core Scripts - Include with every page -->
-    <script src="/assets/js/jquery-1.10.2.js"></script>
+    <script src="/assets/js/jquery-2.1.1.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-
-    <!-- SB Admin Scripts - Include with every page -->
-    <script src="/assets/js/sb-admin.js"></script>
-
+    <script src="/assets/js/jquery.metisMenu.js"></script>
+    <script src="/assets/js/scripts.js"></script>
 </body>
-
 </html>

@@ -1,19 +1,30 @@
 <?php
 // include header
-include('includes/template/header.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
 	$id = htmlentities($_GET['id']);
 	$user_details = array();
 	$user_details = $users->get_user($id);
 }
 if ($_SESSION['access_level'] !== '1' && $_GET['id'] !== $_SESSION['id']) {
-    header('Location: access-denied.php');
+    header('Location: /access-denied.php');
+    exit();
+}
+// post updates to db
+if (isset($_POST['submit'])) {
+    $first_name = $_POST["first_name"];
+    $last_name = $_POST["last_name"];
+    $email = $_POST["email"];
+    $display_name = $_POST["display_name"];
+    $password = $_POST["password"];
+
+    $users->update_profile($email, $first_name, $last_name, $display_name, $password,$id);
+    header('Location: /users/?editsuccess');
     exit();
 }
 ?>
-<!-- html -->
 <br><br>
-	<!-- user edit form -->
 	<form class="well span6" role="form" action='' method='post'>
 		<div class="row">
             <div class="form-group col-lg-6">
@@ -41,25 +52,7 @@ if ($_SESSION['access_level'] !== '1' && $_GET['id'] !== $_SESSION['id']) {
 			</div>	
 		</div>		
 	</form>
-
-	<?php
-		
-	?>
-	<!-- /user edit form -->
-<!-- /html -->
 <?php
-// post updates to db
-if (isset($_POST['submit'])) {
-	$first_name = $_POST["first_name"];
-	$last_name = $_POST["last_name"];
-	$email = $_POST["email"];
-    $display_name = $_POST["display_name"];
-	$password = $_POST["password"];
-
-	$users->update_profile($email, $first_name, $last_name, $display_name, $password,$id);
-	header('Location: users-list.php?editsuccess');
-	exit();
-}
 // include footer
-include('includes/template/footer.php');
+include(ABS_PATH . '/includes/template/footer.php');
 ?>

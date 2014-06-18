@@ -1,9 +1,10 @@
 <?php
 // initialise script
-include('includes/template/header.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+
 // only allow access to admins
 if ($_SESSION['access_level'] !== '1') {
-    header('Location: access-denied.php');
+    header('Location: /access-denied.php');
     exit();
 }
 
@@ -29,7 +30,7 @@ if (isset($_POST['submit'])) {
 
     if (empty($error_message) == TRUE){
         $users->register($email, $password, $first_name, $last_name, $company, $display_name, $address_1, $address_2, $city, $county, $state, $country, $post_code, $phone, $access_level);
-        header('Location: users-list.php?addsuccess');
+        header('Location: /users/?addsuccess');
         exit();
     }
 }
@@ -43,7 +44,6 @@ if (isset($_POST['submit'])) {
             }
         }
     ?>
-	<!-- user entry form -->
 	<form class="well span6" role="form" action='' method='post'>
 		<div class="row">
             <div class="form-group col-lg-6">
@@ -115,9 +115,7 @@ if (isset($_POST['submit'])) {
 				</div>	
 		</div>		
 	</form>
-	<!-- /user entry form -->
-<!-- /html -->
 <?php
 // include footer
-include('includes/template/footer.php');
+include(ABS_PATH . '/includes/template/footer.php');
 ?>

@@ -1,36 +1,23 @@
 <?php
 // initialise script
-require_once('includes/init.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 // check for logged in user
 $users->logged_out_protect();
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title><?php echo SITE_NAME; ?></title>
 
-    <!-- Core CSS - Include with every page -->
-    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-
-    <!-- Page-Level Plugin CSS - Dashboard -->
-    <link href="/assets/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
-    <link href="/assets/css/plugins/timeline/timeline.css" rel="stylesheet">
-
-    <!-- SB Admin CSS - Include with every page -->
-    <link href="/assets/css/sb-admin.css" rel="stylesheet">
-
+    <link href="/assets/css/style.css" rel="stylesheet">
 </head>
-
 <body>
-
     <div id="wrapper">
-
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -39,7 +26,7 @@ $users->logged_out_protect();
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php"><?php echo SITE_NAME ?></a>
+                <a class="navbar-brand" href="/"><?php echo SITE_NAME ?></a>
             </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
@@ -48,11 +35,11 @@ $users->logged_out_protect();
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li>
-                            <a href="users-profile.php?id=<?php echo $_SESSION['id']; ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            <a href="/users/edit.php?id=<?php echo $_SESSION['id']; ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <a href="/logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                 </li>
@@ -76,10 +63,10 @@ $users->logged_out_protect();
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> User Management<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="users-list.php">View Users</a>
+                                    <a href="/users/">View Users</a>
                                 </li>
                                 <li>
-                                    <a href="users-register.php">Add User</a>
+                                    <a href="/users/register.php">Add User</a>
                                 </li>
                             </ul>
                         </li>
@@ -91,7 +78,7 @@ $users->logged_out_protect();
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Profile Management<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="users-profile.php?id=<?php echo $_SESSION['id']; ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                                        <a href="/users/edit.php?id=<?php echo $_SESSION['id']; ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
                                     </li>
                                 </ul>
                             </li>

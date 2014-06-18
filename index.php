@@ -1,8 +1,6 @@
 <?php
-// initialise script
-require_once('includes/init.php');
 // include header
-include('includes/template/header.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 ?>
 <div class="row">
     <div class="col-lg-12">
@@ -12,5 +10,5 @@ include('includes/template/header.php');
 </div>
 <?php
 //include footer
-include('includes/template/footer.php');
+include(ABS_PATH . '/includes/template/footer.php');
 ?>

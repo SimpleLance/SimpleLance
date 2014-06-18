@@ -1,6 +1,7 @@
 <?php
 // include header
-include('includes/template/header.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+
 // only allow access to admins
 if ($_SESSION['access_level'] !== '1') {
     header('Location: access-denied.php');
@@ -18,6 +19,9 @@ $users = $users->get_users();
         }
         if (isset($_GET['editsuccess']) && empty($_GET['editsuccess'])) {
             echo '<br><br>User successfully updated.';
+        }
+        if (isset($_GET['deletesuccess']) && empty($_GET['deletesuccess'])) {
+            echo '<br><br>User successfully deleted.';
         }
         ?>
         <table class="table table-striped custab">
@@ -37,7 +41,7 @@ $users = $users->get_users();
                     <td><?php echo htmlentities($user['last_name']); ?></td>
                     <td><?php echo htmlentities($user['display_name']); ?></td>
                     <td><?php echo htmlentities($user['email']); ?></td>
-                    <td><a href="users-profile.php?id=<?php echo htmlentities($user['id']); ?>">Edit</a> : <a class="delete_row" href="users-delete.php?id=<?php echo htmlentities($user['id']); ?>" onclick="return confirm('Are you sure?')">Delete</a></td>
+                    <td><a href="/users/edit.php?id=<?php echo htmlentities($user['id']); ?>">Edit</a> : <a class="delete_row" href="/users/delete.php?id=<?php echo htmlentities($user['id']); ?>" onclick="return confirm('Are you sure?')">Delete</a></td>
                 </tr>
             <?php } ?>
         </table>
@@ -47,5 +51,5 @@ $users = $users->get_users();
     <!-- /html -->
 <?php
 // include footer
-include('includes/template/footer.php');
+include(ABS_PATH . '/includes/template/footer.php');
 ?>
