@@ -28,7 +28,7 @@ if (isset($_POST['save'])) {
         }
 
         if (empty($error_message) == TRUE){
-            $users->update_profile($first_name, $last_name, $email, $password, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id);
+            $users->update_profile($first_name, $last_name, $email, $password, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id);
             header('Location: /users/?editsuccess');
             exit();
         }
@@ -77,6 +77,17 @@ if (isset($_POST['save'])) {
                             <input type="password" id="password_repeat" name="password_repeat" placeholder="Repeat new password to change" class="form-control">
                         </div>
                     </div>
+                    <?php if($_SESSION['access_level'] == 1) { ?>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="access_level">User Type</label>
+                            <div class="col-sm-10">
+                                <select id="access_level" name="access_level">
+                                    <option value="2" <?php if($user_details['access_level'] == '2') {echo "selected='selected'"; } ?>>Customer</option>
+                                    <option value="1" <?php if($user_details['access_level'] == '1') {echo "selected='selected'"; } ?>>Admin</option>
+                                </select>
+                            </div>
+                        </div>
+                    <?php } ?>
                     <br>
                     <legend>Address Details</legend>
                     <div class="form-group">
