@@ -73,7 +73,7 @@ class Users {
 
     public function login($email, $password) {
 
-        $query = $this->db->prepare("SELECT `password`, `id`, `access_level` FROM `users` WHERE `email` = ?");
+        $query = $this->db->prepare("SELECT `id`, `first_name`, `password`, `access_level` FROM `users` WHERE `email` = ?");
         $query->bindValue(1, $email);
 
         try {
@@ -86,6 +86,7 @@ class Users {
             if (password_verify($password, $stored_password) === true) { // using the verify method to compare the password with the stored hashed password.
                 $_SESSION['access_level'] = $data['access_level'];
                 $_SESSION['id'] = $data['id'];
+                $_SESSION['first_name'] = $data['first_name'];
                 return $id; // returning the user's id.
             } else {
                 return false;
