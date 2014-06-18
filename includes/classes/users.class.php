@@ -73,7 +73,7 @@ class Users {
 
     public function login($email, $password) {
 
-        $query = $this->db->prepare("SELECT `password`, `id`, `access_level`, `display_name` FROM `users` WHERE `email` = ?");
+        $query = $this->db->prepare("SELECT `password`, `id`, `access_level` FROM `users` WHERE `email` = ?");
         $query->bindValue(1, $email);
 
         try {
@@ -86,7 +86,6 @@ class Users {
             if (password_verify($password, $stored_password) === true) { // using the verify method to compare the password with the stored hashed password.
                 $_SESSION['access_level'] = $data['access_level'];
                 $_SESSION['id'] = $data['id'];
-                $_SESSION['display_name'] = $data['display_name'];
                 return $id; // returning the user's id.
             } else {
                 return false;
@@ -151,17 +150,23 @@ class Users {
         return $query->fetch();
     }
 
-    public function update_profile($email, $password, $first_name, $last_name, $display_name, $id) {
-        $query = $this->db->prepare("UPDATE `users` SET `email` = ?, `password` = ?, `first_name` = ?, `last_name` = ?, `display_name` = ? WHERE `id` = ?");
+    public function update_profile($first_name, $last_name, $email, $password, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id) {
+        $query = $this->db->prepare("UPDATE `users` SET `first_name`= ?, `last_name` = ?, `email` = ?, `password` = ?, `address_1` = ?, `address_2` = ?, `city` = ?, `state` = ?, `post_code` = ?, `country` = ?, `phone` = ? WHERE `id` = ?");
 
         $password = password_hash($password, PASSWORD_DEFAULT);
 
-        $query->bindValue(1, $email);
-        $query->bindValue(2, $password);
-        $query->bindValue(3, $first_name);
-        $query->bindValue(4, $last_name);
-        $query->bindValue(5, $display_name);
-        $query->bindValue(6, $id);
+        $query->bindValue(1, $first_name);
+        $query->bindValue(2, $last_name);
+        $query->bindValue(3, $email);
+        $query->bindValue(4, $password);
+        $query->bindValue(5, $address_1);
+        $query->bindValue(6, $address_2);
+        $query->bindValue(7, $city);
+        $query->bindValue(8, $state);
+        $query->bindValue(9, $post_code);
+        $query->bindValue(10, $country);
+        $query->bindValue(11, $phone);
+        $query->bindValue(12, $id);
 
         try {
             $query->execute();
