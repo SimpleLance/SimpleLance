@@ -5,7 +5,7 @@ A simple customer management / invoicing / project tracking tool built for freel
 
 Install by copying files to web root and importing sql file. Make sure to edit config.php to suit
 
-At present only basic user management is working.
+At present only basic user management and project management are working.
 
 2 Accounts exist, 1 admin and 1 cust.
 
