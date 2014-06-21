@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.6.17)
 # Database: simplelance
-# Generation Time: 2014-06-18 19:23:56 +0000
+# Generation Time: 2014-06-21 16:36:25 +0000
 # ************************************************************
 
 
@@ -18,6 +18,56 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Dump of table project_notes
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `project_notes`;
+
+CREATE TABLE `project_notes` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `project` int(11) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `details` text,
+  `created_on` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table project_tasks
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `project_tasks`;
+
+CREATE TABLE `project_tasks` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `project` int(11) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `description` text,
+  `created_on` datetime DEFAULT NULL,
+  `status` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table projects
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `projects`;
+
+CREATE TABLE `projects` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `description` text,
+  `created_on` datetime DEFAULT NULL,
+  `customer` int(11) DEFAULT NULL,
+  `status` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 
 
 # Dump of table users
