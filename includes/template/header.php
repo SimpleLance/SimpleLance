@@ -71,6 +71,17 @@ $users->logged_out_protect();
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Project Tracker<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/projects/">View Projects</a>
+                                </li>
+                                <li>
+                                    <a href="/projects/new.php">Add Project</a>
+                                </li>
+                            </ul>
+                        </li>
                         <?php } ?>
                         <!-- /admin menu -->
                         <!-- customer menu -->
