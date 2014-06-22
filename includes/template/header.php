@@ -34,9 +34,9 @@ $users->logged_out_protect();
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-user">
+                    <ul class="dropdown-menu dropdown-usermenu">
                         <li>
-                            <a href="/users/edit.php?id=<?php echo $_SESSION['id']; ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            <a href="/users/profile.php?id=<?php echo $_SESSION['id']; ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -87,12 +87,10 @@ $users->logged_out_protect();
                         <!-- customer menu -->
                         <?php if ($_SESSION['access_level'] == '2') { ?>
                             <li>
-                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Profile Management<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="/users/edit.php?id=<?php echo $_SESSION['id']; ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                                    </li>
-                                </ul>
+                                <a href="/users/profile.php?id=<?php echo $_SESSION['id']; ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            </li>
+                            <li>
+                                <a href="/projects/?owner=<?php echo $_SESSION['id']; ?>"><i class="fa fa-user fa-fw"></i> Projects</a>
                             </li>
                         <?php } ?>
                         <!-- /customer menu -->
