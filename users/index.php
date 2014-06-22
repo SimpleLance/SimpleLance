@@ -41,7 +41,7 @@ $users = $users->get_users();
                     <td><?php echo htmlentities($user['last_name']); ?></td>
                     <td><?php echo htmlentities($user['email']); ?></td>
                     <td><?php if ($user['access_level'] == 1) { echo("Admin"); } else { echo("Customer"); } ?></td>
-                    <td><a href="/users/edit.php?id=<?php echo htmlentities($user['id']); ?>">Edit</a> : <a class="delete_row" href="/users/delete.php?id=<?php echo htmlentities($user['id']); ?>" onclick="return confirm('Are you sure?')">Delete</a></td>
+                    <td><a href="/users/profile.php?id=<?php echo htmlentities($user['id']); ?>">View</a> : <a class="delete_row" href="/users/delete.php?id=<?php echo htmlentities($user['id']); ?>" onclick="return confirm('Are you sure?')">Delete</a></td>
                 </tr>
             <?php } ?>
         </table>

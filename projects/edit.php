@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
                     <?php
                     foreach ($users->get_users() as $user){
                         $user_selected = $users->get_user($project_details['owner']);
-                        if ($user['id'] === $project_details['owner']) {
+                        if ($user['id'] === $project_details['customer']) {
                             $selected = "selected='selected'";
                         } else {
                             $selected = null;

@@ -15,16 +15,16 @@ if (isset($_POST['submit'])) {
 
     $name = trim($_POST["name"]);
     $description = trim($_POST["description"]);
-    $customer = trim($_POST["customer"]);
+    $owner = trim($_POST["owner"]);
     $status = trim($_POST["status"]);
 
 
-    if (empty($name) || empty($description) || empty($customer) || empty($status)) {
+    if (empty($name) || empty($description) || empty($owner) || empty($status)) {
         $errors[] = 'All fields are required!';
     }
 
     if (empty($errors) == TRUE){
-        $projects->new_project($name, $description, $customer, $status);
+        $projects->new_project($name, $description, $owner, $status);
         header('Location: /projects/?addsuccess');
         exit();
     }
@@ -49,8 +49,8 @@ if (isset($_POST['submit'])) {
                 <textarea rows="5" cols="50" name="description" id="description"></textarea>
 		 	</div>
             <div class="form-group col-lg-12">
-                <label for="customer">Customer</label><br>
-                <select name="customer" id="customer">
+                <label for="owner">Owner</label><br>
+                <select name="owner" id="owner">
                     <option value=""></option>
                     <?php foreach ($user as $u) {
                         echo "<option value='".$u['id']."'>".$u['first_name'].' '.$u['last_name']."</option>";

@@ -8,14 +8,14 @@ class Projects {
         $this->db = $database;
     }
 
-    public function new_project($name, $description, $customer, $status) {
+    public function new_project($name, $description, $owner, $status) {
 
-        $query = $this->db->prepare("INSERT INTO `projects` (`name`, `description`, `created_on`, `customer`, `status`) VALUES (?, ?, ?, ?, ?)");
+        $query = $this->db->prepare("INSERT INTO `projects` (`name`, `description`, `created_on`, `owner`, `status`) VALUES (?, ?, ?, ?, ?)");
 
         $query->bindValue(1, $name);
         $query->bindValue(2, $description);
         $query->bindValue(3, date('Y-m-d H:i:s'));
-        $query->bindValue(4, $customer);
+        $query->bindValue(4, $owner);
         $query->bindValue(5, $status);
 
         try {
@@ -67,13 +67,13 @@ class Projects {
         return $query->fetch();
     }
 
-    public function update_project($name, $description, $customer, $status, $id) {
+    public function update_project($name, $description, $owner, $status, $id) {
 
-        $query = $this->db->prepare ("UPDATE `projects` SET `name` = ?, `description` = ?, `customer` = ?, `status` = ? WHERE `id` = ?");
+        $query = $this->db->prepare ("UPDATE `projects` SET `name` = ?, `description` = ?, `owner` = ?, `status` = ? WHERE `id` = ?");
 
         $query->bindValue(1, $name);
         $query->bindValue(2, $description);
-        $query->bindValue(3, $customer);
+        $query->bindValue(3, $owner);
         $query->bindValue(4, $status);
         $query->bindValue(5, $id);
 
@@ -247,5 +247,19 @@ class Projects {
         } catch (PDOException $e) {
             die($e->getMessage());
         }
+    }
+
+    public function user_projects($owner) {
+
+        $query = $this->db->prepare ("SELECT * FROM `projects` WHERE `owner` = ?");
+
+        $query->bindValue(1, $owner);
+
+        try {
+            $query->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+        return $query->fetchAll();
     }
 }

@@ -11,28 +11,17 @@ if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $note = $projects->list_project_notes($id);
 }
 
+// allow acces only to admin or customer
+if ($_SESSION['access_level'] == '1' || $_SESSION['id'] == $project_details['owner']) {
+// allow page to continue loading
+} else {
+    header('Location: /access-denied.php');
+    exit();
+}
+
 if (isset($_GET['close']) && $_GET['close'] == 'true') {
     $projects->close_project($id);
     header('Location: /projects/details.php?id='.$id.'');
-}
-// update database
-if (isset($_POST['submit'])) {
-
-    $name = trim($_POST["name"]);
-    $description = trim($_POST["description"]);
-    $owner = trim($_POST["owner"]);
-    $status = trim($_POST["status"]);
-
-
-    if (empty($name) || empty($description) || empty($owner) || empty($status)) {
-        $errors[] = 'All fields are required!';
-    }
-
-    if (empty($errors) == TRUE){
-        $projects->update_project($name, $description, $owner, $status, $id);
-        header('Location: /projects/?editsuccess');
-        exit();
-    }
 }
 ?>
 <!-- html -->
@@ -53,8 +42,8 @@ if (isset($_POST['submit'])) {
             <?php echo htmlentities($project_details['description']); ?>
         </div>
         <div class="form-group col-lg-12">
-            <b>Customer</b><br>
-            <?php echo $users->get_user($project_details['customer'])['first_name'].' '.$users->get_user($project_details['customer'])['last_name']; ?>
+            <b>Owner</b><br>
+            <?php echo $users->get_user($project_details['owner'])['first_name'].' '.$users->get_user($project_details['owner'])['last_name']; ?>
         </div>
         <div class="form-group col-lg-12">
             <b>Status</b><br>
@@ -108,10 +97,10 @@ if (isset($_POST['submit'])) {
         <ul class="dropdown-menu" role="menu">
             <li><a href="/projects/task/add.php/?project_id=<?php echo $_GET['id']; ?>">New Task</a></li>
             <li><a href="/projects/note/add.php/?project_id=<?php echo $_GET['id']; ?>">New Note</a></li>
-            <li><a href="/projects/edit.php?id=<?php echo $_GET['id']; ?>">Edit Project</a></li>
-            <li><a href="/projects/details.php?id=<?php echo $_GET['id']; ?>&close=true">Close Project</a></li>
             <?php if ($_SESSION['access_level'] == '1') { ?>
             <li class="divider"></li>
+            <li><a href="/projects/edit.php?id=<?php echo $_GET['id']; ?>">Edit Project</a></li>
+            <li><a href="/projects/details.php?id=<?php echo $_GET['id']; ?>&close=true">Close Project</a></li>
             <li><a href="/projects/delete.php?id=<?php echo $_GET['id']; ?>" onclick="return confirm('Are you sure?')">Delete Project</a></li>
             <?php } ?>
         </ul>
