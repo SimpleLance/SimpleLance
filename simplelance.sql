@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # http://code.google.com/p/sequel-pro/
 #
-# Host: localhost (MySQL 5.6.17)
+# Host: localhost (MySQL 5.6.19)
 # Database: simplelance
-# Generation Time: 2014-06-21 16:36:25 +0000
+# Generation Time: 2014-07-01 19:15:01 +0000
 # ************************************************************
 
 
@@ -63,7 +63,7 @@ CREATE TABLE `projects` (
   `name` varchar(100) DEFAULT NULL,
   `description` text,
   `created_on` datetime DEFAULT NULL,
-  `customer` int(11) DEFAULT NULL,
+  `owner` int(11) DEFAULT NULL,
   `status` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
