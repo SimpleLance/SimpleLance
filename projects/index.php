@@ -4,8 +4,8 @@ include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 // instantiate projects class
 $projects = new Projects($db);
 // check if user is a customer
-if (isset($_GET['owner'])) {
-    $project = $projects->user_projects($_GET['owner']);
+if ($_SESSION['access_level'] != '1') {
+    $project = $projects->user_projects($_SESSION['id']);
 ?>
     <div class="row col-md-9 col-md-offset-1 custyle">
         <table class="table table-striped custab">
@@ -30,12 +30,7 @@ if (isset($_GET['owner'])) {
     </div>
 <?php } else {
 
-    // restrict to admins only
-    if($_SESSION['access_level'] != '1') {
-        header('Location: /access-denied.php');
-        exit();
-    }
-// load projects
+// load all projects
 $project = $projects->list_projects();
 ?>
 <!-- html -->
