@@ -8,6 +8,9 @@ if (isset($_GET['owner'])) {
     $ticket = $tickets->user_tickets($_GET['owner']);
 ?>
     <div class="row col-md-9 col-md-offset-1 custyle">
+        <br>
+        <a href="/support/new.php">Create New Ticket</a>
+        <br>
         <table class="table table-striped custab">
             <thead>
             <tr>

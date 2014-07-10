@@ -82,6 +82,17 @@ $users->logged_out_protect();
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Support Tickets<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/support/">View Tickets</a>
+                                </li>
+                                <li>
+                                    <a href="/support/new.php">Add Ticket</a>
+                                </li>
+                            </ul>
+                        </li>
                         <?php } ?>
                         <!-- /admin menu -->
                         <!-- customer menu -->
@@ -91,6 +102,9 @@ $users->logged_out_protect();
                             </li>
                             <li>
                                 <a href="/projects/?owner=<?php echo $_SESSION['id']; ?>"><i class="fa fa-user fa-fw"></i> Projects</a>
+                            </li>
+                            <li>
+                                <a href="/support/?owner=<?php echo $_SESSION['id']; ?>"><i class="fa fa-user fa-fw"></i> Support Tickets</a>
                             </li>
                         <?php } ?>
                         <!-- /customer menu -->
