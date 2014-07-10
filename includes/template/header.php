@@ -104,7 +104,7 @@ $users->logged_out_protect();
                                 <a href="/projects/?owner=<?php echo $_SESSION['id']; ?>"><i class="fa fa-user fa-fw"></i> Projects</a>
                             </li>
                             <li>
-                                <a href="/support/?owner=<?php echo $_SESSION['id']; ?>"><i class="fa fa-user fa-fw"></i> Support Tickets</a>
+                                <a href="/support/"><i class="fa fa-user fa-fw"></i> Support Tickets</a>
                             </li>
                         <?php } ?>
                         <!-- /customer menu -->
