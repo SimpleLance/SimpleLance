@@ -8,9 +8,17 @@ if (isset($_GET['owner'])) {
     $ticket = $tickets->user_tickets($_GET['owner']);
 ?>
     <div class="row col-md-9 col-md-offset-1 custyle">
-        <br>
+        <?php
+        if (isset($_GET['addsuccess']) && empty($_GET['addsuccess'])) {
+            echo '<br><br>Support ticket successfully added.';
+        }
+        if (isset($_GET['editsuccess']) && empty($_GET['editsuccess'])) {
+            echo '<br><br>Support ticket successfully updated.';
+        }
+        ?>
+        <br><br>
         <a href="/support/new.php">Create New Ticket</a>
-        <br>
+        <br><br>
         <table class="table table-striped custab">
             <thead>
             <tr>

@@ -12,14 +12,25 @@ $tickets = new Tickets($db);
     $content = trim($_POST["content"]);
     $priority = trim($_POST["priority"]);
 
+    if (isset($_POST['owner']) && !empty($_POST['owner'])) {
+        $owner = trim($_POST['owner']);
+    } else {
+        $owner = $_SESSION['id'];
+    }
+
 
     if (empty($subject) || empty($content) || empty($priority)) {
         $errors[] = 'All fields are required!';
     }
 
     if (empty($errors) == TRUE){
-        $tickets->new_ticket($subject, $content, $priority, $_SESSION['id']);
-        header('Location: /support/?addsuccess');
+        $tickets->new_ticket($subject, $content, $priority, $owner);
+        if ($_SESSION['access_level'] == 1) {
+            header('Location: /support/?addsuccess');
+        } else {
+            header('Location: /support/?owner='.$_SESSION['id'].'&addsuccess');
+        }
+
         exit();
     }
 }
@@ -54,6 +65,19 @@ $priority = $tickets->get_priorities();
                     } ?>
                 </select>
             </div>
+            <?php
+            if($_SESSION['access_level'] == '1') {
+                $user = $users->get_users(); ?>
+                <div class="form-group col-lg-12">
+                    <label for="owner">Owner</label><br>
+                    <select name="owner" id="owner">
+                        <option value=""></option>
+                        <?php foreach ($user as $u) {
+                            echo "<option value='".$u['id']."'>".$u['first_name'].' '.$u['last_name']."</option>";
+                        } ?>
+                    </select>
+                </div>
+            <?php } ?>
             <div class="form-group col-lg-6">
                 <button class="btn btn-primary pull-right" name="submit" type="submit">Submit Ticket</button>
             </div>
