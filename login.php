@@ -9,21 +9,21 @@ if (empty($_POST) === false) {
 
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
-
+    // checks to make sure email and password provided and that password is at least 8 characters
     if (empty($email) === true || empty($password) === true) {
         $errors[] = 'Sorry, but we need your email address and password.';
     } else if (strlen($password) < 8) {
         $errors[] = 'The password should be more than 8 characters, without spacing.';
     }
-
+    // if no errors are triggered will process login
     if (empty ($errors)) {
         $login = $users->login($email, $password);
-
+        // triggers error on login failure
         if ($login === false) {
             $errors[] = 'Sorry, those login details are invalid';
         } else {
-            session_regenerate_id(true); // destroying the old session id and creating a new one
-
+            // destroies the old session id and creates a new one
+            session_regenerate_id(true);
             $_SESSION['id'] = $login;
             header('Location: /');
             exit();
@@ -38,7 +38,6 @@ if (empty($_POST) === false) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo(SITE_NAME); ?></title>
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -70,9 +69,5 @@ if (empty($_POST) === false) {
             </div>
         </div>
     </div>
-    <script src="/assets/js/jquery-2.1.1.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/jquery.metisMenu.js"></script>
-    <script src="/assets/js/scripts.js"></script>
 </body>
 </html>
