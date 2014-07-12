@@ -151,24 +151,23 @@ class Users {
         return $query->fetch();
     }
 
-    public function update_profile($first_name, $last_name, $email, $password, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id) {
-        $query = $this->db->prepare("UPDATE `users` SET `first_name`= ?, `last_name` = ?, `email` = ?, `password` = ?, `access_level` = ?,`address_1` = ?, `address_2` = ?, `city` = ?, `state` = ?, `post_code` = ?, `country` = ?, `phone` = ? WHERE `id` = ?");
+    public function update_profile($first_name, $last_name, $email, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id) {
+        $query = $this->db->prepare("UPDATE `users` SET `first_name`= ?, `last_name` = ?, `email` = ?, `access_level` = ?,`address_1` = ?, `address_2` = ?, `city` = ?, `state` = ?, `post_code` = ?, `country` = ?, `phone` = ? WHERE `id` = ?");
 
         $password = password_hash($password, PASSWORD_DEFAULT);
 
         $query->bindValue(1, $first_name);
         $query->bindValue(2, $last_name);
         $query->bindValue(3, $email);
-        $query->bindValue(4, $password);
-        $query->bindValue(5, $access_level);
-        $query->bindValue(6, $address_1);
-        $query->bindValue(7, $address_2);
-        $query->bindValue(8, $city);
-        $query->bindValue(9, $state);
-        $query->bindValue(10, $post_code);
-        $query->bindValue(11, $country);
-        $query->bindValue(12, $phone);
-        $query->bindValue(13, $id);
+        $query->bindValue(4, $access_level);
+        $query->bindValue(5, $address_1);
+        $query->bindValue(6, $address_2);
+        $query->bindValue(7, $city);
+        $query->bindValue(8, $state);
+        $query->bindValue(9, $post_code);
+        $query->bindValue(10, $country);
+        $query->bindValue(11, $phone);
+        $query->bindValue(12, $id);
 
         try {
             $query->execute();

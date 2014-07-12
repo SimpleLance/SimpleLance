@@ -23,12 +23,9 @@ if (isset($_POST['save'])) {
         if (filter_var($email, FILTER_VALIDATE_EMAIL) == FALSE) {
             $error_message[] = 'Please enter a valid email address';
         }
-        if ($password !== $password_repeat) {
-            $error_message[] = 'Your passswords do not match';
-        }
 
         if (empty($error_message) == TRUE){
-            $users->update_profile($first_name, $last_name, $email, $password, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id);
+            $users->update_profile($first_name, $last_name, $email, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id);
             if ($_SESSION['access_level'] == '1') {
                 header('Location: /users/?editsuccess');
                 exit();
@@ -69,18 +66,7 @@ if (isset($_POST['save'])) {
                             <input type="text" id="email" name="email" placeholder="Email Address" value="<?php echo $user_details['email'];?>" class="form-control">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="password">Password*</label>
-                        <div class="col-sm-10">
-                            <input type="password" id="password" name="password" placeholder="Enter new password to change" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="password_repeat">Repeat Password*</label>
-                        <div class="col-sm-10">
-                            <input type="password" id="password_repeat" name="password_repeat" placeholder="Repeat new password to change" class="form-control">
-                        </div>
-                    </div>
+                    <a href="/users/change-password.php?id=<?php echo $user_details['id']; ?>">Change Password</a>
                     <?php if($_SESSION['access_level'] == 1) { ?>
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="access_level">User Type</label>

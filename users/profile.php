@@ -21,6 +21,11 @@ $project = $projects->user_projects($user_details['id']);
 <br><br>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+            <?php
+            if (isset($_GET['password_updated']) && empty($_GET['password_updated'])) {
+                echo "Password successfully updated";
+            }
+            ?>
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title"><?php echo($user_details['first_name'].' '.$user_details['last_name']); ?> - <a href="/users/edit.php?id=<?php echo($user_details['id']); ?>">Edit</a> </h3>
