@@ -191,4 +191,29 @@ class Tickets {
 
         return $query->fetchAll();
     }
+
+    public function delete_ticket($id) {
+
+        $query1 = $this->db->prepare("DELETE FROM `tickets` WHERE `id` = ?");
+
+        $query1->bindValue(1, $id);
+
+        try {
+            $query1->execute();
+
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+
+        $query2 = $this->db->prepare("DELETE FROM `ticket_replies` WHERE `ticket_id` = ?");
+
+        $query2->bindValue(1, $id);
+
+        try {
+            $query2->execute();
+
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 }

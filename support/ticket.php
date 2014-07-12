@@ -82,8 +82,7 @@ if (isset($_POST['submit'])) {
                     <label for="status">Status</label><br>
                     <select name="status" id="status">
                         <?php
-                        foreach ($tickets->get_statuses() as $status){
-                            $status_selected = $tickets->get_status($ticket['status']);
+                        foreach ($tickets->get_statuses() as $status) {
                             if ($status['id'] === $ticket['status']) {
                                 $selected = "selected='selected'";
                             } else {
@@ -99,6 +98,9 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
         </form>
+        <?php if ($_SESSION['access_level'] == '1') { ?>
+            <a href="/support/delete.php?id=<?php echo $ticket['id']; ?>">Delete Ticket</a>
+        <?php } ?>
     </div>
 <!-- /html -->
 
