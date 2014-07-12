@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.6.19)
 # Database: simplelance
-# Generation Time: 2014-07-01 19:15:01 +0000
+# Generation Time: 2014-07-12 15:29:24 +0000
 # ************************************************************
 
 
@@ -70,6 +70,93 @@ CREATE TABLE `projects` (
 
 
 
+# Dump of table ticket_priorities
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `ticket_priorities`;
+
+CREATE TABLE `ticket_priorities` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `priority` varchar(20) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+LOCK TABLES `ticket_priorities` WRITE;
+/*!40000 ALTER TABLE `ticket_priorities` DISABLE KEYS */;
+
+INSERT INTO `ticket_priorities` (`id`, `priority`)
+VALUES
+	(1,'Low'),
+	(2,'Medium'),
+	(3,'High'),
+	(4,'Urgent'),
+	(5,'Critical');
+
+/*!40000 ALTER TABLE `ticket_priorities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table ticket_replies
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `ticket_replies`;
+
+CREATE TABLE `ticket_replies` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ticket_id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `replied_on` datetime NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table ticket_statuses
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `ticket_statuses`;
+
+CREATE TABLE `ticket_statuses` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `status` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+LOCK TABLES `ticket_statuses` WRITE;
+/*!40000 ALTER TABLE `ticket_statuses` DISABLE KEYS */;
+
+INSERT INTO `ticket_statuses` (`id`, `status`)
+VALUES
+	(1,'Open'),
+	(2,'On Hold'),
+	(3,'In Progress'),
+	(4,'Closed');
+
+/*!40000 ALTER TABLE `ticket_statuses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table tickets
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tickets`;
+
+CREATE TABLE `tickets` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `subject` varchar(255) NOT NULL DEFAULT '',
+  `content` text NOT NULL,
+  `opened` datetime NOT NULL,
+  `priority` int(1) NOT NULL,
+  `status` int(1) NOT NULL,
+  `owner` int(11) NOT NULL,
+  `last_reply_user` int(11) NOT NULL,
+  `last_reply_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
 # Dump of table users
 # ------------------------------------------------------------
 
@@ -99,7 +186,7 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `access_level`, `address_1`, `address_2`, `city`, `state`, `post_code`, `country`, `phone`, `generated_string`)
 VALUES
 	(1,'Admin','User','admin@simplelance.com','$2y$10$eQmpgslNp8VOFr2aIg/Q2OSJK91Tv4CqYvWorSh7.lh.aMEbIDryW','1','123 Any Street','','Any Town','','','Ireland','',NULL),
-	(2,'Test','Customer','customer@simplelance.com','$2y$10$ot0BM0IWIXCWk8hrZkROIOSlwxAIjXom/jTOT695Oc7APYT55hUMy','2','123 Any Street','','Any Town','','','Ireland','',NULL);
+	(2,'Customer','User','customer@simplelance.com','$2y$10$oiYoNDv9WFMlmJpcERwYYOM58tS4q.eHNC3WcOZrSFXfXVzpbghM2','2','123 Any Street','','Any Town','','','Ireland','083 122 1562',NULL);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
