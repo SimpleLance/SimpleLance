@@ -12,7 +12,7 @@ if ($_SESSION['access_level'] != '1') {
         if (isset($_GET['addsuccess']) && empty($_GET['addsuccess'])) {
             echo '<br><br>Support ticket successfully added.';
         }
-        if (isset($_GET['editsuccess']) && empty($_GET['editsuccess'])) {
+        if (isset($_GET['updatesuccess']) && empty($_GET['editsuccess'])) {
             echo '<br><br>Support ticket successfully updated.';
         }
         ?>
@@ -23,10 +23,10 @@ if ($_SESSION['access_level'] != '1') {
             <thead>
             <tr>
                 <th>Subject</th>
-                <th>Opened</th>
                 <th>Priority</th>
                 <th>Status</th>
-                <th>Last Reply</th>
+                <th>Last Reply By</th>
+                <th>Last Reply On</th>
                 <th>View</th>
             </tr>
             </thead>
@@ -34,10 +34,10 @@ if ($_SESSION['access_level'] != '1') {
             foreach ($ticket as $t) { ?>
                 <tr>
                     <td><?php echo htmlentities($t['subject']); ?></td>
-                    <td><?php echo date('d/m/Y', strtotime($t['opened'])); ?></td>
                     <td><?php echo $tickets->get_priority($t['priority']); ?></td>
                     <td><?php echo $tickets->get_status($t['status']); ?></td>
-                    <td><?php echo $users->get_user($t['last_reply'])['first_name'].' '.$users->get_user($t['last_reply'])['last_name']; ?></td>
+                    <td><?php echo $users->get_user($t['last_reply_user'])['first_name'].' '.$users->get_user($t['last_reply_user'])['last_name']; ?></td>
+                    <td><?php echo date('d/m/Y H:m', strtotime($t['last_reply_date'])); ?></td>
                     <td><a href="/support/ticket.php?id=<?php echo htmlentities($t['id']); ?>">View</a></td>
                 </tr>
             <?php } ?>
@@ -64,11 +64,11 @@ if ($_SESSION['access_level'] != '1') {
             <thead>
             <tr>
                 <th>Subject</th>
-                <th>Opened</th>
                 <th>Owner</th>
                 <th>Priority</th>
                 <th>Status</th>
-                <th>Last Reply</th>
+                <th>Last Reply By</th>
+                <th>Last Reply <On></On></th>
                 <th>View</th>
             </tr>
             </thead>
@@ -76,11 +76,11 @@ if ($_SESSION['access_level'] != '1') {
             foreach ($ticket as $t) { ?>
                 <tr>
                     <td><?php echo htmlentities($t['subject']); ?></td>
-                    <td><?php echo date('d/m/Y', strtotime($t['opened'])); ?></td>
                     <td><?php echo $users->get_user($t['owner'])['first_name'].' '.$users->get_user($t['owner'])['last_name']; ?></td>
                     <td><?php echo $tickets->get_priority($t['priority']); ?></td>
                     <td><?php echo $tickets->get_status($t['status']); ?></td>
-                    <td><?php echo $users->get_user($t['last_reply'])['first_name'].' '.$users->get_user($t['last_reply'])['last_name']; ?></td>
+                    <td><?php echo $users->get_user($t['last_reply_user'])['first_name'].' '.$users->get_user($t['last_reply_user'])['last_name']; ?></td>
+                    <td><?php echo date('d/m/Y H:m', strtotime($t['last_reply_date'])); ?></td>
                     <td><a href="/support/ticket.php?id=<?php echo htmlentities($t['id']); ?>">View</a></td>
                 </tr>
             <?php } ?>
