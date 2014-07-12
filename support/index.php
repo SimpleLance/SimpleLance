@@ -17,7 +17,7 @@ if ($_SESSION['access_level'] != '1') {
         }
         ?>
         <br><br>
-        <a href="/support/new.php">Create New Ticket</a>
+        <a href="/support/new.php" class="btn btn-primary">Create New Ticket</a>
         <br><br>
         <table class="table table-striped custab">
             <thead>

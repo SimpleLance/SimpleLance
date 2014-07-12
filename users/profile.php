@@ -17,6 +17,9 @@ $gravatarhash = md5(strtolower(trim($user_details['email'])));
 // pull all projects for user
 $projects = new Projects($db);
 $project = $projects->user_projects($user_details['id']);
+// pull all support tickets for user
+$tickets = new Tickets($db);
+$ticket = $tickets->user_tickets($user_details['id']);
 ?>
 <br><br>
     <div class="row">
@@ -88,6 +91,21 @@ $project = $projects->user_projects($user_details['id']);
                                     <tr>
                                         <td><a href="/projects/details.php?id=<?php echo($p['id']); ?>"><?php echo($p['name']); ?></a></td>
                                         <td><?php echo($p['status']); ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </table>
+                            <table class="table table-user-information">
+                                <thead>
+                                <tr>
+                                    <th>Ticket Subject</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <?php
+                                foreach ($ticket as $t){ ?>
+                                    <tr>
+                                        <td><a href="/support/ticket.php?id=<?php echo($t['id']); ?>"><?php echo($t['subject']); ?></a></td>
+                                        <td><?php echo($tickets->get_status($t['status'])); ?></td>
                                     </tr>
                                 <?php } ?>
                             </table>
