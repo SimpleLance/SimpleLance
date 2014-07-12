@@ -61,12 +61,11 @@ if (isset($_POST['save'])) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="email">Email Address*</label>
+                        <label class="col-sm-2 control-label" for="email">Email*</label>
                         <div class="col-sm-10">
                             <input type="text" id="email" name="email" placeholder="Email Address" value="<?php echo $user_details['email'];?>" class="form-control">
                         </div>
                     </div>
-                    <a href="/users/change-password.php?id=<?php echo $user_details['id']; ?>">Change Password</a>
                     <?php if($_SESSION['access_level'] == 1) { ?>
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="access_level">User Type</label>
@@ -125,8 +124,8 @@ if (isset($_POST['save'])) {
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="pull-right">
-                                <button type="submit" name="cancel" class="btn btn-default">Cancel</button>
-                                <button type="submit" name="save" class="btn btn-primary">Save</button>
+                                <a href="/users/change-password.php?id=<?php echo $user_details['id']; ?>" class="btn btn-primary">Change Password</a>
+                                <button type="submit" name="save" class="btn btn-primary">Update User</button>
                             </div>
                         </div>
                     </div>
