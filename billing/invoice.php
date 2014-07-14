@@ -35,10 +35,22 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6">
+                <div class="col-xs-4">
                     <address>
                         <strong>Order Date:</strong><br>
                         <?php echo date('jS F Y', strtotime($invoice['created_date'])); ?><br><br>
+                    </address>
+                </div>
+                <div class="col-xs-4">
+                    <address>
+                        <strong>Due Date:</strong><br>
+                        <?php echo date('jS F Y', strtotime($invoice['due_date'])); ?><br><br>
+                    </address>
+                </div>
+                <div class="col-xs-4">
+                    <address>
+                        <strong>Status:</strong><br>
+                        <?php echo $invoice['status']; ?><br><br>
                     </address>
                 </div>
             </div>
