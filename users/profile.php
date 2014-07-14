@@ -14,12 +14,9 @@ if ($_SESSION['access_level'] !== '1' && $_GET['id'] !== $_SESSION['id']) {
 // get gravatar hash
 $gravatarhash = md5(strtolower(trim($user_details['email'])));
 
-// pull all projects for user
+// instantiate projects and support classes
 $projects = new Projects($db);
-$project = $projects->user_projects($user_details['id']);
-// pull all support tickets for user
-$tickets = new Tickets($db);
-$ticket = $tickets->user_tickets($user_details['id']);
+$support = new Support($db);
 ?>
 <br><br>
     <div class="row">
@@ -87,7 +84,7 @@ $ticket = $tickets->user_tickets($user_details['id']);
                                     </tr>
                                 </thead>
                                 <?php
-                                foreach ($project as $p){ ?>
+                                foreach ($projects->user_projects($user_details['id']) as $p){ ?>
                                     <tr>
                                         <td><a href="/projects/details.php?id=<?php echo($p['id']); ?>"><?php echo($p['name']); ?></a></td>
                                         <td><?php echo($p['status']); ?></td>
@@ -102,10 +99,10 @@ $ticket = $tickets->user_tickets($user_details['id']);
                                 </tr>
                                 </thead>
                                 <?php
-                                foreach ($ticket as $t){ ?>
+                                foreach ($support->user_tickets($user_details['id']) as $t){ ?>
                                     <tr>
                                         <td><a href="/support/ticket.php?id=<?php echo($t['id']); ?>"><?php echo($t['subject']); ?></a></td>
-                                        <td><?php echo($tickets->get_status($t['status'])); ?></td>
+                                        <td><?php echo($support->get_status($t['status'])); ?></td>
                                     </tr>
                                 <?php } ?>
                             </table>

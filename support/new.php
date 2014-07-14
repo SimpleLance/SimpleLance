@@ -4,7 +4,7 @@
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 
 // instantiate support class
-$tickets = new Tickets($db);
+$support = new Support($db);
 
     if (isset($_POST['submit'])) {
 
@@ -24,7 +24,7 @@ $tickets = new Tickets($db);
     }
 
     if (empty($errors) == TRUE){
-        $tickets->new_ticket($subject, $content, $priority, $owner);
+        $support->new_ticket($subject, $content, $priority, $owner);
         if ($_SESSION['access_level'] == 1) {
             header('Location: /support/?addsuccess');
         } else {
@@ -42,9 +42,6 @@ $tickets = new Tickets($db);
 if (!empty($errors)) {
     echo '<p>' . implode('</p><p>', $errors) . '</p>';
 }
-
-// pull priorities
-$priority = $tickets->get_priorities();
 ?>
     <form class="well span6" role="form" action='' method='post'>
         <div class="row">
@@ -60,7 +57,7 @@ $priority = $tickets->get_priorities();
                 <label for="priority">Priority</label><br>
                 <select name="priority" id="priority">
                     <option value=""></option>
-                    <?php foreach ($priority as $p) {
+                    <?php foreach ($support->get_priorities() as $p) {
                         echo "<option value='".$p['id']."'>".$p['priority']."</option>";
                     } ?>
                 </select>
