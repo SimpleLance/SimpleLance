@@ -1,7 +1,8 @@
 <?php
 // initialise script
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
-
+// instantiate bcrypt class
+$bcrypt = new Bcrypt(12);
 // only allow access to admins
 if ($_SESSION['access_level'] !== '1') {
     header('Location: /access-denied.php');

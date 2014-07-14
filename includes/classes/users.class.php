@@ -9,7 +9,9 @@ class Users {
 
     public function change_password($user_id, $password) {
 
-        $password = password_hash($password, PASSWORD_DEFAULT);
+        global $bcrypt;
+
+        $password = $bcrypt->genHash($password);
 
         $query = $this->db->prepare("UPDATE `users` SET `password` = ? WHERE `id` = ?");
 
@@ -46,7 +48,9 @@ class Users {
 
     public function register($first_name, $last_name, $email, $password, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone) {
 
-        $password = password_hash($password, PASSWORD_DEFAULT);
+        global $bcrypt;
+
+        $password = $bcrypt->genHash($password);
 
         $query = $this->db->prepare("INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`, `access_level`, `address_1`, `address_2`, `city`, `state`, `post_code`, `country`, `phone`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
 
@@ -73,6 +77,8 @@ class Users {
 
     public function login($email, $password) {
 
+        global $bcrypt;
+
         $query = $this->db->prepare("SELECT `id`, `first_name`, `password`, `access_level` FROM `users` WHERE `email` = ?");
         $query->bindValue(1, $email);
 
@@ -83,7 +89,7 @@ class Users {
             $stored_password = $data['password']; // stored hashed password
             $id = $data['id']; // id of the user to be returned if the password is verified, below.
 
-            if (password_verify($password, $stored_password) === true) { // using the verify method to compare the password with the stored hashed password.
+            if ($bcrypt->verify($password, $stored_password) === true) { // using the verify method to compare the password with the stored hashed password.
                 $_SESSION['access_level'] = $data['access_level'];
                 $_SESSION['id'] = $data['id'];
                 $_SESSION['first_name'] = $data['first_name'];
