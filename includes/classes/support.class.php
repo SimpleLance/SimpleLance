@@ -1,5 +1,5 @@
 <?php
-class Tickets {
+class Support {
 
     private $db;
 

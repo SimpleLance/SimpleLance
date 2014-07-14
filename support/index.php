@@ -2,10 +2,10 @@
 // include header
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 // instantiate projects class
-$tickets = new Tickets($db);
+$support = new Support($db);
 // check if user is a customer and show only their tickets
 if ($_SESSION['access_level'] != '1') {
-    $ticket = $tickets->user_tickets($_SESSION['id']);
+    $ticket = $support->user_tickets($_SESSION['id']);
 ?>
     <div class="row col-md-9 col-md-offset-1 custyle">
         <?php
@@ -34,8 +34,8 @@ if ($_SESSION['access_level'] != '1') {
             foreach ($ticket as $t) { ?>
                 <tr>
                     <td><?php echo htmlentities($t['subject']); ?></td>
-                    <td><?php echo $tickets->get_priority($t['priority']); ?></td>
-                    <td><?php echo $tickets->get_status($t['status']); ?></td>
+                    <td><?php echo $support->get_priority($t['priority']); ?></td>
+                    <td><?php echo $support->get_status($t['status']); ?></td>
                     <td><?php echo $users->get_user($t['last_reply_user'])['first_name'].' '.$users->get_user($t['last_reply_user'])['last_name']; ?></td>
                     <td><?php echo date('d/m/Y H:m', strtotime($t['last_reply_date'])); ?></td>
                     <td><a href="/support/ticket.php?id=<?php echo htmlentities($t['id']); ?>">View</a></td>
@@ -47,7 +47,7 @@ if ($_SESSION['access_level'] != '1') {
 
 
     // load all projects
-    $ticket = $tickets->list_tickets();
+    $ticket = $support->list_tickets();
     ?>
     <!-- html -->
 
@@ -77,8 +77,8 @@ if ($_SESSION['access_level'] != '1') {
                 <tr>
                     <td><?php echo htmlentities($t['subject']); ?></td>
                     <td><?php echo $users->get_user($t['owner'])['first_name'].' '.$users->get_user($t['owner'])['last_name']; ?></td>
-                    <td><?php echo $tickets->get_priority($t['priority']); ?></td>
-                    <td><?php echo $tickets->get_status($t['status']); ?></td>
+                    <td><?php echo $support->get_priority($t['priority']); ?></td>
+                    <td><?php echo $support->get_status($t['status']); ?></td>
                     <td><?php echo $users->get_user($t['last_reply_user'])['first_name'].' '.$users->get_user($t['last_reply_user'])['last_name']; ?></td>
                     <td><?php echo date('d/m/Y H:m', strtotime($t['last_reply_date'])); ?></td>
                     <td><a href="/support/ticket.php?id=<?php echo htmlentities($t['id']); ?>">View</a></td>
