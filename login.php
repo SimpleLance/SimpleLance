@@ -1,6 +1,8 @@
 <?php
 // initialise script
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
+// instantiate bcrypt class
+$bcrypt = new Bcrypt(12);
 // check to make sure user is not logged in
 $users->logged_in_protect();
 
