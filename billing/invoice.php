@@ -108,6 +108,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             </div>
         </div>
     </div>
+    <a href="#" onClick="window.print()" class="btn btn-primary">Print Invoice</a>
 
 <?php
 // include footer
