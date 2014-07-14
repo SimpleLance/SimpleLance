@@ -13,8 +13,10 @@ $users->logged_out_protect();
     <title><?php echo SITE_NAME; ?></title>
 
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/jquery-ui.smoothness.min.css" rel="stylesheet">
     <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
+    <script src="/assets/js/scripts.js"></script>
 </head>
 <body>
     <div id="wrapper">
