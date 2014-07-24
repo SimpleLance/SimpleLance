@@ -7,6 +7,11 @@ $billing = new Billing($db);
 if ($_SESSION['access_level'] != '1') {
     header("Location: /access-denied.php");
 }
+
+if (isset($_POST['submit'])) {
+
+    var_dump($_POST);
+}
 ?>
     <form role="form" action="" method="post" name="invoice">
     <div class="row">
@@ -58,6 +63,7 @@ if ($_SESSION['access_level'] != '1') {
                                 <td class="text-center"><strong>Price</strong></td>
                                 <td class="text-center"><strong>Quantity</strong></td>
                                 <td class="text-right"><strong>Total</strong></td>
+                                <td></td>
                             </tr>
                             </thead>
                             <tbody>
@@ -67,6 +73,7 @@ if ($_SESSION['access_level'] != '1') {
                                     <td class="text-center"><input type="text" name="price" id="price" value="" onFocus="startCalc();" onBlur="stopCalc();"></td>
                                     <td class="text-center"><input type="text" name="quantity" id="quantity" value="" onFocus="startCalc();" onBlur="stopCalc();"></td>
                                     <td class="text-right"><input type="text" name="total" id="total" value=""></td>
+                                    <td><input type="button" name="add" value="Add" class="tr_clone_add"></td>
                                 </tr>
                             </div>
                             </tbody>
@@ -106,6 +113,7 @@ if ($_SESSION['access_level'] != '1') {
             </div>
         </div>
     </div>
+        <button class="btn btn-primary pull-right" name="submit" type="submit">Save Invoice</button>
     </form>
 
 <?php

@@ -13,7 +13,7 @@ $(function() {
             $('div.sidebar-collapse').addClass('collapse')
         } else {
             $('div.sidebar-collapse').removeClass('collapse')
-        }
+        }w
     })
 })
 // date picker for invoice created date
@@ -25,9 +25,6 @@ $(function() {
 $(function() {
     $("#due_date").datepicker({dateFormat: 'yy-mm-dd'});
 });
-
-// add additional rows to invoice items
-
 
 // calculate totals
 function startCalc(){

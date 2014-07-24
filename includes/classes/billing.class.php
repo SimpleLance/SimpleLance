@@ -73,4 +73,8 @@ class Billing {
 
         return $query->fetchAll();
     }
+
+    public function create_invoice() {
+
+    }
 }
