@@ -21,7 +21,7 @@ if ($_SESSION['access_level'] == '1' || $_SESSION['id'] == $project_details['own
 
 if (isset($_GET['close']) && $_GET['close'] == 'true') {
     $projects->close_project($id);
-    header('Location: /projects/details.php?id='.$id.'');
+    header('Location: /projects/add_details.php?id='.$id.'');
 }
 ?>
 <!-- html -->

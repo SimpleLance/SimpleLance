@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
 
     if (empty($errors) == TRUE){
         $projects->update_project($name, $description, $owner, $status, $id);
-        header('Location: /projects/details.php?id='.$id.'');
+        header('Location: /projects/add_details.php?id='.$id.'');
         exit();
     }
 }

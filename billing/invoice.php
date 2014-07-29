@@ -6,11 +6,18 @@ $billing = new Billing($db);
 // check if valid invoice requested, if not return to invoice list
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $invoice = $billing->get_invoice($_GET['id']);
-    if ($invoice == "Error" || $invoice['user_id'] != $_SESSION['id'] && $_SESSION['access_level'] != '1') {
+    if ($invoice == "Error" || $invoice['owner'] != $_SESSION['id'] && $_SESSION['access_level'] != '1') {
         header("Location: /billing/");
         exit();
     }
 } else {
+    header("Location: /billing/");
+    exit();
+}
+
+if (isset($_GET['send']) && $_GET['send'] == 'yes') {
+    $email = $users->get_user($invoice['owner'])['email'];
+    $billing->send_invoice($_GET['id'], $email);
     header("Location: /billing/");
     exit();
 }
@@ -19,18 +26,18 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <div class="row">
         <div class="col-xs-12">
             <div class="invoice-title">
-                <h2>Invoice</h2><h3 class="pull-right">Invoice # <?php echo $invoice['id']; ?></h3>
+                <h2>Invoice # <?php echo $invoice['id']; ?></h2>
             </div>
             <hr>
             <div class="row">
                 <div class="col-xs-6">
                     <address>
                         <strong>Billed To:</strong><br>
-                        <?php echo $users->get_user($invoice['id'])['first_name'].' '.$users->get_user($invoice['id'])['last_name']; ?><br>
-                        <?php echo $users->get_user($invoice['id'])['address_1']; ?><br>
-                        <?php echo $users->get_user($invoice['id'])['city']; ?>,
-                        <?php echo $users->get_user($invoice['id'])['post_code']; ?><br>
-                        <?php echo $users->get_user($invoice['id'])['country']; ?>
+                        <?php echo $users->get_user($invoice['owner'])['first_name'].' '.$users->get_user($invoice['owner'])['last_name']; ?><br>
+                        <?php echo $users->get_user($invoice['owner'])['address_1']; ?><br>
+                        <?php echo $users->get_user($invoice['owner'])['city']; ?>,
+                        <?php echo $users->get_user($invoice['owner'])['post_code']; ?><br>
+                        <?php echo $users->get_user($invoice['owner'])['country']; ?>
                     </address>
                 </div>
             </div>
@@ -86,20 +93,8 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                             <tr>
                                 <td class="thick-line"></td>
                                 <td class="thick-line"></td>
-                                <td class="thick-line text-center"><strong>Subtotal</strong></td>
-                                <td class="thick-line text-right"><?php echo CURRSYM.$invoice['subtotal']; ?></td>
-                            </tr>
-                            <tr>
-                                <td class="no-line"></td>
-                                <td class="no-line"></td>
-                                <td class="no-line text-center"><strong>Tax</strong></td>
-                                <td class="no-line text-right"><?php echo CURRSYM.$invoice['tax']; ?></td>
-                            </tr>
-                            <tr>
-                                <td class="no-line"></td>
-                                <td class="no-line"></td>
-                                <td class="no-line text-center"><strong>Total</strong></td>
-                                <td class="no-line text-right"><?php echo CURRSYM.$invoice['amount_due']; ?></td>
+                                <td class="thick-line text-center"><strong>Total</strong></td>
+                                <td class="thick-line text-right"><?php echo CURRSYM.$invoice['amount_due']; ?></td>
                             </tr>
                             </tbody>
                         </table>

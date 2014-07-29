@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
 
     if (empty($errors) == TRUE){
         $projects->update_note($title, $details, $id);
-        header('Location: /projects/details.php?id='.$note_details['project'].'');
+        header('Location: /projects/add_details.php?id='.$note_details['project'].'');
         exit();
     }
 }

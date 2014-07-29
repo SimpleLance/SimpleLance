@@ -56,7 +56,7 @@ if ($_SESSION['access_level'] != '1') { ?>
             <?php
             foreach ($billing->list_invoices() as $i) { ?>
                 <tr>
-                    <td><?php echo $users->get_user($i['user_id'])['first_name'].' '.$users->get_user($i['user_id'])['last_name']; ?></td>
+                    <td><?php echo $users->get_user($i['owner'])['first_name'].' '.$users->get_user($i['owner'])['last_name']; ?></td>
                     <td><?php echo date('d/m/Y', strtotime($i['created_date'])); ?></td>
                     <td><?php echo date('d/m/Y', strtotime($i['due_date'])); ?></td>
                     <td><?php echo htmlentities($i['status']); ?></td>

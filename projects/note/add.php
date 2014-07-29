@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
 
     if (empty($errors) == TRUE){
         $projects->new_note($project_id, $title, $details);
-        header('Location: /projects/details.php?id='.$project_id.'');
+        header('Location: /projects/add_details.php?id='.$project_id.'');
         exit();
     }
 }

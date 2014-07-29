@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
 
     if (empty($errors) == TRUE){
         $projects->update_task($name, $description, $status, $id);
-        header('Location: /projects/details.php?id='.$task_details['project'].'');
+        header('Location: /projects/add_details.php?id='.$task_details['project'].'');
         exit();
     }
 }

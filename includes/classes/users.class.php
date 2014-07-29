@@ -1,4 +1,5 @@
 <?php
+
 class Users {
 
     private $db;
@@ -132,6 +133,7 @@ class Users {
 
         return $query->fetchAll();
     }
+
     public function delete_user($id) {
         $query = $this->db->prepare("DELETE from `users` where `id` = ?");
 

@@ -13,12 +13,12 @@ $(function() {
             $('div.sidebar-collapse').addClass('collapse')
         } else {
             $('div.sidebar-collapse').removeClass('collapse')
-        }w
+        }
     })
 })
 // date picker for invoice created date
 $(function() {
-    $("#created_date").datepicker({dateFormat: 'yy-mm-dd'});
+    $( "#created_date" ).datepicker({dateFormat: 'yy-mm-dd'});
 });
 
 // date picker for invoice due date
@@ -31,9 +31,9 @@ function startCalc(){
     interval = setInterval("calc()",1);
 }
 function calc(){
-    one = document.invoice.price.value;
-    two = document.invoice.quantity.value;
-    document.invoice.total.value = (one * 1) * (two * 1);
+    one = document.invoice_item.price.value;
+    two = document.invoice_item.quantity.value;
+    document.invoice_item.total.value = (one * 1) * (two * 1);
 }
 function stopCalc(){
     clearInterval(interval);
