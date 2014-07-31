@@ -14,7 +14,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     header("Location: /billing/");
     exit();
 }
-
+$user = $users->get_user($invoice['owner']);
 if (isset($_GET['send']) && $_GET['send'] == 'yes') {
     $email = $users->get_user($invoice['owner'])['email'];
     $billing->send_invoice($_GET['id'], $email);
@@ -35,11 +35,11 @@ if (isset($_GET['set_status']) && $_GET['set_status'] == 'paid') {
                 <div class="col-xs-6">
                     <address>
                         <strong>Billed To:</strong><br>
-                        <?php echo $users->get_user($invoice['owner'])['first_name'].' '.$users->get_user($invoice['owner'])['last_name']; ?><br>
-                        <?php echo $users->get_user($invoice['owner'])['address_1']; ?><br>
-                        <?php echo $users->get_user($invoice['owner'])['city']; ?>,
-                        <?php echo $users->get_user($invoice['owner'])['post_code']; ?><br>
-                        <?php echo $users->get_user($invoice['owner'])['country']; ?>
+                        <?php echo $user['first_name'].' '.$users->get_user($invoice['owner'])['last_name']; ?><br>
+                        <?php echo $user['address_1']; ?><br>
+                        <?php echo $user['city']; ?>,
+                        <?php echo $user['post_code']; ?><br>
+                        <?php echo $user['country']; ?>
                     </address>
                 </div>
             </div>
@@ -107,7 +107,21 @@ if (isset($_GET['set_status']) && $_GET['set_status'] == 'paid') {
     </div>
     <a href="#" onClick="window.print()" class="btn btn-primary">Print Invoice</a>
     <?php if($_SESSION['access_level'] == '1' && $invoice['status'] != 'Paid') { ?>
-    <a href="/billing/invoice.php?set_status=paid&id=<?php echo $_GET['id']; ?>" class="btn btn-primary">Mark Paid</a>
+        <a href="/billing/invoice.php?set_status=paid&id=<?php echo $_GET['id']; ?>" class="btn btn-primary">Mark Paid</a>
+    <?php } ?>
+    <?php if($invoice['status'] !='Paid') { ?>
+        <form action="/billing/charge?invoice=<?php echo $invoice['id']; ?>" method="POST">
+            <script
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="<?php echo $stripe['publishable_key']; ?>"
+                data-image="/square-image.png"
+                data-name="<?php echo (SITE_NAME); ?>"
+                data-email="<?php echo $user['email']; ?>"
+                data-currency="<?php echo (CURRCODE); ?>"
+                data-description="Invoice <?php echo $invoice['id'] ?> (<?php echo ($invoice['total']); ?>)"
+                data-amount="<?php echo ($invoice['total'] * '100'); ?>">
+            </script>
+        </form>
     <?php } ?>
 
 <?php

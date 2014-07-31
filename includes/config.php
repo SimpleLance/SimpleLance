@@ -14,3 +14,9 @@ define('DB_NAME', 'simplelance');
 // define currency
 define('CURRNAME', 'Euro');
 define('CURRSYM', '&euro;');
+define('CURRCODE', 'EUR');
+
+$stripe = array(
+    "publishable_key" => "SET_PUBLISHABLE_KEY",
+    "secret_key" => "SET_SECRET_KEY"
+);
