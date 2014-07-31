@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.6.19)
 # Database: simplelance
-# Generation Time: 2014-07-14 13:58:28 +0000
+# Generation Time: 2014-07-31 21:13:51 +0000
 # ************************************************************
 
 
@@ -35,16 +35,6 @@ CREATE TABLE `invoice_items` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-LOCK TABLES `invoice_items` WRITE;
-/*!40000 ALTER TABLE `invoice_items` DISABLE KEYS */;
-
-INSERT INTO `invoice_items` (`id`, `invoice_id`, `item`, `price`, `quantity`, `total`)
-VALUES
-	(1,1,'Consulting Hour',30.00,3,90.00),
-	(2,1,'Development Hour',50.00,10,500.00);
-
-/*!40000 ALTER TABLE `invoice_items` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table invoices
@@ -54,26 +44,15 @@ DROP TABLE IF EXISTS `invoices`;
 
 CREATE TABLE `invoices` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `owner` int(11) NOT NULL,
   `created_date` date NOT NULL,
   `due_date` date NOT NULL,
   `status` varchar(20) NOT NULL DEFAULT '',
-  `date_paid` date NOT NULL,
-  `subtotal` decimal(13,2) DEFAULT NULL,
-  `tax` decimal(13,2) DEFAULT NULL,
-  `amount_due` decimal(13,2) NOT NULL,
+  `date_paid` date DEFAULT NULL,
+  `total` decimal(13,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-LOCK TABLES `invoices` WRITE;
-/*!40000 ALTER TABLE `invoices` DISABLE KEYS */;
-
-INSERT INTO `invoices` (`id`, `user_id`, `created_date`, `due_date`, `status`, `date_paid`, `subtotal`, `tax`, `amount_due`)
-VALUES
-	(1,2,'2014-07-14','2014-07-21','Unpaid','0000-00-00',590.00,135.70,725.70);
-
-/*!40000 ALTER TABLE `invoices` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table project_notes
