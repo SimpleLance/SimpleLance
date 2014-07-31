@@ -12,7 +12,9 @@ if (isset($_POST['submit'])) {
 
     $owner = trim($_POST["owner"]);
     $created_date = trim($_POST["created_date"]);
+    $created_date = date('Y-m-d', strtotime($created_date));
     $due_date = trim($_POST["due_date"]);
+    $due_date = date('Y-m-d', strtotime($due_date));
 
     if (empty($owner) || empty($created_date) || empty($due_date)) {
         $errors[] = 'All fields are required!';

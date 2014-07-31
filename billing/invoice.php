@@ -18,8 +18,10 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 if (isset($_GET['send']) && $_GET['send'] == 'yes') {
     $email = $users->get_user($invoice['owner'])['email'];
     $billing->send_invoice($_GET['id'], $email);
-    header("Location: /billing/");
-    exit();
+}
+
+if (isset($_GET['set_status']) && $_GET['set_status'] == 'paid') {
+    $billing->mark_paid($_GET['id']);
 }
 ?>
 
@@ -94,7 +96,7 @@ if (isset($_GET['send']) && $_GET['send'] == 'yes') {
                                 <td class="thick-line"></td>
                                 <td class="thick-line"></td>
                                 <td class="thick-line text-center"><strong>Total</strong></td>
-                                <td class="thick-line text-right"><?php echo CURRSYM.$invoice['amount_due']; ?></td>
+                                <td class="thick-line text-right"><?php echo CURRSYM.$invoice['total']; ?></td>
                             </tr>
                             </tbody>
                         </table>
@@ -104,6 +106,9 @@ if (isset($_GET['send']) && $_GET['send'] == 'yes') {
         </div>
     </div>
     <a href="#" onClick="window.print()" class="btn btn-primary">Print Invoice</a>
+    <?php if($_SESSION['access_level'] == '1' && $invoice['status'] != 'Paid') { ?>
+    <a href="/billing/invoice.php?set_status=paid&id=<?php echo $_GET['id']; ?>" class="btn btn-primary">Mark Paid</a>
+    <?php } ?>
 
 <?php
 // include footer

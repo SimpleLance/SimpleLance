@@ -78,7 +78,7 @@ class Billing {
 
     public function create_invoice($owner, $created_date, $due_date) {
 
-        $query = $this->db->prepare("INSERT INTO `invoices` (`owner`, `created_date`, `due_date`, `status`, `amount_due`) VALUES (?, ?, ?, ?, ?)");
+        $query = $this->db->prepare("INSERT INTO `invoices` (`owner`, `created_date`, `due_date`, `status`, `total`) VALUES (?, ?, ?, ?, ?)");
 
         $query->bindValue(1, $owner);
         $query->bindValue(2, $created_date);
@@ -115,7 +115,7 @@ class Billing {
             die($e->getMessage());
         }
 
-        $query2 = $this->db->prepare("UPDATE `invoices` SET `amount_due` = `amount_due` + ? WHERE `id` = ?");
+        $query2 = $this->db->prepare("UPDATE `invoices` SET `total` = `total` + ? WHERE `id` = ?");
 
         $query2->bindValue(1, $total);
         $query2->bindValue(2, $invoice_id);
@@ -151,6 +151,25 @@ class Billing {
         $headers = "From: admin@simplelane.com";
 
         mail($email,$subject,$body,$headers);
+        header("Location: /billing/");
+    }
+
+    public function mark_paid($invoice_id) {
+
+        $query = $this->db->prepare("UPDATE `invoices` SET `status` = ?, `date_paid` = ? WHERE `id` = ?");
+
+        $query->bindValue(1, 'Paid');
+        $query->bindValue(2, date('Y-m-d'));
+        $query->bindValue(3, $invoice_id);
+
+        try {
+            $query->execute();
+
+        } catch (PDOException $e) {
+
+            die($e->getMessage());
+        }
+        header("Location: /billing/");
     }
 }
 

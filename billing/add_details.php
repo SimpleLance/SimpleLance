@@ -51,13 +51,13 @@ if (isset($_POST['submit'])) {
                 <div class="form-group col-xs-4">
                     <address>
                         Created date:<br>
-                        <?php echo date('d/m/Y', strtotime($invoice['created_date'])); ?>
+                        <?php echo date('jS F Y', strtotime($invoice['created_date'])); ?>
                     </address>
                 </div>
                 <div class="form-group col-xs-4">
                     <address>
                         Due date:<br>
-                        <?php echo date('d/m/Y', strtotime($invoice['due_date'])); ?>
+                        <?php echo date('jS F Y', strtotime($invoice['due_date'])); ?>
                     </address>
                 </div>
             </div>
@@ -117,7 +117,7 @@ if (isset($_POST['submit'])) {
                                 <td class="thick-line"></td>
                                 <td class="thick-line"></td>
                                 <td class="thick-line text-center"><strong>Total:</strong></td>
-                                <td class="thick-line text-right"><?php echo CURRSYM.$invoice['amount_due']; ?></td>
+                                <td class="thick-line text-right"><?php echo CURRSYM.$invoice['total']; ?></td>
                             </tr>
                             </tbody>
                         </table>

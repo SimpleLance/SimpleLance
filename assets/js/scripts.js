@@ -18,12 +18,12 @@ $(function() {
 })
 // date picker for invoice created date
 $(function() {
-    $( "#created_date" ).datepicker({dateFormat: 'yy-mm-dd'});
+    $( "#created_date" ).datepicker({dateFormat: 'dd-mm-yy'});
 });
 
 // date picker for invoice due date
 $(function() {
-    $("#due_date").datepicker({dateFormat: 'yy-mm-dd'});
+    $("#due_date").datepicker({dateFormat: 'dd-mm-yy'});
 });
 
 // calculate totals

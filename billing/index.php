@@ -16,16 +16,18 @@ if ($_SESSION['access_level'] != '1') { ?>
                 <th>View</th>
             </tr>
             </thead>
-            <?php
-            foreach ($billing->user_invoices($_SESSION['id']) as $i) { ?>
-                <tr>
-                    <td><?php echo date('d/m/Y', strtotime($i['created_date'])); ?></td>
-                    <td><?php echo date('d/m/Y', strtotime($i['due_date'])); ?></td>
-                    <td><?php echo htmlentities($i['status']); ?></td>
-                    <td><?php echo htmlentities($i['amount_due']); ?></td>
-                    <td><a href="/billing/invoice.php?id=<?php echo htmlentities($i['id']); ?>">View</a></td>
-                </tr>
-            <?php } ?>
+            <?php // only show invoices that are not draft
+            foreach ($billing->user_invoices($_SESSION['id']) as $i) {
+                if ($i['status'] != 'Draft') { ?>
+                    <tr>
+                        <td><?php echo date('d/m/Y', strtotime($i['created_date'])); ?></td>
+                        <td><?php echo date('d/m/Y', strtotime($i['due_date'])); ?></td>
+                        <td><?php echo htmlentities($i['status']); ?></td>
+                        <td><?php echo CURRSYM . htmlentities($i['total']); ?></td>
+                        <td><a href="/billing/invoice.php?id=<?php echo htmlentities($i['id']); ?>">View</a></td>
+                    </tr>
+          <?php }
+           } ?>
         </table>
     </div>
 <?php } else {
@@ -60,7 +62,7 @@ if ($_SESSION['access_level'] != '1') { ?>
                     <td><?php echo date('d/m/Y', strtotime($i['created_date'])); ?></td>
                     <td><?php echo date('d/m/Y', strtotime($i['due_date'])); ?></td>
                     <td><?php echo htmlentities($i['status']); ?></td>
-                    <td><?php echo htmlentities($i['amount_due']); ?></td>
+                    <td><?php echo CURRSYM . htmlentities($i['total']); ?></td>
                     <td><a href="/billing/invoice.php?id=<?php echo htmlentities($i['id']); ?>">View</a></td>
                 </tr>
             <?php } ?>
