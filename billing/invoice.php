@@ -114,11 +114,10 @@ if (isset($_GET['set_status']) && $_GET['set_status'] == 'paid') {
             <script
                 src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<?php echo $stripe['publishable_key']; ?>"
-                data-image="/square-image.png"
                 data-name="<?php echo (SITE_NAME); ?>"
                 data-email="<?php echo $user['email']; ?>"
                 data-currency="<?php echo (CURRCODE); ?>"
-                data-description="Invoice <?php echo $invoice['id'] ?> (<?php echo ($invoice['total']); ?>)"
+                data-description="Invoice #<?php echo $invoice['id'] ?> (<?php echo CURRSYM.($invoice['total']); ?>)"
                 data-amount="<?php echo ($invoice['total'] * '100'); ?>">
             </script>
         </form>
