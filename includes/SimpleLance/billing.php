@@ -1,5 +1,7 @@
 <?php
 
+namespace SimpleLance;
+
 class Billing {
 
     private $db;

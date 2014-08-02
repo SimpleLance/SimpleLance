@@ -2,7 +2,7 @@
 // include header
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 // instantiate billing class
-$billing = new Billing($db);
+$billing = new \SimpleLance\Billing($db);
 // check if user is a customer and only show their invoices
 if ($_SESSION['access_level'] != '1') { ?>
     <div class="row col-md-9 col-md-offset-1 custyle">

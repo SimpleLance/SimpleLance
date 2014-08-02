@@ -1,7 +1,7 @@
 <?php
 // include init file
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
-$billing = new Billing($db);
+$billing = new \SimpleLance\Billing($db);
 // pull stripe token from form
 $token  = $_POST['stripeToken'];
 // load invoice details

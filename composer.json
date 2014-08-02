@@ -1,0 +1,11 @@
+{
+    "require": {
+        "ircmaxell/password-compat": "~1.0 ",
+        "stripe/stripe-php": "~1.17"
+    },
+    "autoload": {
+        "psr-0": {
+            "SimpleLance": "includes/"
+        }
+    }
+}

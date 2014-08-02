@@ -2,7 +2,7 @@
 // include header
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 // instantiate projects class
-$projects = new Projects($db);
+$projects = new \SimpleLance\Projects($db);
 // pulls project details if valid project
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $id = htmlentities($_GET['id']);
@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
 
     if (empty($errors) == TRUE){
         $projects->update_task($name, $description, $status, $id);
-        header('Location: /projects/add_details.php?id='.$task_details['project'].'');
+        header('Location: /projects/details.php?id='.$task_details['project'].'');
         exit();
     }
 }

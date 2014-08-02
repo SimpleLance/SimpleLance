@@ -2,7 +2,7 @@
 // include header
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 // instantiate projects class
-$support = new Support($db);
+$support = new \SimpleLance\Support($db);
 // check if user is a customer and show only their tickets
 if ($_SESSION['access_level'] != '1') {
     $ticket = $support->user_tickets($_SESSION['id']);
@@ -46,7 +46,7 @@ if ($_SESSION['access_level'] != '1') {
 <?php } else {
 
 
-    // load all projects
+    // load all tickets
     $ticket = $support->list_tickets();
     ?>
     <!-- html -->
