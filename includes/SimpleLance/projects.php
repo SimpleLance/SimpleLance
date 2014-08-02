@@ -1,4 +1,7 @@
 <?php
+
+namespace SimpleLance;
+
 class Projects {
 
     private $db;

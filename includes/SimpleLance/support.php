@@ -1,4 +1,7 @@
 <?php
+
+namespace SimpleLance;
+
 class Support {
 
     private $db;

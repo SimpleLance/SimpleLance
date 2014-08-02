@@ -2,7 +2,7 @@
 // initialise script
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 // instantiate tickets class
-$support = new Support($db);
+$support = new \SimpleLance\Support($db);
 if ($_SESSION['access_level'] !== '1') {
     header('Location: /access-denied.php');
     exit();

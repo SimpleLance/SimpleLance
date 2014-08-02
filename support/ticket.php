@@ -2,7 +2,7 @@
 // include header
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 // instantiate projects class
-$support = new Support($db);
+$support = new \SimpleLance\Support($db);
 // check if valid ticket requested, if not return to ticket list
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $ticket = $support->get_ticket($_GET['id']);

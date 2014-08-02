@@ -2,7 +2,7 @@
 // include header
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 // instantiate billing class
-$billing = new Billing($db);
+$billing = new \SimpleLance\Billing($db);
 // check if valid invoice requested, if not return to invoice list
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $invoice = $billing->get_invoice($_GET['id']);

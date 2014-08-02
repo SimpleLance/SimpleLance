@@ -1,8 +1,6 @@
 <?php
 // include header
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
-// instantiate bcrypt class
-$bcrypt = new Bcrypt(12);
 // gets user details from database
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $id = htmlentities($_GET['id']);

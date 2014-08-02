@@ -2,7 +2,7 @@
 // include header
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 // instantiate billing class
-$billing = new Billing($db);
+$billing = new \SimpleLance\Billing($db);
 // only allow access to admins
 if ($_SESSION['access_level'] != '1') {
     header("Location: /access-denied.php");

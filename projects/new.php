@@ -10,7 +10,7 @@ if ($_SESSION['access_level'] !== '1') {
 // pull users
 $user = $users->get_users();
 // instantiate projects class
-$projects = new Projects($db);
+$projects = new \SimpleLance\Projects($db);
 if (isset($_POST['submit'])) {
 
     $name = trim($_POST["name"]);

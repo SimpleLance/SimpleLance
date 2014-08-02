@@ -16,7 +16,8 @@ define('CURRNAME', 'Euro');
 define('CURRSYM', '&euro;');
 define('CURRCODE', 'EUR');
 
+// set stripe keys
 $stripe = array(
-    "publishable_key" => "SET_PUBLISHABLE_KEY",
-    "secret_key" => "SET_SECRET_KEY"
+    "publishable_key" => "pk_key",
+    "secret_key" => "sk_key"
 );

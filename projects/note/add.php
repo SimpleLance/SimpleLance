@@ -4,7 +4,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 // pull users
 $user = $users->get_users();
 // instantiate projects class
-$projects = new Projects($db);
+$projects = new \SimpleLance\Projects($db);
 $project_id = htmlentities($_GET['project_id']);
 
 if (isset($_POST['submit'])) {
@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
 
     if (empty($errors) == TRUE){
         $projects->new_note($project_id, $title, $details);
-        header('Location: /projects/add_details.php?id='.$project_id.'');
+        header('Location: /projects/details.php?id='.$project_id.'');
         exit();
     }
 }

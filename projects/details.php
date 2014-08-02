@@ -2,7 +2,7 @@
 // include header
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 // instantiate projects class
-$projects = new Projects($db);
+$projects = new \SimpleLance\Projects($db);
 // pulls project details if valid project
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $id = htmlentities($_GET['id']);
@@ -21,7 +21,7 @@ if ($_SESSION['access_level'] == '1' || $_SESSION['id'] == $project_details['own
 
 if (isset($_GET['close']) && $_GET['close'] == 'true') {
     $projects->close_project($id);
-    header('Location: /projects/add_details.php?id='.$id.'');
+    header('Location: /projects/details.php?id='.$id.'');
 }
 ?>
 <!-- html -->
