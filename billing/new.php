@@ -1,13 +1,13 @@
 <?php
 // include header
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
-// instantiate projects class
+// instantiate billing class
 $billing = new Billing($db);
 // only allow access to admins
 if ($_SESSION['access_level'] != '1') {
     header("Location: /access-denied.php");
 }
-
+// creates new invoice on form submission and validation
 if (isset($_POST['submit'])) {
 
     $owner = trim($_POST["owner"]);
@@ -24,7 +24,6 @@ if (isset($_POST['submit'])) {
         $billing->create_invoice($owner, $created_date, $due_date);
     }
 }
-
 ?>
     <form role="form" action="" method="post" name="invoice">
         <div class="row">

@@ -1,7 +1,7 @@
 <?php
 // include header
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
-// instantiate projects class
+// instantiate billing class
 $billing = new Billing($db);
 // check if valid invoice requested, if not return to invoice list
 if (isset($_GET['id']) && !empty($_GET['id'])) {
@@ -14,17 +14,18 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     header("Location: /billing/");
     exit();
 }
+// pulls user details for invoice owner
 $user = $users->get_user($invoice['owner']);
+// checks to see if invoice is being sent and sends
 if (isset($_GET['send']) && $_GET['send'] == 'yes') {
     $email = $users->get_user($invoice['owner'])['email'];
     $billing->send_invoice($_GET['id'], $email);
 }
-
+// checks to see if invoice is being set as paid and updates
 if (isset($_GET['set_status']) && $_GET['set_status'] == 'paid') {
     $billing->mark_paid($_GET['id']);
 }
 ?>
-
     <div class="row">
         <div class="col-xs-12">
             <div class="invoice-title">
@@ -65,7 +66,6 @@ if (isset($_GET['set_status']) && $_GET['set_status'] == 'paid') {
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -121,9 +121,8 @@ if (isset($_GET['set_status']) && $_GET['set_status'] == 'paid') {
                 data-amount="<?php echo ($invoice['total'] * '100'); ?>">
             </script>
         </form>
-    <?php } ?>
+    <?php }
 
-<?php
 // include footer
 include(ABS_PATH . '/includes/template/footer.php');
 ?>

@@ -1,9 +1,9 @@
 <?php
 // include header
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
-// instantiate projects class
+// instantiate billing class
 $billing = new Billing($db);
-// check if user is a customer
+// check if user is a customer and only show their invoices
 if ($_SESSION['access_level'] != '1') { ?>
     <div class="row col-md-9 col-md-offset-1 custyle">
         <table class="table table-striped custab">
@@ -31,19 +31,9 @@ if ($_SESSION['access_level'] != '1') { ?>
         </table>
     </div>
 <?php } else {
-// load all projects
+// user is admin, show all invoices
     ?>
-    <!-- html -->
-
     <div class="row col-md-9 col-md-offset-1 custyle">
-        <?php
-        if (isset($_GET['addsuccess']) && empty($_GET['addsuccess'])) {
-            echo '<br><br>Project successfully added.';
-        }
-        if (isset($_GET['editsuccess']) && empty($_GET['editsuccess'])) {
-            echo '<br><br>Project successfully updated.';
-        }
-        ?>
         <table class="table table-striped custab">
             <thead>
             <tr>
@@ -68,9 +58,6 @@ if ($_SESSION['access_level'] != '1') { ?>
             <?php } ?>
         </table>
     </div>
-
-
-    <!-- /html -->
 <?php
 }
 // include footer

@@ -1,7 +1,7 @@
 <?php
 // include header
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
-// instantiate projects class
+// instantiate billing class
 $billing = new Billing($db);
 // only allow access to admins
 if ($_SESSION['access_level'] != '1') {
@@ -12,7 +12,6 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 } else {
     header("Location: /billing");
 }
-
 if (isset($_POST['submit'])) {
 
     $item = trim($_POST["item"]);
@@ -28,9 +27,7 @@ if (isset($_POST['submit'])) {
         $billing->add_invoice_item($_GET['id'], $item, $price, $quantity, $total);
     }
 }
-
 ?>
-
     <div class="row">
         <div class="col-xs-12">
             <div class="invoice-title">
@@ -63,7 +60,6 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -71,64 +67,63 @@ if (isset($_POST['submit'])) {
                     <h3 class="panel-title"><strong>Order summary</strong></h3>
                 </div>
                 <form role="form" action="" method="post" name="invoice_item">
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-condensed" id="invoice_items">
-                            <thead>
-                            <tr>
-                                <td><strong>Item</strong></td>
-                                <td class="text-center"><strong>Price</strong></td>
-                                <td class="text-center"><strong>Quantity</strong></td>
-                                <td class="text-right"><strong>Total</strong></td>
-                                <td></td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <div>
-                                <?php foreach ($billing->invoice_items($_GET['id']) as $item) { ?>
-                                    <tr>
-                                        <td><?php echo $item['item']; ?></td>
-                                        <td class="text-center"><?php echo CURRSYM.$item['price']; ?></td>
-                                        <td class="text-center"><?php echo $item['quantity']; ?></td>
-                                        <td class="text-right"><?php echo CURRSYM.$item['total']; ?></td>
-                                    </tr>
-                                <?php } ?>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-condensed" id="invoice_items">
+                                <thead>
                                 <tr>
-                                    <td><input type="text" name="item" id="item" value=""></td>
-                                    <td class="text-center"><input type="text" name="price" id="price" value="" onFocus="startCalc();" onBlur="stopCalc();"></td>
-                                    <td class="text-center"><input type="text" name="quantity" id="quantity" value="" onFocus="startCalc();" onBlur="stopCalc();"></td>
-                                    <td class="text-right"><input type="text" name="total" id="total" value=""></td>
-                                    <td><button class="button " name="submit" type="submit">Add Item</button></td>
+                                    <td><strong>Item</strong></td>
+                                    <td class="text-center"><strong>Price</strong></td>
+                                    <td class="text-center"><strong>Quantity</strong></td>
+                                    <td class="text-right"><strong>Total</strong></td>
+                                    <td></td>
                                 </tr>
-                            </div>
-                            </tbody>
-                        </table>
-                        <table class="table table-condensed">
-                            <thead>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="thick-line"></td>
-                                <td class="thick-line"></td>
-                                <td class="thick-line text-center"><strong>Total:</strong></td>
-                                <td class="thick-line text-right"><?php echo CURRSYM.$invoice['total']; ?></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                <div>
+                                    <?php foreach ($billing->invoice_items($_GET['id']) as $item) { ?>
+                                        <tr>
+                                            <td><?php echo $item['item']; ?></td>
+                                            <td class="text-center"><?php echo CURRSYM.$item['price']; ?></td>
+                                            <td class="text-center"><?php echo $item['quantity']; ?></td>
+                                            <td class="text-right"><?php echo CURRSYM.$item['total']; ?></td>
+                                        </tr>
+                                    <?php } ?>
+                                    <tr>
+                                        <td><input type="text" name="item" id="item" value=""></td>
+                                        <td class="text-center"><input type="text" name="price" id="price" value="" onFocus="startCalc();" onBlur="stopCalc();"></td>
+                                        <td class="text-center"><input type="text" name="quantity" id="quantity" value="" onFocus="startCalc();" onBlur="stopCalc();"></td>
+                                        <td class="text-right"><input type="text" name="total" id="total" value=""></td>
+                                        <td><button class="button " name="submit" type="submit">Add Item</button></td>
+                                    </tr>
+                                </div>
+                                </tbody>
+                            </table>
+                            <table class="table table-condensed">
+                                <thead>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line text-center"><strong>Total:</strong></td>
+                                    <td class="thick-line text-right"><?php echo CURRSYM.$invoice['total']; ?></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
     <a href="/billing/invoice.php?send=yes&id=<?php echo $_GET['id']; ?>"  class="btn btn-primary">Send Invoice</a>
-    </form>
-
 <?php
 // include footer
 include(ABS_PATH . '/includes/template/footer.php');
