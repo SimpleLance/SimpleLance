@@ -9,7 +9,5 @@ require_once(ABS_PATH.'/includes/config.php');
 require_once (ABS_PATH.'/includes/database.php');
 // load composer libs
 require (ABS_PATH . '/vendor/autoload.php');
-// load stripe
-Stripe::setApiKey($stripe['secret_key']);
 // loads users class for all pages, needed for confirming login etc
 $users = new \SimpleLance\Users($db);

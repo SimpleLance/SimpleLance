@@ -1,6 +1,8 @@
 <?php
 // include init file
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
+// Instantiate stripe
+Stripe::setApiKey($stripe['secret_key']);
 $billing = new \SimpleLance\Billing($db);
 // pull stripe token from form
 $token  = $_POST['stripeToken'];

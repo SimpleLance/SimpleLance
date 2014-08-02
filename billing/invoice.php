@@ -3,6 +3,8 @@
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 // instantiate billing class
 $billing = new \SimpleLance\Billing($db);
+// Instantiate stripe
+Stripe::setApiKey($stripe['secret_key']);
 // check if valid invoice requested, if not return to invoice list
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $invoice = $billing->get_invoice($_GET['id']);
