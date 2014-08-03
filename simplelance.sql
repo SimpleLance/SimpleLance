@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.6.19)
 # Database: simplelance
-# Generation Time: 2014-07-12 15:29:24 +0000
+# Generation Time: 2014-08-03 20:43:12 +0000
 # ************************************************************
 
 
@@ -18,6 +18,41 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Dump of table invoice_items
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `invoice_items`;
+
+CREATE TABLE `invoice_items` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `invoice_id` int(11) NOT NULL,
+  `item` varchar(100) NOT NULL DEFAULT '',
+  `price` decimal(10,2) NOT NULL,
+  `quantity` int(5) NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table invoices
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `invoices`;
+
+CREATE TABLE `invoices` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `owner` int(11) NOT NULL,
+  `created_date` date NOT NULL,
+  `due_date` date NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT '',
+  `date_paid` date DEFAULT NULL,
+  `total` decimal(13,2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 
 
 # Dump of table project_notes
@@ -185,8 +220,8 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `access_level`, `address_1`, `address_2`, `city`, `state`, `post_code`, `country`, `phone`, `generated_string`)
 VALUES
-	(1,'Admin','User','admin@simplelance.com','$2y$10$eQmpgslNp8VOFr2aIg/Q2OSJK91Tv4CqYvWorSh7.lh.aMEbIDryW','1','123 Any Street','','Any Town','','','Ireland','',NULL),
-	(2,'Customer','User','customer@simplelance.com','$2y$10$oiYoNDv9WFMlmJpcERwYYOM58tS4q.eHNC3WcOZrSFXfXVzpbghM2','2','123 Any Street','','Any Town','','','Ireland','083 122 1562',NULL);
+	(1,'Admin','User','admin@simplelance.com','$2y$10$eQmpgslNp8VOFr2aIg/Q2OSJK91Tv4CqYvWorSh7.lh.aMEbIDryW','1','123 Any Street','','Any Town','','D16','Ireland','',NULL),
+	(2,'Customer','User','customer@simplelance.com','$2y$10$SvUoTUfzGzkSSUFvToBG2.mmkS2TbfP9IzGLwsvPo6RsW7/BEGcpK','2','123 Any Street','','Any Town','','','Ireland','083 122 1562',NULL);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

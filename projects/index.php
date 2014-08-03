@@ -2,7 +2,7 @@
 // include header
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 // instantiate projects class
-$projects = new Projects($db);
+$projects = new \SimpleLance\Projects($db);
 // check if user is a customer
 if ($_SESSION['access_level'] != '1') {
     $project = $projects->user_projects($_SESSION['id']);

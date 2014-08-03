@@ -13,8 +13,10 @@ $users->logged_out_protect();
     <title><?php echo SITE_NAME; ?></title>
 
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
     <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
+
 </head>
 <body>
     <div id="wrapper">
@@ -93,6 +95,17 @@ $users->logged_out_protect();
                                 </li>
                             </ul>
                         </li>
+                         <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Invoices<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/billing/">View Invoices</a>
+                                </li>
+                                <li>
+                                    <a href="/billing/new.php">Create Invoice</a>
+                                </li>
+                            </ul>
+                        </li>
                         <?php } ?>
                         <!-- /admin menu -->
                         <!-- customer menu -->
@@ -105,6 +118,9 @@ $users->logged_out_protect();
                             </li>
                             <li>
                                 <a href="/support/"><i class="fa fa-user fa-fw"></i> Support Tickets</a>
+                            </li>
+                            <li>
+                                <a href="/billing/"><i class="fa fa-user fa-fw"></i> Invoices</a>
                             </li>
                         <?php } ?>
                         <!-- /customer menu -->

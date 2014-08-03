@@ -1,0 +1,20 @@
+{
+    "name": "railto/simplelance",
+    "description": "A simple management tool for freelancers",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mark Railton",
+            "email": "marksrailton@gmail.com"
+        }
+    ],
+    "require": {
+        "ircmaxell/password-compat": "~1.0",
+        "stripe/stripe-php": "~1.17"
+    },
+    "autoload": {
+        "psr-4": {
+            "SimpleLance\\": "includes/SimpleLance"
+        }
+    }
+}

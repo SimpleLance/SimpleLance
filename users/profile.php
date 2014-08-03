@@ -15,8 +15,8 @@ if ($_SESSION['access_level'] !== '1' && $_GET['id'] !== $_SESSION['id']) {
 $gravatarhash = md5(strtolower(trim($user_details['email'])));
 
 // instantiate projects and support classes
-$projects = new Projects($db);
-$support = new Support($db);
+$projects = new \SimpleLance\Projects($db);
+$support = new \SimpleLance\Support($db);
 ?>
 <br><br>
     <div class="row">

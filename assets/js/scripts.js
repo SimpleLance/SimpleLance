@@ -16,3 +16,25 @@ $(function() {
         }
     })
 })
+// date picker for invoice created date
+$(function() {
+    $( "#created_date" ).datepicker({dateFormat: 'dd-mm-yy'});
+});
+
+// date picker for invoice due date
+$(function() {
+    $("#due_date").datepicker({dateFormat: 'dd-mm-yy'});
+});
+
+// calculate totals
+function startCalc(){
+    interval = setInterval("calc()",1);
+}
+function calc(){
+    one = document.invoice_item.price.value;
+    two = document.invoice_item.quantity.value;
+    document.invoice_item.total.value = (one * 1) * (two * 1);
+}
+function stopCalc(){
+    clearInterval(interval);
+}

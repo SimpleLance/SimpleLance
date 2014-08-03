@@ -8,7 +8,7 @@ if ($_SESSION['access_level'] !== '1') {
     exit();
 }
 // instantiate projects class
-$projects = new Projects($db);
+$projects = new \SimpleLance\Projects($db);
 // pulls project details if valid project
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $id = htmlentities($_GET['id']);

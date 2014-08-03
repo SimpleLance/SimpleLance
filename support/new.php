@@ -4,7 +4,7 @@
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 
 // instantiate support class
-$support = new Support($db);
+$support = new \SimpleLance\Support($db);
 
     if (isset($_POST['submit'])) {
 
