@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.6.19)
 # Database: simplelance
-# Generation Time: 2014-07-31 21:13:51 +0000
+# Generation Time: 2014-08-03 20:43:12 +0000
 # ************************************************************
 
 
@@ -221,7 +221,7 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `access_level`, `address_1`, `address_2`, `city`, `state`, `post_code`, `country`, `phone`, `generated_string`)
 VALUES
 	(1,'Admin','User','admin@simplelance.com','$2y$10$eQmpgslNp8VOFr2aIg/Q2OSJK91Tv4CqYvWorSh7.lh.aMEbIDryW','1','123 Any Street','','Any Town','','D16','Ireland','',NULL),
-	(2,'Customer','User','customer@simplelance.com','$2y$12$209078062153c3b3d66c3OLttl1c.rDZ2KLXHHbs82NNuxH3ds.sO','2','123 Any Street','','Any Town','','','Ireland','083 122 1562',NULL);
+	(2,'Customer','User','customer@simplelance.com','$2y$10$SvUoTUfzGzkSSUFvToBG2.mmkS2TbfP9IzGLwsvPo6RsW7/BEGcpK','2','123 Any Street','','Any Town','','','Ireland','083 122 1562',NULL);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

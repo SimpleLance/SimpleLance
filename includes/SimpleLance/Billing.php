@@ -148,11 +148,6 @@ class Billing {
             die($e->getMessage());
         }
 
-        $subject = "New Invoice from SimpleLance Dev";
-        $body = "Hi There, you have received a new invoice from SimpleLance Dev";
-        $headers = "From: admin@simplelane.com";
-
-        mail($email,$subject,$body,$headers);
         header("Location: /billing/");
     }
 
