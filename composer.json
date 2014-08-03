@@ -10,7 +10,8 @@
     ],
     "require": {
         "ircmaxell/password-compat": "~1.0",
-        "stripe/stripe-php": "~1.17"
+        "stripe/stripe-php": "~1.17",
+        "phpmailer/phpmailer": "~5.2"
     },
     "autoload": {
         "psr-4": {
