@@ -96,6 +96,22 @@ class Support {
         } catch (PDOException $e) {
             die($e->getMessage());
         }
+
+        $mail = new \PHPMailer();
+        $mail->IsSMTP();
+        $mail->Host = EMAIL_SERVER;
+        $mail->Port = EMAIL_PORT;
+        $mail->SMTPAuth = true;
+        $mail->Username = EMAIL_USER;
+        $mail->Password = EMAIL_PASSWORD;
+        $mail->SMTPSecure = EMAIL_SECURITY;
+        $mail->From = EMAIL_FROM_ADDRESS;
+        $mail->FromName = EMAIL_FROM_NAME;
+        $mail->AddAddress(ADMIN_EMAIL, ADMIN_NAME);
+        $mail->IsHTML(true);
+        $mail->Subject = 'New support ticket';
+        $mail->Body    = 'Hi '.ADMIN_NAME.',<br><br>Someone has opened a new '. $this->get_priority($priority) .' priority support ticket with subject '.$subject.'.<br><br>You can view the ticket at http://'.SITE_URL.'/support/ticket?id='.$this->last_ticket_id().'<br><br>Regards,<br>'. SITE_NAME;
+        $mail->Send();
     }
 
     public function user_tickets($id) {
@@ -218,5 +234,21 @@ class Support {
         } catch (PDOException $e) {
             die($e->getMessage());
         }
+    }
+
+    public function last_ticket_id() {
+
+        $query = $this->db->prepare("SELECT `id` FROM `tickets` ORDER BY `id` DESC LIMIT 1");
+
+        try {
+            $query->execute();
+
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+
+        $data =  $query->fetch();
+        $status = $data['id'];
+        return $status;
     }
 }
