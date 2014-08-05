@@ -110,7 +110,7 @@ class Support {
         $mail->AddAddress(ADMIN_EMAIL, ADMIN_NAME);
         $mail->IsHTML(true);
         $mail->Subject = 'New support ticket';
-        $mail->Body    = 'Hi '.ADMIN_NAME.',<br><br>Someone has opened a new '. $this->get_priority($priority) .' priority support ticket with subject '.$subject.'.<br><br>You can view the ticket at http://'.SITE_URL.'/support/ticket?id='.$this->last_ticket_id().'<br><br>Regards,<br>'. SITE_NAME;
+        $mail->Body    = 'Hi '.ADMIN_NAME.',<br><br>'.$this->get_user($this->get_ticket($this->last_ticket_id())['owner'])['first_name'].' '.$this->get_user($this->get_ticket($this->last_ticket_id())['owner'])['last_name'].' has opened a new '. $this->get_priority($priority) .' priority support ticket with subject '.$subject.'.<br><br>You can view the ticket at http://'.SITE_URL.'/support/ticket?id='.$this->last_ticket_id().'<br><br>Regards,<br>'. SITE_NAME;
         $mail->Send();
     }
 
@@ -172,6 +172,42 @@ class Support {
 
         } catch (PDOException $e) {
             die($e->getMessage());
+        }
+        // check if reply from user
+        if($status == '2' || $status == '3') {
+
+            $mail = new \PHPMailer();
+            $mail->IsSMTP();
+            $mail->Host = EMAIL_SERVER;
+            $mail->Port = EMAIL_PORT;
+            $mail->SMTPAuth = true;
+            $mail->Username = EMAIL_USER;
+            $mail->Password = EMAIL_PASSWORD;
+            $mail->SMTPSecure = EMAIL_SECURITY;
+            $mail->From = EMAIL_FROM_ADDRESS;
+            $mail->FromName = EMAIL_FROM_NAME;
+            $mail->AddAddress($this->get_user($this->get_ticket($ticket_id)['owner'])['email'], $this->get_user($this->get_ticket($ticket_id)['owner'])['first_name'].' '.$this->get_user($this->get_ticket($ticket_id)['owner'])['last_name']);
+            $mail->IsHTML(true);
+            $mail->Subject = 'Updated support ticket';
+            $mail->Body    = 'Hi '.$this->get_user($this->get_ticket($ticket_id)['owner'])['first_name'].' '.$this->get_user($this->get_ticket($ticket_id)['owner'])['last_name'].',<br><br>Your support ticket with subject '.$this->get_ticket($ticket_id)['subject'].' has been updated.<br><br>You can view the ticket at http://'.SITE_URL.'/support/ticket?id='.$this->last_ticket_id().'<br><br>Regards,<br>'. SITE_NAME;
+            $mail->Send();
+        } else if ($status = '1') { // check if reply from admin
+
+            $mail = new \PHPMailer();
+            $mail->IsSMTP();
+            $mail->Host = EMAIL_SERVER;
+            $mail->Port = EMAIL_PORT;
+            $mail->SMTPAuth = true;
+            $mail->Username = EMAIL_USER;
+            $mail->Password = EMAIL_PASSWORD;
+            $mail->SMTPSecure = EMAIL_SECURITY;
+            $mail->From = EMAIL_FROM_ADDRESS;
+            $mail->FromName = EMAIL_FROM_NAME;
+            $mail->AddAddress(ADMIN_EMAIL, ADMIN_NAME);
+            $mail->IsHTML(true);
+            $mail->Subject = 'Updated support ticket';
+            $mail->Body    = 'Hi '.ADMIN_NAME.',<br><br>'.$this->get_user($this->get_ticket($ticket_id)['owner'])['first_name'].' '.$this->get_user($this->get_ticket($ticket_id)['owner'])['last_name'].' has updated their support ticket with subject '.$this->get_ticket($ticket_id)['subject'].'.<br><br>You can view the ticket at http://'.SITE_URL.'/support/ticket?id='.$this->last_ticket_id().'<br><br>Regards,<br>'. SITE_NAME;
+            $mail->Send();
         }
     }
 
@@ -250,5 +286,18 @@ class Support {
         $data =  $query->fetch();
         $status = $data['id'];
         return $status;
+    }
+
+    public function get_user($id) {
+        $query = $this->db->prepare("SELECT * FROM `users` WHERE `id`= ?");
+        $query->bindValue(1, $id);
+
+        try {
+            $query->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+
+        return $query->fetch();
     }
 }
