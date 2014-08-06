@@ -29,3 +29,15 @@ To install SimpleLance:
 - Run 'composer install' to install dependencies
 
 That's it, SimpleLance is now up and running, ready to help you run your freelance business.
+
+###ToDo:
+
+There are a few things left to be done:
+
+- Create admin dashboard / customer home screen
+- Create installer
+- Finish email notifications
+- General code tidy
+- Improve (create!) documentation
+
+If you feel so inclined to help with any of these, please open a PR and get stuck in.
