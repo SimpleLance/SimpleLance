@@ -1,6 +1,6 @@
 <?php
 // define site name
-define('SITE_NAME', 'SimpleLance DEV LOCAL');
+define('SITE_NAME', 'SimpleLance DEV');
 
 // define site URL
 define('SITE_URL', 'simplelance.dev');
