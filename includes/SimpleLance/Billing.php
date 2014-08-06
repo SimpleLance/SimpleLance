@@ -161,7 +161,7 @@ class Billing {
         $mail->AddAddress($this->get_user($this->get_invoice($invoice_id)['owner'])['email'], $this->get_user($this->get_invoice($invoice_id)['owner'])['first_name'].' '.$this->get_user($this->get_invoice($invoice_id)['owner'])['last_name']);
         $mail->IsHTML(true);
         $mail->Subject = 'New invoice from '.SITE_NAME;
-        $mail->Body    = 'Hi '.$this->get_user($this->get_invoice($invoice_id)['owner'])['first_name'].' '.$this->get_user($this->get_invoice($invoice_id)['owner'])['last_name'].',<br><br>A new invoice has been generated for you at '.SITE_NAME.'.<br><br>You can view the invoice at http://'.SITE_URL.'/billing/invoice?id='.$this->last_invoice_id().'<br><br>Regards,<br>'. SITE_NAME;
+        $mail->Body    = 'Hi '.$this->get_user($this->get_invoice($invoice_id)['owner'])['first_name'].' '.$this->get_user($this->get_invoice($invoice_id)['owner'])['last_name'].',<br><br>A new invoice has been generated for you at '.SITE_NAME.' for '.CURRSYM.$this->get_invoice($invoice_id)['total'].' and is due on '.date('d/m/Y', strtotime($this->get_invoice($invoice_id)['due_date'])).'.<br><br>You can view the invoice at http://'.SITE_URL.'/billing/invoice?id='.$this->last_invoice_id().'<br><br>Regards,<br>'. SITE_NAME;
         $mail->Send();
 
         header("Location: /billing/");
