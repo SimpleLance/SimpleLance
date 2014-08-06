@@ -1,14 +1,12 @@
 <?php
-// define environment
-define('ENV', 'dev');
 ob_start();
 session_start();
 // define absolute server path
 define('ABS_PATH', $_SERVER['DOCUMENT_ROOT']);
-// include configuration file
-if(ENV == 'dev'){
+// checks to see if a dev config file exists and if does, loads it
+if(file_exists(ABS_PATH.'/includes/.dev.config.php')){
     require_once(ABS_PATH.'/includes/.dev.config.php');
-} else {
+} else { // if no dev config file found loads main config
     require_once(ABS_PATH.'/includes/config.php');
 }
 // load database settings
