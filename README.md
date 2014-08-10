@@ -39,7 +39,7 @@ A demo is available at [demo.simplelance.com](http://demo.simplelance.com) which
 There are a few things left to be done:
 
 - Create admin dashboard / customer home screen
-- Create installer
+- Create database installer
 - Finish email notifications
 - General code tidy
 - Improve (create!) documentation
