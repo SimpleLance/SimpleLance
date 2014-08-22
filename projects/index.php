@@ -38,10 +38,10 @@ $project = $projects->list_projects();
 <div class="row col-md-9 col-md-offset-1 custyle">
     <?php
     if (isset($_GET['addsuccess']) && empty($_GET['addsuccess'])) {
-        echo '<br><br>Project successfully added.';
+        echo '<br><div class="alert alert-success" role="alert">Project successfully added.</div>';
     }
     if (isset($_GET['editsuccess']) && empty($_GET['editsuccess'])) {
-        echo '<br><br>Project successfully updated.';
+        echo '<br><div class="alert alert-success" role="alert">Project successfully updated.</div>';
     }
     ?>
     <table class="table table-striped custab">
