@@ -15,13 +15,13 @@ $users = $users->get_users();
     <div class="row col-md-9 col-md-offset-1 custyle">
         <?php
         if (isset($_GET['addsuccess']) && empty($_GET['addsuccess'])) {
-            echo '<br><br>User successfully added, they can now login.';
+            echo '<br><div class="alert alert-success" role="alert">User successfully added, they can now login.</div>';
         }
         if (isset($_GET['editsuccess']) && empty($_GET['editsuccess'])) {
-            echo '<br><br>User successfully updated.';
+            echo '<br><div class="alert alert-success" role="alert">User successfully updated.</div>';
         }
         if (isset($_GET['deletesuccess']) && empty($_GET['deletesuccess'])) {
-            echo '<br><br>User successfully deleted.';
+            echo '<br><div class="alert alert-success" role="alert">User successfully deleted.</div>';
         }
         ?>
         <table class="table table-striped custab">

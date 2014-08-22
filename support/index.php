@@ -10,10 +10,10 @@ if ($_SESSION['access_level'] != '1') {
     <div class="row col-md-9 col-md-offset-1 custyle">
         <?php
         if (isset($_GET['addsuccess']) && empty($_GET['addsuccess'])) {
-            echo '<br><br>Support ticket successfully added.';
+            echo '<br><div class="alert alert-success" role="alert">Support ticket successfully added.</div>';
         }
         if (isset($_GET['updatesuccess']) && empty($_GET['editsuccess'])) {
-            echo '<br><br>Support ticket successfully updated.';
+            echo '<br><div class="alert alert-success" role="alert">Support ticket successfully updated.</div>';
         }
         ?>
         <br><br>
@@ -54,10 +54,10 @@ if ($_SESSION['access_level'] != '1') {
     <div class="row col-md-9 col-md-offset-1 custyle">
         <?php
         if (isset($_GET['addsuccess']) && empty($_GET['addsuccess'])) {
-            echo '<br><br>Support ticket successfully added.';
+            echo '<br><div class="alert alert-success" role="alert">Support ticket successfully added.</div>';
         }
         if (isset($_GET['editsuccess']) && empty($_GET['editsuccess'])) {
-            echo '<br><br>Support ticket successfully updated.';
+            echo '<br><div class="alert alert-success" role="alert">Support ticket successfully updated.</div>';
         }
         ?>
         <table class="table table-striped custab">
