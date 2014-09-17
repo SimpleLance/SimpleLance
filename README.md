@@ -30,10 +30,6 @@ To install SimpleLance:
 
 That's it, SimpleLance is now up and running, ready to help you run your freelance business.
 
-###Demo:
-
-A demo is available at [demo.simplelance.com](http://demo.simplelance.com) which resets every 2 hours.  Please use the login details above on the demo.
-
 ###ToDo:
 
 There are a few things left to be done:
