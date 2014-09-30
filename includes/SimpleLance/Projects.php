@@ -4,7 +4,7 @@ namespace SimpleLance;
 
 use PDOException;
 
-class Projects
+class Projects extends Mailer
 {
     private $db;
 
@@ -267,5 +267,19 @@ class Projects
         }
 
         return $query->fetchAll();
+    }
+
+    public function get_user($id)
+    {
+        $query = $this->db->prepare("SELECT * FROM `users` WHERE `id`= ?");
+        $query->bindValue(1, $id);
+
+        try {
+            $query->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+
+        return $query->fetch();
     }
 }

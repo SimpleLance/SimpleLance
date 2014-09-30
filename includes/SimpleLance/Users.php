@@ -8,7 +8,7 @@ use PDOException;
  * Class Users
  * @package SimpleLance
  */
-class Users
+class Users extends Mailer
 {
     /**
      * @var

@@ -4,7 +4,7 @@ namespace SimpleLance;
 
 use PDOException;
 
-class Support
+class Support extends Mailer
 {
     private $db;
 
