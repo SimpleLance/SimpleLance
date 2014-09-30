@@ -2,17 +2,19 @@
 
 namespace SimpleLance;
 
-class Billing {
+use PDOException;
 
+class Billing
+{
     private $db;
 
-    public function __construct($database) {
-
+    public function __construct($database)
+    {
         $this->db = $database;
     }
 
-    public function list_invoices() {
-
+    public function list_invoices()
+    {
         $query = $this->db->prepare("SELECT * FROM `invoices`");
 
         try {
@@ -25,8 +27,8 @@ class Billing {
         return $query->fetchAll();
     }
 
-    public function user_invoices($user_id) {
-
+    public function user_invoices($user_id)
+    {
         $query = $this->db->prepare("SELECT * FROM `invoices` WHERE `owner` = ?");
 
         $query->bindValue(1, $user_id);
@@ -41,8 +43,8 @@ class Billing {
         return $query->fetchAll();
     }
 
-    public function get_invoice($id) {
-
+    public function get_invoice($id)
+    {
         $query = $this->db->prepare("SELECT * FROM `invoices` WHERE `id` = ? LIMIT 1");
 
         $query->bindValue(1, $id);
@@ -61,8 +63,8 @@ class Billing {
         }
     }
 
-    public function invoice_items($id) {
-
+    public function invoice_items($id)
+    {
         $query = $this->db->prepare("SELECT * FROM `invoice_items` WHERE `invoice_id` = ?");
 
         $query->bindValue(1, $id);
@@ -78,8 +80,8 @@ class Billing {
         return $query->fetchAll();
     }
 
-    public function create_invoice($owner, $created_date, $due_date) {
-
+    public function create_invoice($owner, $created_date, $due_date)
+    {
         $query = $this->db->prepare("INSERT INTO `invoices` (`owner`, `created_date`, `due_date`, `status`, `total`) VALUES (?, ?, ?, ?, ?)");
 
         $query->bindValue(1, $owner);
@@ -99,8 +101,8 @@ class Billing {
         header("Location: /billing/add_details.php?id=" . $this->db->lastInsertId() . "");
     }
 
-    public function add_invoice_item($invoice_id, $item, $price, $quantity, $total) {
-
+    public function add_invoice_item($invoice_id, $item, $price, $quantity, $total)
+    {
         $query = $this->db->prepare("INSERT INTO `invoice_items` (`invoice_id`, `item`, `price`, `quantity`, `total`) VALUES (?, ?, ?, ?, ?)");
 
         $query->bindValue(1, $invoice_id);
@@ -133,8 +135,8 @@ class Billing {
         header("Location: /billing/add_details.php?id=" . $invoice_id . "");
     }
 
-    public function send_invoice($invoice_id, $email) {
-
+    public function send_invoice($invoice_id)
+    {
         $query = $this->db->prepare("UPDATE `invoices` SET `status` = ? WHERE `id` = ?");
 
         $query->bindValue(1, 'Unpaid');
@@ -167,8 +169,8 @@ class Billing {
         header("Location: /billing/");
     }
 
-    public function mark_paid($invoice_id) {
-
+    public function mark_paid($invoice_id)
+    {
         $query = $this->db->prepare("UPDATE `invoices` SET `status` = ?, `date_paid` = ? WHERE `id` = ?");
 
         $query->bindValue(1, 'Paid');
@@ -202,7 +204,8 @@ class Billing {
         header("Location: /billing/");
     }
 
-    public function get_user($id) {
+    public function get_user($id)
+    {
         $query = $this->db->prepare("SELECT * FROM `users` WHERE `id`= ?");
         $query->bindValue(1, $id);
 
@@ -215,8 +218,8 @@ class Billing {
         return $query->fetch();
     }
 
-    public function last_invoice_id() {
-
+    public function last_invoice_id()
+    {
         $query = $this->db->prepare("SELECT `id` FROM `invoices` ORDER BY `id` DESC LIMIT 1");
 
         try {
@@ -228,7 +231,7 @@ class Billing {
 
         $data =  $query->fetch();
         $status = $data['id'];
+
         return $status;
     }
 }
-

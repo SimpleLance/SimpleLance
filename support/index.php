@@ -1,6 +1,6 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // instantiate projects class
 $support = new \SimpleLance\Support($db);
 // check if user is a customer and show only their tickets
@@ -45,7 +45,6 @@ if ($_SESSION['access_level'] != '1') {
     </div>
 <?php } else {
 
-
     // load all tickets
     $ticket = $support->list_tickets();
     ?>
@@ -68,7 +67,7 @@ if ($_SESSION['access_level'] != '1') {
                 <th>Priority</th>
                 <th>Status</th>
                 <th>Last Reply By</th>
-                <th>Last Reply <On></On></th>
+                <th>Last Reply On</th>
                 <th>View</th>
             </tr>
             </thead>
@@ -92,5 +91,5 @@ if ($_SESSION['access_level'] != '1') {
 <?php
 }
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

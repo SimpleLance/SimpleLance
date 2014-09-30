@@ -1,6 +1,6 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // instantiate projects class
 $projects = new \SimpleLance\Projects($db);
 // pulls project details if valid project
@@ -109,5 +109,5 @@ if (isset($_GET['close']) && $_GET['close'] == 'true') {
 <!-- /html -->
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

@@ -1,6 +1,6 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 
 // only allow access to admins
 if ($_SESSION['access_level'] !== '1') {
@@ -51,5 +51,5 @@ $users = $users->get_users();
     <!-- /html -->
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

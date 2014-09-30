@@ -1,6 +1,6 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 ?>
 <div class="row">
     <div class="col-lg-12">
@@ -15,5 +15,5 @@ include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
 </div>
 <?php
 //include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

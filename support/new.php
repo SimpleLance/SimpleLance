@@ -1,7 +1,7 @@
 <?php
 
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 
 // instantiate support class
 $support = new \SimpleLance\Support($db);
@@ -18,12 +18,11 @@ $support = new \SimpleLance\Support($db);
         $owner = $_SESSION['id'];
     }
 
-
     if (empty($subject) || empty($content) || empty($priority)) {
         $errors[] = 'All fields are required!';
     }
 
-    if (empty($errors) == TRUE){
+    if (empty($errors) == TRUE) {
         $support->new_ticket($subject, $content, $priority, $owner);
         if ($_SESSION['access_level'] == 1) {
             header('Location: /support/?addsuccess');
@@ -63,7 +62,7 @@ if (!empty($errors)) {
                 </select>
             </div>
             <?php
-            if($_SESSION['access_level'] == '1') {
+            if ($_SESSION['access_level'] == '1') {
                 $user = $users->get_users(); ?>
                 <div class="form-group col-lg-12">
                     <label for="owner">Owner</label><br>
@@ -82,5 +81,5 @@ if (!empty($errors)) {
     </form>
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

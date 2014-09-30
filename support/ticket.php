@@ -1,6 +1,6 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // instantiate projects class
 $support = new \SimpleLance\Support($db);
 // check if valid ticket requested, if not return to ticket list
@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
         $errors[] = 'All fields are required!';
     }
 
-    if (empty($errors) == TRUE){
+    if (empty($errors) == TRUE) {
         $support->update_ticket($ticket['id'], $content, $_SESSION['id'], $status);
         header('Location: /support/?updatesuccess');
         exit();
@@ -106,5 +106,5 @@ if (isset($_POST['submit'])) {
 
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

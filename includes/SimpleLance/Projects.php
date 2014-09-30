@@ -2,17 +2,19 @@
 
 namespace SimpleLance;
 
-class Projects {
+use PDOException;
 
+class Projects
+{
     private $db;
 
-    public function __construct($database) {
-
+    public function __construct($database)
+    {
         $this->db = $database;
     }
 
-    public function new_project($name, $description, $owner, $status) {
-
+    public function new_project($name, $description, $owner, $status)
+    {
         $query = $this->db->prepare("INSERT INTO `projects` (`name`, `description`, `created_on`, `owner`, `status`) VALUES (?, ?, ?, ?, ?)");
 
         $query->bindValue(1, $name);
@@ -29,8 +31,8 @@ class Projects {
         }
     }
 
-    public function list_projects() {
-
+    public function list_projects()
+    {
         $query = $this->db->prepare("SELECT * FROM `projects` ORDER BY `ID` DESC");
 
         try {
@@ -42,8 +44,8 @@ class Projects {
         return $query->fetchAll();
     }
 
-    public function delete_project($id) {
-
+    public function delete_project($id)
+    {
         $query = $this->db->prepare("DELETE from `projects` where `id` = ?");
 
         $query->bindValue(1, $id);
@@ -55,23 +57,23 @@ class Projects {
         }
     }
 
-    public function get_project($id) {
-
+    public function get_project($id)
+    {
         $query = $this->db->prepare ("SELECT * from `projects` WHERE `id` = ?");
 
         $query->bindValue(1, $id);
 
         try {
             $query->execute();
-        } catch (PDOException $e){
+        } catch (PDOException $e) {
             die ($e->getMessage());
         }
 
         return $query->fetch();
     }
 
-    public function update_project($name, $description, $owner, $status, $id) {
-
+    public function update_project($name, $description, $owner, $status, $id)
+    {
         $query = $this->db->prepare ("UPDATE `projects` SET `name` = ?, `description` = ?, `owner` = ?, `status` = ? WHERE `id` = ?");
 
         $query->bindValue(1, $name);
@@ -87,8 +89,8 @@ class Projects {
         }
     }
 
-    public function list_project_tasks($id) {
-
+    public function list_project_tasks($id)
+    {
         $query = $this->db->prepare ("SELECT * FROM `project_tasks` WHERE `project` = ? ORDER BY `id` DESC");
 
         $query->bindValue(1, $id);
@@ -102,8 +104,8 @@ class Projects {
         return $query->fetchAll();
     }
 
-    public function list_project_notes($id) {
-
+    public function list_project_notes($id)
+    {
         $query = $this->db->prepare ("SELECT * FROM `project_notes` WHERE `project` = ? ORDER BY `id` DESC");
 
         $query->bindValue(1, $id);
@@ -117,8 +119,8 @@ class Projects {
         return $query->fetchAll();
     }
 
-    public function new_task($project_id, $name, $description, $status) {
-
+    public function new_task($project_id, $name, $description, $status)
+    {
         $query = $this->db->prepare("INSERT INTO `project_tasks` (`project`, `name`, `description`, `created_on`, `status`) VALUES (?, ?, ?, ?, ?)");
 
         $query->bindValue(1, $project_id);
@@ -135,23 +137,23 @@ class Projects {
         }
     }
 
-    public function get_task($id) {
-
+    public function get_task($id)
+    {
         $query = $this->db->prepare ("SELECT * from `project_tasks` WHERE `id` = ?");
 
         $query->bindValue(1, $id);
 
         try {
             $query->execute();
-        } catch (PDOException $e){
+        } catch (PDOException $e) {
             die ($e->getMessage());
         }
 
         return $query->fetch();
     }
 
-    public function update_task($name, $description, $status, $id) {
-
+    public function update_task($name, $description, $status, $id)
+    {
         $query = $this->db->prepare ("UPDATE `project_tasks` SET `name` = ?, `description` = ?, `status` = ? WHERE `id` = ?");
 
         $query->bindValue(1, $name);
@@ -166,8 +168,8 @@ class Projects {
         }
     }
 
-    public function new_note($project_id, $title, $details) {
-
+    public function new_note($project_id, $title, $details)
+    {
         $query = $this->db->prepare("INSERT INTO `project_notes` (`project`, `title`, `details`, `created_on`) VALUES (?, ?, ?, ?)");
 
         $query->bindValue(1, $project_id);
@@ -183,23 +185,23 @@ class Projects {
         }
     }
 
-    public function get_note($id) {
-
+    public function get_note($id)
+    {
         $query = $this->db->prepare ("SELECT * from `project_notes` WHERE `id` = ?");
 
         $query->bindValue(1, $id);
 
         try {
             $query->execute();
-        } catch (PDOException $e){
+        } catch (PDOException $e) {
             die ($e->getMessage());
         }
 
         return $query->fetch();
     }
 
-    public function update_note($title, $details, $id) {
-
+    public function update_note($title, $details, $id)
+    {
         $query = $this->db->prepare ("UPDATE `project_notes` SET `title` = ?, `details` = ? WHERE `id` = ?");
 
         $query->bindValue(1, $title);
@@ -213,8 +215,8 @@ class Projects {
         }
     }
 
-    public function close_project($id) {
-
+    public function close_project($id)
+    {
         $query = $this->db->prepare ("UPDATE `projects` SET `status` = 'Closed' WHERE `id` = ?");
 
         $query->bindValue(1, $id);
@@ -226,8 +228,8 @@ class Projects {
         }
     }
 
-    public function delete_project_tasks($id) {
-
+    public function delete_project_tasks($id)
+    {
         $query = $this->db->prepare ("DELETE FROM `project_tasks` WHERE `project` = ?");
 
         $query->bindValue(1, $id);
@@ -239,8 +241,8 @@ class Projects {
         }
     }
 
-    public function delete_project_notes($id) {
-
+    public function delete_project_notes($id)
+    {
         $query = $this->db->prepare ("DELETE FROM `project_notes` WHERE `project` = ?");
 
         $query->bindValue(1, $id);
@@ -252,8 +254,8 @@ class Projects {
         }
     }
 
-    public function user_projects($owner) {
-
+    public function user_projects($owner)
+    {
         $query = $this->db->prepare ("SELECT * FROM `projects` WHERE `owner` = ?");
 
         $query->bindValue(1, $owner);
@@ -263,6 +265,7 @@ class Projects {
         } catch (PDOException $e) {
             die($e->getMessage());
         }
+
         return $query->fetchAll();
     }
 }

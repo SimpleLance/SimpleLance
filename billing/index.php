@@ -1,6 +1,6 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // instantiate billing class
 $billing = new \SimpleLance\Billing($db);
 // check if user is a customer and only show their invoices
@@ -61,5 +61,5 @@ if ($_SESSION['access_level'] != '1') { ?>
 <?php
 }
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

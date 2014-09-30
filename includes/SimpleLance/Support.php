@@ -2,17 +2,19 @@
 
 namespace SimpleLance;
 
-class Support {
+use PDOException;
 
+class Support
+{
     private $db;
 
-    public function __construct($database) {
-
+    public function __construct($database)
+    {
         $this->db = $database;
     }
 
-    public function get_priorities() {
-
+    public function get_priorities()
+    {
         $query = $this->db->prepare("SELECT * FROM `ticket_priorities`");
 
         try {
@@ -26,8 +28,8 @@ class Support {
 
     }
 
-    public function get_priority($id) {
-
+    public function get_priority($id)
+    {
         $query = $this->db->prepare("SELECT `priority` FROM `ticket_priorities` WHERE `id` = ? LIMIT 1");
 
         $query->bindValue(1, $id);
@@ -41,12 +43,13 @@ class Support {
 
         $data =  $query->fetch();
         $priority = $data['priority'];
+
         return $priority;
 
     }
 
-    public function get_statuses() {
-
+    public function get_statuses()
+    {
         $query = $this->db->prepare("SELECT * FROM `ticket_statuses`");
 
         try {
@@ -59,8 +62,8 @@ class Support {
         return $query->fetchAll();
     }
 
-    public function get_status($id) {
-
+    public function get_status($id)
+    {
         $query = $this->db->prepare("SELECT `status` FROM `ticket_statuses` WHERE `id` = ?");
 
         $query->bindValue(1, $id);
@@ -74,11 +77,12 @@ class Support {
 
         $data =  $query->fetch();
         $status = $data['status'];
+
         return $status;
     }
 
-    public function new_ticket($subject, $content, $priority, $owner) {
-
+    public function new_ticket($subject, $content, $priority, $owner)
+    {
         $query = $this->db->prepare("INSERT INTO `tickets` (`subject`, `content`, `opened`, `priority`, `status`, `owner`, `last_reply_user`, `last_reply_date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
         $query->bindValue(1, $subject);
@@ -114,8 +118,8 @@ class Support {
         $mail->Send();
     }
 
-    public function user_tickets($id) {
-
+    public function user_tickets($id)
+    {
         $query = $this->db->prepare("SELECT * FROM `tickets` WHERE `owner` = ?");
 
         $query->bindValue(1, $id);
@@ -130,8 +134,8 @@ class Support {
         return $query->fetchAll();
     }
 
-    public function list_tickets() {
-
+    public function list_tickets()
+    {
         $query = $this->db->prepare("SELECT * FROM `tickets` ORDER BY `last_reply_date` ASC");
 
         try {
@@ -144,7 +148,8 @@ class Support {
         return $query->fetchAll();
     }
 
-    public function update_ticket($ticket_id, $content, $user_id, $status) {
+    public function update_ticket($ticket_id, $content, $user_id, $status)
+    {
         // insert ticket reply to db
         $query1 = $this->db->prepare("INSERT INTO `ticket_replies` (`ticket_id`, `content`, `replied_on`, `user_id`) VALUES (?, ?, ?, ?)");
 
@@ -174,7 +179,7 @@ class Support {
             die($e->getMessage());
         }
         // check if reply from user
-        if($status == '2' || $status == '3') {
+        if ($status == '2' || $status == '3') {
 
             $mail = new \PHPMailer();
             $mail->IsSMTP();
@@ -191,7 +196,7 @@ class Support {
             $mail->Subject = 'Updated support ticket';
             $mail->Body    = 'Hi '.$this->get_user($this->get_ticket($ticket_id)['owner'])['first_name'].' '.$this->get_user($this->get_ticket($ticket_id)['owner'])['last_name'].',<br><br>Your support ticket with subject '.$this->get_ticket($ticket_id)['subject'].' has been updated.<br><br>You can view the ticket at http://'.SITE_URL.'/support/ticket?id='.$this->last_ticket_id().'<br><br>Regards,<br>'. SITE_NAME;
             $mail->Send();
-        } else if ($status = '1') { // check if reply from admin
+        } elseif ($status = '1') { // check if reply from admin
 
             $mail = new \PHPMailer();
             $mail->IsSMTP();
@@ -211,8 +216,8 @@ class Support {
         }
     }
 
-    public function get_ticket($id) {
-
+    public function get_ticket($id)
+    {
         $query = $this->db->prepare("SELECT * FROM `tickets` WHERE `id` = ?");
 
         $query->bindValue(1, $id);
@@ -231,8 +236,8 @@ class Support {
         }
     }
 
-    public function get_ticket_replies($id) {
-
+    public function get_ticket_replies($id)
+    {
         $query = $this->db->prepare("SELECT * FROM `ticket_replies` WHERE `ticket_id` = ? ORDER BY `id` ASC");
 
         $query->bindValue(1, $id);
@@ -247,8 +252,8 @@ class Support {
         return $query->fetchAll();
     }
 
-    public function delete_ticket($id) {
-
+    public function delete_ticket($id)
+    {
         $query1 = $this->db->prepare("DELETE FROM `tickets` WHERE `id` = ?");
 
         $query1->bindValue(1, $id);
@@ -272,8 +277,8 @@ class Support {
         }
     }
 
-    public function last_ticket_id() {
-
+    public function last_ticket_id()
+    {
         $query = $this->db->prepare("SELECT `id` FROM `tickets` ORDER BY `id` DESC LIMIT 1");
 
         try {
@@ -285,10 +290,12 @@ class Support {
 
         $data =  $query->fetch();
         $status = $data['id'];
+
         return $status;
     }
 
-    public function get_user($id) {
+    public function get_user($id)
+    {
         $query = $this->db->prepare("SELECT * FROM `users` WHERE `id`= ?");
         $query->bindValue(1, $id);
 

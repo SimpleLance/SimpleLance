@@ -1,6 +1,6 @@
 <?php
 // initialise script
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/init.php';
 
 // only allow access to admins
 if ($_SESSION['access_level'] !== '1') {

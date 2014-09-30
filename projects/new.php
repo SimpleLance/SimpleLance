@@ -1,7 +1,7 @@
 <?php
 
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // only allow access to admins
 if ($_SESSION['access_level'] !== '1') {
     header('Location: /access-denied.php');
@@ -18,12 +18,11 @@ if (isset($_POST['submit'])) {
     $owner = trim($_POST["owner"]);
     $status = trim($_POST["status"]);
 
-
     if (empty($name) || empty($description) || empty($owner) || empty($status)) {
         $errors[] = 'All fields are required!';
     }
 
-    if (empty($errors) == TRUE){
+    if (empty($errors) == TRUE) {
         $projects->new_project($name, $description, $owner, $status);
         header('Location: /projects/?addsuccess');
         exit();
@@ -33,11 +32,11 @@ if (isset($_POST['submit'])) {
 <!-- html -->
 <br><br>
 	<?php
-	// display any errors
-	if (!empty($errors)) {
-	    echo '<p>' . implode('</p><p>', $errors) . '</p>';
-	}
-	?>
+    // display any errors
+    if (!empty($errors)) {
+        echo '<p>' . implode('</p><p>', $errors) . '</p>';
+    }
+    ?>
 	<form class="well span6" role="form" action='' method='post'>
 		<div class="row">
 			<div class="form-group col-lg-12">
@@ -70,9 +69,9 @@ if (isset($_POST['submit'])) {
 		    <div class="form-group col-lg-6">
 				<button class="btn btn-primary pull-right" name="submit" type="submit">Add Project</button>
 			</div>
-		</div>		
+		</div>
 	</form>
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

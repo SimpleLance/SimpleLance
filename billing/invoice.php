@@ -1,6 +1,6 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // instantiate billing class
 $billing = new \SimpleLance\Billing($db);
 // Instantiate stripe
@@ -21,7 +21,7 @@ $user = $users->get_user($invoice['owner']);
 // checks to see if invoice is being sent and sends
 if (isset($_GET['send']) && $_GET['send'] == 'yes') {
     $email = $users->get_user($invoice['owner'])['email'];
-    $billing->send_invoice($_GET['id'], $email);
+    $billing->send_invoice($_GET['id']);
 }
 // checks to see if invoice is being set as paid and updates
 if (isset($_GET['set_status']) && $_GET['set_status'] == 'paid') {
@@ -108,10 +108,10 @@ if (isset($_GET['set_status']) && $_GET['set_status'] == 'paid') {
         </div>
     </div>
     <a href="#" onClick="window.print()" class="btn btn-primary">Print Invoice</a>
-    <?php if($_SESSION['access_level'] == '1' && $invoice['status'] != 'Paid') { ?>
+    <?php if ($_SESSION['access_level'] == '1' && $invoice['status'] != 'Paid') { ?>
         <a href="/billing/invoice.php?set_status=paid&id=<?php echo $_GET['id']; ?>" class="btn btn-primary">Mark Paid</a>
     <?php } ?>
-    <?php if($invoice['status'] !='Paid') { ?>
+    <?php if ($invoice['status'] !='Paid') { ?>
         <form action="/billing/charge?invoice=<?php echo $invoice['id']; ?>" method="POST">
             <script
                 src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -126,5 +126,5 @@ if (isset($_GET['set_status']) && $_GET['set_status'] == 'paid') {
     <?php }
 
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

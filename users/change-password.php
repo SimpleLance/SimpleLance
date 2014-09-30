@@ -1,6 +1,6 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // gets user details from database
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $id = htmlentities($_GET['id']);
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
     <div class="row">
         <div class="col-md-8 col-md-offset-1">
             <?php
-            if(isset($error_message)){
+            if (isset($error_message)) {
                 foreach ($error_message as $error) {
                     echo '<p>' . $error . '</p>';
                 }
@@ -72,5 +72,5 @@ if (isset($_POST['submit'])) {
     </div>
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

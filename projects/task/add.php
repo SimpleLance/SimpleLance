@@ -1,6 +1,6 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // pull users
 $user = $users->get_users();
 // instantiate projects class
@@ -12,12 +12,11 @@ if (isset($_POST['submit'])) {
     $description = trim($_POST["description"]);
     $status = trim($_POST["status"]);
 
-
     if (empty($name) || empty($description) || empty($status)) {
         $errors[] = 'All fields are required!';
     }
 
-    if (empty($errors) == TRUE){
+    if (empty($errors) == TRUE) {
         $projects->new_task($project_id, $name, $description, $status);
         header('Location: /projects/details.php?id='.$project_id.'');
         exit();
@@ -27,11 +26,11 @@ if (isset($_POST['submit'])) {
 <!-- html -->
 <br><br>
 	<?php
-	// display any errors
-	if (!empty($errors)) {
-	    echo '<p>' . implode('</p><p>', $errors) . '</p>';
-	}
-	?>
+    // display any errors
+    if (!empty($errors)) {
+        echo '<p>' . implode('</p><p>', $errors) . '</p>';
+    }
+    ?>
 	<!-- user entry form -->
 	<form class="well span6" role="form" action='' method='post'>
 		<div class="row">
@@ -56,11 +55,11 @@ if (isset($_POST['submit'])) {
 		    <div class="form-group col-lg-6">
 				<button class="btn btn-primary pull-right" name="submit" type="submit">Add Task</button>
 			</div>
-		</div>		
+		</div>
 	</form>
 	<!-- /user entry form -->
 <!-- /html -->
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

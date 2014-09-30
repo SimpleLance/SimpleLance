@@ -1,6 +1,6 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // instantiate billing class
 $billing = new \SimpleLance\Billing($db);
 // only allow access to admins
@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
         $errors[] = 'All fields are required!';
     }
 
-    if (empty($errors) == TRUE){
+    if (empty($errors) == TRUE) {
         $billing->create_invoice($owner, $created_date, $due_date);
     }
 }
@@ -53,7 +53,7 @@ if (isset($_POST['submit'])) {
                     <br>
                     <div class="form-group col-xs-12">
                         <address>
-                            <label for="created_date">Due Date:</label><br>
+                            <label for="due_date">Due Date:</label><br>
                             <input type="text" name="due_date" id="due_date" value="">
                         </address>
                     </div>
@@ -65,5 +65,5 @@ if (isset($_POST['submit'])) {
 
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>
