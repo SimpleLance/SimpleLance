@@ -5,7 +5,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $id = htmlentities($_GET['id']);
     $user_details = array();
-    $user_details = $users->get_user($id);
+    $user_details = $users->getUser($id);
 }
 if ($_SESSION['access_level'] !== '1' && $_GET['id'] !== $_SESSION['id']) {
     header('Location: /access-denied.php');
@@ -25,7 +25,7 @@ if (isset($_POST['save'])) {
         }
 
         if (empty($error_message) == TRUE) {
-            $users->update_profile($first_name, $last_name, $email, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id);
+            $users->updateProfile($first_name, $last_name, $email, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id);
             if ($_SESSION['access_level'] == '1') {
                 header('Location: /users/?editsuccess');
                 exit();

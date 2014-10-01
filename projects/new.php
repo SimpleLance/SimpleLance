@@ -8,7 +8,7 @@ if ($_SESSION['access_level'] !== '1') {
     exit();
 }
 // pull users
-$user = $users->get_users();
+$user = $users->listUsers();
 // instantiate projects class
 $projects = new \SimpleLance\Projects($db);
 if (isset($_POST['submit'])) {
@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (empty($errors) == TRUE) {
-        $projects->new_project($name, $description, $owner, $status);
+        $projects->newProject($name, $description, $owner, $status);
         header('Location: /projects/?addsuccess');
         exit();
     }

@@ -6,7 +6,7 @@ $projects = new \SimpleLance\Projects($db);
 // pulls project details if valid project
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $id = htmlentities($_GET['id']);
-    $note_details = $projects->get_note($id);
+    $note_details = $projects->getNote($id);
 }
 // update database
 if (isset($_POST['submit'])) {
@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (empty($errors) == TRUE) {
-        $projects->update_note($title, $details, $id);
+        $projects->updateNote($title, $details, $id);
         header('Location: /projects/details.php?id='.$note_details['project'].'');
         exit();
     }

@@ -27,11 +27,11 @@ class Users extends Mailer
      * @param $user_id
      * @param $password
      */
-    public function change_password($user_id, $password)
+    public function changePassword($user_id, $password)
     {
         $password = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = $this->db->prepare("UPDATE `users` SET `password` = ? WHERE `id` = ?");
+        $query = $this->db->prepare("UPDATE users SET password = ? WHERE id = ?");
 
         $query->bindValue(1, $password);
         $query->bindValue(2, $user_id);
@@ -48,9 +48,9 @@ class Users extends Mailer
     /**
      * @param $email
      */
-    public function user_exists($email)
+    public function userExists($email)
     {
-        $query = $this->db->prepare("SELECT COUNT(`id`) FROM `users` WHERE `email`= ?");
+        $query = $this->db->prepare("SELECT COUNT(id) FROM users WHERE email= ?");
         $query->bindValue(1, $email);
 
         try {
@@ -86,7 +86,7 @@ class Users extends Mailer
     {
         $password = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = $this->db->prepare("INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`, `access_level`, `address_1`, `address_2`, `city`, `state`, `post_code`, `country`, `phone`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
+        $query = $this->db->prepare("INSERT INTO users (first_name, last_name, email, password, access_level, address_1, address_2, city, state, post_code, country, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
 
         $query->bindValue(1, $first_name);
         $query->bindValue(2, $last_name);
@@ -116,7 +116,7 @@ class Users extends Mailer
      */
     public function login($email, $password)
     {
-        $query = $this->db->prepare("SELECT `id`, `first_name`, `password`, `access_level` FROM `users` WHERE `email` = ?");
+        $query = $this->db->prepare("SELECT id, first_name, password, access_level FROM users WHERE email = ?");
         $query->bindValue(1, $email);
 
         try {
@@ -143,7 +143,7 @@ class Users extends Mailer
     /**
      * @return bool
      */
-    public function logged_in()
+    public function loggedIn()
     {
         return(isset($_SESSION['id'])) ? true : false;
     }
@@ -151,9 +151,9 @@ class Users extends Mailer
     /**
      *
      */
-    public function logged_in_protect()
+    public function loggedInProtect()
     {
-        if ($this->logged_in() === true) {
+        if ($this->loggedIn() === true) {
             header('Location: /');
             exit();
         }
@@ -162,9 +162,9 @@ class Users extends Mailer
     /**
      *
      */
-    public function logged_out_protect()
+    public function loggedOutProtect()
     {
-        if ($this->logged_in() === false) {
+        if ($this->loggedIn() === false) {
             header('Location: /login.php');
             exit();
         }
@@ -173,9 +173,9 @@ class Users extends Mailer
     /**
      * @return mixed
      */
-    public function get_users()
+    public function listUsers()
     {
-        $query = $this->db->prepare("SELECT * FROM `users` ORDER BY `id` ASC");
+        $query = $this->db->prepare("SELECT * FROM users ORDER BY id ASC");
 
         try {
             $query->execute();
@@ -189,9 +189,9 @@ class Users extends Mailer
     /**
      * @param $id
      */
-    public function delete_user($id)
+    public function deleteUser($id)
     {
-        $query = $this->db->prepare("DELETE from `users` where `id` = ?");
+        $query = $this->db->prepare("DELETE from users where id = ?");
 
         $query->bindValue(1, $id);
 
@@ -206,9 +206,9 @@ class Users extends Mailer
      * @param $id
      * @return mixed
      */
-    public function get_user($id)
+    public function getUser($id)
     {
-        $query = $this->db->prepare("SELECT * FROM `users` WHERE `id`= ?");
+        $query = $this->db->prepare("SELECT * FROM users WHERE id= ?");
         $query->bindValue(1, $id);
 
         try {
@@ -234,9 +234,9 @@ class Users extends Mailer
      * @param $phone
      * @param $id
      */
-    public function update_profile($first_name, $last_name, $email, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id)
+    public function updateProfile($first_name, $last_name, $email, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id)
     {
-        $query = $this->db->prepare("UPDATE `users` SET `first_name`= ?, `last_name` = ?, `email` = ?, `access_level` = ?,`address_1` = ?, `address_2` = ?, `city` = ?, `state` = ?, `post_code` = ?, `country` = ?, `phone` = ? WHERE `id` = ?");
+        $query = $this->db->prepare("UPDATE users SET first_name= ?, last_name = ?, email = ?, access_level = ?,address_1 = ?, address_2 = ?, city = ?, state = ?, post_code = ?, country = ?, phone = ? WHERE id = ?");
 
         $query->bindValue(1, $first_name);
         $query->bindValue(2, $last_name);

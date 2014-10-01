@@ -4,18 +4,31 @@ namespace SimpleLance;
 
 use PDOException;
 
+/**
+ * Class Billing
+ * @package SimpleLance
+ */
 class Billing extends Mailer
 {
+    /**
+     * @var
+     */
     private $db;
 
+    /**
+     * @param $database
+     */
     public function __construct($database)
     {
         $this->db = $database;
     }
 
-    public function list_invoices()
+    /**
+     * @return mixed
+     */
+    public function listInvoices()
     {
-        $query = $this->db->prepare("SELECT * FROM `invoices`");
+        $query = $this->db->prepare("SELECT * FROM invoices");
 
         try {
             $query->execute();
@@ -27,9 +40,13 @@ class Billing extends Mailer
         return $query->fetchAll();
     }
 
-    public function user_invoices($user_id)
+    /**
+     * @param $user_id
+     * @return mixed
+     */
+    public function userInvoices($user_id)
     {
-        $query = $this->db->prepare("SELECT * FROM `invoices` WHERE `owner` = ?");
+        $query = $this->db->prepare("SELECT * FROM invoices WHERE owner = ?");
 
         $query->bindValue(1, $user_id);
 
@@ -43,9 +60,13 @@ class Billing extends Mailer
         return $query->fetchAll();
     }
 
-    public function get_invoice($id)
+    /**
+     * @param $id
+     * @return string
+     */
+    public function getInvoice($id)
     {
-        $query = $this->db->prepare("SELECT * FROM `invoices` WHERE `id` = ? LIMIT 1");
+        $query = $this->db->prepare("SELECT * FROM invoices WHERE id = ? LIMIT 1");
 
         $query->bindValue(1, $id);
 
@@ -63,9 +84,13 @@ class Billing extends Mailer
         }
     }
 
-    public function invoice_items($id)
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function invoiceItems($id)
     {
-        $query = $this->db->prepare("SELECT * FROM `invoice_items` WHERE `invoice_id` = ?");
+        $query = $this->db->prepare("SELECT * FROM invoice_items WHERE invoice_id = ?");
 
         $query->bindValue(1, $id);
 
@@ -80,9 +105,14 @@ class Billing extends Mailer
         return $query->fetchAll();
     }
 
-    public function create_invoice($owner, $created_date, $due_date)
+    /**
+     * @param $owner
+     * @param $created_date
+     * @param $due_date
+     */
+    public function createInvoice($owner, $created_date, $due_date)
     {
-        $query = $this->db->prepare("INSERT INTO `invoices` (`owner`, `created_date`, `due_date`, `status`, `total`) VALUES (?, ?, ?, ?, ?)");
+        $query = $this->db->prepare("INSERT INTO invoices (owner, created_date, due_date, status, total) VALUES (?, ?, ?, ?, ?)");
 
         $query->bindValue(1, $owner);
         $query->bindValue(2, $created_date);
@@ -101,9 +131,16 @@ class Billing extends Mailer
         header("Location: /billing/add_details.php?id=" . $this->db->lastInsertId() . "");
     }
 
-    public function add_invoice_item($invoice_id, $item, $price, $quantity, $total)
+    /**
+     * @param $invoice_id
+     * @param $item
+     * @param $price
+     * @param $quantity
+     * @param $total
+     */
+    public function addInvoiceItem($invoice_id, $item, $price, $quantity, $total)
     {
-        $query = $this->db->prepare("INSERT INTO `invoice_items` (`invoice_id`, `item`, `price`, `quantity`, `total`) VALUES (?, ?, ?, ?, ?)");
+        $query = $this->db->prepare("INSERT INTO invoice_items (invoice_id, item, price, quantity, total) VALUES (?, ?, ?, ?, ?)");
 
         $query->bindValue(1, $invoice_id);
         $query->bindValue(2, $item);
@@ -119,7 +156,7 @@ class Billing extends Mailer
             die($e->getMessage());
         }
 
-        $query2 = $this->db->prepare("UPDATE `invoices` SET `total` = `total` + ? WHERE `id` = ?");
+        $query2 = $this->db->prepare("UPDATE invoices SET total = total + ? WHERE id = ?");
 
         $query2->bindValue(1, $total);
         $query2->bindValue(2, $invoice_id);
@@ -135,9 +172,12 @@ class Billing extends Mailer
         header("Location: /billing/add_details.php?id=" . $invoice_id . "");
     }
 
-    public function send_invoice($invoice_id)
+    /**
+     * @param $invoice_id
+     */
+    public function sendInvoice($invoice_id)
     {
-        $query = $this->db->prepare("UPDATE `invoices` SET `status` = ? WHERE `id` = ?");
+        $query = $this->db->prepare("UPDATE invoices SET status = ? WHERE id = ?");
 
         $query->bindValue(1, 'Unpaid');
         $query->bindValue(2, $invoice_id);
@@ -150,25 +190,27 @@ class Billing extends Mailer
             die($e->getMessage());
         }
 
-        $user = $this->get_user($this->get_invoice($invoice_id)['owner']);
+        $user = $this->getUser($this->getInvoice($invoice_id)['owner']);
 
         $this->sendMail($params = array(
             'email' => $user['email'],
             'name' => $user['first_name']." ".$user['last_name'],
             'subject' => 'New invoice from '.SITE_NAME,
             'body' => 'Hi '.$user['first_name'].' '.$user['last_name'].',<br><br>A new invoice has been generated for
-            you at '.SITE_NAME.' for '.CURRSYM.$this->get_invoice($invoice_id)['total'].' and is due on '.date('d/m/Y',
-                    strtotime($this->get_invoice($invoice_id)['due_date'])).'.<br><br>You can view the invoice at
-                    http://'.SITE_URL.'/billing/invoice?id='.$this->last_invoice_id().'<br><br>Regards,<br>'. SITE_NAME
+            you at '.SITE_NAME.' for '.CURRSYM.$this->getInvoice($invoice_id)['total'].' and is due on '.date('d/m/Y',
+                    strtotime($this->getInvoice($invoice_id)['due_date'])).'.<br><br>You can view the invoice at
+                    http://'.SITE_URL.'/billing/invoice?id='.$this->lastInvoiceId().'<br><br>Regards,<br>'. SITE_NAME
         ));
-
 
         header("Location: /billing/");
     }
 
-    public function mark_paid($invoice_id)
+    /**
+     * @param $invoice_id
+     */
+    public function setInvoicePaid($invoice_id)
     {
-        $query = $this->db->prepare("UPDATE `invoices` SET `status` = ?, `date_paid` = ? WHERE `id` = ?");
+        $query = $this->db->prepare("UPDATE invoices SET status = ?, date_paid = ? WHERE id = ?");
 
         $query->bindValue(1, 'Paid');
         $query->bindValue(2, date('Y-m-d'));
@@ -182,7 +224,7 @@ class Billing extends Mailer
             die($e->getMessage());
         }
 
-        $user = $this->get_user($this->get_invoice($invoice_id)['owner']);
+        $user = $this->getUser($this->getInvoice($invoice_id)['owner']);
 
         $this->sendMail($params = array(
             'email' => $user['email'],
@@ -194,9 +236,12 @@ class Billing extends Mailer
         header("Location: /billing/");
     }
 
-    public function last_invoice_id()
+    /**
+     * @return mixed
+     */
+    public function lastInvoiceId()
     {
-        $query = $this->db->prepare("SELECT `id` FROM `invoices` ORDER BY `id` DESC LIMIT 1");
+        $query = $this->db->prepare("SELECT id FROM invoices ORDER BY id DESC LIMIT 1");
 
         try {
             $query->execute();
@@ -211,9 +256,13 @@ class Billing extends Mailer
         return $status;
     }
 
-    public function get_user($id)
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getUser($id)
     {
-        $query = $this->db->prepare("SELECT * FROM `users` WHERE `id`= ?");
+        $query = $this->db->prepare("SELECT * FROM users WHERE id= ?");
         $query->bindValue(1, $id);
 
         try {

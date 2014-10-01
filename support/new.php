@@ -23,7 +23,7 @@ $support = new \SimpleLance\Support($db);
     }
 
     if (empty($errors) == TRUE) {
-        $support->new_ticket($subject, $content, $priority, $owner);
+        $support->newTicket($subject, $content, $priority, $owner);
         if ($_SESSION['access_level'] == 1) {
             header('Location: /support/?addsuccess');
         } else {
@@ -56,14 +56,14 @@ if (!empty($errors)) {
                 <label for="priority">Priority</label><br>
                 <select name="priority" id="priority">
                     <option value=""></option>
-                    <?php foreach ($support->get_priorities() as $p) {
+                    <?php foreach ($support->getPriorities() as $p) {
                         echo "<option value='".$p['id']."'>".$p['priority']."</option>";
                     } ?>
                 </select>
             </div>
             <?php
             if ($_SESSION['access_level'] == '1') {
-                $user = $users->get_users(); ?>
+                $user = $users->listUsers(); ?>
                 <div class="form-group col-lg-12">
                     <label for="owner">Owner</label><br>
                     <select name="owner" id="owner">

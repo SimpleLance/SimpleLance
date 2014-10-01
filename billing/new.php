@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (empty($errors) == TRUE) {
-        $billing->create_invoice($owner, $created_date, $due_date);
+        $billing->createInvoice($owner, $created_date, $due_date);
     }
 }
 ?>
@@ -37,7 +37,7 @@ if (isset($_POST['submit'])) {
                         <label for="owner">Invoice To:</label><br>
                         <select name="owner" id="owner">
                             <option value=""></option>
-                            <?php foreach ($users->get_users() as $u) {
+                            <?php foreach ($users->listUsers() as $u) {
                                 echo "<option value='".$u['id']."'>".$u['first_name'].' '.$u['last_name']."</option>";
                             } ?>
                         </select>

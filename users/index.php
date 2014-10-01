@@ -8,7 +8,7 @@ if ($_SESSION['access_level'] !== '1') {
     exit();
 }
 // load users
-$users = $users->get_users();
+$users = $users->listUsers();
 ?>
     <!-- html -->
 

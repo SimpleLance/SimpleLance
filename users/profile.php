@@ -5,7 +5,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $id = htmlentities($_GET['id']);
     $user_details = array();
-    $user_details = $users->get_user($id);
+    $user_details = $users->getUser($id);
 }
 if ($_SESSION['access_level'] !== '1' && $_GET['id'] !== $_SESSION['id']) {
     header('Location: /access-denied.php');
@@ -84,7 +84,7 @@ $support = new \SimpleLance\Support($db);
                                     </tr>
                                 </thead>
                                 <?php
-                                foreach ($projects->user_projects($user_details['id']) as $p) { ?>
+                                foreach ($projects->showUserProjects($user_details['id']) as $p) { ?>
                                     <tr>
                                         <td><a href="/projects/details.php?id=<?php echo($p['id']); ?>"><?php echo($p['name']); ?></a></td>
                                         <td><?php echo($p['status']); ?></td>
@@ -99,10 +99,10 @@ $support = new \SimpleLance\Support($db);
                                 </tr>
                                 </thead>
                                 <?php
-                                foreach ($support->user_tickets($user_details['id']) as $t) { ?>
+                                foreach ($support->listUserTickets($user_details['id']) as $t) { ?>
                                     <tr>
                                         <td><a href="/support/ticket.php?id=<?php echo($t['id']); ?>"><?php echo($t['subject']); ?></a></td>
-                                        <td><?php echo($support->get_status($t['status'])); ?></td>
+                                        <td><?php echo($support->getStatus($t['status'])); ?></td>
                                     </tr>
                                 <?php } ?>
                             </table>

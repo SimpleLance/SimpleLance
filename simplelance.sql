@@ -20,7 +20,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-# Dump of table invoice_items
+# Dump of table invoiceItems
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `invoice_items`;

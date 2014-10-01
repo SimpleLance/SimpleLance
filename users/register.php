@@ -20,7 +20,7 @@ if (isset($_POST['save'])) {
     if (empty($first_name) || empty($last_name) || empty($email) || empty($password) || empty($password_repeat) ||  empty($address_1) || empty($city) || empty($country)) {
         $error_message[] = 'All fields with a * are required!';
     } else {
-        if ($users->user_exists($email) == TRUE) {
+        if ($users->userExists($email) == TRUE) {
             $error_message[] = 'A user with that email address already exists';
         }
         if (strlen($password) < 8) {

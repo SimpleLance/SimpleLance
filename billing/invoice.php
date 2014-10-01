@@ -7,7 +7,7 @@ $billing = new \SimpleLance\Billing($db);
 Stripe::setApiKey($stripe['secret_key']);
 // check if valid invoice requested, if not return to invoice list
 if (isset($_GET['id']) && !empty($_GET['id'])) {
-    $invoice = $billing->get_invoice($_GET['id']);
+    $invoice = $billing->getInvoice($_GET['id']);
     if ($invoice == "Error" || $invoice['owner'] != $_SESSION['id'] && $_SESSION['access_level'] != '1') {
         header("Location: /billing/");
         exit();
@@ -17,15 +17,15 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     exit();
 }
 // pulls user details for invoice owner
-$user = $users->get_user($invoice['owner']);
+$user = $users->getUser($invoice['owner']);
 // checks to see if invoice is being sent and sends
 if (isset($_GET['send']) && $_GET['send'] == 'yes') {
-    $email = $users->get_user($invoice['owner'])['email'];
-    $billing->send_invoice($_GET['id']);
+    $email = $users->getUser($invoice['owner'])['email'];
+    $billing->sendInvoice($_GET['id']);
 }
 // checks to see if invoice is being set as paid and updates
 if (isset($_GET['set_status']) && $_GET['set_status'] == 'paid') {
-    $billing->mark_paid($_GET['id']);
+    $billing->setInvoicePaid($_GET['id']);
 }
 ?>
     <div class="row">
@@ -38,7 +38,7 @@ if (isset($_GET['set_status']) && $_GET['set_status'] == 'paid') {
                 <div class="col-xs-6">
                     <address>
                         <strong>Billed To:</strong><br>
-                        <?php echo $user['first_name'].' '.$users->get_user($invoice['owner'])['last_name']; ?><br>
+                        <?php echo $user['first_name'].' '.$users->getUser($invoice['owner'])['last_name']; ?><br>
                         <?php echo $user['address_1']; ?><br>
                         <?php echo $user['city']; ?>,
                         <?php echo $user['post_code']; ?><br>
@@ -86,7 +86,7 @@ if (isset($_GET['set_status']) && $_GET['set_status'] == 'paid') {
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($billing->invoice_items($_GET['id']) as $item) { ?>
+                            <?php foreach ($billing->invoiceItems($_GET['id']) as $item) { ?>
                             <tr>
                                 <td><?php echo $item['item']; ?></td>
                                 <td class="text-center"><?php echo CURRSYM.$item['price']; ?></td>

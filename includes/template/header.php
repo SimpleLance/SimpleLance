@@ -2,7 +2,7 @@
 // initialise script
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/init.php';
 // check for logged in user
-$users->logged_out_protect();
+$users->loggedOutProtect();
 ?>
 <!DOCTYPE html>
 <html>

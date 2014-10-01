@@ -4,18 +4,34 @@ namespace SimpleLance;
 
 use PDOException;
 
+/**
+ * Class Projects
+ * @package SimpleLance
+ */
 class Projects extends Mailer
 {
+    /**
+     * @var
+     */
     private $db;
 
+    /**
+     * @param $database
+     */
     public function __construct($database)
     {
         $this->db = $database;
     }
 
-    public function new_project($name, $description, $owner, $status)
+    /**
+     * @param $name
+     * @param $description
+     * @param $owner
+     * @param $status
+     */
+    public function newProject($name, $description, $owner, $status)
     {
-        $query = $this->db->prepare("INSERT INTO `projects` (`name`, `description`, `created_on`, `owner`, `status`) VALUES (?, ?, ?, ?, ?)");
+        $query = $this->db->prepare("INSERT INTO projects (name, description, created_on, owner, status) VALUES (?, ?, ?, ?, ?)");
 
         $query->bindValue(1, $name);
         $query->bindValue(2, $description);
@@ -31,9 +47,12 @@ class Projects extends Mailer
         }
     }
 
-    public function list_projects()
+    /**
+     * @return mixed
+     */
+    public function listProjects()
     {
-        $query = $this->db->prepare("SELECT * FROM `projects` ORDER BY `ID` DESC");
+        $query = $this->db->prepare("SELECT * FROM projects ORDER BY ID DESC");
 
         try {
             $query->execute();
@@ -44,9 +63,12 @@ class Projects extends Mailer
         return $query->fetchAll();
     }
 
-    public function delete_project($id)
+    /**
+     * @param $id
+     */
+    public function deleteProject($id)
     {
-        $query = $this->db->prepare("DELETE from `projects` where `id` = ?");
+        $query = $this->db->prepare("DELETE from projects where id = ?");
 
         $query->bindValue(1, $id);
 
@@ -57,9 +79,13 @@ class Projects extends Mailer
         }
     }
 
-    public function get_project($id)
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getProject($id)
     {
-        $query = $this->db->prepare ("SELECT * from `projects` WHERE `id` = ?");
+        $query = $this->db->prepare ("SELECT * from projects WHERE id = ?");
 
         $query->bindValue(1, $id);
 
@@ -72,9 +98,16 @@ class Projects extends Mailer
         return $query->fetch();
     }
 
-    public function update_project($name, $description, $owner, $status, $id)
+    /**
+     * @param $name
+     * @param $description
+     * @param $owner
+     * @param $status
+     * @param $id
+     */
+    public function updateProject($name, $description, $owner, $status, $id)
     {
-        $query = $this->db->prepare ("UPDATE `projects` SET `name` = ?, `description` = ?, `owner` = ?, `status` = ? WHERE `id` = ?");
+        $query = $this->db->prepare ("UPDATE projects SET name = ?, description = ?, owner = ?, status = ? WHERE id = ?");
 
         $query->bindValue(1, $name);
         $query->bindValue(2, $description);
@@ -89,9 +122,13 @@ class Projects extends Mailer
         }
     }
 
-    public function list_project_tasks($id)
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function listProjectTasks($id)
     {
-        $query = $this->db->prepare ("SELECT * FROM `project_tasks` WHERE `project` = ? ORDER BY `id` DESC");
+        $query = $this->db->prepare ("SELECT * FROM project_tasks WHERE project = ? ORDER BY id DESC");
 
         $query->bindValue(1, $id);
 
@@ -104,9 +141,13 @@ class Projects extends Mailer
         return $query->fetchAll();
     }
 
-    public function list_project_notes($id)
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function listProjectNotes($id)
     {
-        $query = $this->db->prepare ("SELECT * FROM `project_notes` WHERE `project` = ? ORDER BY `id` DESC");
+        $query = $this->db->prepare ("SELECT * FROM project_notes WHERE project = ? ORDER BY id DESC");
 
         $query->bindValue(1, $id);
 
@@ -119,9 +160,15 @@ class Projects extends Mailer
         return $query->fetchAll();
     }
 
-    public function new_task($project_id, $name, $description, $status)
+    /**
+     * @param $project_id
+     * @param $name
+     * @param $description
+     * @param $status
+     */
+    public function newTask($project_id, $name, $description, $status)
     {
-        $query = $this->db->prepare("INSERT INTO `project_tasks` (`project`, `name`, `description`, `created_on`, `status`) VALUES (?, ?, ?, ?, ?)");
+        $query = $this->db->prepare("INSERT INTO project_tasks (project, name, description, created_on, status) VALUES (?, ?, ?, ?, ?)");
 
         $query->bindValue(1, $project_id);
         $query->bindValue(2, $name);
@@ -137,9 +184,13 @@ class Projects extends Mailer
         }
     }
 
-    public function get_task($id)
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getTask($id)
     {
-        $query = $this->db->prepare ("SELECT * from `project_tasks` WHERE `id` = ?");
+        $query = $this->db->prepare ("SELECT * from project_tasks WHERE id = ?");
 
         $query->bindValue(1, $id);
 
@@ -152,9 +203,15 @@ class Projects extends Mailer
         return $query->fetch();
     }
 
-    public function update_task($name, $description, $status, $id)
+    /**
+     * @param $name
+     * @param $description
+     * @param $status
+     * @param $id
+     */
+    public function updateTask($name, $description, $status, $id)
     {
-        $query = $this->db->prepare ("UPDATE `project_tasks` SET `name` = ?, `description` = ?, `status` = ? WHERE `id` = ?");
+        $query = $this->db->prepare ("UPDATE project_tasks SET name = ?, description = ?, status = ? WHERE id = ?");
 
         $query->bindValue(1, $name);
         $query->bindValue(2, $description);
@@ -168,9 +225,14 @@ class Projects extends Mailer
         }
     }
 
-    public function new_note($project_id, $title, $details)
+    /**
+     * @param $project_id
+     * @param $title
+     * @param $details
+     */
+    public function newNote($project_id, $title, $details)
     {
-        $query = $this->db->prepare("INSERT INTO `project_notes` (`project`, `title`, `details`, `created_on`) VALUES (?, ?, ?, ?)");
+        $query = $this->db->prepare("INSERT INTO project_notes (project, title, details, created_on) VALUES (?, ?, ?, ?)");
 
         $query->bindValue(1, $project_id);
         $query->bindValue(2, $title);
@@ -185,9 +247,13 @@ class Projects extends Mailer
         }
     }
 
-    public function get_note($id)
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getNote($id)
     {
-        $query = $this->db->prepare ("SELECT * from `project_notes` WHERE `id` = ?");
+        $query = $this->db->prepare ("SELECT * from project_notes WHERE id = ?");
 
         $query->bindValue(1, $id);
 
@@ -200,9 +266,14 @@ class Projects extends Mailer
         return $query->fetch();
     }
 
-    public function update_note($title, $details, $id)
+    /**
+     * @param $title
+     * @param $details
+     * @param $id
+     */
+    public function updateNote($title, $details, $id)
     {
-        $query = $this->db->prepare ("UPDATE `project_notes` SET `title` = ?, `details` = ? WHERE `id` = ?");
+        $query = $this->db->prepare ("UPDATE project_notes SET title = ?, details = ? WHERE id = ?");
 
         $query->bindValue(1, $title);
         $query->bindValue(2, $details);
@@ -215,9 +286,12 @@ class Projects extends Mailer
         }
     }
 
-    public function close_project($id)
+    /**
+     * @param $id
+     */
+    public function closeProject($id)
     {
-        $query = $this->db->prepare ("UPDATE `projects` SET `status` = 'Closed' WHERE `id` = ?");
+        $query = $this->db->prepare ("UPDATE projects SET status = 'Closed' WHERE id = ?");
 
         $query->bindValue(1, $id);
 
@@ -228,9 +302,12 @@ class Projects extends Mailer
         }
     }
 
-    public function delete_project_tasks($id)
+    /**
+     * @param $id
+     */
+    public function deleteProjectTasks($id)
     {
-        $query = $this->db->prepare ("DELETE FROM `project_tasks` WHERE `project` = ?");
+        $query = $this->db->prepare ("DELETE FROM project_tasks WHERE project = ?");
 
         $query->bindValue(1, $id);
 
@@ -241,9 +318,12 @@ class Projects extends Mailer
         }
     }
 
-    public function delete_project_notes($id)
+    /**
+     * @param $id
+     */
+    public function deleteProjectNotes($id)
     {
-        $query = $this->db->prepare ("DELETE FROM `project_notes` WHERE `project` = ?");
+        $query = $this->db->prepare ("DELETE FROM project_notes WHERE project = ?");
 
         $query->bindValue(1, $id);
 
@@ -254,9 +334,13 @@ class Projects extends Mailer
         }
     }
 
-    public function user_projects($owner)
+    /**
+     * @param $owner
+     * @return mixed
+     */
+    public function showUserProjects($owner)
     {
-        $query = $this->db->prepare ("SELECT * FROM `projects` WHERE `owner` = ?");
+        $query = $this->db->prepare ("SELECT * FROM projects WHERE owner = ?");
 
         $query->bindValue(1, $owner);
 
@@ -269,9 +353,13 @@ class Projects extends Mailer
         return $query->fetchAll();
     }
 
-    public function get_user($id)
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getUser($id)
     {
-        $query = $this->db->prepare("SELECT * FROM `users` WHERE `id`= ?");
+        $query = $this->db->prepare("SELECT * FROM users WHERE id= ?");
         $query->bindValue(1, $id);
 
         try {

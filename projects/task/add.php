@@ -2,7 +2,7 @@
 // include header
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // pull users
-$user = $users->get_users();
+$user = $users->listUsers();
 // instantiate projects class
 $projects = new \SimpleLance\Projects($db);
 $project_id = htmlentities($_GET['project_id']);
@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (empty($errors) == TRUE) {
-        $projects->new_task($project_id, $name, $description, $status);
+        $projects->newTask($project_id, $name, $description, $status);
         header('Location: /projects/details.php?id='.$project_id.'');
         exit();
     }

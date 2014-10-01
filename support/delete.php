@@ -10,7 +10,7 @@ if ($_SESSION['access_level'] !== '1') {
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $id = htmlentities($_GET['id']);
 
-    $support->delete_ticket($id);
+    $support->deleteTicket($id);
     header("Location: /support/");
     exit();
 }

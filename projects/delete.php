@@ -10,9 +10,9 @@ if ($_SESSION['access_level'] !== '1') {
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $id = htmlentities($_GET['id']);
 
-    $project->delete_project($id);
-    $project->delete_project_notes($id);
-    $project->delete_project_tasks($id);
+    $project->deleteProject($id);
+    $project->deleteProjectNotes($id);
+    $project->deleteProjectTasks($id);
     header("Location: /projects/");
     exit();
 }

@@ -27,4 +27,4 @@ class Mailer
         $mail->Body    = $params['body'];
         $mail->Send();
     }
-} 
+}

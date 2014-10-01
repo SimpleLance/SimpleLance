@@ -17,7 +17,7 @@ if ($_SESSION['access_level'] != '1') { ?>
             </tr>
             </thead>
             <?php // only show invoices that are not draft
-            foreach ($billing->user_invoices($_SESSION['id']) as $i) {
+            foreach ($billing->userInvoices($_SESSION['id']) as $i) {
                 if ($i['status'] != 'Draft') { ?>
                     <tr>
                         <td><?php echo date('d/m/Y', strtotime($i['created_date'])); ?></td>
@@ -46,9 +46,9 @@ if ($_SESSION['access_level'] != '1') { ?>
             </tr>
             </thead>
             <?php
-            foreach ($billing->list_invoices() as $i) { ?>
+            foreach ($billing->listInvoices() as $i) { ?>
                 <tr>
-                    <td><?php echo $users->get_user($i['owner'])['first_name'].' '.$users->get_user($i['owner'])['last_name']; ?></td>
+                    <td><?php echo $users->getUser($i['owner'])['first_name'].' '.$users->getUser($i['owner'])['last_name']; ?></td>
                     <td><?php echo date('d/m/Y', strtotime($i['created_date'])); ?></td>
                     <td><?php echo date('d/m/Y', strtotime($i['due_date'])); ?></td>
                     <td><?php echo htmlentities($i['status']); ?></td>
