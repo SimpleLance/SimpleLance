@@ -1,8 +1,8 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // pull users
-$user = $users->get_users();
+$user = $users->listUsers();
 // instantiate projects class
 $projects = new \SimpleLance\Projects($db);
 $project_id = htmlentities($_GET['project_id']);
@@ -12,13 +12,12 @@ if (isset($_POST['submit'])) {
     $title = trim($_POST["title"]);
     $details = trim($_POST["details"]);
 
-
     if (empty($title) || empty($details)) {
         $errors[] = 'All fields are required!';
     }
 
-    if (empty($errors) == TRUE){
-        $projects->new_note($project_id, $title, $details);
+    if (empty($errors) == TRUE) {
+        $projects->newNote($project_id, $title, $details);
         header('Location: /projects/details.php?id='.$project_id.'');
         exit();
     }
@@ -27,11 +26,11 @@ if (isset($_POST['submit'])) {
 <!-- html -->
 <br><br>
 	<?php
-	// display any errors
-	if (!empty($errors)) {
-	    echo '<p>' . implode('</p><p>', $errors) . '</p>';
-	}
-	?>
+    // display any errors
+    if (!empty($errors)) {
+        echo '<p>' . implode('</p><p>', $errors) . '</p>';
+    }
+    ?>
 	<!-- user entry form -->
 	<form class="well span6" role="form" action='' method='post'>
 		<div class="row">
@@ -46,11 +45,11 @@ if (isset($_POST['submit'])) {
 		    <div class="form-group col-lg-6">
 				<button class="btn btn-primary pull-right" name="submit" type="submit">Add Note</button>
 			</div>
-		</div>		
+		</div>
 	</form>
 	<!-- /user entry form -->
 <!-- /html -->
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

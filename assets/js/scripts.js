@@ -15,7 +15,7 @@ $(function() {
             $('div.sidebar-collapse').removeClass('collapse')
         }
     })
-})
+});
 // date picker for invoice created date
 $(function() {
     $( "#created_date" ).datepicker({dateFormat: 'dd-mm-yy'});
@@ -33,7 +33,7 @@ function startCalc(){
 function calc(){
     one = document.invoice_item.price.value;
     two = document.invoice_item.quantity.value;
-    document.invoice_item.total.value = (one * 1) * (two * 1);
+    document.invoice_item.total.value = (one) * (two);
 }
 function stopCalc(){
     clearInterval(interval);

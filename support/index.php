@@ -1,11 +1,11 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // instantiate projects class
 $support = new \SimpleLance\Support($db);
 // check if user is a customer and show only their tickets
 if ($_SESSION['access_level'] != '1') {
-    $ticket = $support->user_tickets($_SESSION['id']);
+    $ticket = $support->listUserTickets($_SESSION['id']);
 ?>
     <div class="row col-md-9 col-md-offset-1 custyle">
         <?php
@@ -34,9 +34,9 @@ if ($_SESSION['access_level'] != '1') {
             foreach ($ticket as $t) { ?>
                 <tr>
                     <td><?php echo htmlentities($t['subject']); ?></td>
-                    <td><?php echo $support->get_priority($t['priority']); ?></td>
-                    <td><?php echo $support->get_status($t['status']); ?></td>
-                    <td><?php echo $users->get_user($t['last_reply_user'])['first_name'].' '.$users->get_user($t['last_reply_user'])['last_name']; ?></td>
+                    <td><?php echo $support->getPriority($t['priority']); ?></td>
+                    <td><?php echo $support->getStatus($t['status']); ?></td>
+                    <td><?php echo $users->getUser($t['last_reply_user'])['first_name'].' '.$users->getUser($t['last_reply_user'])['last_name']; ?></td>
                     <td><?php echo date('d/m/Y H:m', strtotime($t['last_reply_date'])); ?></td>
                     <td><a href="/support/ticket.php?id=<?php echo htmlentities($t['id']); ?>">View</a></td>
                 </tr>
@@ -45,9 +45,8 @@ if ($_SESSION['access_level'] != '1') {
     </div>
 <?php } else {
 
-
     // load all tickets
-    $ticket = $support->list_tickets();
+    $ticket = $support->listAllTickets();
     ?>
     <!-- html -->
 
@@ -68,7 +67,7 @@ if ($_SESSION['access_level'] != '1') {
                 <th>Priority</th>
                 <th>Status</th>
                 <th>Last Reply By</th>
-                <th>Last Reply <On></On></th>
+                <th>Last Reply On</th>
                 <th>View</th>
             </tr>
             </thead>
@@ -76,10 +75,10 @@ if ($_SESSION['access_level'] != '1') {
             foreach ($ticket as $t) { ?>
                 <tr>
                     <td><?php echo htmlentities($t['subject']); ?></td>
-                    <td><?php echo $users->get_user($t['owner'])['first_name'].' '.$users->get_user($t['owner'])['last_name']; ?></td>
-                    <td><?php echo $support->get_priority($t['priority']); ?></td>
-                    <td><?php echo $support->get_status($t['status']); ?></td>
-                    <td><?php echo $users->get_user($t['last_reply_user'])['first_name'].' '.$users->get_user($t['last_reply_user'])['last_name']; ?></td>
+                    <td><?php echo $users->getUser($t['owner'])['first_name'].' '.$users->getUser($t['owner'])['last_name']; ?></td>
+                    <td><?php echo $support->getPriority($t['priority']); ?></td>
+                    <td><?php echo $support->getStatus($t['status']); ?></td>
+                    <td><?php echo $users->getUser($t['last_reply_user'])['first_name'].' '.$users->getUser($t['last_reply_user'])['last_name']; ?></td>
                     <td><?php echo date('d/m/Y H:m', strtotime($t['last_reply_date'])); ?></td>
                     <td><a href="/support/ticket.php?id=<?php echo htmlentities($t['id']); ?>">View</a></td>
                 </tr>
@@ -92,5 +91,5 @@ if ($_SESSION['access_level'] != '1') {
 <?php
 }
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

@@ -1,12 +1,12 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // instantiate projects class
 $projects = new \SimpleLance\Projects($db);
 // pulls project details if valid project
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $id = htmlentities($_GET['id']);
-    $note_details = $projects->get_note($id);
+    $note_details = $projects->getNote($id);
 }
 // update database
 if (isset($_POST['submit'])) {
@@ -14,13 +14,12 @@ if (isset($_POST['submit'])) {
     $title = trim($_POST["title"]);
     $details = trim($_POST["details"]);
 
-
     if (empty($title) || empty($details)) {
         $errors[] = 'All fields are required!';
     }
 
-    if (empty($errors) == TRUE){
-        $projects->update_note($title, $details, $id);
+    if (empty($errors) == TRUE) {
+        $projects->updateNote($title, $details, $id);
         header('Location: /projects/details.php?id='.$note_details['project'].'');
         exit();
     }
@@ -29,11 +28,11 @@ if (isset($_POST['submit'])) {
 <!-- html -->
 <br><br>
 	<?php
-	// display any errors
-	if (!empty($errors)) {
-	    echo '<p>' . implode('</p><p>', $errors) . '</p>';
-	}
-	?>
+    // display any errors
+    if (!empty($errors)) {
+        echo '<p>' . implode('</p><p>', $errors) . '</p>';
+    }
+    ?>
 	<!-- user entry form -->
 	<form class="well span6" role="form" action='' method='post'>
 		<div class="row">
@@ -54,5 +53,5 @@ if (isset($_POST['submit'])) {
 <!-- /html -->
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

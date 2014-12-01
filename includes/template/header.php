@@ -1,8 +1,8 @@
 <?php
 // initialise script
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/init.php';
 // check for logged in user
-$users->logged_out_protect();
+$users->loggedOutProtect();
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,9 +12,9 @@ $users->logged_out_protect();
 
     <title><?php echo SITE_NAME; ?></title>
 
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
-    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
 
 </head>

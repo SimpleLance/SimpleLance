@@ -1,11 +1,11 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
-	$id = htmlentities($_GET['id']);
-	$user_details = array();
-	$user_details = $users->get_user($id);
+    $id = htmlentities($_GET['id']);
+    $user_details = array();
+    $user_details = $users->getUser($id);
 }
 if ($_SESSION['access_level'] !== '1' && $_GET['id'] !== $_SESSION['id']) {
     header('Location: /access-denied.php');
@@ -24,8 +24,8 @@ if (isset($_POST['save'])) {
             $error_message[] = 'Please enter a valid email address';
         }
 
-        if (empty($error_message) == TRUE){
-            $users->update_profile($first_name, $last_name, $email, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id);
+        if (empty($error_message) == TRUE) {
+            $users->updateProfile($first_name, $last_name, $email, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id);
             if ($_SESSION['access_level'] == '1') {
                 header('Location: /users/?editsuccess');
                 exit();
@@ -40,7 +40,7 @@ if (isset($_POST['save'])) {
     <div class="row">
         <div class="col-md-8 col-md-offset-1">
             <?php
-            if(isset($error_message)){
+            if (isset($error_message)) {
                 foreach ($error_message as $error) {
                     echo '<p>' . $error . '</p>';
                 }
@@ -66,13 +66,13 @@ if (isset($_POST['save'])) {
                             <input type="text" id="email" name="email" placeholder="Email Address" value="<?php echo $user_details['email'];?>" class="form-control">
                         </div>
                     </div>
-                    <?php if($_SESSION['access_level'] == 1) { ?>
+                    <?php if ($_SESSION['access_level'] == 1) { ?>
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="access_level">User Type</label>
                             <div class="col-sm-10">
                                 <select id="access_level" name="access_level">
-                                    <option value="2" <?php if($user_details['access_level'] == '2') {echo "selected='selected'"; } ?>>Customer</option>
-                                    <option value="1" <?php if($user_details['access_level'] == '1') {echo "selected='selected'"; } ?>>Admin</option>
+                                    <option value="2" <?php if ($user_details['access_level'] == '2') {echo "selected='selected'"; } ?>>Customer</option>
+                                    <option value="1" <?php if ($user_details['access_level'] == '1') {echo "selected='selected'"; } ?>>Admin</option>
                                 </select>
                             </div>
                         </div>
@@ -136,5 +136,5 @@ if (isset($_POST['save'])) {
     </div>
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 
 // instantiate support class
 $support = new \SimpleLance\Support($db);
@@ -18,13 +18,12 @@ $support = new \SimpleLance\Support($db);
         $owner = $_SESSION['id'];
     }
 
-
     if (empty($subject) || empty($content) || empty($priority)) {
         $errors[] = 'All fields are required!';
     }
 
-    if (empty($errors) == TRUE){
-        $support->new_ticket($subject, $content, $priority, $owner);
+    if (empty($errors) == TRUE) {
+        $support->newTicket($subject, $content, $priority, $owner);
         if ($_SESSION['access_level'] == 1) {
             header('Location: /support/?addsuccess');
         } else {
@@ -57,14 +56,14 @@ if (!empty($errors)) {
                 <label for="priority">Priority</label><br>
                 <select name="priority" id="priority">
                     <option value=""></option>
-                    <?php foreach ($support->get_priorities() as $p) {
+                    <?php foreach ($support->getPriorities() as $p) {
                         echo "<option value='".$p['id']."'>".$p['priority']."</option>";
                     } ?>
                 </select>
             </div>
             <?php
-            if($_SESSION['access_level'] == '1') {
-                $user = $users->get_users(); ?>
+            if ($_SESSION['access_level'] == '1') {
+                $user = $users->listUsers(); ?>
                 <div class="form-group col-lg-12">
                     <label for="owner">Owner</label><br>
                     <select name="owner" id="owner">
@@ -82,5 +81,5 @@ if (!empty($errors)) {
     </form>
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

@@ -1,6 +1,6 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // instantiate billing class
 $billing = new \SimpleLance\Billing($db);
 // only allow access to admins
@@ -8,7 +8,7 @@ if ($_SESSION['access_level'] != '1') {
     header("Location: /access-denied.php");
 }
 if (isset($_GET['id']) && !empty($_GET['id'])) {
-    $invoice = $billing->get_invoice($_GET['id']);
+    $invoice = $billing->getInvoice($_GET['id']);
 } else {
     header("Location: /billing");
 }
@@ -23,8 +23,8 @@ if (isset($_POST['submit'])) {
         $errors[] = 'All fields are required!';
     }
 
-    if (empty($errors) == TRUE){
-        $billing->add_invoice_item($_GET['id'], $item, $price, $quantity, $total);
+    if (empty($errors) == TRUE) {
+        $billing->addInvoiceItem($_GET['id'], $item, $price, $quantity, $total);
     }
 }
 ?>
@@ -38,11 +38,11 @@ if (isset($_POST['submit'])) {
                 <div class="col-xs-6">
                     <address>
                         <strong>Billed To:</strong><br>
-                        <?php echo $users->get_user($invoice['owner'])['first_name'].' '.$users->get_user($invoice['owner'])['last_name']; ?><br>
-                        <?php echo $users->get_user($invoice['owner'])['address_1']; ?><br>
-                        <?php echo $users->get_user($invoice['owner'])['city']; ?>,
-                        <?php echo $users->get_user($invoice['owner'])['post_code']; ?><br>
-                        <?php echo $users->get_user($invoice['owner'])['country']; ?>
+                        <?php echo $users->getUser($invoice['owner'])['first_name'].' '.$users->getUser($invoice['owner'])['last_name']; ?><br>
+                        <?php echo $users->getUser($invoice['owner'])['address_1']; ?><br>
+                        <?php echo $users->getUser($invoice['owner'])['city']; ?>,
+                        <?php echo $users->getUser($invoice['owner'])['post_code']; ?><br>
+                        <?php echo $users->getUser($invoice['owner'])['country']; ?>
                     </address>
                 </div>
                 <div class="form-group col-xs-4">
@@ -80,8 +80,7 @@ if (isset($_POST['submit'])) {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <div>
-                                    <?php foreach ($billing->invoice_items($_GET['id']) as $item) { ?>
+                                    <?php foreach ($billing->invoiceItems($_GET['id']) as $item) { ?>
                                         <tr>
                                             <td><?php echo $item['item']; ?></td>
                                             <td class="text-center"><?php echo CURRSYM.$item['price']; ?></td>
@@ -90,13 +89,12 @@ if (isset($_POST['submit'])) {
                                         </tr>
                                     <?php } ?>
                                     <tr>
-                                        <td><input type="text" name="item" id="item" value=""></td>
-                                        <td class="text-center"><input type="text" name="price" id="price" value="" onFocus="startCalc();" onBlur="stopCalc();"></td>
-                                        <td class="text-center"><input type="text" name="quantity" id="quantity" value="" onFocus="startCalc();" onBlur="stopCalc();"></td>
-                                        <td class="text-right"><input type="text" name="total" id="total" value=""></td>
+                                        <td><label for="item"></label><input type="text" name="item" id="item" value=""></td>
+                                        <td class="text-center"><label for="price"></label><input type="text" name="price" id="price" value="" onFocus="startCalc();" onBlur="stopCalc();"></td>
+                                        <td class="text-center"><label for="quantity"></label><input type="text" name="quantity" id="quantity" value="" onFocus="startCalc();" onBlur="stopCalc();"></td>
+                                        <td class="text-right"><label for="total"></label><input type="text" name="total" id="total" value=""></td>
                                         <td><button class="button " name="submit" type="submit">Add Item</button></td>
                                     </tr>
-                                </div>
                                 </tbody>
                             </table>
                             <table class="table table-condensed">
@@ -126,5 +124,5 @@ if (isset($_POST['submit'])) {
     <a href="/billing/invoice.php?send=yes&id=<?php echo $_GET['id']; ?>"  class="btn btn-primary">Send Invoice</a>
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

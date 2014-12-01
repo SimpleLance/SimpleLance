@@ -1,14 +1,14 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // instantiate projects class
 $projects = new \SimpleLance\Projects($db);
 // pulls project details if valid project
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $id = htmlentities($_GET['id']);
-    $project_details = $projects->get_project($id);
-    $task = $projects->list_project_tasks($id);
-    $note = $projects->list_project_notes($id);
+    $project_details = $projects->getProject($id);
+    $task = $projects->listProjectTasks($id);
+    $note = $projects->listProjectNotes($id);
 }
 
 // allow acces only to admin or customer
@@ -20,7 +20,7 @@ if ($_SESSION['access_level'] == '1' || $_SESSION['id'] == $project_details['own
 }
 
 if (isset($_GET['close']) && $_GET['close'] == 'true') {
-    $projects->close_project($id);
+    $projects->closeProject($id);
     header('Location: /projects/details.php?id='.$id.'');
 }
 ?>
@@ -43,7 +43,7 @@ if (isset($_GET['close']) && $_GET['close'] == 'true') {
         </div>
         <div class="form-group col-lg-12">
             <b>Owner</b><br>
-            <?php echo $users->get_user($project_details['owner'])['first_name'].' '.$users->get_user($project_details['owner'])['last_name']; ?>
+            <?php echo $users->getUser($project_details['owner'])['first_name'].' '.$users->getUser($project_details['owner'])['last_name']; ?>
         </div>
         <div class="form-group col-lg-12">
             <b>Status</b><br>
@@ -109,5 +109,5 @@ if (isset($_GET['close']) && $_GET['close'] == 'true') {
 <!-- /html -->
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

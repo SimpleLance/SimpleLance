@@ -1,11 +1,11 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // instantiate projects class
 $projects = new \SimpleLance\Projects($db);
 // check if user is a customer
 if ($_SESSION['access_level'] != '1') {
-    $project = $projects->user_projects($_SESSION['id']);
+    $project = $projects->showUserProjects($_SESSION['id']);
 ?>
     <div class="row col-md-9 col-md-offset-1 custyle">
         <table class="table table-striped custab">
@@ -31,7 +31,7 @@ if ($_SESSION['access_level'] != '1') {
 <?php } else {
 
 // load all projects
-$project = $projects->list_projects();
+$project = $projects->listProjects();
 ?>
 <!-- html -->
 
@@ -59,7 +59,7 @@ $project = $projects->list_projects();
                     <tr>
                         <td><?php echo htmlentities($p['name']); ?></td>
                         <td><?php echo date('d/m/Y', strtotime($p['created_on'])); ?></td>
-                        <td><?php echo $users->get_user($p['owner'])['first_name'].' '.$users->get_user($p['owner'])['last_name']; ?></td>
+                        <td><?php echo $users->getUser($p['owner'])['first_name'].' '.$users->getUser($p['owner'])['last_name']; ?></td>
                         <td><?php echo htmlentities($p['status']); ?></td>
                         <td><a href="/projects/details.php?id=<?php echo htmlentities($p['id']); ?>">View</a></td>
                     </tr>
@@ -72,5 +72,5 @@ $project = $projects->list_projects();
 <?php
 }
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

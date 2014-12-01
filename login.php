@@ -1,8 +1,8 @@
 <?php
 // initialise script
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/init.php';
 // check to make sure user is not logged in
-$users->logged_in_protect();
+$users->loggedInProtect();
 // process login form if submitted
 if (empty($_POST) === false) {
 
@@ -11,7 +11,7 @@ if (empty($_POST) === false) {
     // checks to make sure email and password provided and that password is at least 8 characters
     if (empty($email) === true || empty($password) === true) {
         $error = 'Sorry, but we need your email address and password.';
-    } else if (strlen($password) < 8) {
+    } elseif (strlen($password) < 8) {
         $error = 'The password should be more than 8 characters, without spacing.';
     }
     // if no errors are triggered will process login
@@ -21,7 +21,7 @@ if (empty($_POST) === false) {
         if ($login === false) {
             $error = 'Sorry, those login details are invalid';
         } else {
-            // destroies the old session id and creates a new one
+            // destroys the old session id and creates a new one
             session_regenerate_id(true);
             $_SESSION['id'] = $login;
             header('Location: /');
@@ -36,7 +36,7 @@ if (empty($_POST) === false) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo(SITE_NAME); ?></title>
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
 </head>
 <body>

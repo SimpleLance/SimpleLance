@@ -1,6 +1,6 @@
 <?php
 // initialise script
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/init.php';
 
 // only allow access to admins
 if ($_SESSION['access_level'] !== '1') {
@@ -10,7 +10,7 @@ if ($_SESSION['access_level'] !== '1') {
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $id = htmlentities($_GET['id']);
 
-    $users->delete_user($id);
+    $users->deleteUser($id);
     header("Location: /users/?deletesuccess");
     exit();
 }

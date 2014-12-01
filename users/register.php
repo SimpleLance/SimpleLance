@@ -1,6 +1,6 @@
 <?php
 // initialise script
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // only allow access to admins
 if ($_SESSION['access_level'] !== '1') {
     header('Location: /access-denied.php');
@@ -20,7 +20,7 @@ if (isset($_POST['save'])) {
     if (empty($first_name) || empty($last_name) || empty($email) || empty($password) || empty($password_repeat) ||  empty($address_1) || empty($city) || empty($country)) {
         $error_message[] = 'All fields with a * are required!';
     } else {
-        if ($users->user_exists($email) == TRUE) {
+        if ($users->userExists($email) == TRUE) {
             $error_message[] = 'A user with that email address already exists';
         }
         if (strlen($password) < 8) {
@@ -33,7 +33,7 @@ if (isset($_POST['save'])) {
             $error_message[] = 'Your passswords do not match';
         }
 
-        if (empty($error_message) == TRUE){
+        if (empty($error_message) == TRUE) {
             $users->register($first_name, $last_name, $email, $password, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone);
             header('Location: /users/?addsuccess');
             exit();
@@ -45,7 +45,7 @@ if (isset($_POST['save'])) {
     <div class="row">
         <div class="col-md-8 col-md-offset-1">
             <?php
-            if(isset($error_message)){
+            if (isset($error_message)) {
                 foreach ($error_message as $error) {
                     echo '<p>' . $error . '</p>';
                 }
@@ -149,5 +149,5 @@ if (isset($_POST['save'])) {
     </div><!-- /.row -->
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

@@ -1,11 +1,11 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // instantiate projects class
 $support = new \SimpleLance\Support($db);
 // check if valid ticket requested, if not return to ticket list
 if (isset($_GET['id']) && !empty($_GET['id'])) {
-    $ticket = $support->get_ticket($_GET['id']);
+    $ticket = $support->getTicket($_GET['id']);
     if ($ticket == "Error" || $ticket['owner'] != $_SESSION['id'] && $_SESSION['access_level'] != '1') {
         header("Location: /support/");
         exit();
@@ -24,8 +24,8 @@ if (isset($_POST['submit'])) {
         $errors[] = 'All fields are required!';
     }
 
-    if (empty($errors) == TRUE){
-        $support->update_ticket($ticket['id'], $content, $_SESSION['id'], $status);
+    if (empty($errors) == TRUE) {
+        $support->updateTicket($ticket['id'], $content, $_SESSION['id'], $status);
         header('Location: /support/?updatesuccess');
         exit();
     }
@@ -46,11 +46,11 @@ if (isset($_POST['submit'])) {
     </div>
     <div class="form-group col-lg-12">
         <b>Owner</b><br>
-        <?php echo $users->get_user($ticket['owner'])['first_name'].' '.$users->get_user($ticket['owner'])['last_name']; ?>
+        <?php echo $users->getUser($ticket['owner'])['first_name'].' '.$users->getUser($ticket['owner'])['last_name']; ?>
     </div>
     <div class="form-group col-lg-12">
         <b>Status</b><br>
-        <?php echo $support->get_status($ticket['status']); ?>
+        <?php echo $support->getStatus($ticket['status']); ?>
     </div>
     <div class="form-group col-lg-12">
         <b>Last Update</b><br>
@@ -61,9 +61,9 @@ if (isset($_POST['submit'])) {
         <?php echo htmlentities($ticket['content']); ?>
     </div>
 </div>
-<?php foreach ($support->get_ticket_replies($ticket['id']) as $r) { ?>
+<?php foreach ($support->getTicketReplies($ticket['id']) as $r) { ?>
     <div class="form-group col-lg-12">
-        <em>Reply by</em> <b><?php echo $users->get_user($r['user_id'])['first_name'].' '.$users->get_user($r['user_id'])['last_name']; ?></b>
+        <em>Reply by</em> <b><?php echo $users->getUser($r['user_id'])['first_name'].' '.$users->getUser($r['user_id'])['last_name']; ?></b>
         <em>on</em> <b><?php echo date('d/m/Y', strtotime($r['replied_on'])); ?></b> <em>at</em> <b><?php echo date('H:m', strtotime($r['replied_on'])); ?></b>
         <br>
         <?php echo htmlentities($r['content']); ?>
@@ -82,7 +82,7 @@ if (isset($_POST['submit'])) {
                     <label for="status">Status</label><br>
                     <select name="status" id="status">
                         <?php
-                        foreach ($support->get_statuses() as $status) {
+                        foreach ($support->getStatuses() as $status) {
                             if ($status['id'] === $ticket['status']) {
                                 $selected = "selected='selected'";
                             } else {
@@ -106,5 +106,5 @@ if (isset($_POST['submit'])) {
 
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

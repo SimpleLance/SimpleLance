@@ -1,11 +1,11 @@
 <?php
 // include header
-include($_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/template/header.php';
 // gets user details from database
 if (isset($_GET['id']) && empty($_GET['id']) === false) {
     $id = htmlentities($_GET['id']);
     $user_details = array();
-    $user_details = $users->get_user($id);
+    $user_details = $users->getUser($id);
 }
 // allows access only to admin or specific user
 if ($_SESSION['access_level'] !== '1' && $_GET['id'] !== $_SESSION['id']) {
@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (empty($errors)) {
-        $users->change_password($_GET['id'], $password);
+        $users->changePassword($_GET['id'], $password);
         header('Location: /users/profile.php?id='.$user_details['id'].'&password_updated');
     }
 }
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
     <div class="row">
         <div class="col-md-8 col-md-offset-1">
             <?php
-            if(isset($error_message)){
+            if (isset($error_message)) {
                 foreach ($error_message as $error) {
                     echo '<p>' . $error . '</p>';
                 }
@@ -72,5 +72,5 @@ if (isset($_POST['submit'])) {
     </div>
 <?php
 // include footer
-include(ABS_PATH . '/includes/template/footer.php');
+include ABS_PATH . '/includes/template/footer.php';
 ?>

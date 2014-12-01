@@ -2,34 +2,55 @@
 
 namespace SimpleLance;
 
-class Users {
+use PDOException;
 
+/**
+ * Class Users
+ * @package SimpleLance
+ */
+class Users extends Mailer
+{
+    /**
+     * @var
+     */
     private $db;
 
-    public function __construct($database) {
+    /**
+     * @param $database
+     */
+    public function __construct($database)
+    {
         $this->db = $database;
     }
 
-    public function change_password($user_id, $password) {
-
+    /**
+     * @param $user_id
+     * @param $password
+     */
+    public function changePassword($user_id, $password)
+    {
         $password = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = $this->db->prepare("UPDATE `users` SET `password` = ? WHERE `id` = ?");
+        $query = $this->db->prepare("UPDATE users SET password = ? WHERE id = ?");
 
         $query->bindValue(1, $password);
         $query->bindValue(2, $user_id);
 
         try {
             $query->execute();
+
             return true;
         } catch (PDOException $e) {
             die($e->getMessage());
         }
     }
 
-    public function user_exists($email) {
-
-        $query = $this->db->prepare("SELECT COUNT(`id`) FROM `users` WHERE `email`= ?");
+    /**
+     * @param $email
+     */
+    public function userExists($email)
+    {
+        $query = $this->db->prepare("SELECT COUNT(id) FROM users WHERE email= ?");
         $query->bindValue(1, $email);
 
         try {
@@ -47,11 +68,25 @@ class Users {
         }
     }
 
-    public function register($first_name, $last_name, $email, $password, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone) {
-
+    /**
+     * @param $first_name
+     * @param $last_name
+     * @param $email
+     * @param $password
+     * @param $access_level
+     * @param $address_1
+     * @param $address_2
+     * @param $city
+     * @param $state
+     * @param $post_code
+     * @param $country
+     * @param $phone
+     */
+    public function register($first_name, $last_name, $email, $password, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone)
+    {
         $password = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = $this->db->prepare("INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`, `access_level`, `address_1`, `address_2`, `city`, `state`, `post_code`, `country`, `phone`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
+        $query = $this->db->prepare("INSERT INTO users (first_name, last_name, email, password, access_level, address_1, address_2, city, state, post_code, country, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
 
         $query->bindValue(1, $first_name);
         $query->bindValue(2, $last_name);
@@ -74,9 +109,14 @@ class Users {
         }
     }
 
-    public function login($email, $password) {
-
-        $query = $this->db->prepare("SELECT `id`, `first_name`, `password`, `access_level` FROM `users` WHERE `email` = ?");
+    /**
+     * @param $email
+     * @param $password
+     * @return bool
+     */
+    public function login($email, $password)
+    {
+        $query = $this->db->prepare("SELECT id, first_name, password, access_level FROM users WHERE email = ?");
         $query->bindValue(1, $email);
 
         try {
@@ -90,6 +130,7 @@ class Users {
                 $_SESSION['access_level'] = $data['access_level'];
                 $_SESSION['id'] = $data['id'];
                 $_SESSION['first_name'] = $data['first_name'];
+
                 return $id; // returning the user's id.
             } else {
                 return false;
@@ -99,27 +140,42 @@ class Users {
         }
     }
 
-    public function logged_in() {
+    /**
+     * @return bool
+     */
+    public function loggedIn()
+    {
         return(isset($_SESSION['id'])) ? true : false;
     }
 
-    public function logged_in_protect() {
-        if ($this->logged_in() === true) {
+    /**
+     *
+     */
+    public function loggedInProtect()
+    {
+        if ($this->loggedIn() === true) {
             header('Location: /');
             exit();
         }
     }
 
-    public function logged_out_protect() {
-        if ($this->logged_in() === false) {
+    /**
+     *
+     */
+    public function loggedOutProtect()
+    {
+        if ($this->loggedIn() === false) {
             header('Location: /login.php');
             exit();
         }
     }
 
-    public function get_users() {
-
-        $query = $this->db->prepare("SELECT * FROM `users` ORDER BY `id` ASC");
+    /**
+     * @return mixed
+     */
+    public function listUsers()
+    {
+        $query = $this->db->prepare("SELECT * FROM users ORDER BY id ASC");
 
         try {
             $query->execute();
@@ -130,8 +186,12 @@ class Users {
         return $query->fetchAll();
     }
 
-    public function delete_user($id) {
-        $query = $this->db->prepare("DELETE from `users` where `id` = ?");
+    /**
+     * @param $id
+     */
+    public function deleteUser($id)
+    {
+        $query = $this->db->prepare("DELETE from users where id = ?");
 
         $query->bindValue(1, $id);
 
@@ -142,8 +202,13 @@ class Users {
         }
     }
 
-    public function get_user($id) {
-        $query = $this->db->prepare("SELECT * FROM `users` WHERE `id`= ?");
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getUser($id)
+    {
+        $query = $this->db->prepare("SELECT * FROM users WHERE id= ?");
         $query->bindValue(1, $id);
 
         try {
@@ -155,10 +220,23 @@ class Users {
         return $query->fetch();
     }
 
-    public function update_profile($first_name, $last_name, $email, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id) {
-        $query = $this->db->prepare("UPDATE `users` SET `first_name`= ?, `last_name` = ?, `email` = ?, `access_level` = ?,`address_1` = ?, `address_2` = ?, `city` = ?, `state` = ?, `post_code` = ?, `country` = ?, `phone` = ? WHERE `id` = ?");
-
-        $password = password_hash($password, PASSWORD_DEFAULT);
+    /**
+     * @param $first_name
+     * @param $last_name
+     * @param $email
+     * @param $access_level
+     * @param $address_1
+     * @param $address_2
+     * @param $city
+     * @param $state
+     * @param $post_code
+     * @param $country
+     * @param $phone
+     * @param $id
+     */
+    public function updateProfile($first_name, $last_name, $email, $access_level, $address_1, $address_2, $city, $state, $post_code, $country, $phone, $id)
+    {
+        $query = $this->db->prepare("UPDATE users SET first_name= ?, last_name = ?, email = ?, access_level = ?,address_1 = ?, address_2 = ?, city = ?, state = ?, post_code = ?, country = ?, phone = ? WHERE id = ?");
 
         $query->bindValue(1, $first_name);
         $query->bindValue(2, $last_name);
