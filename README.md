@@ -30,14 +30,14 @@ To install SimpleLance:
 
 That's it, SimpleLance is now up and running, ready to help you run your freelance business.
 
-###ToDo:
+###ToDo / Contributing:
 
 There are a few things left to be done:
 
 - Create admin dashboard / customer home screen
-- Create database installer
 - Finish email notifications
 - General code tidy
 - Improve (create!) documentation
+- General front end improvements (nothing radical, but it needs serious loving)
 
 If you feel so inclined to help with any of these, please open a PR and get stuck in.
