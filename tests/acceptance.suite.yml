@@ -7,8 +7,15 @@
 class_name: AcceptanceTester
 modules:
     enabled:
-        - PhpBrowser
+        - WebDriver
         - AcceptanceHelper
+        - Db
     config:
-        PhpBrowser:
-            url: 'http://localhost/myapp/'
+        WebDriver:
+            url: 'http://localhost/'
+            browser: phantomjs
+            window_size: 1024x750
+            capabilities:
+              webStorageEnabled: true
+        Db:
+            cleanup: true
