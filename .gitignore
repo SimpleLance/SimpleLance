@@ -1,2 +1,4 @@
 vendor/
 .dev.config.php
+.idea/
+.vagrant/
