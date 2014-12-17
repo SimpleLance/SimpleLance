@@ -26,7 +26,9 @@ To install SimpleLance:
 - Clone the repo to your web server to its own subdomain
 - Import the included simplelance.sql file to a new MySQL database
 - Update details in includes/config.php
-- Run 'composer install' to install dependencies
+- Run ```composer install``` to install dependencies
+
+Note: If running in production use ```composer isntall --no-dev``` otherwise ```composer install```
 
 That's it, SimpleLance is now up and running, ready to help you run your freelance business.
 
@@ -40,6 +42,10 @@ Vagrant is built into the project
 - Update details in includes/config.php
 - run ```composer install``` to install dependencies
 - add ```192.168.65.10    simplelance.dev``` to your hosts file
+
+###Testing
+
+To run the test suite run ```codecept run``` from the project root. This is made easier if you use the built in vagrant box.
 
 ###ToDo / Contributing:
 
