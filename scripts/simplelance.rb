@@ -1,5 +1,5 @@
-class Msiof
-  def Msiof.configure(config, settings)
+class SL
+  def SL.configure(config, settings)
     # Configure The Box
     config.vm.box = "ubuntu/trusty64"
     config.vm.hostname = "homestead"
