@@ -13,6 +13,9 @@
         "stripe/stripe-php": "~1.17",
         "phpmailer/phpmailer": "~5.2"
     },
+    "require-dev": {
+        "codeception/codeception":"~2.0"
+    },
     "autoload": {
         "psr-4": {
             "SimpleLance\\": "includes/SimpleLance"
