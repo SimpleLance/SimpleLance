@@ -30,6 +30,17 @@ To install SimpleLance:
 
 That's it, SimpleLance is now up and running, ready to help you run your freelance business.
 
+###Local Development
+
+Vagrant is built into the project
+
+- Clone the repo to your local computer
+- cd to the folder you cloned
+- run ```vagrant up```
+- Update details in includes/config.php
+- run ```composer install``` to install dependencies
+- add ```192.168.65.10    simplelance.dev``` to your hosts file
+
 ###ToDo / Contributing:
 
 There are a few things left to be done:
