@@ -1,0 +1,21 @@
+---
+ip: "192.168.65.10"
+memory: 1024
+cpus: 2
+
+authorize: ~/.ssh/id_rsa.pub
+
+keys:
+    - ~/.ssh/id_rsa
+
+folders:
+    - map: .
+      to: /home/vagrant/simplelance.dev
+
+sites:
+    - map: simplelance.dev
+      to: /home/vagrant/simplelance.dev
+
+variables:
+    - key: APP_ENV
+      value: dev
