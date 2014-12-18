@@ -7,11 +7,7 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y phantomjs screen
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
-  - rackup  # start a Web server
-  - sleep 3 # give Web server some time to bind to sockets, etc
+  - sh scripts/provision.sh
   - mysql -e 'create database vagrant;'
   - mysql -e "GRANT ALL PRIVILEGES ON vagrant.* TO 'vagrant'@'%' IDENTIFIED BY 'vagrant'" -uroot
   - mysql -e "GRANT ALL PRIVILEGES ON vagrant.* TO 'vagrant'@'localhost' IDENTIFIED BY 'vagrant'" -uroot
