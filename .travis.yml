@@ -9,7 +9,7 @@ before_install:
 before_script:
   - mysql -e 'create database vagrant;'
   - mysql -e "GRANT ALL PRIVILEGES ON vagrant.* TO 'vagrant'@'%' IDENTIFIED BY 'vagrant'" -uroot
-  - mysql -u vagrant -pvagrant vagrant < simplelance.sql
+  - mysql -u travis -p vagrant < simplelance.sql
   - screen -S server -d -m phantomjs --webdriver=4444
   - "composer self-update"
   - "composer install --dev --no-interaction"
