@@ -28,7 +28,7 @@ To install SimpleLance:
 - Update details in includes/config.php
 - Run ```composer install``` to install dependencies
 
-Note: If running in production use ```composer isntall --no-dev``` otherwise ```composer install```
+Note: If running in production use ```composer install --no-dev``` otherwise ```composer install```
 
 That's it, SimpleLance is now up and running, ready to help you run your freelance business.
 
