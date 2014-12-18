@@ -1,20 +1,30 @@
 <VirtualHost *:80>
+    ServerName localhost
+    DocumentRoot %TRAVIS_BUILD_DIR%
+    DirectoryIndex index.php
 
-  DocumentRoot %TRAVIS_BUILD_DIR%
+    RewriteEngine On
 
-  <Directory "%TRAVIS_BUILD_DIR%">
-    Options FollowSymLinks MultiViews ExecCGI
-    AllowOverride All
-    Order deny,allow
-    Allow from all
-  </Directory>
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
+    RewriteRule ^ %1 [R,L]
 
-  # Wire up Apache to use Travis CI's php-fpm.
-  <IfModule mod_fastcgi.c>
-    AddHandler php5-fcgi .php
-    Action php5-fcgi /php5-fcgi
-    Alias /php5-fcgi /usr/lib/cgi-bin/php5-fcgi
-    FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi -host 127.0.0.1:9000 -pass-header Authorization
-  </IfModule>
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}\.php -f
+    RewriteRule ^(.*)$ $1.php
+
+    <Directory "%TRAVIS_BUILD_DIR%">
+        Options FollowSymLinks MultiViews ExecCGI
+        AllowOverride All
+        Order deny,allow
+        Allow from all
+    </Directory>
+
+    # Wire up Apache to use Travis CI's php-fpm.
+    <IfModule mod_fastcgi.c>
+        AddHandler php5-fcgi .php
+        Action php5-fcgi /php5-fcgi
+        Alias /php5-fcgi /usr/lib/cgi-bin/php5-fcgi
+        FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi -host 127.0.0.1:9000 -pass-header Authorization
+    </IfModule>
 
 </VirtualHost>
