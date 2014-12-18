@@ -7,7 +7,6 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y phantomjs screen
 before_script:
-  - sh scripts/provision.sh
   - mysql -e 'create database vagrant;'
   - mysql -e "GRANT ALL PRIVILEGES ON vagrant.* TO 'vagrant'@'%' IDENTIFIED BY 'vagrant'" -uroot
   - mysql -e "GRANT ALL PRIVILEGES ON vagrant.* TO 'vagrant'@'localhost' IDENTIFIED BY 'vagrant'" -uroot
