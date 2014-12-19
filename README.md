@@ -23,23 +23,15 @@ If you have a feature you would like to see added, please create an issue or PR
 
 To install SimpleLance:
 
-- Clone the repo to your web server to its own subdomain
-- Import the included simplelance.sql file to a new MySQL database
-- Update details in includes/config.php
-- Run ```composer install``` to install dependencies
-
-Note: If running in production use ```composer install --no-dev``` otherwise ```composer install```
-
-That's it, SimpleLance is now up and running, ready to help you run your freelance business.
+- TODO: Update Install to support new laravel version
 
 ###Local Development
 
-Vagrant is built into the project
+Vagrant is built into the project via Laravel Homestead
 
 - Clone the repo to your local computer
 - cd to the folder you cloned
 - run ```vagrant up```
-- Update details in includes/config.php
 - run ```composer install``` to install dependencies
 - add ```192.168.65.10    simplelance.dev``` to your hosts file
 
