@@ -85,3 +85,8 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+App::missing(function($exception)
+{
+	return Response::view('errors.404', array(), 404);
+});
