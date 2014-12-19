@@ -1,11 +1,21 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
+	"name": "simplelance/simplelance",
+	"description": "A simple customer management / invoicing / project tracking tool built for freelancers.",
+	"keywords": ["freelance", "customer management"],
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "4.2.*"
+	  "laravel/framework": "4.2.*",
+	  "doctrine/dbal": "dev-master",
+	  "guzzlehttp/guzzle": "4.*"
+	},
+	"require-dev": {
+	  "fzaninotto/faker": "dev-master",
+	  "way/generators": "~2.6",
+	  "mockery/mockery": "dev-master",
+	  "barryvdh/laravel-ide-helper": "dev-master",
+	  "codeception/codeception":"~2.0",
+	  "barryvdh/laravel-debugbar": "1.x"
 	},
 	"autoload": {
 		"classmap": [
