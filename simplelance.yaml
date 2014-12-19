@@ -14,7 +14,7 @@ folders:
 
 sites:
     - map: simplelance.dev
-      to: /home/vagrant/simplelance.dev
+      to: /home/vagrant/simplelance.dev/public
 
 variables:
     - key: APP_ENV

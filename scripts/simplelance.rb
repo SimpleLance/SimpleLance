@@ -1,7 +1,7 @@
 class SL
   def SL.configure(config, settings)
     # Configure The Box
-    config.vm.box = "ubuntu/trusty64"
+    config.vm.box = "laravel/homestead"
     config.vm.hostname = "homestead"
 
     # Configure A Private Network IP
@@ -19,9 +19,6 @@ class SL
     config.vm.network "forwarded_port", guest: 80, host: 8000
     config.vm.network "forwarded_port", guest: 3306, host: 33060
     config.vm.network "forwarded_port", guest: 5432, host: 54320
-
-    # Provision the box
-    config.vm.provision "shell", path: "scripts/provision.sh"
 
     # Configure The Public Key For SSH Access
     config.vm.provision "shell" do |s|
