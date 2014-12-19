@@ -24,11 +24,34 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
+$env = $app->detectEnvironment(function() use ($app)
+{
+	if ($app->runningInConsole()) {
+		$folder = explode('/', $_SERVER['PWD']);
 
-	'local' => array('homestead'),
+		if (end($folder) == 'simplelance.dev')
+		{
 
-));
+			return 'local';
+		}
+
+
+		if (end($folder) == 'simplelance.com')
+		{
+
+			return 'production';
+		}
+
+	}
+
+	return getenv('LARAVEL_ENV') ?: 'local';
+});
+
+//$env = $app->detectEnvironment(array(
+//
+//	'local' => array('homestead'),
+//
+//));
 
 /*
 |--------------------------------------------------------------------------
