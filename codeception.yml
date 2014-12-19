@@ -11,8 +11,8 @@ settings:
 modules:
     config:
         Db:
-            dsn: 'mysql:host=localhost;dbname=vagrant'
-            user: 'vagrant'
-            password: 'vagrant'
+            dsn: 'mysql:host=localhost;dbname=homestead'
+            user: 'homestead'
+            password: 'secret'
             dump: tests/_data/dump.sql
             cleanup: true
