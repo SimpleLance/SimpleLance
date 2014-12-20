@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SimpleLance</title>
+    <title>@yield('title')Simple Lance</title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/jquery-ui.theme.css" rel="stylesheet">
-    <link href="/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    @yield('head')
 </head>
 <body>
 <div id="wrapper">
@@ -21,10 +22,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">SimpleLance</a>
+            <a class="navbar-brand" href="/">SITE_NAME</a>
         </div>
         <ul class="nav navbar-top-links navbar-right">
-            Hello !
+            Hello USER!
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -35,7 +36,7 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
             </li>
@@ -43,76 +44,18 @@
         <div class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
-                    <!-- Admin Menu -->
-                    <li class="sidebar-search">
-                        <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> User Management<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">View Users</a>
-                            </li>
-                            <li>
-                                <a href="#">Add User</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Project Tracker<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">View Projects</a>
-                            </li>
-                            <li>
-                                <a href="#">Add Project</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Support Tickets<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">View Tickets</a>
-                            </li>
-                            <li>
-                                <a href="#">Add Ticket</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Invoices<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">View Invoices</a>
-                            </li>
-                            <li>
-                                <a href="#">Create Invoice</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- /admin menu -->
-                    <!-- customer menu -->
-                    <li>
-                        <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-user fa-fw"></i> Projects</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-user fa-fw"></i> Support Tickets</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-user fa-fw"></i> Invoices</a>
-                    </li>
-                    <!-- /customer menu -->
+                    @if (isset($userLevel))
+                        @if ($userLevel == 'Admin')
+                            <!-- Admin Menu -->
+                            @include('layouts.menus.admin')
+                            <!-- /admin menu -->
+                        @endif
+                        @if ($userLevel == 'User')
+                            <!-- customer menu -->
+                            @include('layouts.menus.user')
+                            <!-- /customer menu -->
+                        @endif
+                    @endif
                 </ul>
             </div>
         </div>
@@ -126,5 +69,6 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/metisMenu.min.js"></script>
 <script src="/js/scripts.js"></script>
+@yield('footer')
 </body>
 </html>
