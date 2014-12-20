@@ -69,6 +69,10 @@
         </div>
     </nav>
     <div id="page-wrapper">
+        <!-- Notifications -->
+        @include('Sentinel::layouts/notifications')
+        <!-- ./ notifications -->
+
         @yield('content')
     </div>
 </div>
