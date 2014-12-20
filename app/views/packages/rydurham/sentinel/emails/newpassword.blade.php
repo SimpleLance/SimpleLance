@@ -9,6 +9,6 @@
 		<p>Here is your new password:</p>
 		<p><blockquote>{{{ $newPassword }}}</blockquote></p>
 		<p>Thank you, <br />
-			~The Admin Team</p>
+			~The SimpleLance Team</p>
 	</body>
 </html>

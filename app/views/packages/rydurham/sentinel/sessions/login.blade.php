@@ -1,9 +1,4 @@
-@extends(Config::get('Sentinel::config.layout'))
-
-{{-- Web site Title --}}
-@section('title')
-Log In
-@stop
+@extends('layouts.default')
 
 {{-- Content --}}
 @section('content')

@@ -1,10 +1,4 @@
-@extends(Config::get('Sentinel::config.layout'))
-
-{{-- Web site Title --}}
-@section('title')
-@parent
-Groups
-@stop
+@extends('layouts.default')
 
 {{-- Content --}}
 @section('content')
