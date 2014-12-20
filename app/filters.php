@@ -99,10 +99,3 @@ App::missing(function($exception)
 | http://laravel.com/docs/responses#view-composers
 |
 */
-if (Sentry::check()) {
-	$thisUser = Sentry::getUser();
-	$thisUser->isAdmin = Sentry::inGroup(Sentry::findGroupByName('Admins'));
-	$thisUser->isUser = Sentry::inGroup(Sentry::findGroupByName('Users'));
-
-	View::share('user', $thisUser);
-}

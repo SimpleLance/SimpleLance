@@ -24,16 +24,16 @@
             </button>
             <a class="navbar-brand" href="/">SITE_NAME</a>
         </div>
-        @if (isset($user))
+        @if (Sentry::check())
             <ul class="nav navbar-top-links navbar-right">
-                Hello {{ $user->username }}!
+                Hello {{ Sentry::getUser()->username }}!
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu">
                         <li>
-                            <a href="/users/{{ $user->id }}"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            <a href="/users/{{ Sentry::getUser()->id }}"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -52,13 +52,13 @@
         <div class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
-                    @if (isset($user))
-                        @if ($user->isAdmin)
+                    @if (Sentry::check())
+                        @if (Sentry::inGroup(Sentry::findGroupByName('Admins')))
                             <!-- Admin Menu -->
                             @include('layouts.menus.admin')
                             <!-- /admin menu -->
                         @endif
-                        @if ($user->isUser)
+                        @if (Sentry::inGroup(Sentry::findGroupByName('Users')))
                             <!-- customer menu -->
                             @include('layouts.menus.user')
                             <!-- /customer menu -->
