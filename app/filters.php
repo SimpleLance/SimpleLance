@@ -90,3 +90,19 @@ App::missing(function($exception)
 {
 	return Response::view('errors.404', array(), 404);
 });
+
+/*
+|--------------------------------------------------------------------------
+| View Composers & Shares
+|--------------------------------------------------------------------------
+|
+| http://laravel.com/docs/responses#view-composers
+|
+*/
+if (Sentry::check()) {
+	$thisUser = Sentry::getUser();
+	$isAdmin = Sentry::inGroup(Sentry::findGroupByName('Admins'));
+	$thisUser->isAdmin = $isAdmin;
+
+	View::share('user', $thisUser);
+}
