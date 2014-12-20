@@ -12,8 +12,8 @@ updated when past due.  This is all to come in future release.
 
 2 Accounts exist, 1 admin and 1 customer.
 
-admin - email = admin@simplelance.com / password = admin123 <br>
-customer - email = customer@simplelance.com / password = customer123
+admin - email = ```admin@admin.com``` / password = ```simplelance``` <br>
+customer - email = ```user@user.com``` / password = ```simplelance```
 
 Development is ongoing and updates will be released as regular as possible.
 
