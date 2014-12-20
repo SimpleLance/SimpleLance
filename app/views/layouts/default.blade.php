@@ -24,33 +24,41 @@
             </button>
             <a class="navbar-brand" href="/">SITE_NAME</a>
         </div>
-        <ul class="nav navbar-top-links navbar-right">
-            Hello USER!
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-usermenu">
-                    <li>
-                        <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+        @if (isset($user))
+            <ul class="nav navbar-top-links navbar-right">
+                Hello {{ $user->username }}!
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-usermenu">
+                        <li>
+                            <a href="/users/{{ $user->id }}"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        @else
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a href="/login">Log In</a>
+                </li>
+            </ul>
+        @endif
         <div class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
-                    @if (isset($userLevel))
-                        @if ($userLevel == 'Admin')
+                    @if (isset($user))
+                        @if ($user->isAdmin)
                             <!-- Admin Menu -->
                             @include('layouts.menus.admin')
                             <!-- /admin menu -->
                         @endif
-                        @if ($userLevel == 'User')
+                        @if ($user->isUser)
                             <!-- customer menu -->
                             @include('layouts.menus.user')
                             <!-- /customer menu -->

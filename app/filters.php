@@ -101,8 +101,8 @@ App::missing(function($exception)
 */
 if (Sentry::check()) {
 	$thisUser = Sentry::getUser();
-	$isAdmin = Sentry::inGroup(Sentry::findGroupByName('Admins'));
-	$thisUser->isAdmin = $isAdmin;
+	$thisUser->isAdmin = Sentry::inGroup(Sentry::findGroupByName('Admins'));
+	$thisUser->isUser = Sentry::inGroup(Sentry::findGroupByName('Users'));
 
 	View::share('user', $thisUser);
 }

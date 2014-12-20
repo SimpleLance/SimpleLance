@@ -15,7 +15,7 @@
             <a href="/users">View Users</a>
         </li>
         <li>
-            <a href="/users/register.php">Add User</a>
+            <a href="/users/create">Add User</a>
         </li>
     </ul>
 </li>
@@ -26,7 +26,7 @@
             <a href="/projects">View Projects</a>
         </li>
         <li>
-            <a href="/projects/new.php">Add Project</a>
+            <a href="/projects/create">Add Project</a>
         </li>
     </ul>
 </li>
@@ -37,7 +37,7 @@
             <a href="/support">View Tickets</a>
         </li>
         <li>
-            <a href="/support/new.php">Add Ticket</a>
+            <a href="/support/create">Add Ticket</a>
         </li>
     </ul>
 </li>
@@ -48,7 +48,7 @@
             <a href="/billing">View Invoices</a>
         </li>
         <li>
-            <a href="/billing/new.php">Create Invoice</a>
+            <a href="/billing/create">Create Invoice</a>
         </li>
     </ul>
 </li>
