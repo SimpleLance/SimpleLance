@@ -13,5 +13,6 @@
 
 Route::get('/', function()
 {
-	return View::make('test');
+
+	return View::make('home');
 });
