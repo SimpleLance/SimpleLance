@@ -42,7 +42,7 @@ return array(
 
         'register'  => array(
             'route' => 'register',
-            'enabled' => true,
+            'enabled' => false,
         ),
 
         'resend'    => array(
@@ -116,7 +116,7 @@ return array(
     |
     */
 
-    'registration' => true,
+    'registration' => false,
 
     /*
     |--------------------------------------------------------------------------
