@@ -1,2 +1,0 @@
-@extends('layouts.default')
-    test

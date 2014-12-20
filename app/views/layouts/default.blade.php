@@ -6,10 +6,10 @@
 
     <title>@yield('title')Simple Lance</title>
 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/jquery-ui.theme.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     @yield('head')
 </head>
 <body>
@@ -65,7 +65,7 @@
     </div>
 </div>
 <script src="/js/jquery-2.1.3.min.js"></script>
-<script src="/js/jquery-ui.min.css"></script>
+<script src="/js/jquery-ui.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/metisMenu.min.js"></script>
 <script src="/js/scripts.js"></script>
