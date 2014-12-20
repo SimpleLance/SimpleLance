@@ -7,7 +7,8 @@
 	"require": {
 	  "laravel/framework": "4.2.*",
 	  "doctrine/dbal": "dev-master",
-	  "guzzlehttp/guzzle": "4.*"
+	  "guzzlehttp/guzzle": "4.*",
+	  "rydurham/sentinel": "~1.4"
 	},
 	"require-dev": {
 	  "fzaninotto/faker": "dev-master",
