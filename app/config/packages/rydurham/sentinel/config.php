@@ -103,7 +103,7 @@ return array(
     |
     */
 
-    'layout' => 'Sentinel::layouts.default',
+    'layout' => 'layouts.default',
 
 
     /*
