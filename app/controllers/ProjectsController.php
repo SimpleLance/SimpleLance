@@ -17,7 +17,7 @@ class ProjectsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$projects = $this->project->all();
+		$projects = $this->project->with('owner')->get();
 
 		return View::make('projects.index')
 			->with('projects', $projects);
