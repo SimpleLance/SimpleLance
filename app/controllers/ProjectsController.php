@@ -17,7 +17,10 @@ class ProjectsController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$projects = $this->project->all();
+
+		return View::make('projects.index')
+			->with('projects', $projects);
 	}
 
 	/**
@@ -28,7 +31,8 @@ class ProjectsController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+
+		return View::make('projects.create');
 	}
 
 	/**
@@ -51,7 +55,10 @@ class ProjectsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$thisProject = $this->project->find($id);
+
+		return View::make('projects.show')
+			->with('project', $thisProject);
 	}
 
 	/**
@@ -63,7 +70,10 @@ class ProjectsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$thisProject = $this->project->find($id);
+
+		return View::make('projects.edit')
+		           ->with('project', $thisProject);
 	}
 
 	/**
