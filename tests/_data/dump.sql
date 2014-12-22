@@ -39,7 +39,7 @@ CREATE TABLE `groups` (
 
 LOCK TABLES `groups` WRITE;
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
-INSERT INTO `groups` VALUES (1,'Users','{\"users\":1}','2014-12-20 20:59:26','2014-12-20 20:59:26'),(2,'Admins','{\"admin\":1,\"users\":1}','2014-12-20 20:59:26','2014-12-20 20:59:26');
+INSERT INTO `groups` VALUES (1,'Users','{\"users\":1}','2014-12-22 13:32:59','2014-12-22 13:32:59'),(2,'Admins','{\"admin\":1,\"users\":1}','2014-12-22 13:32:59','2014-12-22 13:32:59');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,8 +62,37 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES ('2012_12_06_225921_migration_cartalyst_sentry_install_users',1),('2012_12_06_225929_migration_cartalyst_sentry_install_groups',1),('2012_12_06_225945_migration_cartalyst_sentry_install_users_groups_pivot',1),('2012_12_06_225988_migration_cartalyst_sentry_install_throttle',1);
+INSERT INTO `migrations` VALUES ('2012_12_06_225921_migration_cartalyst_sentry_install_users',1),('2012_12_06_225929_migration_cartalyst_sentry_install_groups',1),('2012_12_06_225945_migration_cartalyst_sentry_install_users_groups_pivot',1),('2012_12_06_225988_migration_cartalyst_sentry_install_throttle',1),('2014_12_22_012146_create_projects_table',1),('2014_12_22_130417_create_tickets_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `projects`
+--
+
+DROP TABLE IF EXISTS `projects`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `projects` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `status_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `projects`
+--
+
+LOCK TABLES `projects` WRITE;
+/*!40000 ALTER TABLE `projects` DISABLE KEYS */;
+INSERT INTO `projects` VALUES (1,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(2,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(3,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(4,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(5,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(6,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(7,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(8,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(9,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(10,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59');
+/*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -95,6 +124,35 @@ CREATE TABLE `throttle` (
 LOCK TABLES `throttle` WRITE;
 /*!40000 ALTER TABLE `throttle` DISABLE KEYS */;
 /*!40000 ALTER TABLE `throttle` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tickets`
+--
+
+DROP TABLE IF EXISTS `tickets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tickets` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `priority_id` int(11) NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tickets`
+--
+
+LOCK TABLES `tickets` WRITE;
+/*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
+INSERT INTO `tickets` VALUES (1,'Eos unde asperiores illum nam ipsum.','Aut ipsam aut unde amet aspernatur facere fugit.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(2,'Voluptatum porro nemo ullam praesentium autem commodi.','Magnam voluptates nam maiores repellendus ex in.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(3,'Et ipsam vero nisi.','Necessitatibus rerum reiciendis dolor ab eaque.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(4,'Similique dolor incidunt ad eaque.','Est quas ex cum possimus dicta eos ut.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(5,'Reiciendis aut dolore rem maxime quis.','Neque ex eos et dolorem quidem ut.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(6,'Ut aut quo libero suscipit a ipsa molestias.','Dolores omnis quidem error ut quos sed.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(7,'Quis ex vel modi dignissimos aperiam magni.','Necessitatibus consequuntur officia similique et adipisci provident illo.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(8,'Consequatur quis aut quam consequuntur debitis tempore.','Similique eos id rerum consequatur in possimus nam voluptatum.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(9,'Exercitationem facere occaecati natus a vel.','Libero vitae sapiente sit in aut.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(10,'Dolor neque et excepturi eos sit non.','Occaecati cupiditate quas culpa fugit laboriosam.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59');
+/*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -134,7 +192,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin@admin.com','admin','$2y$10$CatEa/6ez0HMq2kna9A23emhLDwUQH8lwhoaaR3vKs/F/lm965I3e',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2014-12-20 20:59:26','2014-12-20 20:59:26'),(2,'user@user.com','','$2y$10$ni/LQQ.DpGv1l8NPzWGfBO2lCMtGWQaXIyuXot4d34hRA87G25xpu',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2014-12-20 20:59:27','2014-12-20 20:59:27');
+INSERT INTO `users` VALUES (1,'admin@admin.com','admin','$2y$10$Gbg2lQGhu3BJUyf3AA6wDOSr5oDHnGuiE9i1RZZEKKFysBtc5FZhS',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(2,'user@user.com','','$2y$10$gI26zRrgMazjvJOnfhPmQ.F3RRDEfVjaqVms08MOhcEpMmX9Heheq',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2014-12-22 13:32:59','2014-12-22 13:32:59');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,4 +229,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-20 21:00:02
+-- Dump completed on 2014-12-22 13:33:21
