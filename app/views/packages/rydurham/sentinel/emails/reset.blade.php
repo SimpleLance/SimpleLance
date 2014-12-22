@@ -9,6 +9,6 @@
 		<p>To reset your password, <a href="{{ URL::action('Sentinel\UserController@reset', array('id' => $userId, 'code' => urlencode($resetCode))) }}">click here.</a>  If you did not request a password reset, you can safely ignore this email - nothing will be changed.</p>
 		<p>Or point your browser to this address: <br /> {{ URL::action('Sentinel\UserController@reset', array('id' => $userId, 'code' => urlencode($resetCode))) }}</p>
 		<p>Thank you, <br />
-			~The SimpleLance Team</p>
+			~The Admin Team</p>
 	</body>
 </html>
