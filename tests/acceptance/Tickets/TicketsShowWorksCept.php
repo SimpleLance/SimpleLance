@@ -1,6 +1,6 @@
 <?php
 $I = new AcceptanceTester($scenario);
-$I->wantTo('ensure that the tickets index works');
+$I->wantTo('ensure that the tickets show works');
 $I->amOnPage('/tickets/1');
 $I->see('Support Ticket', 'h4');
 $I->see('Title', 'strong');
