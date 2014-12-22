@@ -12,8 +12,8 @@ class TicketsTableSeeder extends Seeder {
 		foreach(range(1, 10) as $index)
 		{
 			Ticket::create([
-				'title' => 'Sample Support Ticket',
-				'description' => 'Support Ticket Description',
+				'title' => $faker->sentence(),
+				'description' => $faker->sentence(),
 				'priority_id' => '1',
 				'owner_id' => '1'
 			]);
