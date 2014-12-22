@@ -8,7 +8,7 @@ class Project extends \Eloquent {
 		'status_id'
 	];
 
-	public function user() {
+	public function owner() {
 
 		return $this->belongsTo('User');
 	}
