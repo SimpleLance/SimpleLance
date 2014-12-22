@@ -4,9 +4,10 @@ class TicketsController extends \BaseController {
 
 	protected $ticket;
 
-	public function __construct(Ticket $ticket)
+	public function __construct(Ticket $ticket, User $user)
 	{
 		$this->ticket = $ticket;
+		$this->user = $user;
 	}
 
 	/**
@@ -55,7 +56,7 @@ class TicketsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$thisTicket = $this->ticket->find($id);
+		$thisTicket = $this->ticket->with('owner')->find($id);
 
 		return View::make('tickets.show')
 		           ->with('ticket', $thisTicket);
@@ -71,9 +72,22 @@ class TicketsController extends \BaseController {
 	public function edit($id)
 	{
 		$thisTicket = $this->ticket->find($id);
+		$allOwners = $this->user->all();
+		$owners = [];
+
+		foreach ($allOwners as $thisOwner)
+		{
+			if (empty($thisOwner->username))
+			{
+				$thisOwner->username =  $thisOwner->email;
+			}
+
+			$owners[$thisOwner->id] = $thisOwner->username;
+		}
 
 		return View::make('tickets.edit')
-		           ->with('ticket', $thisTicket);
+			->with('ticket', $thisTicket)
+			->with('owners', $owners);
 	}
 
 	/**

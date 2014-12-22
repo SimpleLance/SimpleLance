@@ -1,6 +1,54 @@
 @extends('layouts.default')
 
 @section('content')
-    TODO: Edit ticket form
+    <h4>Edit Support Ticket</h4>
+    <div class="well">
+        {{ Form::open(array(
+            'action' => array('TicketsController@update', $ticket->id),
+            'method' => 'put',
+            'class' => 'form-horizontal',
+            'role' => 'form'
+            )) }}
+
+        <div class="form-group {{ ($errors->has('title')) ? 'has-error' : '' }}" for="title">
+            {{ Form::label('edit_title', 'Title', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+                {{ Form::text('title', $ticket->title, array('class' => 'form-control', 'placeholder' => 'Title', 'id' => 'edit_title'))}}
+            </div>
+            {{ ($errors->has('title') ? $errors->first('title') : '') }}
+        </div>
+
+        <div class="form-group {{ ($errors->has('description')) ? 'has-error' : '' }}" for="description">
+            {{ Form::label('edit_description', 'Last Name', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+                {{ Form::text('description', $ticket->description, array('class' => 'form-control', 'placeholder' => 'Description', 'id' => 'edit_description'))}}
+            </div>
+            {{ ($errors->has('description') ? $errors->first('description') : '') }}
+        </div>
+
+        <div class="form-group {{ ($errors->has('priority')) ? 'has-error' : '' }}" for="priority">
+            {{ Form::label('edit_priority', 'Priority', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+                TODO: This should be a drop down of Priorities
+            </div>
+            {{ ($errors->has('priority') ? $errors->first('priority') : '') }}
+        </div>
+
+        <div class="form-group {{ ($errors->has('owner')) ? 'has-error' : '' }}" for="owner">
+            {{ Form::label('edit_owner', 'Owner', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+                {{ Form::select('owner', $owners, $ticket->owner_id) }}
+            </div>
+            {{ ($errors->has('owner') ? $errors->first('owner') : '') }}
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                {{ Form::hidden('id', $ticket->id) }}
+                {{ Form::submit('Submit Changes', array('class' => 'btn btn-primary'))}}
+            </div>
+        </div>
+        {{ Form::close()}}
+    </div>
 @stop
 
