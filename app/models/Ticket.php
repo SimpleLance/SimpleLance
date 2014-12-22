@@ -8,7 +8,7 @@ class Ticket extends \Eloquent {
 		'owner_id'
 	];
 
-	public function user() {
+	public function owner() {
 
 		return $this->belongsTo('User');
 	}
