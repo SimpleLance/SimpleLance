@@ -9,12 +9,22 @@ class ProjectsTableSeeder extends Seeder {
 	{
 		$faker = Faker::create();
 
-		foreach(range(1, 10) as $index)
+		foreach(range(1, 5) as $index)
 		{
 			Project::create([
 				'title' => 'Sample Project',
 				'description' => 'Test project',
 				'owner_id' => '1',
+				'status_id' => '1'
+			]);
+		}
+
+		foreach(range(1, 5) as $index)
+		{
+			Project::create([
+				'title' => 'Sample Project',
+				'description' => 'Test project',
+				'owner_id' => '2',
 				'status_id' => '1'
 			]);
 		}
