@@ -22,7 +22,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">SITE_NAME</a>
+            <a class="navbar-brand" href="/">{{ Config::get('simplelance.site_name')}}</a>
         </div>
         @if (Sentry::check())
             <ul class="nav navbar-top-links navbar-right">
