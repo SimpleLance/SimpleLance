@@ -11,7 +11,7 @@
             {{ ($errors->has('title') ? $errors->first('title') : '') }}
         </div>
 
-        {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
+        {{ Form::submit('Create', array('class' => 'btn btn-primary create')) }}
 
         {{ Form::close() }}
 
