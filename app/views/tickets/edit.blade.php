@@ -26,12 +26,12 @@
             {{ ($errors->has('description') ? $errors->first('description') : '') }}
         </div>
 
-        <div class="form-group {{ ($errors->has('priority')) ? 'has-error' : '' }}" for="priority">
-            {{ Form::label('edit_priority', 'Priority', array('class' => 'col-sm-2 control-label')) }}
+        <div class="form-group {{ ($errors->has('priority_id')) ? 'has-error' : '' }}" for="priority_id">
+            {{ Form::label('edit_priority_id', 'Priority', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-10">
-                TODO: This should be a drop down of Priorities
+                {{ Form::select('priority_id', $priorities, $ticket->priority_id) }}
             </div>
-            {{ ($errors->has('priority') ? $errors->first('priority') : '') }}
+            {{ ($errors->has('priority_id') ? $errors->first('priority_id') : '') }}
         </div>
 
         <div class="form-group {{ ($errors->has('owner')) ? 'has-error' : '' }}" for="owner">

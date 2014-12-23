@@ -22,12 +22,10 @@
                     {{ $ticket->description }}
                 </td>
                 <td>
-                    {{ $ticket->priority_id }}
-                    {{--TODO: Swap ID with Priority Value--}}
+                    {{ $ticket->priority->title }}
                 </td>
                 <td>
-                    {{ $ticket->owner_id }}
-                    {{--TODO: Swap ID with User Value--}}
+                    {{ $ticket->owner->username }}
                 </td>
             </tr>
         @endforeach

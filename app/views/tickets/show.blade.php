@@ -7,7 +7,7 @@
         <div class="col-md-8">
             <p><strong>Title</strong>: {{ $ticket->title }}</p>
             <p><strong>Description</strong>: {{ $ticket->description }}</p>
-            <p><strong>Priority</strong>: {{ $ticket->priority_id }}</p>
+            <p><strong>Priority</strong>: {{ $ticket->priority->title }}</p>
             <p><strong>Owner</strong>: {{ $ticket->owner->username }}</p>
 
         </div>
