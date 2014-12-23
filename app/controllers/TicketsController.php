@@ -118,7 +118,37 @@ class TicketsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = Input::all();
+
+		$rules = array(
+			'title' => 'required',
+			'description' => 'required',
+			'priority_id' => 'required',
+			'owner_id' => 'required'
+		);
+
+		$validator = Validator::make($input, $rules);
+
+		if ($validator->fails()) {
+
+			return Redirect::route('tickets.edit', $id)
+			               ->withErrors($validator)
+			               ->withInput($input);
+		} else {
+
+			$ticket = $this->ticket->find($id);
+			$ticket->title = $input['title'];
+			$ticket->description = $input['description'];
+			$ticket->priority_id = $input['priority_id'];
+			$ticket->owner_id = $input['owner_id'];
+
+			$ticket->save();
+
+			return Redirect::route('tickets.index')->with('flash', [
+				'class' => 'success',
+				'message' => 'Ticket Updated.'
+			]);
+		}
 	}
 
 	/**
@@ -130,7 +160,14 @@ class TicketsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		if ($this->ticket->destroy($id))
+		{
+			Session::flash('success', 'Ticket Deleted');
+		} else {
+			Session::flash('error', 'Unable to Delete Ticket');
+		}
+
+		return Redirect::action('TicketsController@index');
 	}
 
 }

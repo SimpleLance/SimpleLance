@@ -16,6 +16,19 @@
             <p><em>Last Updated: {{ $ticket->updated_at }}</em></p>
             <button class="btn btn-primary" onClick="location.href='{{ action('TicketsController@edit', array($ticket->id)) }}'">Edit Ticket</button>
         </div>
+        <div class="col-md-2">
+            {{ Form::open(array(
+                 'action' => array('TicketsController@destroy', $ticket->id),
+                 'method' => 'delete',
+                 'class' => $ticket->id . '-delete',
+                 'id' => $ticket->id . '-delete',
+                 'name' => $ticket->id . '-delete',
+                 'role' => ''
+                 )) }}
+
+            {{ Form::submit('Delete', ['class' => 'btn btn-danger', 'id' => 'delete-' . $ticket->id])}}
+            {{ Form::close() }}
+        </div>
     </div>
 @stop
 

@@ -34,12 +34,12 @@
             {{ ($errors->has('priority_id') ? $errors->first('priority_id') : '') }}
         </div>
 
-        <div class="form-group {{ ($errors->has('owner')) ? 'has-error' : '' }}" for="owner">
-            {{ Form::label('edit_owner', 'Owner', array('class' => 'col-sm-2 control-label')) }}
+        <div class="form-group {{ ($errors->has('owner_id')) ? 'has-error' : '' }}" for="owner_id">
+            {{ Form::label('edit_owner_id', 'Owner', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-10">
-                {{ Form::select('owner', $owners, $ticket->owner_id) }}
+                {{ Form::select('owner_id', $owners, $ticket->owner_id) }}
             </div>
-            {{ ($errors->has('owner') ? $errors->first('owner') : '') }}
+            {{ ($errors->has('owner_id') ? $errors->first('owner_id') : '') }}
         </div>
 
         <div class="form-group">
