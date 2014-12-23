@@ -63,7 +63,7 @@ class TicketsController extends \BaseController {
 				->withErrors($validator)
 				->withInput($input);
 		} else {
-			$ticket = $this->tocket->create($input);
+			$ticket = $this->ticket->create($input);
 
 			Redirect::route('tickets.index')->with('flash', [
 				'class' => 'success',
