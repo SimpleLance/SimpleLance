@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="well">
-        {{ Form::open(array('action' => 'Sentinel\UserController@store')) }}
+        {{ Form::open(array('action' => 'TicketsController@store')) }}
 
         <h4>Create New Support Ticket</h4>
 
