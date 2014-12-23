@@ -14,7 +14,7 @@
         <div class="col-md-4">
             <p><em>Ticket created: {{ $ticket->created_at }}</em></p>
             <p><em>Last Updated: {{ $ticket->updated_at }}</em></p>
-            <button class="btn btn-primary" onClick="location.href='{{ action('TicketsController@edit', array($ticket->id)) }}'">Edit Ticket</button>
+            <button id="edit-{{ $ticket->id }}" class="btn btn-primary" onClick="location.href='{{ action('TicketsController@edit', array($ticket->id)) }}'">Edit Ticket</button>
         </div>
         <div class="col-md-2">
             {{ Form::open(array(
