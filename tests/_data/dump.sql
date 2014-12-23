@@ -39,7 +39,7 @@ CREATE TABLE `groups` (
 
 LOCK TABLES `groups` WRITE;
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
-INSERT INTO `groups` VALUES (1,'Users','{\"users\":1}','2014-12-22 13:32:59','2014-12-22 13:32:59'),(2,'Admins','{\"admin\":1,\"users\":1}','2014-12-22 13:32:59','2014-12-22 13:32:59');
+INSERT INTO `groups` VALUES (1,'Users','{\"users\":1}','2014-12-23 02:58:46','2014-12-23 02:58:46'),(2,'Admins','{\"admin\":1,\"users\":1}','2014-12-23 02:58:46','2014-12-23 02:58:46');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,8 +62,34 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES ('2012_12_06_225921_migration_cartalyst_sentry_install_users',1),('2012_12_06_225929_migration_cartalyst_sentry_install_groups',1),('2012_12_06_225945_migration_cartalyst_sentry_install_users_groups_pivot',1),('2012_12_06_225988_migration_cartalyst_sentry_install_throttle',1),('2014_12_22_012146_create_projects_table',1),('2014_12_22_130417_create_tickets_table',1);
+INSERT INTO `migrations` VALUES ('2012_12_06_225921_migration_cartalyst_sentry_install_users',1),('2012_12_06_225929_migration_cartalyst_sentry_install_groups',1),('2012_12_06_225945_migration_cartalyst_sentry_install_users_groups_pivot',1),('2012_12_06_225988_migration_cartalyst_sentry_install_throttle',1),('2014_12_22_012146_create_projects_table',1),('2014_12_22_130417_create_tickets_table',1),('2014_12_23_020214_create_priorities_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `priorities`
+--
+
+DROP TABLE IF EXISTS `priorities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `priorities` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `priorities`
+--
+
+LOCK TABLES `priorities` WRITE;
+/*!40000 ALTER TABLE `priorities` DISABLE KEYS */;
+INSERT INTO `priorities` VALUES (1,'Low','2014-12-23 02:58:47','2014-12-23 02:58:47'),(2,'Medium','2014-12-23 02:58:47','2014-12-23 02:58:47'),(3,'High','2014-12-23 02:58:47','2014-12-23 02:58:47'),(4,'Urgent','2014-12-23 02:58:47','2014-12-23 02:58:47'),(5,'Critical','2014-12-23 02:58:47','2014-12-23 02:58:47');
+/*!40000 ALTER TABLE `priorities` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -91,7 +117,7 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES (1,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(2,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(3,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(4,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(5,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(6,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(7,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(8,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(9,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(10,'Sample Project','Test project',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59');
+INSERT INTO `projects` VALUES (1,'Sample Project','Test project',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(2,'Sample Project','Test project',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(3,'Sample Project','Test project',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(4,'Sample Project','Test project',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(5,'Sample Project','Test project',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(6,'Sample Project','Test project',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(7,'Sample Project','Test project',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(8,'Sample Project','Test project',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(9,'Sample Project','Test project',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(10,'Sample Project','Test project',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +177,7 @@ CREATE TABLE `tickets` (
 
 LOCK TABLES `tickets` WRITE;
 /*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
-INSERT INTO `tickets` VALUES (1,'Eos unde asperiores illum nam ipsum.','Aut ipsam aut unde amet aspernatur facere fugit.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(2,'Voluptatum porro nemo ullam praesentium autem commodi.','Magnam voluptates nam maiores repellendus ex in.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(3,'Et ipsam vero nisi.','Necessitatibus rerum reiciendis dolor ab eaque.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(4,'Similique dolor incidunt ad eaque.','Est quas ex cum possimus dicta eos ut.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(5,'Reiciendis aut dolore rem maxime quis.','Neque ex eos et dolorem quidem ut.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(6,'Ut aut quo libero suscipit a ipsa molestias.','Dolores omnis quidem error ut quos sed.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(7,'Quis ex vel modi dignissimos aperiam magni.','Necessitatibus consequuntur officia similique et adipisci provident illo.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(8,'Consequatur quis aut quam consequuntur debitis tempore.','Similique eos id rerum consequatur in possimus nam voluptatum.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(9,'Exercitationem facere occaecati natus a vel.','Libero vitae sapiente sit in aut.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(10,'Dolor neque et excepturi eos sit non.','Occaecati cupiditate quas culpa fugit laboriosam.',1,1,'2014-12-22 13:32:59','2014-12-22 13:32:59');
+INSERT INTO `tickets` VALUES (1,'Facere vero ut laboriosam.','Voluptatem maiores voluptatibus fugit blanditiis.',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(2,'Aut nulla ea autem.','Rerum qui sunt saepe aut.',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(3,'Asperiores culpa sequi quo.','Ullam dolores aperiam ex atque tempora sapiente cupiditate sunt.',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(4,'Iste qui id voluptatem.','Autem aut sunt ut ducimus optio vero.',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(5,'Dicta dignissimos non sapiente.','Placeat ipsam cum unde consequatur sed nisi nihil.',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(6,'Aperiam sed eaque voluptatem ut pariatur culpa sit.','Ab quidem rem voluptas odio culpa ipsam eligendi.',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(7,'Ipsum qui magni ad nobis et occaecati.','Vel aperiam ratione quis inventore totam non qui voluptatem.',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(8,'Corrupti et temporibus perferendis autem beatae aut et.','Ea et est ea fugit quibusdam.',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(9,'Et sed saepe ratione nesciunt aut.','In sapiente eum alias qui inventore accusantium.',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47'),(10,'Quis corrupti ad repellendus saepe esse nobis.','Alias est rerum omnis impedit.',1,1,'2014-12-23 02:58:47','2014-12-23 02:58:47');
 /*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,7 +218,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin@admin.com','admin','$2y$10$Gbg2lQGhu3BJUyf3AA6wDOSr5oDHnGuiE9i1RZZEKKFysBtc5FZhS',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2014-12-22 13:32:59','2014-12-22 13:32:59'),(2,'user@user.com','','$2y$10$gI26zRrgMazjvJOnfhPmQ.F3RRDEfVjaqVms08MOhcEpMmX9Heheq',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2014-12-22 13:32:59','2014-12-22 13:32:59');
+INSERT INTO `users` VALUES (1,'admin@admin.com','admin','$2y$10$PdtUHvH4wWd9uOXu7oalqeJ0ilLzptUxWQi2WV26LjlxHtSYaKxo2',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2014-12-23 02:58:46','2014-12-23 02:58:46'),(2,'user@user.com','','$2y$10$/czJ1P6qQXjJmkyHJC61LujLnnp/oluHXQknpp5cgjEP.f6ZkdZpK',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2014-12-23 02:58:46','2014-12-23 02:58:46');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,4 +255,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-22 13:33:21
+-- Dump completed on 2014-12-23  2:58:54
