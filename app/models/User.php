@@ -28,4 +28,22 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->hasMany('Project');
 	}
 
+	public function getOwners()
+	{
+		$allOwners = User::all();
+		$owners = [];
+
+		foreach ($allOwners as $thisOwner)
+		{
+			if (empty($thisOwner->username))
+			{
+				$thisOwner->username =  $thisOwner->email;
+			}
+
+			$owners[$thisOwner->id] = $thisOwner->username;
+		}
+
+		return $owners;
+	}
+
 }

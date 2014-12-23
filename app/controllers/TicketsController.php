@@ -32,8 +32,10 @@ class TicketsController extends \BaseController {
 	 */
 	public function create()
 	{
+		$owners = $this->user->getOwners();
 
-		return View::make('tickets.create');
+		return View::make('tickets.create')
+			->with('owners', $owners);
 	}
 
 	/**
@@ -44,7 +46,30 @@ class TicketsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+
+		$rules = array(
+			'title' => 'required',
+			'description' => 'required',
+			'priority_id' => 'integer|required',
+			'owner_id' => 'integer|required'
+		);
+
+		$validator = Validator::make($input, $rules);
+
+		if ($validator->fails()) {
+
+			return Redirect::route('tickets.create')
+				->withErrors($validator)
+				->withInput($input);
+		} else {
+			$ticket = $this->tocket->create($input);
+
+			Redirect::route('tickets.index')->with('flash', [
+				'class' => 'success',
+				'message' => 'Ticket Created.'
+			]);
+		}
 	}
 
 	/**
@@ -72,18 +97,7 @@ class TicketsController extends \BaseController {
 	public function edit($id)
 	{
 		$thisTicket = $this->ticket->find($id);
-		$allOwners = $this->user->all();
-		$owners = [];
-
-		foreach ($allOwners as $thisOwner)
-		{
-			if (empty($thisOwner->username))
-			{
-				$thisOwner->username =  $thisOwner->email;
-			}
-
-			$owners[$thisOwner->id] = $thisOwner->username;
-		}
+		$owners = $this->user->getOwners();
 
 		return View::make('tickets.edit')
 			->with('ticket', $thisTicket)
