@@ -12,4 +12,9 @@ class Ticket extends \Eloquent {
 
 		return $this->belongsTo('User');
 	}
+
+	public function priority() {
+
+		return $this->belongsTo('Priority');
+	}
 }
