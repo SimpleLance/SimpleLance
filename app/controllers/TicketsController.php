@@ -4,10 +4,11 @@ class TicketsController extends \BaseController {
 
 	protected $ticket;
 
-	public function __construct(Ticket $ticket, User $user)
+	public function __construct(Ticket $ticket, User $user, Priority $priority)
 	{
 		$this->ticket = $ticket;
 		$this->user = $user;
+		$this->priority = $priority;
 	}
 
 	/**
@@ -18,7 +19,7 @@ class TicketsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$tickets = $this->ticket->all();
+		$tickets = $this->ticket->with('owner')->with('priority')->get();
 
 		return View::make('tickets.index')
 		           ->with('tickets', $tickets);
@@ -33,9 +34,11 @@ class TicketsController extends \BaseController {
 	public function create()
 	{
 		$owners = $this->user->getOwners();
+		$priorities = $this->priority->getPriorities();
 
 		return View::make('tickets.create')
-			->with('owners', $owners);
+			->with('owners', $owners)
+			->with('priorities', $priorities);
 	}
 
 	/**
@@ -51,8 +54,8 @@ class TicketsController extends \BaseController {
 		$rules = array(
 			'title' => 'required',
 			'description' => 'required',
-			'priority_id' => 'integer|required',
-			'owner_id' => 'integer|required'
+			'priority_id' => 'required',
+			'owner_id' => 'required'
 		);
 
 		$validator = Validator::make($input, $rules);
@@ -65,7 +68,7 @@ class TicketsController extends \BaseController {
 		} else {
 			$ticket = $this->ticket->create($input);
 
-			Redirect::route('tickets.index')->with('flash', [
+			return Redirect::route('tickets.index')->with('flash', [
 				'class' => 'success',
 				'message' => 'Ticket Created.'
 			]);
@@ -81,7 +84,7 @@ class TicketsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$thisTicket = $this->ticket->with('owner')->find($id);
+		$thisTicket = $this->ticket->with('owner')->with('priority')->find($id);
 
 		return View::make('tickets.show')
 		           ->with('ticket', $thisTicket);
@@ -98,10 +101,12 @@ class TicketsController extends \BaseController {
 	{
 		$thisTicket = $this->ticket->find($id);
 		$owners = $this->user->getOwners();
+		$priorities = $this->priority->getPriorities();
 
 		return View::make('tickets.edit')
 			->with('ticket', $thisTicket)
-			->with('owners', $owners);
+			->with('owners', $owners)
+			->with('priorities', $priorities);
 	}
 
 	/**
