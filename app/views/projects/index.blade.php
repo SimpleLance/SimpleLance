@@ -23,7 +23,7 @@
                             <td>{{ $project->title }}</td>
                             <td>{{ $project->description }}</td>
                             <td>{{ $project->owner->username }}</td>
-                            <td>{{ $project->status_id }}</td>
+                            <td>{{ $project->status->title }}</td>
                             <td>{{ date('jS F Y', strtotime($project->updated_at)) }}</td>
                             <td><a href="/projects/{{ $project->id }}" class="btn btn-primary btn-small"> View Project</a></td>
                         </tr>
