@@ -12,4 +12,9 @@ class Project extends \Eloquent {
 
 		return $this->belongsTo('User');
 	}
+
+	public function status() {
+
+		return $this->belongsTo('Status');
+	}
 }
