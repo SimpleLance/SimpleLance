@@ -34,10 +34,10 @@
     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Support Tickets<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
         <li>
-            <a href="/support">View Tickets</a>
+            <a href="/tickets">View Tickets</a>
         </li>
         <li>
-            <a href="/support/create">Add Ticket</a>
+            <a href="/tickets/create">Add Ticket</a>
         </li>
     </ul>
 </li>
