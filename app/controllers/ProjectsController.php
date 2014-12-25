@@ -4,9 +4,11 @@ class ProjectsController extends \BaseController {
 
 	protected $project;
 
-	public function __construct(Project $project)
+	public function __construct(Project $project, User $user, Status $status)
 	{
 		$this->project = $project;
+		$this->user = $user;
+		$this->status = $status;
 	}
 
 	/**
@@ -31,19 +33,45 @@ class ProjectsController extends \BaseController {
 	 */
 	public function create()
 	{
+		$owners = $this->user->getOwners();
+		$statuses = $this->status->getStatuses();
 
-		return View::make('projects.create');
+		return View::make('projects.create')
+			->with('owners', $owners)
+			->with('statuses', $statuses);
 	}
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /projects
+	 * POST /projects/create
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+
+		$rules = array(
+			'title' => 'required',
+			'description' => 'required',
+			'status_id' => 'required',
+			'owner_id' => 'required'
+		);
+
+		$validator = Validator::make($input, $rules);
+
+		if ($validator->fails()) {
+
+			return Redirect::route('projects.create')
+				->withErrors($validator)
+				->withInput($input);
+		} else {
+			$project = $this->project->create($input);
+
+			Session::flash('success', 'Project Created');
+
+			return Redirect::route('projects.index');
+		}
 	}
 
 	/**

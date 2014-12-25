@@ -9,13 +9,23 @@ class TicketsTableSeeder extends Seeder {
 	{
 		$faker = Faker::create();
 
-		foreach(range(1, 10) as $index)
+		foreach(range(1, 5) as $index)
 		{
 			Ticket::create([
 				'title' => $faker->sentence(),
 				'description' => $faker->sentence(),
 				'priority_id' => '1',
 				'owner_id' => '1'
+			]);
+		}
+
+		foreach(range(1, 5) as $index)
+		{
+			Ticket::create([
+				'title' => $faker->sentence(),
+				'description' => $faker->sentence(),
+				'priority_id' => '1',
+				'owner_id' => '2'
 			]);
 		}
 	}
