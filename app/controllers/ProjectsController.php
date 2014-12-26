@@ -158,7 +158,14 @@ class ProjectsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		if ($this->project->destroy($id))
+		{
+			Session::flash('success', 'Project Deleted');
+		} else {
+			Session::flash('error', 'Unable to Delete Project');
+		}
+
+		return Redirect::action('ProjectsController@index');
 	}
 
 }
