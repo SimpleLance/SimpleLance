@@ -83,10 +83,10 @@ class ProjectsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$thisProject = $this->project->find($id);
+		$project = $this->project->find($id);
 
 		return View::make('projects.show')
-			->with('project', $thisProject);
+			->with('project', $project);
 	}
 
 	/**
@@ -98,10 +98,14 @@ class ProjectsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$thisProject = $this->project->find($id);
+		$project = $this->project->find($id);
+		$owners = $this->user->getOwners();
+		$statuses = $this->status->getStatuses();
 
 		return View::make('projects.edit')
-		           ->with('project', $thisProject);
+			->with('project', $project)
+			->with('owners', $owners)
+			->with('statuses', $statuses);
 	}
 
 	/**
@@ -113,7 +117,36 @@ class ProjectsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = Input::all();
+
+		$rules = array(
+			'title' => 'required',
+			'description' => 'required',
+			'status_id' => 'required',
+			'owner_id' => 'required'
+		);
+
+		$validator = Validator::make($input, $rules);
+
+		if ($validator->fails()) {
+
+			return Redirect::route('projects.edit', $id)
+				->withErrors($validator)
+				->withInput($input);
+		} else {
+
+			$project = $this->project->find($id);
+			$project->title = $input['title'];
+			$project->description = $input['description'];
+			$project->status_id = $input['status_id'];
+			$project->owner_id = $input['owner_id'];
+
+			$project->save();
+
+			Session::flash('success', 'Project Updated');
+
+			return Redirect::route('projects.index');
+		}
 	}
 
 	/**
@@ -125,7 +158,14 @@ class ProjectsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		if ($this->project->destroy($id))
+		{
+			Session::flash('success', 'Project Deleted');
+		} else {
+			Session::flash('error', 'Unable to Delete Project');
+		}
+
+		return Redirect::action('ProjectsController@index');
 	}
 
 }
