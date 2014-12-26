@@ -1,6 +1,7 @@
 <?php
 $I = new AcceptanceTester($scenario);
 $I->wantTo('ensure that the statuses create works');
+TestCommonAdmin::logMeIn($I);
 $I->amOnPage('/statuses');
 $I->click('#new');
 $I->amOnPage('/statuses/create');
