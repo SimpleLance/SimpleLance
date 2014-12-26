@@ -12,7 +12,7 @@
 
         </div>
         <div class="col-md-4">
-            <p><em>Ticket created: {{ $project->created_at }}</em></p>
+            <p><em>Project created: {{ $project->created_at }}</em></p>
             <p><em>Last Updated: {{ $project->updated_at }}</em></p>
             <button id="edit-{{ $project->id }}" class="btn btn-primary" onClick="location.href='{{ action('ProjectsController@edit', array($project->id)) }}'">Edit Project</button>
         </div>
