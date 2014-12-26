@@ -13,8 +13,10 @@
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
-
-Route::resource('projects', 'ProjectsController');
-Route::resource('tickets', 'TicketsController');
-Route::resource('priorities', 'PrioritiesController', ['except' => ['show']]);
-Route::resource('statuses', 'StatusesController');
+Route::group(['before' => 'auth'], function()
+{
+	Route::resource('projects', 'ProjectsController');
+	Route::resource('tickets', 'TicketsController');
+	Route::resource('priorities', 'PrioritiesController', ['except' => ['show']]);
+	Route::resource('statuses', 'StatusesController');
+});
