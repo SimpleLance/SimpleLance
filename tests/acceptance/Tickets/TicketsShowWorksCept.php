@@ -1,6 +1,7 @@
 <?php
 $I = new AcceptanceTester($scenario);
 $I->wantTo('ensure that the tickets show works');
+TestCommonAdmin::logMeIn($I);
 $I->amOnPage('/tickets/1');
 $I->see('Support Ticket', 'h4');
 $I->see('Title', 'strong');
