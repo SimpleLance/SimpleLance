@@ -1,6 +1,7 @@
 <?php
 $I = new AcceptanceTester($scenario);
 $I->wantTo('ensure that the priorities edit works');
+TestCommonAdmin::logMeIn($I);
 $I->amOnPage('/priorities');
 $I->click('#edit-1');
 $I->amOnPage('/priorities/1/edit');

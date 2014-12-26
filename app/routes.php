@@ -13,7 +13,7 @@
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
-Route::group(['before' => 'auth'], function()
+Route::group(['before' => 'Sentinel\auth'], function()
 {
 	Route::resource('projects', 'ProjectsController');
 	Route::resource('tickets', 'TicketsController');

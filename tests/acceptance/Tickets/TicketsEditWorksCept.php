@@ -1,6 +1,7 @@
 <?php
 $I = new AcceptanceTester($scenario);
 $I->wantTo('ensure that the ticket edit works');
+TestCommonAdmin::logMeIn($I);
 $I->amOnPage('/tickets/1');
 $I->click('#edit-1');
 $I->amOnPage('/tickets/1/edit');
