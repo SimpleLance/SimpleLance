@@ -13,19 +13,19 @@
                     <th>Owner</th>
                     <th>Status</th>
                     <th>Last Updated</th>
-                    <th>View</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($projects as $project)
                     @if (Sentry::inGroup(Sentry::findGroupByName('Admins')) || $project->owner_id == Sentry::getUser()->id)
                         <tr>
-                            <td>{{ $project->title }}</td>
+                            <td><a href="{{ action('ProjectsController@show', array($project->id)) }}">
+                                    {{ $project->title }}
+                                </a></td>
                             <td>{{ $project->description }}</td>
                             <td>{{ $project->owner->username }}</td>
                             <td>{{ $project->status->title }}</td>
                             <td>{{ date('jS F Y', strtotime($project->updated_at)) }}</td>
-                            <td><a href="/projects/{{ $project->id }}" class="btn btn-primary btn-small"> View Project</a></td>
                         </tr>
                     @endif
                 @endforeach
