@@ -83,10 +83,10 @@ class ProjectsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$thisProject = $this->project->find($id);
+		$project = $this->project->find($id);
 
 		return View::make('projects.show')
-			->with('project', $thisProject);
+			->with('project', $project);
 	}
 
 	/**
