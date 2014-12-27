@@ -11,12 +11,11 @@
 |
 */
 
-Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
-
 Route::group(['before' => 'Sentinel\auth'], function()
 {
 	Route::resource('projects', 'ProjectsController');
 	Route::resource('tickets', 'TicketsController');
+	Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 });
 
 Route::group(['before' => 'Sentinel\inGroup:Admins'], function()
