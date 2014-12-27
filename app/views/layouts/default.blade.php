@@ -58,7 +58,7 @@
                             @include('layouts.menus.admin')
                             <!-- /admin menu -->
                         @endif
-                        @if (Sentry::inGroup(Sentry::findGroupByName('Users')))
+                        @if (Sentry::inGroup(Sentry::findGroupByName('Users')) && !Sentry::inGroup(Sentry::findGroupByName('Admins')))
                             <!-- customer menu -->
                             @include('layouts.menus.user')
                             <!-- /customer menu -->
