@@ -1,5 +1,7 @@
 <?php
 
+use Sentinel;
+
 class ProjectsController extends \BaseController {
 
 	protected $project;
@@ -9,6 +11,17 @@ class ProjectsController extends \BaseController {
 		$this->project = $project;
 		$this->user = $user;
 		$this->status = $status;
+
+		$this->beforeFilter('Sentinel\inGroup:Admins',
+			[
+				'only' => [
+					'create',
+					'destroy',
+					'update',
+					'edit'
+				]
+			]
+		);
 	}
 
 	/**

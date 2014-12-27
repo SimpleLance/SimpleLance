@@ -17,6 +17,10 @@ Route::group(['before' => 'Sentinel\auth'], function()
 {
 	Route::resource('projects', 'ProjectsController');
 	Route::resource('tickets', 'TicketsController');
+});
+
+Route::group(['before' => 'Sentinel\inGroup:Admins'], function()
+{
 	Route::resource('priorities', 'PrioritiesController', ['except' => ['show']]);
 	Route::resource('statuses', 'StatusesController', ['except' => ['show']]);
 });
