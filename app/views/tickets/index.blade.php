@@ -12,24 +12,25 @@
         </thead>
         <tbody>
         @foreach ($tickets as $ticket)
-            <tr>
-                <td>
-                    <a href="{{ action('TicketsController@show', array($ticket->id)) }}">
-                        {{ $ticket->title }}
-                    </a>
-                </td>
-                <td>
-                    {{ $ticket->description }}
-                </td>
-                <td>
-                    {{ $ticket->priority->title }}
-                </td>
-                <td>
-                    {{ $ticket->owner->username }}
-                </td>
-            </tr>
+            @if (Sentry::inGroup(Sentry::findGroupByName('Admins')) || $ticket->owner_id == Sentry::getUser()->id)
+                <tr>
+                    <td>
+                        <a href="{{ action('TicketsController@show', array($ticket->id)) }}">
+                            {{ $ticket->title }}
+                        </a>
+                    </td>
+                    <td>
+                        {{ $ticket->description }}
+                    </td>
+                    <td>
+                        {{ $ticket->priority->title }}
+                    </td>
+                    <td>
+                        {{ $ticket->owner->username }}
+                    </td>
+                </tr>
+            @endif
         @endforeach
         </tbody>
     </table>
 @stop
-
