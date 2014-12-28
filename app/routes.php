@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| Application Routers
 |--------------------------------------------------------------------------
 |
 | Here is where you can register all of the routes for an application.
@@ -16,6 +16,9 @@ Route::group(['before' => 'Sentinel\auth'], function()
 	Route::resource('projects', 'ProjectsController');
 	Route::resource('tickets', 'TicketsController');
 	Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+	# Override Sentinel's Default user routes with our own filter requirement
+	Route::get('/users/{id}', ['as' => 'sl_user.show', 'uses' => 'SimpleLance\UserController@show'])->where('id', '[0-9]+');
+
 });
 
 Route::group(['before' => 'Sentinel\inGroup:Admins'], function()
