@@ -1,7 +1,5 @@
 <?php
 
-use Sentinel;
-
 class ProjectsController extends \BaseController {
 
 	protected $project;
