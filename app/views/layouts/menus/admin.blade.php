@@ -45,10 +45,10 @@
     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Invoices<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
         <li>
-            <a href="/billing">View Invoices</a>
+            <a href="/invoices">View Invoices</a>
         </li>
         <li>
-            <a href="/billing/create">Create Invoice</a>
+            <a href="/invoices/create">Create Invoice</a>
         </li>
     </ul>
 </li>
