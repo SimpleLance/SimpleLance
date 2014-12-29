@@ -12,11 +12,13 @@ class InvoicesTableSeeder extends Seeder {
 		foreach(range(1, 10) as $index)
 		{
 			$status = Status::orderByRaw("RAND()")->first();
+			$user = User::orderByRaw("RAND()")->first();
 			Invoice::create([
 				'title' => $faker->word(),
 				'due' => $faker->date(),
 				'status_id' => $status->id,
-				'amount' => $faker->randomFloat($nbMaxDecimals = 2)
+				'amount' => $faker->randomFloat($nbMaxDecimals = 2),
+				'owner_id' => $user->id
 			]);
 		}
 	}
