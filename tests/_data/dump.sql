@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.19-0ubuntu0.14.04.1)
 # Database: homestead
-# Generation Time: 2014-12-30 14:22:39 +0000
+# Generation Time: 2014-12-30 14:56:48 +0000
 # ************************************************************
 
 
@@ -40,8 +40,8 @@ LOCK TABLES `groups` WRITE;
 
 INSERT INTO `groups` (`id`, `name`, `permissions`, `created_at`, `updated_at`)
 VALUES
-	(1,'Users','{\"users\":1}','2014-12-30 14:21:50','2014-12-30 14:21:50'),
-	(2,'Admins','{\"admin\":1,\"users\":1}','2014-12-30 14:21:50','2014-12-30 14:21:50');
+	(1,'Users','{\"users\":1}','2014-12-30 14:52:23','2014-12-30 14:52:23'),
+	(2,'Admins','{\"admin\":1,\"users\":1}','2014-12-30 14:52:23','2014-12-30 14:52:23');
 
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -69,16 +69,16 @@ LOCK TABLES `invoices` WRITE;
 
 INSERT INTO `invoices` (`id`, `title`, `due`, `status_id`, `amount`, `owner_id`, `created_at`, `updated_at`)
 VALUES
-	(1,'aut','1986-02-19',1,'1.42',1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(2,'voluptates','1984-07-30',1,'4.98',1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(3,'cupiditate','1994-01-17',4,'23308.95',1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(4,'qui','1999-02-22',4,'1331548',1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(5,'consequatur','1982-04-04',2,'60359704.81',2,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(6,'dolor','2003-02-02',1,'9.16',2,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(7,'molestias','2010-11-16',2,'29095556.46',2,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(8,'quis','1989-11-27',1,'14797.41',2,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(9,'totam','1994-02-28',2,'574.87',1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(10,'officiis','1991-04-27',3,'685292.45',1,'2014-12-30 14:21:51','2014-12-30 14:21:51');
+	(1,'quod','1970-12-05',3,'4690.16',2,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(2,'molestias','2008-06-20',4,'1.76',2,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(3,'dolorem','1976-07-12',1,'4.15',2,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(4,'dolorem','1998-11-30',2,'87044292.94',1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(5,'sunt','1979-08-14',1,'30.31',2,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(6,'nam','1989-09-01',2,'379090810.73',1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(7,'impedit','2013-11-10',2,'64207.53',1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(8,'non','2014-09-17',4,'4.76',1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(9,'reprehenderit','1995-08-21',4,'1.86',1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(10,'adipisci','1999-08-21',1,'24879.95',1,'2014-12-30 14:52:24','2014-12-30 14:52:24');
 
 /*!40000 ALTER TABLE `invoices` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -131,11 +131,11 @@ LOCK TABLES `priorities` WRITE;
 
 INSERT INTO `priorities` (`id`, `title`, `created_at`, `updated_at`)
 VALUES
-	(1,'Low','2014-12-30 14:21:50','2014-12-30 14:21:50'),
-	(2,'Medium','2014-12-30 14:21:50','2014-12-30 14:21:50'),
-	(3,'High','2014-12-30 14:21:50','2014-12-30 14:21:50'),
-	(4,'Urgent','2014-12-30 14:21:50','2014-12-30 14:21:50'),
-	(5,'Critical','2014-12-30 14:21:50','2014-12-30 14:21:50');
+	(1,'Low','2014-12-30 14:52:23','2014-12-30 14:52:23'),
+	(2,'Medium','2014-12-30 14:52:23','2014-12-30 14:52:23'),
+	(3,'High','2014-12-30 14:52:23','2014-12-30 14:52:23'),
+	(4,'Urgent','2014-12-30 14:52:23','2014-12-30 14:52:23'),
+	(5,'Critical','2014-12-30 14:52:23','2014-12-30 14:52:23');
 
 /*!40000 ALTER TABLE `priorities` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -163,16 +163,16 @@ LOCK TABLES `projects` WRITE;
 
 INSERT INTO `projects` (`id`, `title`, `description`, `owner_id`, `status_id`, `priority_id`, `created_at`, `updated_at`)
 VALUES
-	(1,'Sample Project','Test project',1,1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(2,'Sample Project','Test project',1,1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(3,'Sample Project','Test project',1,1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(4,'Sample Project','Test project',1,1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(5,'Sample Project','Test project',1,1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(6,'Sample Project','Test project',2,1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(7,'Sample Project','Test project',2,1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(8,'Sample Project','Test project',2,1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(9,'Sample Project','Test project',2,1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(10,'Sample Project','Test project',2,1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51');
+	(1,'Sample Project','Test project',1,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(2,'Sample Project','Test project',1,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(3,'Sample Project','Test project',1,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(4,'Sample Project','Test project',1,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(5,'Sample Project','Test project',1,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(6,'Sample Project','Test project',2,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(7,'Sample Project','Test project',2,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(8,'Sample Project','Test project',2,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(9,'Sample Project','Test project',2,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(10,'Sample Project','Test project',2,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24');
 
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -196,10 +196,10 @@ LOCK TABLES `statuses` WRITE;
 
 INSERT INTO `statuses` (`id`, `title`, `created_at`, `updated_at`)
 VALUES
-	(1,'Open','2014-12-30 14:21:50','2014-12-30 14:21:50'),
-	(2,'In Progress','2014-12-30 14:21:50','2014-12-30 14:21:50'),
-	(3,'On Hold','2014-12-30 14:21:50','2014-12-30 14:21:50'),
-	(4,'Closed','2014-12-30 14:21:50','2014-12-30 14:21:50');
+	(1,'Open','2014-12-30 14:52:23','2014-12-30 14:52:23'),
+	(2,'In Progress','2014-12-30 14:52:23','2014-12-30 14:52:23'),
+	(3,'On Hold','2014-12-30 14:52:23','2014-12-30 14:52:23'),
+	(4,'Closed','2014-12-30 14:52:23','2014-12-30 14:52:23');
 
 /*!40000 ALTER TABLE `statuses` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -224,6 +224,15 @@ CREATE TABLE `throttle` (
   KEY `throttle_user_id_index` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+LOCK TABLES `throttle` WRITE;
+/*!40000 ALTER TABLE `throttle` DISABLE KEYS */;
+
+INSERT INTO `throttle` (`id`, `user_id`, `ip_address`, `attempts`, `suspended`, `banned`, `last_attempt_at`, `suspended_at`, `banned_at`)
+VALUES
+	(1,1,NULL,0,0,0,NULL,NULL,NULL);
+
+/*!40000 ALTER TABLE `throttle` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table tickets
@@ -236,6 +245,7 @@ CREATE TABLE `tickets` (
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `priority_id` int(11) NOT NULL,
+  `status_id` int(11) NOT NULL,
   `owner_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -245,18 +255,18 @@ CREATE TABLE `tickets` (
 LOCK TABLES `tickets` WRITE;
 /*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
 
-INSERT INTO `tickets` (`id`, `title`, `description`, `priority_id`, `owner_id`, `created_at`, `updated_at`)
+INSERT INTO `tickets` (`id`, `title`, `description`, `priority_id`, `status_id`, `owner_id`, `created_at`, `updated_at`)
 VALUES
-	(1,'Voluptate esse architecto ut voluptas sapiente inventore.','Eos at est ut deleniti est quia.',1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(2,'Ipsa consectetur delectus ut excepturi.','Qui sunt eaque et culpa numquam ut vel.',1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(3,'Cupiditate temporibus facilis sint.','Et aut explicabo maiores rerum.',1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(4,'Aut enim necessitatibus reprehenderit ab dignissimos.','Ut iusto aliquid quia temporibus rem quae.',1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(5,'Qui et mollitia recusandae id molestias labore.','Vero praesentium aut fugit et dolorem.',1,1,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(6,'Sequi pariatur dicta dolorem et sit.','Nobis et temporibus et vitae et illo maiores.',1,2,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(7,'Eos distinctio ducimus nam voluptas aspernatur repudiandae.','Exercitationem officia laboriosam accusamus ut similique deleniti.',1,2,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(8,'Quisquam iure repellendus aut vitae.','Id reiciendis mollitia voluptatem voluptatum sed qui.',1,2,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(9,'Voluptatem ut in ducimus sit sit et.','Minima alias labore unde qui eveniet.',1,2,'2014-12-30 14:21:51','2014-12-30 14:21:51'),
-	(10,'Quisquam aut in labore vel et repellendus.','Velit qui laborum architecto consequatur sed reprehenderit voluptatem.',1,2,'2014-12-30 14:21:51','2014-12-30 14:21:51');
+	(1,'Et aut voluptatem nulla quod eius suscipit.','Ratione velit eum illum nihil.',1,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(2,'Eligendi rerum nihil adipisci.','Enim optio eligendi perspiciatis et porro nam.',1,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(3,'Vel odio sint beatae a dolore dolorem.','Est sit quas hic.',1,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(4,'Voluptatem praesentium in et dolorem eveniet est voluptas.','Nulla ex iste quibusdam est consequatur mollitia.',1,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(5,'Facere eveniet molestiae numquam earum quis.','Labore rerum dolorem dicta et amet.',1,1,1,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(6,'Ut fugit non dolore expedita ut harum amet.','Molestiae officia aut ab blanditiis ex nobis quam.',1,1,2,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(7,'Soluta aliquam sit nobis itaque.','Atque asperiores quae et reiciendis sed doloribus debitis.',1,1,2,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(8,'Id sunt temporibus amet aliquam.','Quibusdam ut hic nemo sed voluptatum enim.',1,1,2,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(9,'Quos earum rerum repellat autem reiciendis.','Id vero eos et corporis consectetur quae et.',1,1,2,'2014-12-30 14:52:24','2014-12-30 14:52:24'),
+	(10,'Eveniet cupiditate nisi reiciendis velit vitae.','Nulla accusantium ex maiores amet excepturi iste non.',1,1,2,'2014-12-30 14:52:24','2014-12-30 14:52:24');
 
 /*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -295,8 +305,8 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `permissions`, `activated`, `activation_code`, `activated_at`, `last_login`, `persist_code`, `reset_password_code`, `first_name`, `last_name`, `created_at`, `updated_at`)
 VALUES
-	(1,'admin@admin.com','admin','$2y$10$5iynUaJzrKHNMGCgqrdVceKmTmfutngEzeUP8vw7l0BGYJbbwnpFG',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2014-12-30 14:21:50','2014-12-30 14:21:50'),
-	(2,'user@user.com','user','$2y$10$061Ecy87b16RKfsqN0jLkuVrFF2xpKPZL1dMNlZNygWF9wTHydpDG',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2014-12-30 14:21:50','2014-12-30 14:21:50');
+	(1,'admin@admin.com','admin','$2y$10$RQO40TB9OKtcWBFU8yinuelD9jN/TZfH3zhHSPDQjk37OJevO5eG6',NULL,1,NULL,NULL,'2014-12-30 14:52:49','$2y$10$/8QKHhSG.KAtf15xirX4Gep2dX9byy/7RnhmKv24wwby33azwvl8W',NULL,NULL,NULL,'2014-12-30 14:52:23','2014-12-30 14:52:49'),
+	(2,'user@user.com','user','$2y$10$e5hTEFfAewuZo3RNkeZFe.A9HC5Rjj17tLOhLmIsNs9sPtqDPsnSy',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2014-12-30 14:52:23','2014-12-30 14:52:23');
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

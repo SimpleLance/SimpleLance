@@ -22,6 +22,12 @@
             {{ ($errors->has('priority_id') ? $errors->first('priority_id') : '') }}
         </div>
 
+        <div class="form-group {{ ($errors->has('status_id')) ? 'has-error' : '' }}" for="status_id">
+            {{ Form::label('edit_status_id', 'Status', array('class' => '')) }}
+            {{ Form::select('status_id', $statuses, null) }}
+            {{ ($errors->has('status_id') ? $errors->first('status_id') : '') }}
+        </div>
+
         <div class="form-group {{ ($errors->has('owner_id')) ? 'has-error' : '' }}" for="owner_id">
             {{ Form::label('edit_owner_id', 'Owner', array('class' => '')) }}
             {{ Form::select('owner_id', $owners, null) }}
