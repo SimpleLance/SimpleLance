@@ -5,7 +5,8 @@ class Project extends \Eloquent {
 		'title',
 		'description',
 		'owner_id',
-		'status_id'
+		'status_id',
+		'priority_id'
 	];
 
 	public function owner() {
@@ -16,5 +17,9 @@ class Project extends \Eloquent {
 	public function status() {
 
 		return $this->belongsTo('Status');
+	}
+
+	public function priority() {
+		return $this->belongsTo('Priority');
 	}
 }
