@@ -8,6 +8,7 @@
         <th>Title</th>
         <th>Description</th>
         <th>Status</th>
+        <th>Priority</th>
         <th>Owner</th>
         </thead>
         <tbody>
@@ -24,6 +25,9 @@
                     </td>
                     <td>
                         {{ $project->status->title }}
+                    </td>
+                    <td>
+                        {{ $project->priority->title }}
                     </td>
                     <td>
                         {{ $project->owner->username }}

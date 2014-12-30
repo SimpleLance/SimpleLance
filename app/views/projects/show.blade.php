@@ -8,6 +8,7 @@
             <p><strong>Title</strong>: {{ $project->title }}</p>
             <p><strong>Description</strong>: {{ $project->description }}</p>
             <p><strong>Status</strong>: {{ $project->status->title }}</p>
+            <p><strong>Priority</strong>: {{ $project->priority->title }}</p>
             <p><strong>Owner</strong>: {{ $project->owner->username }}</p>
 
         </div>

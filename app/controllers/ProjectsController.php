@@ -4,11 +4,12 @@ class ProjectsController extends \BaseController {
 
 	protected $project;
 
-	public function __construct(Project $project, User $user, Status $status)
+	public function __construct(Project $project, User $user, Status $status, Priority $priority)
 	{
 		$this->project = $project;
 		$this->user = $user;
 		$this->status = $status;
+		$this->priority = $priority;
 
 		$this->beforeFilter('Sentinel\inGroup:Admins',
 			[
@@ -46,10 +47,12 @@ class ProjectsController extends \BaseController {
 	{
 		$owners = $this->user->getOwners();
 		$statuses = $this->status->getStatuses();
+		$priorities = $this->priority->getPriorities();
 
 		return View::make('projects.create')
 			->with('owners', $owners)
-			->with('statuses', $statuses);
+			->with('statuses', $statuses)
+			->with('priorities', $priorities);
 	}
 
 	/**
@@ -66,6 +69,7 @@ class ProjectsController extends \BaseController {
 			'title' => 'required',
 			'description' => 'required',
 			'status_id' => 'required',
+			'priority_id' => 'required',
 			'owner_id' => 'required'
 		);
 
@@ -112,11 +116,13 @@ class ProjectsController extends \BaseController {
 		$project = $this->project->find($id);
 		$owners = $this->user->getOwners();
 		$statuses = $this->status->getStatuses();
+		$priorities = $this->priority->getPriorities();
 
 		return View::make('projects.edit')
 			->with('project', $project)
 			->with('owners', $owners)
-			->with('statuses', $statuses);
+			->with('statuses', $statuses)
+			->with('priorities', $priorities);
 	}
 
 	/**
@@ -134,6 +140,7 @@ class ProjectsController extends \BaseController {
 			'title' => 'required',
 			'description' => 'required',
 			'status_id' => 'required',
+			'priority_id' => 'required',
 			'owner_id' => 'required'
 		);
 
@@ -150,6 +157,7 @@ class ProjectsController extends \BaseController {
 			$project->title = $input['title'];
 			$project->description = $input['description'];
 			$project->status_id = $input['status_id'];
+			$project->priority_id = $input['priority_id'];
 			$project->owner_id = $input['owner_id'];
 
 			$project->save();

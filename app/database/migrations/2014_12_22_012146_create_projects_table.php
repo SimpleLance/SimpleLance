@@ -19,6 +19,7 @@ class CreateProjectsTable extends Migration {
 			$table->text('description');
 			$table->integer('owner_id');
 			$table->integer('status_id');
+			$table->integer('priority_id');
 			$table->timestamps();
 		});
 	}

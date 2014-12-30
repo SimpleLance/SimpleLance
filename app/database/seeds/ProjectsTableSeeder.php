@@ -15,7 +15,8 @@ class ProjectsTableSeeder extends Seeder {
 				'title' => 'Sample Project',
 				'description' => 'Test project',
 				'owner_id' => '1',
-				'status_id' => '1'
+				'status_id' => '1',
+				'priority_id' => '1'
 			]);
 		}
 
@@ -25,7 +26,8 @@ class ProjectsTableSeeder extends Seeder {
 				'title' => 'Sample Project',
 				'description' => 'Test project',
 				'owner_id' => '2',
-				'status_id' => '1'
+				'status_id' => '1',
+				'priority_id' => '1'
 			]);
 		}
 	}
