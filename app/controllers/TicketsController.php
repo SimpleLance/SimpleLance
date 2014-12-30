@@ -4,11 +4,12 @@ class TicketsController extends \BaseController {
 
 	protected $ticket;
 
-	public function __construct(Ticket $ticket, User $user, Priority $priority)
+	public function __construct(Ticket $ticket, User $user, Priority $priority, Status $status)
 	{
 		$this->ticket = $ticket;
 		$this->user = $user;
 		$this->priority = $priority;
+		$this->status = $status;
 	}
 
 	/**
@@ -19,7 +20,7 @@ class TicketsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$tickets = $this->ticket->with('owner')->with('priority')->get();
+		$tickets = $this->ticket->with('owner')->get();
 
 		return View::make('tickets.index')
 		           ->with('tickets', $tickets);
@@ -35,10 +36,12 @@ class TicketsController extends \BaseController {
 	{
 		$owners = $this->user->getOwners();
 		$priorities = $this->priority->getPriorities();
+		$statuses = $this->status->getStatuses();
 
 		return View::make('tickets.create')
 			->with('owners', $owners)
-			->with('priorities', $priorities);
+			->with('priorities', $priorities)
+			->with('statuses', $statuses);
 	}
 
 	/**
@@ -55,6 +58,7 @@ class TicketsController extends \BaseController {
 			'title' => 'required',
 			'description' => 'required',
 			'priority_id' => 'required',
+			'status_id' => 'required',
 			'owner_id' => 'required'
 		);
 
@@ -84,10 +88,10 @@ class TicketsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$thisTicket = $this->ticket->with('owner')->with('priority')->find($id);
+		$ticket = $this->ticket->find($id);
 
 		return View::make('tickets.show')
-		           ->with('ticket', $thisTicket);
+		           ->with('ticket', $ticket);
 	}
 
 	/**
@@ -102,11 +106,13 @@ class TicketsController extends \BaseController {
 		$thisTicket = $this->ticket->find($id);
 		$owners = $this->user->getOwners();
 		$priorities = $this->priority->getPriorities();
+		$statuses = $this->status->getStatuses();
 
 		return View::make('tickets.edit')
 			->with('ticket', $thisTicket)
 			->with('owners', $owners)
-			->with('priorities', $priorities);
+			->with('priorities', $priorities)
+			->with('statuses', $statuses);
 	}
 
 	/**
@@ -124,6 +130,7 @@ class TicketsController extends \BaseController {
 			'title' => 'required',
 			'description' => 'required',
 			'priority_id' => 'required',
+			'status_id' => 'required',
 			'owner_id' => 'required'
 		);
 
@@ -140,6 +147,7 @@ class TicketsController extends \BaseController {
 			$ticket->title = $input['title'];
 			$ticket->description = $input['description'];
 			$ticket->priority_id = $input['priority_id'];
+			$ticket->status_id = $input['status_id'];
 			$ticket->owner_id = $input['owner_id'];
 
 			$ticket->save();

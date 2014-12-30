@@ -8,6 +8,7 @@
             <th>Title</th>
             <th>Description</th>
             <th>Priority</th>
+            <th>Status</th>
             <th>Owner</th>
         </thead>
         <tbody>
@@ -24,6 +25,9 @@
                     </td>
                     <td>
                         {{ $ticket->priority->title }}
+                    </td>
+                    <td>
+                        {{ $ticket->status->title }}
                     </td>
                     <td>
                         {{ $ticket->owner->username }}

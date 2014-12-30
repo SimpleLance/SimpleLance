@@ -8,6 +8,7 @@
             <p><strong>Title</strong>: {{ $ticket->title }}</p>
             <p><strong>Description</strong>: {{ $ticket->description }}</p>
             <p><strong>Priority</strong>: {{ $ticket->priority->title }}</p>
+            <p><strong>Status</strong>: {{ $ticket->status->title }}</p>
             <p><strong>Owner</strong>: {{ $ticket->owner->username }}</p>
 
         </div>

@@ -18,6 +18,7 @@ class CreateTicketsTable extends Migration {
 			$table->string('title');
 			$table->text('description');
 			$table->integer('priority_id');
+			$table->integer('status_id');
 			$table->integer('owner_id');
 			$table->timestamps();
 		});

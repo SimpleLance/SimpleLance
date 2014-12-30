@@ -15,6 +15,7 @@ class TicketsTableSeeder extends Seeder {
 				'title' => $faker->sentence(),
 				'description' => $faker->sentence(),
 				'priority_id' => '1',
+				'status_id' => '1',
 				'owner_id' => '1'
 			]);
 		}
@@ -25,6 +26,7 @@ class TicketsTableSeeder extends Seeder {
 				'title' => $faker->sentence(),
 				'description' => $faker->sentence(),
 				'priority_id' => '1',
+				'status_id' => '1',
 				'owner_id' => '2'
 			]);
 		}
