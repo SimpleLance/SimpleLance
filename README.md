@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/SimpleLance/SimpleLance.svg?branch=feature%2Flaravel)](https://travis-ci.org/SimpleLance/SimpleLance)
+
 SimpleLance
 ===========
 
