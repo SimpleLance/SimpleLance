@@ -4,12 +4,13 @@ class TicketsController extends \BaseController {
 
 	protected $ticket;
 
-	public function __construct(Ticket $ticket, User $user, Priority $priority, Status $status)
+	public function __construct(Ticket $ticket, User $user, Priority $priority, Status $status, TicketReply $ticketreply)
 	{
 		$this->ticket = $ticket;
 		$this->user = $user;
 		$this->priority = $priority;
 		$this->status = $status;
+		$this->replies = $ticketreply;
 	}
 
 	/**
