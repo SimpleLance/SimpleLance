@@ -90,9 +90,11 @@ class TicketsController extends \BaseController {
 	public function show($id)
 	{
 		$ticket = $this->ticket->find($id);
+		$statuses = $this->status->getStatuses();
 
 		return View::make('tickets.show')
-		           ->with('ticket', $ticket);
+		           ->with('ticket', $ticket)
+				   ->with('statuses', $statuses);
 	}
 
 	/**
@@ -177,6 +179,50 @@ class TicketsController extends \BaseController {
 		}
 
 		return Redirect::action('TicketsController@index');
+	}
+
+	/**
+	 * Reply to specified ticket
+	 * POST /tickets/{id}/reply
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function reply($id)
+	{
+		$input = Input::all();
+
+		$user_id = Sentry::getUser()->id;
+
+		$rules = array(
+			'status_id' => 'required',
+			'content' => 'required'
+		);
+
+		$validator = Validator::make($input, $rules);
+
+		if ($validator->fails()) {
+
+			return Redirect::route('tickets.show, $id')
+				->withErrors($validator)
+				->withInput($input);
+		} else {
+
+			TicketReply::create([
+				'ticket_id' => $id,
+				'user_id' => $user_id,
+				'content' => $input['content']
+			]);
+
+			$ticket = $this->ticket->find($id);
+			$ticket->status_id = $input['status_id'];
+			$ticket->save();
+
+			return Redirect::route('tickets.index')->with('flash', [
+				'class' => 'success',
+				'message' => 'Ticket Replied To.'
+			]);
+		}
 	}
 
 }

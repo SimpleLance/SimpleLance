@@ -31,5 +31,26 @@
             {{ Form::close() }}
         </div>
     </div>
+    {{ Form::open(array(
+            'action' => array('TicketsController@reply', $ticket->id),
+            'method' => 'post',
+            'class' => 'form-horizontal',
+            'role' => 'form'
+            )) }}
+
+    <div class="form-group {{ ($errors->has('content')) ? 'has-error' : '' }}">
+        {{ Form::textarea('content', null, array('class' => 'form-control', 'placeholder' => 'Your Reply')) }}
+        {{ ($errors->has('content') ? $errors->first('content') : '') }}
+    </div>
+
+    <div class="form-group {{ ($errors->has('status_id')) ? 'has-error' : '' }}" for="status_id">
+        {{ Form::label('edit_status_id', 'Status', array('class' => '')) }}
+        {{ Form::select('status_id', $statuses, null) }}
+        {{ ($errors->has('status_id') ? $errors->first('status_id') : '') }}
+    </div>
+
+    {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
+
+    {{ Form::close() }}
 @stop
 
