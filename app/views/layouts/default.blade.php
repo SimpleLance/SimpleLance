@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('title')Simple Lance</title>
+    <title>@yield('title')SimpleLance</title>
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/jquery-ui.theme.css" rel="stylesheet">
