@@ -4,12 +4,13 @@ class TicketsController extends \BaseController {
 
 	protected $ticket;
 
-	public function __construct(Ticket $ticket, User $user, Priority $priority, Status $status)
+	public function __construct(Ticket $ticket, User $user, Priority $priority, Status $status, TicketReply $ticketReply)
 	{
 		$this->ticket = $ticket;
 		$this->user = $user;
 		$this->priority = $priority;
 		$this->status = $status;
+		$this->replies = $ticketReply;
 	}
 
 	/**
@@ -70,7 +71,8 @@ class TicketsController extends \BaseController {
 				->withErrors($validator)
 				->withInput($input);
 		} else {
-			$ticket = $this->ticket->create($input);
+			$input['replies'] = 0;
+			$this->ticket->create($input);
 
 			return Redirect::route('tickets.index')->with('flash', [
 				'class' => 'success',
@@ -89,9 +91,15 @@ class TicketsController extends \BaseController {
 	public function show($id)
 	{
 		$ticket = $this->ticket->find($id);
+		$statuses = $this->status->getStatuses();
+		$priorities = $this->priority->getPriorities();
+		$replies = $this->replies->with('user')->where('ticket_id', $id)->orderBy('updated_at', 'ASC')->get();
 
 		return View::make('tickets.show')
-		           ->with('ticket', $ticket);
+		           ->with('ticket', $ticket)
+				   ->with('statuses', $statuses)
+				   ->with('priorities', $priorities)
+			       ->with('replies', $replies);
 	}
 
 	/**
@@ -176,6 +184,52 @@ class TicketsController extends \BaseController {
 		}
 
 		return Redirect::action('TicketsController@index');
+	}
+
+	/**
+	 * Reply to specified ticket
+	 * POST /tickets/{id}/reply
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function reply($id)
+	{
+		$input = Input::all();
+
+		$user_id = Sentry::getUser()->id;
+
+		$rules = array(
+			'status_id' => 'required',
+			'content' => 'required'
+		);
+
+		$validator = Validator::make($input, $rules);
+
+		if ($validator->fails()) {
+
+			return Redirect::route('tickets.show', $id)
+				->withErrors($validator)
+				->withInput($input);
+		} else {
+
+			TicketReply::create([
+				'ticket_id' => $id,
+				'user_id' => $user_id,
+				'content' => $input['content']
+			]);
+
+			$ticket = $this->ticket->find($id);
+			$ticket->status_id = $input['status_id'];
+			$ticket->priority_id = $input['priority_id'];
+			$ticket->replies = $ticket->replies +1;
+			$ticket->save();
+
+			return Redirect::route('tickets.index')->with('flash', [
+				'class' => 'success',
+				'message' => 'Ticket Replied To.'
+			]);
+		}
 	}
 
 }
