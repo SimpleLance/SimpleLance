@@ -3,21 +3,17 @@
 @section('content')
     <h4>Support Ticket</h4>
 
-    <div class="well clearfix">
-        <div class="col-md-8">
-            <p><strong>Title</strong>: {{ $ticket->title }}</p>
-            <p><strong>Description</strong>: {{ $ticket->description }}</p>
+    <div class="well col-md-6">
+        <div class="col-md-6">
+            <p><strong>Subject</strong>: {{ $ticket->title }}</p>
+            <p><strong>Owner</strong>: {{ $ticket->owner->username }}</p>
             <p><strong>Priority</strong>: {{ $ticket->priority->title }}</p>
             <p><strong>Status</strong>: {{ $ticket->status->title }}</p>
-            <p><strong>Owner</strong>: {{ $ticket->owner->username }}</p>
+            <p><strong>Ticket created</strong>: {{ $ticket->created_at }}</p>
+            <p><strong>Last Updated</strong>: {{ $ticket->updated_at }}</p>
 
-        </div>
-        <div class="col-md-4">
-            <p><em>Ticket created: {{ $ticket->created_at }}</em></p>
-            <p><em>Last Updated: {{ $ticket->updated_at }}</em></p>
             <button id="edit-{{ $ticket->id }}" class="btn btn-primary" onClick="location.href='{{ action('TicketsController@edit', array($ticket->id)) }}'">Edit Ticket</button>
-        </div>
-        <div class="col-md-2">
+
             {{ Form::open(array(
                  'action' => array('TicketsController@destroy', $ticket->id),
                  'method' => 'delete',
@@ -31,26 +27,58 @@
             {{ Form::close() }}
         </div>
     </div>
-    {{ Form::open(array(
-            'action' => array('TicketsController@reply', $ticket->id),
-            'method' => 'post',
-            'class' => 'form-horizontal',
-            'role' => 'form'
-            )) }}
 
-    <div class="form-group {{ ($errors->has('content')) ? 'has-error' : '' }}">
-        {{ Form::textarea('content', null, array('class' => 'form-control', 'placeholder' => 'Your Reply')) }}
-        {{ ($errors->has('content') ? $errors->first('content') : '') }}
+    <div class="well col-md-6">
+        @foreach($replies as $reply)
+            <div>
+                <em>Reply by</em> <b>{{ $reply->user->username }}</b>
+                <em>on</em> <b>{{ $reply->created_at }}</b>
+                <br>
+                &nbsp;{{ $reply->content }}
+                <hr>
+            </div>
+        @endforeach
+            <div>
+                <em>Ticket opened by</em> <b>{{ $ticket->owner->username }}</b>
+                <em>on</em> <b>{{ $ticket->created_at }}</b>
+                <br>
+                &nbsp;{{ $ticket->description }}
+                <hr>
+            </div>
+
+            <div>
+                {{ Form::open(array(
+                        'action' => array('TicketsController@reply', $ticket->id),
+                        'method' => 'post',
+                        'class' => 'form-horizontal',
+                        'role' => 'form'
+                        )) }}
+
+                <div class="form-group {{ ($errors->has('content')) ? 'has-error' : '' }}">
+                    {{ Form::textarea('content', null, array('class' => 'form-control', 'placeholder' => 'Your Reply')) }}
+                    {{ ($errors->has('content') ? $errors->first('content') : '') }}
+                </div>
+
+                <div class="form-group {{ ($errors->has('priority_id')) ? 'has-error' : '' }}" for="priority_id">
+                    {{ Form::label('edit_priority_id', 'Priority', array('class' => 'col-sm-2 control-label')) }}
+                    <div class="col-sm-10">
+                        {{ Form::select('priority_id', $priorities, $ticket->priority_id) }}
+                    </div>
+                    {{ ($errors->has('priority_id') ? $errors->first('priority_id') : '') }}
+                </div>
+
+                <div class="form-group {{ ($errors->has('status_id')) ? 'has-error' : '' }}" for="status_id">
+                    {{ Form::label('edit_status_id', 'Status', array('class' => 'col-sm-2 control-label')) }}
+                    <div class="col-sm-10">
+                        {{ Form::select('status_id', $statuses, $ticket->status_id) }}
+                    </div>
+                    {{ ($errors->has('status_id') ? $errors->first('status_id') : '') }}
+                </div>
+
+                {{ Form::submit('Submit Reply', array('class' => 'btn btn-primary')) }}
+
+                {{ Form::close() }}
+            </div>
     </div>
-
-    <div class="form-group {{ ($errors->has('status_id')) ? 'has-error' : '' }}" for="status_id">
-        {{ Form::label('edit_status_id', 'Status', array('class' => '')) }}
-        {{ Form::select('status_id', $statuses, null) }}
-        {{ ($errors->has('status_id') ? $errors->first('status_id') : '') }}
-    </div>
-
-    {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
-
-    {{ Form::close() }}
 @stop
 

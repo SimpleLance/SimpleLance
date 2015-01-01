@@ -4,13 +4,13 @@ class TicketsController extends \BaseController {
 
 	protected $ticket;
 
-	public function __construct(Ticket $ticket, User $user, Priority $priority, Status $status, TicketReply $ticketreply)
+	public function __construct(Ticket $ticket, User $user, Priority $priority, Status $status, TicketReply $ticketReply)
 	{
 		$this->ticket = $ticket;
 		$this->user = $user;
 		$this->priority = $priority;
 		$this->status = $status;
-		$this->replies = $ticketreply;
+		$this->replies = $ticketReply;
 	}
 
 	/**
@@ -71,7 +71,8 @@ class TicketsController extends \BaseController {
 				->withErrors($validator)
 				->withInput($input);
 		} else {
-			$ticket = $this->ticket->create($input);
+			$input['replies'] = 0;
+			$this->ticket->create($input);
 
 			return Redirect::route('tickets.index')->with('flash', [
 				'class' => 'success',
@@ -91,10 +92,14 @@ class TicketsController extends \BaseController {
 	{
 		$ticket = $this->ticket->find($id);
 		$statuses = $this->status->getStatuses();
+		$priorities = $this->priority->getPriorities();
+		$replies = $this->replies->with('user')->where('ticket_id', $id)->orderBy('updated_at', 'ASC')->get();
 
 		return View::make('tickets.show')
 		           ->with('ticket', $ticket)
-				   ->with('statuses', $statuses);
+				   ->with('statuses', $statuses)
+				   ->with('priorities', $priorities)
+			       ->with('replies', $replies);
 	}
 
 	/**
@@ -203,7 +208,7 @@ class TicketsController extends \BaseController {
 
 		if ($validator->fails()) {
 
-			return Redirect::route('tickets.show, $id')
+			return Redirect::route('tickets.show', $id)
 				->withErrors($validator)
 				->withInput($input);
 		} else {
@@ -216,6 +221,8 @@ class TicketsController extends \BaseController {
 
 			$ticket = $this->ticket->find($id);
 			$ticket->status_id = $input['status_id'];
+			$ticket->priority_id = $input['priority_id'];
+			$ticket->replies = $ticket->replies +1;
 			$ticket->save();
 
 			return Redirect::route('tickets.index')->with('flash', [

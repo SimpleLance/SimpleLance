@@ -16,7 +16,8 @@ class TicketsTableSeeder extends Seeder {
 				'description' => $faker->sentence(),
 				'priority_id' => '1',
 				'status_id' => '1',
-				'owner_id' => '1'
+				'owner_id' => '1',
+				'replies' => '0'
 			]);
 		}
 
@@ -27,7 +28,8 @@ class TicketsTableSeeder extends Seeder {
 				'description' => $faker->sentence(),
 				'priority_id' => '1',
 				'status_id' => '1',
-				'owner_id' => '2'
+				'owner_id' => '2',
+				'replies' => '0'
 			]);
 		}
 	}

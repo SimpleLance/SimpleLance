@@ -6,7 +6,8 @@ class Ticket extends \Eloquent {
 		'description',
 		'priority_id',
 		'status_id',
-		'owner_id'
+		'owner_id',
+		'replies'
 	];
 
 	public function owner() {
@@ -22,4 +23,5 @@ class Ticket extends \Eloquent {
 	public function status() {
 		return $this->belongsTo('Status');
 	}
+
 }

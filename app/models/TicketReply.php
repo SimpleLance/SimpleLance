@@ -12,8 +12,4 @@ class TicketReply extends \Eloquent {
 		return $this->belongsTo('User');
 	}
 
-	public function ticket() {
-
-		return $this->belongsTo('Ticket');
-	}
 }
