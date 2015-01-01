@@ -15,3 +15,5 @@ before_script:
   - php artisan migrate
 script:
   - ./vendor/bin/codecept run
+notifications:
+  slack: markrailton:B2mAJg9GBmlgHFhrY4vnVin7
