@@ -29,6 +29,14 @@
     </div>
 
     <div class="well col-md-6">
+        <div>
+            <em>Ticket opened by</em> <b>{{ $ticket->owner->username }}</b>
+            <em>on</em> <b>{{ $ticket->created_at }}</b>
+            <br>
+            &nbsp;{{ $ticket->description }}
+            <hr>
+        </div>
+
         @foreach($replies as $reply)
             <div>
                 <em>Reply by</em> <b>{{ $reply->user->username }}</b>
@@ -38,13 +46,6 @@
                 <hr>
             </div>
         @endforeach
-            <div>
-                <em>Ticket opened by</em> <b>{{ $ticket->owner->username }}</b>
-                <em>on</em> <b>{{ $ticket->created_at }}</b>
-                <br>
-                &nbsp;{{ $ticket->description }}
-                <hr>
-            </div>
 
             <div>
                 {{ Form::open(array(
