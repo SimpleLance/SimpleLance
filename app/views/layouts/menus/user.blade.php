@@ -8,5 +8,5 @@
     <a href="/tickets"><i class="fa fa-user fa-fw"></i> Support Tickets</a>
 </li>
 <li>
-    <a href="/billing"><i class="fa fa-user fa-fw"></i> Invoices</a>
+    <a href="/invoices"><i class="fa fa-user fa-fw"></i> Invoices</a>
 </li>
