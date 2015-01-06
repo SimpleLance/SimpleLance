@@ -144,8 +144,6 @@ class TicketsController extends \BaseController {
 		$input = Input::all();
 
 		$rules = array(
-			'title' => 'required',
-			'description' => 'required',
 			'priority_id' => 'required',
 			'status_id' => 'required',
 			'owner_id' => 'required'
@@ -161,8 +159,6 @@ class TicketsController extends \BaseController {
 		} else {
 
 			$ticket = $this->ticket->find($id);
-			$ticket->title = $input['title'];
-			$ticket->description = $input['description'];
 			$ticket->priority_id = $input['priority_id'];
 			$ticket->status_id = $input['status_id'];
 			$ticket->owner_id = $input['owner_id'];
