@@ -9,6 +9,17 @@ class InvoicesController extends \BaseController {
 		$this->invoice = $invoice;
 		$this->user = $user;
 		$this->status = $status;
+
+		$this->beforeFilter('Sentinel\inGroup:Admins',
+			[
+				'only' => [
+					'create',
+					'destroy',
+					'update',
+					'edit'
+				]
+			]
+		);
 	}
 
 	/**

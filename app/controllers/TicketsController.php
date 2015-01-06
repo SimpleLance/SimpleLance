@@ -11,6 +11,15 @@ class TicketsController extends \BaseController {
 		$this->priority = $priority;
 		$this->status = $status;
 		$this->replies = $ticketReply;
+
+		$this->beforeFilter('Sentinel\inGroup:Admins',
+			[
+				'only' => [
+					'destroy',
+					'edit'
+				]
+			]
+		);
 	}
 
 	/**
