@@ -30,7 +30,7 @@ class TicketsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$tickets = $this->ticket->with('owner')->get();
+		$tickets = $this->ticket->with('owner')->orderBy('updated_at', 'ASC')->get();
 
 		return View::make('tickets.index')
 		           ->with('tickets', $tickets);
