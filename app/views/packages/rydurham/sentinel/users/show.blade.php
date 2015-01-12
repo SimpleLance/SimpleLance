@@ -19,7 +19,18 @@ Home
 		    	<p><strong>Last Name:</strong> {{ $user->last_name }} </p>
 			@endif
 		    <p><strong>Email:</strong> {{ $user->email }}</p>
-		    
+			@if ($user->phone)
+				<p><strong>Phone:</strong> {{ $user->phone }} </p>
+			@endif
+			@if ($user->address)
+				<p>
+					<strong>Address:</strong> <br />
+					{{ $user->address }} <br />
+					{{ $user->address2 }} <br />
+					{{ $user->city }} {{ $user->state }},  {{ $user->post_code }}<br />
+					{{ $user->country }} <br />
+				</p>
+			@endif
 		</div>
 		<div class="col-md-4">
 			<p><em>Account created: {{ $user->created_at }}</em></p>
@@ -43,10 +54,4 @@ Home
 	</div>
 	
 	<hr />
-
-	<h4>User Object</h4>
-	<div>
-		<p>{{ var_dump($user) }}</p>
-	</div>
-
 @stop

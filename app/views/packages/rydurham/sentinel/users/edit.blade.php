@@ -26,7 +26,7 @@ Profile</h4>
         )) }}
         
         <div class="form-group {{ ($errors->has('first_name')) ? 'has-error' : '' }}" for="first_name">
-            {{ Form::label('edit_first_name', 'First Name', array('class' => 'col-sm-2 control-label')) }}
+            {{ Form::label('edit_first_name', 'First Name *', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-10">
               {{ Form::text('first_name', $user->first_name, array('class' => 'form-control', 'placeholder' => 'First Name', 'id' => 'edit_first_name'))}}
             </div>
@@ -35,11 +35,67 @@ Profile</h4>
 
 
         <div class="form-group {{ ($errors->has('last_name')) ? 'has-error' : '' }}" for="last_name">
-            {{ Form::label('edit_last_name', 'Last Name', array('class' => 'col-sm-2 control-label')) }}
+            {{ Form::label('edit_last_name', 'Last Name *', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-10">
               {{ Form::text('last_name', $user->last_name, array('class' => 'form-control', 'placeholder' => 'Last Name', 'id' => 'edit_last_name'))}}
             </div>
             {{ ($errors->has('last_name') ? $errors->first('last_name') : '') }}                
+        </div>
+
+        <div class="form-group {{ ($errors->has('address')) ? 'has-error' : '' }}" for="address">
+            {{ Form::label('edit_address', 'Address *', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+                {{ Form::text('address', $user->address, array('class' => 'form-control', 'placeholder' => 'Address', 'id' => 'edit_address'))}}
+            </div>
+            {{ ($errors->has('address') ? $errors->first('address') : '') }}
+        </div>
+
+        <div class="form-group {{ ($errors->has('address2')) ? 'has-error' : '' }}" for="address2">
+            {{ Form::label('edit_address2', 'Address 2 *', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+                {{ Form::text('address2', $user->address2, array('class' => 'form-control', 'placeholder' => 'Address 2', 'id' => 'edit_address2'))}}
+            </div>
+            {{ ($errors->has('address2') ? $errors->first('address2') : '') }}
+        </div>
+
+        <div class="form-group {{ ($errors->has('city')) ? 'has-error' : '' }}" for="city">
+            {{ Form::label('edit_city', 'City *', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+                {{ Form::text('city', $user->city, array('class' => 'form-control', 'placeholder' => 'City', 'id' => 'edit_city'))}}
+            </div>
+            {{ ($errors->has('city') ? $errors->first('city') : '') }}
+        </div>
+
+        <div class="form-group {{ ($errors->has('state')) ? 'has-error' : '' }}" for="state">
+            {{ Form::label('edit_state', 'State *', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+                {{ Form::text('state', $user->state, array('class' => 'form-control', 'placeholder' => 'State', 'id' => 'edit_state'))}}
+            </div>
+            {{ ($errors->has('state') ? $errors->first('state') : '') }}
+        </div>
+
+        <div class="form-group {{ ($errors->has('post_code')) ? 'has-error' : '' }}" for="post_code">
+            {{ Form::label('edit_post_code', 'Post Code *', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+                {{ Form::text('post_code', $user->post_code, array('class' => 'form-control', 'placeholder' => 'Post Code', 'id' => 'edit_post_code'))}}
+            </div>
+            {{ ($errors->has('post_code') ? $errors->first('post_code') : '') }}
+        </div>
+
+        <div class="form-group {{ ($errors->has('country')) ? 'has-error' : '' }}" for="country">
+            {{ Form::label('edit_country', 'Country *', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+                {{ Form::text('country', $user->country, array('class' => 'form-control', 'placeholder' => 'Country', 'id' => 'edit_country'))}}
+            </div>
+            {{ ($errors->has('country') ? $errors->first('country') : '') }}
+        </div>
+
+        <div class="form-group {{ ($errors->has('phone')) ? 'has-error' : '' }}" for="phone">
+            {{ Form::label('edit_phone', 'Phone *', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+                {{ Form::text('phone', $user->phone, array('class' => 'form-control', 'placeholder' => 'Phone', 'id' => 'edit_phone'))}}
+            </div>
+            {{ ($errors->has('phone') ? $errors->first('phone') : '') }}
         </div>
 
         @if (Sentry::getUser()->hasAccess('admin'))
