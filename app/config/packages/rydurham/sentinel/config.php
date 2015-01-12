@@ -155,6 +155,15 @@ return array(
 
     'additional_user_fields' => array(
         //'field_name' => 'validation'
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'address' => 'required',
+        'address2' => 'required',
+        'city' => 'required',
+        'state' => 'required',
+        'post_code' => 'required',
+        'country' => 'required',
+        'phone' => 'required',
     ),
 
     /*
