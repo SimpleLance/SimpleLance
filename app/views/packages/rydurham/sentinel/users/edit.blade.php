@@ -58,6 +58,14 @@ Profile</h4>
             {{ ($errors->has('address2') ? $errors->first('address2') : '') }}
         </div>
 
+        <div class="form-group {{ ($errors->has('city')) ? 'has-error' : '' }}" for="city">
+            {{ Form::label('edit_city', 'City *', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+                {{ Form::text('city', $user->city, array('class' => 'form-control', 'placeholder' => 'City', 'id' => 'edit_city'))}}
+            </div>
+            {{ ($errors->has('city') ? $errors->first('city') : '') }}
+        </div>
+
         <div class="form-group {{ ($errors->has('state')) ? 'has-error' : '' }}" for="state">
             {{ Form::label('edit_state', 'State *', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-10">
