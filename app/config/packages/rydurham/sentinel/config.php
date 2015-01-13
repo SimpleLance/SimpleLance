@@ -68,7 +68,7 @@ return array(
     |
     */
 
-    'post_login'    => 'home',
+    'post_login'    => 'dashboard',
 
     'post_logout'   => 'home',
 
