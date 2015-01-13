@@ -24,4 +24,14 @@ class Ticket extends \Eloquent {
 		return $this->belongsTo('Status');
 	}
 
+	public function getOpenTickets() {
+
+		return Ticket::has('status', 1)->get();
+	}
+
+	public function getInProgressTickets() {
+
+		return Ticket::has('status', 2)->get();
+	}
+
 }
