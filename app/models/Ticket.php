@@ -26,12 +26,12 @@ class Ticket extends \Eloquent {
 
 	public function getOpenTickets() {
 
-		return Ticket::has('status', 1)->get();
+		return Ticket::where('status_id', '=', '1')->get();
 	}
 
 	public function getInProgressTickets() {
 
-		return Ticket::has('status', 2)->get();
+		return Ticket::where('status_id', '=', '2')->get();
 	}
 
 }
