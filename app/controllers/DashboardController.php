@@ -32,8 +32,16 @@ class DashboardController extends BaseController {
 
 			return View::make('dashboard.admin')->with('data', $data);
 		} else {
+			$data['openTickets'] = $this->ticket->getOpenTicketsByUser();
+			$data['inProgressTickets'] = $this->ticket->getInProgressTicketsByUser();
+			$data['openProjects'] = $this->project->getOpenProjectsByUser();
+			$data['inProgressProjects'] = $this->project->getInProgressProjectsByUser();
+			$data['openInvoices'] = $this->invoice->getOpenInvoicesByUser();
+			$data['openInvoicesAmount'] = $this->invoice->getOpenInvoicesTotalAmountByUser();
+			$data['overdueInvoices'] = $this->invoice->getOverdueInvoicesByUser();
+			$data['overdueInvoicesAmount'] = $this->invoice->getOverdueInvoicesTotalAmountByUser();
 
-			return View::make('dashboard.user');
+			return View::make('dashboard.user')->with('data', $data);
 		}
 	}
 

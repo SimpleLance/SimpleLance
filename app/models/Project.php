@@ -32,4 +32,18 @@ class Project extends \Eloquent {
 
 		return Project::where('status_id', '=', '2')->get();
 	}
+
+	public function getOpenProjectsByUser() {
+
+		return Project::where('status_id', '=', '1')
+			->where('owner_id', '=', Sentry::getUser()->id)
+			->get();
+	}
+
+	public function getInProgressProjectsByUser() {
+
+		return Project::where('status_id', '=', '2')
+			->where('owner_id', '=', Sentry::getUser()->id)
+			->get();
+	}
 }
