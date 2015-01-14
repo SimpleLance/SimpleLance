@@ -20,7 +20,7 @@ Route::group(['before' => 'Sentinel\auth'], function()
 	Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 	# Override Sentinel's Default user routes with our own filter requirement
 	Route::get('/users/{id}', ['as' => 'sl_user.show', 'uses' => 'SimpleLance\UserController@show'])->where('id', '[0-9]+');
-
+	Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
 });
 
 Route::group(['before' => 'Sentinel\inGroup:Admins'], function()

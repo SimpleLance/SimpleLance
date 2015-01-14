@@ -22,4 +22,14 @@ class Project extends \Eloquent {
 	public function priority() {
 		return $this->belongsTo('Priority');
 	}
+
+	public function getOpenProjects() {
+
+		return Project::where('status_id', '=', '1')->get();
+	}
+
+	public function getInProgressProjects() {
+
+		return Project::where('status_id', '=', '2')->get();
+	}
 }
