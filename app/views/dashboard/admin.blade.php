@@ -1,11 +1,21 @@
 @extends('layouts.default')
 
 @section('content')
-    Admin Dashboard
+    <h1>Admin Dashboard</h1>
 
-    Open Tickets: {{ count($openTickets) }} / In Progress Tickets: {{ count($inProgressTickets) }} <br />
-    Open Projects: {{ count($openProjects) }} / In Progress Projects: {{ count($inProgressProjects) }} <br />
-    Count of number of open invoices, also including total $ amount for all open invoices <br />
-    Count of number of overdue invoices, also including total $ amount for all overdue invoices <br />
+    <h3>Support Tickets</h3>
+    Open Tickets: {{ count($data['openTickets']) }} /
+    In Progress Tickets: {{ count($data['inProgressTickets']) }} <br />
+
+    <h3>Projects</h3>
+    Open Projects: {{ count($data['openProjects']) }} /
+    In Progress Projects: {{ count($data['inProgressProjects']) }} <br />
+
+    <h3>Invoices:</h3>
+    Open Invoices: {{ count($data['openInvoices']) }} /
+    Total Open Amount: {{ $data['openInvoicesAmount'] }}<br />
+
+    Overdue Invoices: {{ count($data['overdueInvoices']) }} /
+    Total Overdue Amount: {{ $data['overdueInvoicesAmount'] }}<br />
 @stop
 
