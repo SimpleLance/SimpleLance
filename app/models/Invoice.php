@@ -61,4 +61,49 @@ class Invoice extends \Eloquent {
 
 		return $totalAmount;
 	}
+
+	public function getOpenInvoicesByUser() {
+
+		return Invoice::where('status_id', '=', '1')
+			->where('owner_id', '=', Sentry::getUser()->id)
+			->get();
+	}
+
+	public function getOpenInvoicesTotalAmountByUser() {
+		$invoices = $this->getOpenInvoicesByUser();
+
+		$totalAmount = 0;
+
+		foreach ($invoices as $invoice) {
+			$totalAmount = $totalAmount + $invoice->amount;
+		}
+
+		return $totalAmount;
+	}
+
+	public function getOverdueInvoicesByUser() {
+		$invoices = $this->getOpenInvoicesByUser();
+		$overdueInvoices = [];
+		$today = date("Y-m-d");
+
+		foreach ($invoices as $invoice) {
+			if($invoice->due < $today){
+				$overdueInvoices[] = $invoice;
+			}
+		}
+
+		return $overdueInvoices;
+	}
+
+	public function getOverdueInvoicesTotalAmountByUser() {
+		$invoices = $this->getOverdueInvoicesByUser();
+
+		$totalAmount = 0;
+
+		foreach ($invoices as $invoice) {
+			$totalAmount = $totalAmount + $invoice->amount;
+		}
+
+		return $totalAmount;
+	}
 }
