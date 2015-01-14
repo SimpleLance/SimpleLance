@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/SimpleLance/SimpleLance.svg?branch=feature%2Flaravel)](https://travis-ci.org/SimpleLance/SimpleLance)
 [![Code Climate](https://codeclimate.com/github/SimpleLance/SimpleLance/badges/gpa.svg)](https://codeclimate.com/github/SimpleLance/SimpleLance)
+[![Stories in Ready](https://badge.waffle.io/SimpleLance/SimpleLance.png?label=ready&title=Ready)](https://waffle.io/SimpleLance/SimpleLance)
 
 SimpleLance
 ===========
