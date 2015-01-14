@@ -34,4 +34,17 @@ class Ticket extends \Eloquent {
 		return Ticket::where('status_id', '=', '2')->get();
 	}
 
+	public function getOpenTicketsByUser() {
+
+		return Ticket::where('status_id', '=', '1')
+			->where('owner_id', '=', Sentry::getUser()->id)
+			->get();
+	}
+
+	public function getInProgressTicketsByUser() {
+
+		return Ticket::where('status_id', '=', '2')
+			->where('owner_id', '=', Sentry::getUser()->id)
+			->get();
+	}
 }
