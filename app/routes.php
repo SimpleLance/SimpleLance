@@ -17,10 +17,10 @@ Route::group(['before' => 'Sentinel\auth'], function()
 	Route::resource('tickets', 'TicketsController');
 	Route::resource('invoices', 'InvoicesController');
 	Route::post('tickets/{id}/reply', 'TicketsController@reply');
-	Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+	Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 	# Override Sentinel's Default user routes with our own filter requirement
 	Route::get('/users/{id}', ['as' => 'sl_user.show', 'uses' => 'SimpleLance\UserController@show'])->where('id', '[0-9]+');
-	Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
+	Route::get('dashboard', ['as' => 'home', 'uses' => 'DashboardController@index']);
 });
 
 Route::group(['before' => 'Sentinel\inGroup:Admins'], function()
