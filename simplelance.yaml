@@ -16,6 +16,9 @@ sites:
     - map: simplelance.dev
       to: /home/vagrant/simplelance.dev/public
 
+databases:
+    - homestead
+
 variables:
     - key: APP_ENV
       value: dev
