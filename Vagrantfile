@@ -1,12 +1,22 @@
+require 'json'
+require 'yaml'
+
 VAGRANTFILE_API_VERSION = "2"
 
-path = "#{File.dirname(__FILE__)}"
+homesteadYamlPath = File.expand_path("./simplelance.yaml")
+afterScriptPath = File.expand_path("./scripts/customize.sh")
+aliasesPath = File.expand_path("./aliases")
 
-require 'yaml'
-require path + '/scripts/simplelance.rb'
+require_relative 'scripts/simplelance.rb'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  SL.configure(config, YAML::load(File.read(path + '/simplelance.yaml')))
+	if File.exists? aliasesPath then
+		config.vm.provision "file", source: aliasesPath, destination: "~/.bash_aliases"
+	end
 
-  config.vm.provision "shell", path: "scripts/customize.sh"
+	Homestead.configure(config, YAML::load(File.read(homesteadYamlPath)))
+
+	if File.exists? afterScriptPath then
+		config.vm.provision "shell", path: afterScriptPath
+	end
 end
