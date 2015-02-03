@@ -98,9 +98,11 @@ class InvoicesController extends \BaseController {
 	public function show($id)
 	{
 		$thisInvoice = $this->invoice->with('owner')->with('status')->find($id);
+		$items = $this->items->where('invoice_id', $id)->orderBy('updated_at', 'ASC')->get();
 
 		return View::make('invoices.show')
-		           ->with('invoice', $thisInvoice);
+			->with('invoice', $thisInvoice)
+			->with('items', $items);
 	}
 
 	/**
@@ -189,7 +191,7 @@ class InvoicesController extends \BaseController {
      */
 	public function items($id)
 	{
-		$thisInvoice = $this->invoice->with('owner')->with('status')->with('item')->find($id);
+		$thisInvoice = $this->invoice->with('owner')->with('status')->find($id);
 		$items = $this->items->where('invoice_id', $id)->orderBy('updated_at', 'ASC')->get();
 
 		return View::make('invoices.items')
