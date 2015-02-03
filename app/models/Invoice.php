@@ -16,7 +16,7 @@ class Invoice extends \Eloquent {
 
 	public function status() {
 
-		return $this->belongsTo('Status');
+		return $this->belongsTo('InvoiceStatus');
 	}
 
 	public function getOpenInvoices() {
