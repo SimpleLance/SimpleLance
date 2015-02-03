@@ -31,7 +31,7 @@ class InvoicesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$invoices = $this->invoice->with('owner')->with('status')->get();
+		$invoices = $this->invoice->with('owner')->with('status')->paginate(10);
 
 		return View::make('invoices.index')
 		           ->with('invoices', $invoices);
