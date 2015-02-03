@@ -93,5 +93,5 @@
             </div>
         </div>
     </div>
-    <a href="/invoices{{ $invoice->id }}/send"  class="btn btn-primary">Send Invoice</a>
+    <button id="send-{{ $invoice->id }}" class="btn btn-primary" onClick="location.href='{{ action('InvoicesController@send', array($invoice->id)) }}'">Send Invoice</button>
 @stop

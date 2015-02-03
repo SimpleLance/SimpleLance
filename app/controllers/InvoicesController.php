@@ -136,7 +136,6 @@ class InvoicesController extends \BaseController {
 		$input = Input::all();
 
 		$rules = array(
-			'title' => 'required',
 			'due' => 'required',
 			'status_id' => 'required',
 			'owner_id' => 'required'
@@ -152,7 +151,6 @@ class InvoicesController extends \BaseController {
 		} else {
 
 			$invoice = $this->invoice->find($id);
-			$invoice->title = $input['title'];
 			$invoice->due = $input['due'];
 			$invoice->status_id = $input['status_id'];
 			$invoice->owner_id = $input['owner_id'];
