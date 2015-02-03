@@ -38,3 +38,7 @@ function calc(){
 function stopCalc(){
     clearInterval(interval);
 }
+$(document).ready(function() {
+    $('#calendar').datepicker({
+    });
+} );

@@ -6,20 +6,10 @@
 
         <h4>Create New Invoice</h4>
 
-        <div class="form-group {{ ($errors->has('title')) ? 'has-error' : '' }}">
-            {{ Form::text('title', null, array('class' => 'form-control', 'placeholder' => 'Title')) }}
-            {{ ($errors->has('title') ? $errors->first('title') : '') }}
-        </div>
-
         <div class="form-group {{ ($errors->has('due')) ? 'has-error' : '' }}">
-            {{ Form::textarea('due', null, array('class' => 'form-control', 'placeholder' => 'Due Date')) }}
+            {{ Form::label('due', 'Due Date', array('class' => '')) }}
+            {{ Form::text('due', null, array('class' => 'input-xs datepicker', 'placeholder' => 'Due Date', 'id' => 'calendar')) }}
             {{ ($errors->has('due') ? $errors->first('due') : '') }}
-        </div>
-
-        <div class="form-group {{ ($errors->has('status_id')) ? 'has-error' : '' }}" for="status_id">
-            {{ Form::label('edit_status_id', 'Priority', array('class' => '')) }}
-            {{ Form::select('status_id', $statuses, null) }}
-            {{ ($errors->has('status_id') ? $errors->first('status_id') : '') }}
         </div>
 
         <div class="form-group {{ ($errors->has('owner_id')) ? 'has-error' : '' }}" for="owner_id">
