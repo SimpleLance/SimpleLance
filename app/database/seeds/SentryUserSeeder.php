@@ -16,6 +16,14 @@ class SentryUserSeeder extends Seeder {
 	        'username' => 'admin',
 	        'password' => 'simplelance',
 	        'activated' => 1,
+			'first_name' => 'Admin',
+			'last_name' => 'User',
+			'phone' => '+1 (432) 432-4324',
+			'country' => 'USA',
+			'post_code' => '45524',
+			'state' => 'NY',
+			'address2' => 'Brooklyn',
+			'address' => '123 Any Street'
 	    ));
 
 	    Sentry::getUserProvider()->create(array(
@@ -23,6 +31,14 @@ class SentryUserSeeder extends Seeder {
 	        'username' => 'user',
 	        'password' => 'simplelance',
 	        'activated' => 1,
+			'first_name' => 'Customer',
+			'last_name' => 'User',
+			'phone' => '+1 (432) 432-4324',
+			'country' => 'USA',
+			'post_code' => '45524',
+			'state' => 'NY',
+			'address2' => 'Brooklyn',
+			'address' => '123 Any Street'
 	    ));
 	}
 

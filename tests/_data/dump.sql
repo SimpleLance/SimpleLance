@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.19-0ubuntu0.14.04.1)
 # Database: homestead
-# Generation Time: 2015-01-01 19:38:59 +0000
+# Generation Time: 2015-02-03 10:59:24 +0000
 # ************************************************************
 
 
@@ -40,10 +40,57 @@ LOCK TABLES `groups` WRITE;
 
 INSERT INTO `groups` (`id`, `name`, `permissions`, `created_at`, `updated_at`)
 VALUES
-	(1,'Users','{\"users\":1}','2015-01-01 19:38:42','2015-01-01 19:38:42'),
-	(2,'Admins','{\"admin\":1,\"users\":1}','2015-01-01 19:38:42','2015-01-01 19:38:42');
+	(1,'Users','{\"users\":1}','2015-02-03 10:58:03','2015-02-03 10:58:03'),
+	(2,'Admins','{\"admin\":1,\"users\":1}','2015-02-03 10:58:03','2015-02-03 10:58:03');
 
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table invoice_items
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `invoice_items`;
+
+CREATE TABLE `invoice_items` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `invoice_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
+# Dump of table invoice_statuses
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `invoice_statuses`;
+
+CREATE TABLE `invoice_statuses` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+LOCK TABLES `invoice_statuses` WRITE;
+/*!40000 ALTER TABLE `invoice_statuses` DISABLE KEYS */;
+
+INSERT INTO `invoice_statuses` (`id`, `title`, `created_at`, `updated_at`)
+VALUES
+	(1,'Open','2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(2,'Overdue','2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(3,'Draft','2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(4,'Paid','2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(5,'Cancelled','2015-02-03 10:58:04','2015-02-03 10:58:04');
+
+/*!40000 ALTER TABLE `invoice_statuses` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -54,10 +101,9 @@ DROP TABLE IF EXISTS `invoices`;
 
 CREATE TABLE `invoices` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `due` date NOT NULL,
   `status_id` int(11) NOT NULL,
-  `amount` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
   `owner_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -67,18 +113,18 @@ CREATE TABLE `invoices` (
 LOCK TABLES `invoices` WRITE;
 /*!40000 ALTER TABLE `invoices` DISABLE KEYS */;
 
-INSERT INTO `invoices` (`id`, `title`, `due`, `status_id`, `amount`, `owner_id`, `created_at`, `updated_at`)
+INSERT INTO `invoices` (`id`, `due`, `status_id`, `amount`, `owner_id`, `created_at`, `updated_at`)
 VALUES
-	(1,'iusto','1981-01-14',4,'2.07',2,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(2,'nihil','1979-08-12',3,'14497.96',2,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(3,'voluptas','2008-01-06',3,'6476.82',1,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(4,'facere','2009-03-02',1,'1127391.3',2,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(5,'rerum','2008-11-19',3,'7.55',1,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(6,'quam','2005-05-31',3,'1023.96',1,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(7,'et','2005-12-04',1,'1768.69',2,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(8,'et','1991-08-02',4,'43996.07',2,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(9,'aut','2008-01-12',1,'7458671.93',2,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(10,'beatae','1996-08-15',1,'116107.59',2,'2015-01-01 19:38:43','2015-01-01 19:38:43');
+	(1,'1992-03-06',1,776.19,2,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(2,'1987-03-27',1,0.00,2,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(3,'2010-07-02',3,443.16,2,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(4,'1997-02-05',4,56.26,2,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(5,'1975-10-01',3,0.13,2,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(6,'2005-12-12',2,99999999.99,1,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(7,'1979-11-09',3,1937658.08,1,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(8,'2008-11-10',2,17556.22,2,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(9,'1978-11-08',4,5902102.40,1,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(10,'1991-09-28',2,73154532.06,2,'2015-02-03 10:58:04','2015-02-03 10:58:04');
 
 /*!40000 ALTER TABLE `invoices` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -108,7 +154,10 @@ VALUES
 	('2014_12_23_020214_create_priorities_table',1),
 	('2014_12_24_203904_create_statuses_table',1),
 	('2014_12_29_134211_create_invoices_table',1),
-	('2014_12_31_082924_create_ticket_replies_table',1);
+	('2014_12_31_082924_create_ticket_replies_table',1),
+	('2015_01_12_141846_add_fields_to_users_table',1),
+	('2015_02_03_055302_create_invoice_statuses_table',1),
+	('2015_02_03_072806_create_invoice_items_table',1);
 
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -132,11 +181,11 @@ LOCK TABLES `priorities` WRITE;
 
 INSERT INTO `priorities` (`id`, `title`, `created_at`, `updated_at`)
 VALUES
-	(1,'Low','2015-01-01 19:38:42','2015-01-01 19:38:42'),
-	(2,'Medium','2015-01-01 19:38:42','2015-01-01 19:38:42'),
-	(3,'High','2015-01-01 19:38:42','2015-01-01 19:38:42'),
-	(4,'Urgent','2015-01-01 19:38:42','2015-01-01 19:38:42'),
-	(5,'Critical','2015-01-01 19:38:42','2015-01-01 19:38:42');
+	(1,'Low','2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(2,'Medium','2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(3,'High','2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(4,'Urgent','2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(5,'Critical','2015-02-03 10:58:04','2015-02-03 10:58:04');
 
 /*!40000 ALTER TABLE `priorities` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -164,16 +213,16 @@ LOCK TABLES `projects` WRITE;
 
 INSERT INTO `projects` (`id`, `title`, `description`, `owner_id`, `status_id`, `priority_id`, `created_at`, `updated_at`)
 VALUES
-	(1,'Sample Project','Test project',1,1,1,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(2,'Sample Project','Test project',1,1,1,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(3,'Sample Project','Test project',1,1,1,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(4,'Sample Project','Test project',1,1,1,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(5,'Sample Project','Test project',1,1,1,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(6,'Sample Project','Test project',2,1,1,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(7,'Sample Project','Test project',2,1,1,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(8,'Sample Project','Test project',2,1,1,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(9,'Sample Project','Test project',2,1,1,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(10,'Sample Project','Test project',2,1,1,'2015-01-01 19:38:43','2015-01-01 19:38:43');
+	(1,'Sample Project','Test project',1,1,1,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(2,'Sample Project','Test project',1,1,1,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(3,'Sample Project','Test project',1,1,1,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(4,'Sample Project','Test project',1,1,1,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(5,'Sample Project','Test project',1,1,1,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(6,'Sample Project','Test project',2,1,1,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(7,'Sample Project','Test project',2,1,1,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(8,'Sample Project','Test project',2,1,1,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(9,'Sample Project','Test project',2,1,1,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(10,'Sample Project','Test project',2,1,1,'2015-02-03 10:58:04','2015-02-03 10:58:04');
 
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -197,10 +246,10 @@ LOCK TABLES `statuses` WRITE;
 
 INSERT INTO `statuses` (`id`, `title`, `created_at`, `updated_at`)
 VALUES
-	(1,'Open','2015-01-01 19:38:42','2015-01-01 19:38:42'),
-	(2,'In Progress','2015-01-01 19:38:42','2015-01-01 19:38:42'),
-	(3,'On Hold','2015-01-01 19:38:42','2015-01-01 19:38:42'),
-	(4,'Closed','2015-01-01 19:38:42','2015-01-01 19:38:42');
+	(1,'Open','2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(2,'In Progress','2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(3,'On Hold','2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(4,'Closed','2015-02-03 10:58:04','2015-02-03 10:58:04');
 
 /*!40000 ALTER TABLE `statuses` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -225,6 +274,15 @@ CREATE TABLE `throttle` (
   KEY `throttle_user_id_index` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+LOCK TABLES `throttle` WRITE;
+/*!40000 ALTER TABLE `throttle` DISABLE KEYS */;
+
+INSERT INTO `throttle` (`id`, `user_id`, `ip_address`, `attempts`, `suspended`, `banned`, `last_attempt_at`, `suspended_at`, `banned_at`)
+VALUES
+	(1,1,NULL,0,0,0,NULL,NULL,NULL);
+
+/*!40000 ALTER TABLE `throttle` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table ticket_replies
@@ -267,16 +325,16 @@ LOCK TABLES `tickets` WRITE;
 
 INSERT INTO `tickets` (`id`, `title`, `description`, `priority_id`, `status_id`, `owner_id`, `replies`, `created_at`, `updated_at`)
 VALUES
-	(1,'Neque veritatis excepturi voluptatibus rerum aliquid debitis.','Cupiditate hic eius alias unde excepturi mollitia.',1,1,1,0,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(2,'Aliquam tempora quidem hic ipsam.','Dolorem deleniti fuga quis sit at magnam excepturi.',1,1,1,0,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(3,'Voluptatem provident quos sapiente veritatis voluptatem omnis repellat.','Tempore tempore iusto quae minus distinctio explicabo.',1,1,1,0,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(4,'Excepturi eaque harum deserunt id qui ullam.','Molestiae ut voluptatem voluptatum occaecati cum.',1,1,1,0,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(5,'Consequatur alias qui aut facilis quam excepturi est.','Eaque ipsum dolorum et qui eveniet veniam.',1,1,1,0,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(6,'Ut voluptatem nostrum doloribus rerum dolor sequi eos praesentium.','Praesentium corporis fugiat dicta ab.',1,1,2,0,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(7,'Dolores qui omnis et dicta dolor totam exercitationem.','Voluptas voluptatem sit quia ea.',1,1,2,0,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(8,'Velit ut provident et et ipsam expedita dolores.','Nesciunt corporis ut sit.',1,1,2,0,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(9,'Officia aliquam culpa sint eos veritatis.','Ab iure dolor laboriosam impedit veniam eos.',1,1,2,0,'2015-01-01 19:38:43','2015-01-01 19:38:43'),
-	(10,'Porro eveniet enim iste.','Laudantium adipisci similique corrupti et.',1,1,2,0,'2015-01-01 19:38:43','2015-01-01 19:38:43');
+	(1,'Rerum est est quis quaerat inventore.','Et doloremque non maxime consequuntur cum saepe atque.',1,1,1,0,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(2,'Facere sed at quidem.','Et laborum in fugiat hic delectus atque.',1,1,1,0,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(3,'Eos impedit sit adipisci perspiciatis.','Quos illo quo nostrum accusamus maiores ut.',1,1,1,0,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(4,'Quod aspernatur ab enim qui iure ut.','Deleniti veritatis ut rerum officia quo pariatur dolores.',1,1,1,0,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(5,'Natus unde dolorem ab quo.','Sint minima aut repellat rerum mollitia error.',1,1,1,0,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(6,'Error itaque voluptatum dolor numquam.','Enim ad quia fuga incidunt facilis saepe exercitationem.',1,1,2,0,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(7,'Quasi cumque rerum optio atque sit minus quaerat.','Soluta eos omnis minus id aut.',1,1,2,0,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(8,'Quasi voluptas qui rerum.','Est praesentium vel aliquid omnis eos.',1,1,2,0,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(9,'Amet velit enim omnis fugit voluptatem perferendis qui.','Qui adipisci aut dolorem voluptatem facilis sit.',1,1,2,0,'2015-02-03 10:58:04','2015-02-03 10:58:04'),
+	(10,'Cum officia sed delectus unde quasi.','Labore deserunt consequatur voluptatem esse ut.',1,1,2,0,'2015-02-03 10:58:04','2015-02-03 10:58:04');
 
 /*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -301,6 +359,13 @@ CREATE TABLE `users` (
   `reset_password_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` text COLLATE utf8_unicode_ci NOT NULL,
+  `country` text COLLATE utf8_unicode_ci NOT NULL,
+  `post_code` text COLLATE utf8_unicode_ci NOT NULL,
+  `state` text COLLATE utf8_unicode_ci NOT NULL,
+  `city` text COLLATE utf8_unicode_ci NOT NULL,
+  `address2` text COLLATE utf8_unicode_ci NOT NULL,
+  `address` text COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
@@ -313,10 +378,10 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 
-INSERT INTO `users` (`id`, `email`, `username`, `password`, `permissions`, `activated`, `activation_code`, `activated_at`, `last_login`, `persist_code`, `reset_password_code`, `first_name`, `last_name`, `created_at`, `updated_at`)
+INSERT INTO `users` (`id`, `email`, `username`, `password`, `permissions`, `activated`, `activation_code`, `activated_at`, `last_login`, `persist_code`, `reset_password_code`, `first_name`, `last_name`, `phone`, `country`, `post_code`, `state`, `city`, `address2`, `address`, `created_at`, `updated_at`)
 VALUES
-	(1,'admin@admin.com','admin','$2y$10$tis/j1elqoVZZr/4q9NifegrpbPmUCfntxMIn.ceNaUX86/LJVieq',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2015-01-01 19:38:42','2015-01-01 19:38:42'),
-	(2,'user@user.com','user','$2y$10$DBbC3wI6ag7QDAuePUX1TOQ2O1LXhjzlW8CWeaHiAEgg23eNYGw1a',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2015-01-01 19:38:42','2015-01-01 19:38:42');
+	(1,'admin@admin.com','admin','$2y$10$1cgBB7pu3c/cYc364c.Kxe7rqMR.8cqBCav348EZqnjCNOqHl9me.',NULL,1,NULL,NULL,'2015-02-03 10:58:31','$2y$10$pmR5u7xbHpRDdQaEi/.Fi.mxxD/w53z5YBJuj9ZWk59Uwo8NCS3uO',NULL,'Admin','User','+1 (432) 432-4324','USA','45524','NY','','Brooklyn','123 Any Street','2015-02-03 10:58:03','2015-02-03 10:58:31'),
+	(2,'user@user.com','user','$2y$10$dicspSyDHxSL5yEwPJ3ZMOlbFqZfoIn4Xkyt6EipnjAj0bnbayFye',NULL,1,NULL,NULL,NULL,NULL,NULL,'Customer','User','+1 (432) 432-4324','USA','45524','NY','','Brooklyn','123 Any Street','2015-02-03 10:58:03','2015-02-03 10:58:03');
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
