@@ -106,4 +106,9 @@ class Invoice extends \Eloquent {
 
 		return $totalAmount;
 	}
+
+	public function item() {
+
+		return $this->belongsTo('InvoiceItem');
+	}
 }

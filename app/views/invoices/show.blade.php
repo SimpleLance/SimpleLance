@@ -5,10 +5,9 @@
 
     <div class="well clearfix">
         <div class="col-md-8">
-            <p><strong>Title</strong>: {{ $invoice->title }}</p>
             <p><strong>Due Date</strong>: {{ $invoice->due }}</p>
-            <p><strong>Status</strong>: {{ $invoice->status->title }}</p>
             <p><strong>Owner</strong>: {{ $invoice->owner->username }}</p>
+            <p><strong>Amount</strong>: {{ number_format($invoice->amount, 2, '.', ',') }}</p>
 
         </div>
         <div class="col-md-4">

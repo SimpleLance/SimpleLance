@@ -4,11 +4,12 @@ class InvoicesController extends \BaseController {
 
 	protected $invoice;
 
-	public function __construct(Invoice $invoice, User $user, Status $status)
+	public function __construct(Invoice $invoice, User $user, InvoiceStatus $status, InvoiceItem $item)
 	{
 		$this->invoice = $invoice;
 		$this->user = $user;
 		$this->status = $status;
+		$this->items = $item;
 
 		$this->beforeFilter('Sentinel\inGroup:Admins',
 			[
@@ -62,8 +63,9 @@ class InvoicesController extends \BaseController {
 	{
 		$input = Input::all();
 
+		$input['status_id'] = 3;
+
 		$rules = array(
-			'title' => 'required',
 			'due' => 'required',
 			'status_id' => 'required',
 			'owner_id' => 'required'
@@ -79,7 +81,7 @@ class InvoicesController extends \BaseController {
 		} else {
 			$invoice = $this->invoice->create($input);
 
-			return Redirect::route('invoices.index')->with('flash', [
+			return Redirect::to('invoices/'.$invoice->id.'/items')->with('flash', [
 				'class' => 'success',
 				'message' => 'Invoice Created.'
 			]);
@@ -179,6 +181,71 @@ class InvoicesController extends \BaseController {
 		}
 
 		return Redirect::action('InvoicesController@index');
+	}
+
+	/**
+	 * @param $id
+	 * @return mixed
+     */
+	public function items($id)
+	{
+		$thisInvoice = $this->invoice->with('owner')->with('status')->with('item')->find($id);
+		$items = $this->items->where('invoice_id', $id)->orderBy('updated_at', 'ASC')->get();
+
+		return View::make('invoices.items')
+			->with('invoice', $thisInvoice)
+			->with('items', $items);
+	}
+
+	/**
+	 * @param $id
+	 * @return mixed
+     */
+	public function storeItem($id)
+	{
+		$input = Input::all();
+		$input['invoice_id'] = $id;
+
+		$rules = array(
+			'invoice_id' => 'required',
+			'name' => 'required',
+			'price' => 'required',
+			'quantity' => 'required',
+			'total' => 'required'
+		);
+
+		$validator = Validator::make($input, $rules);
+
+		if ($validator->fails()) {
+
+			return Redirect::to('invoices/'.$id.'/items')
+				->withErrors($validator)
+				->withInput($input);
+		} else {
+
+			$this->items->create($input);
+
+			$invoice = $this->invoice->find($id);
+			$invoice->amount = $invoice->amount = $input['total'];
+			$invoice->save();
+
+			return Redirect::to('invoices/'.$id.'/items')->with('flash', [
+				'class' => 'success',
+				'message' => 'Invoice Updated.'
+			]);
+		}
+	}
+
+	public function send($id)
+	{
+		$invoice = $this->invoice->find($id);
+		$invoice->status_id = 1;
+		$invoice->save();
+
+		return Redirect::to('invoices')->with('flash', [
+			'class' => 'success',
+			'message' => 'Invoice Sent.'
+		]);
 	}
 
 }

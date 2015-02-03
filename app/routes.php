@@ -21,6 +21,11 @@ Route::group(['before' => 'Sentinel\auth'], function()
 	# Override Sentinel's Default user routes with our own filter requirement
 	Route::get('/users/{id}', ['as' => 'sl_user.show', 'uses' => 'SimpleLance\UserController@show'])->where('id', '[0-9]+');
 	Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
+	# Manual routes to allow for invoice creation
+	Route::get('/invoices/{id}/items', 'InvoicesController@items');
+	Route::post('/invoices/{id}/items', 'InvoicesController@storeItem');
+	Route::get('/invoices{id}/send', 'InvoicesController@send');
+
 });
 
 Route::group(['before' => 'Sentinel\inGroup:Admins'], function()
