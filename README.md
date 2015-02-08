@@ -23,11 +23,25 @@ Development is ongoing and updates will be released as regular as possible.
 
 If you have a feature you would like to see added, please create an issue or PR
 
+##Requirements
+
+SimpleLance requires PHP > 5.4 to run. 
+
+We recommend installing and running SimpleLance on Ubuntu x64 LTS. Other server  configurations will likely work.
+
 ##Installation
 
 To install SimpleLance:
 
-- TODO: Update Install to support new laravel version
+- Clone this repo: ```git clone git@github.com:SimpleLance/SimpleLance.git```
+- Edit ```SimpleLance/app/config/database.php``` with your database settings.
+- Point your web server virtual host at: ```/path/to/cloned/SimpleLance/public```
+- Change Directory to ```/path/to/cloned/SimpleLance```
+- Run the Database Migrations: ```php artisan migrate```
+- Seed the Database: ```php artisan db:seed```
+- You can login with the accounts above. Please remove or change the passwords to these accounts before making your site live.
+
+Have trouble installing? Please create an issue and we'll do our best to help.
 
 ###Local Development
 
@@ -43,14 +57,12 @@ Vagrant is built into the project via Laravel Homestead
 
 To run the test suite run ```codecept run``` from the project root. This is made easier if you use the built in vagrant box.
 
-###ToDo / Contributing:
+### Contributing:
 
-There are a few things left to be done:
+We welcome and love contributions! To facilitate receiving updates to SimpleLance, we encourage you to create a new personal branch after you fork this repository. This branch should be used for content and changes that are specific to your event. However, anything you are willing to push back should be updated in your master branch. This will help keep the master branch generic for future event organizers that choose to use the system. You would then be able to merge master to your private branch and get updates when desired!
 
-- Create admin dashboard / customer home screen
-- Finish email notifications
-- General code tidy
-- Improve (create!) documentation
-- General front end improvements (nothing radical, but it needs serious loving)
+Not sure what to work on? [Check the Ready tag](https://waffle.io/simplelance/simplelance)
 
-If you feel so inclined to help with any of these, please open a PR and get stuck in.
+Please include failing tests in all bug reports. Please include passing tests with new feature PRs. 
+
+Please join us in #SimpleLance on the Freenode IRC network.
