@@ -2,8 +2,7 @@
 [![Code Climate](https://codeclimate.com/github/SimpleLance/SimpleLance/badges/gpa.svg)](https://codeclimate.com/github/SimpleLance/SimpleLance)
 [![Stories in Ready](https://badge.waffle.io/SimpleLance/SimpleLance.png?label=ready&title=Ready)](https://waffle.io/SimpleLance/SimpleLance)
 
-SimpleLance
-===========
+# SimpleLance
 
 A simple customer management / invoicing / project tracking tool built for freelancers.
 
