@@ -6,11 +6,11 @@
     <table class="table table-striped table-hover">
         <thead>
             <th>Title</th>
-            <th>Description</th>
             <th>Priority</th>
             <th>Status</th>
             <th>Replies</th>
             <th>Owner</th>
+            <th>Updated At</th>
         </thead>
         <tbody>
         @foreach ($tickets as $ticket)
@@ -20,9 +20,6 @@
                         <a href="{{ action('TicketsController@show', array($ticket->id)) }}">
                             {{ $ticket->title }}
                         </a>
-                    </td>
-                    <td>
-                        {{ $ticket->description }}
                     </td>
                     <td>
                         {{ $ticket->priority->title }}
@@ -35,6 +32,9 @@
                     </td>
                     <td>
                         {{ $ticket->owner->username }}
+                    </td>
+                    <td>
+                        {{ $ticket->updated_at }}
                     </td>
                 </tr>
             @endif
