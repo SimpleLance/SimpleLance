@@ -16,6 +16,7 @@ Route::group(['before' => 'Sentinel\auth'], function()
 	Route::resource('projects', 'ProjectsController');
 	Route::resource('tickets', 'TicketsController');
 	Route::resource('invoices', 'InvoicesController');
+	Route::get('/tickets/status/{status}', ['as' => 'ticket.by.status', 'uses' => 'TicketsController@filterByStatus']);
 	Route::post('tickets/{id}/reply', 'TicketsController@reply');
 	Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 	# Override Sentinel's Default user routes with our own filter requirement
