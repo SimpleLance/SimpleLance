@@ -20,4 +20,9 @@ class Status extends \Eloquent {
 
 		return $statuses;
 	}
+
+	public function getStatusByName($name)
+	{
+		return Status::where('title', $name)->firstOrFail();
+	}
 }
