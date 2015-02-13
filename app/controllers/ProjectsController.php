@@ -31,9 +31,15 @@ class ProjectsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$projects = $this->project->with('owner')->get();
+		$statuses = $this->status->getStatuses();
+		$projects = $this->project
+			->with('owner')
+			->where('status_id', '1')
+			->orderBy('updated_at', 'ASC')
+			->get();
 
 		return View::make('projects.index')
+			->with('statuses', $statuses)
 			->with('projects', $projects);
 	}
 
@@ -187,4 +193,26 @@ class ProjectsController extends \BaseController {
 		return Redirect::action('ProjectsController@index');
 	}
 
+	public function filterByStatus($statusName)
+	{
+		try {
+			$status = $this->status->getStatusByName($statusName);
+		} catch(Exception $e) {
+
+			return Redirect::route('projects.index')->with('flash', [
+				'class' => 'info',
+				'message' => 'Invalid Status Name.'
+			]);
+		}
+		$statuses = $this->status->getStatuses();
+		$projects = $this->project
+			->with('owner')
+			->where('status_id', $status->id)
+			->orderBy('updated_at', 'ASC')
+			->get();
+
+		return View::make('projects.index')
+		           ->with('statuses', $statuses)
+		           ->with('projects', $projects);
+	}
 }

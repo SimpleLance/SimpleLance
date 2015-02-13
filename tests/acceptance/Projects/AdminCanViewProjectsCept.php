@@ -5,5 +5,3 @@ TestCommonAdmin::logMeIn($I);
 $I->click('Project Tracker');
 $I->click('View Projects');
 $I->see('Sample Project');
-$I->see('Test Project', 'tr');
-
