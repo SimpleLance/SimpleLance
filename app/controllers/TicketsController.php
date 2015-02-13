@@ -30,6 +30,7 @@ class TicketsController extends \BaseController {
 	 */
 	public function index()
 	{
+		$statuses = $this->status->getStatuses();
 		$tickets = $this->ticket
 			->with('owner')
 			->where('status_id', '1')
@@ -37,7 +38,8 @@ class TicketsController extends \BaseController {
 			->get();
 
 		return View::make('tickets.index')
-		           ->with('tickets', $tickets);
+					->with('statuses', $statuses)
+					->with('tickets', $tickets);
 	}
 
 	/**
@@ -252,7 +254,7 @@ class TicketsController extends \BaseController {
 				'message' => 'Invalid Status Name.'
 			]);
 		}
-
+		$statuses = $this->status->getStatuses();
 		$tickets = $this->ticket
 			->with('owner')
 			->where('status_id', $status->id)
@@ -260,6 +262,7 @@ class TicketsController extends \BaseController {
 			->get();
 
 		return View::make('tickets.index')
-		           ->with('tickets', $tickets);
+					->with('statuses', $statuses)
+					->with('tickets', $tickets);
 	}
 }
