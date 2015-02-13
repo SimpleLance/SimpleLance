@@ -30,7 +30,11 @@ class TicketsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$tickets = $this->ticket->with('owner')->orderBy('updated_at', 'ASC')->get();
+		$tickets = $this->ticket
+			->with('owner')
+			->where('status_id', '1')
+			->orderBy('updated_at', 'ASC')
+			->get();
 
 		return View::make('tickets.index')
 		           ->with('tickets', $tickets);
@@ -237,4 +241,25 @@ class TicketsController extends \BaseController {
 		}
 	}
 
+	public function filterByStatus($statusName)
+	{
+		try {
+			$status = $this->status->getStatusByName($statusName);
+		} catch(Exception $e) {
+
+			return Redirect::route('tickets.index')->with('flash', [
+				'class' => 'info',
+				'message' => 'Invalid Status Name.'
+			]);
+		}
+
+		$tickets = $this->ticket
+			->with('owner')
+			->where('status_id', $status->id)
+			->orderBy('updated_at', 'ASC')
+			->get();
+
+		return View::make('tickets.index')
+		           ->with('tickets', $tickets);
+	}
 }
