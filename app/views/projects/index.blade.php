@@ -6,7 +6,7 @@
         @foreach($statuses as $status)
             <a class="btn btn-default"
                role="button"
-               href="/tickets/status/{{ $status }}">{{ $status }}</a>
+               href="/projects/status/{{ $status }}">{{ $status }}</a>
         @endforeach
     </div>
     <table class="table table-striped table-hover">
