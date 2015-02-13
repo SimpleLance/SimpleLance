@@ -21,7 +21,7 @@
         <div class="form-group {{ ($errors->has('description')) ? 'has-error' : '' }}" for="description">
             {{ Form::label('edit_description', 'Description', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-10">
-                {{ Form::text('description', $project->description, array('class' => 'form-control', 'placeholder' => 'Description', 'id' => 'edit_description'))}}
+                {{ Form::textarea('description', $project->description, array('class' => 'form-control', 'placeholder' => 'Description', 'id' => 'edit_description'))}}
             </div>
             {{ ($errors->has('description') ? $errors->first('description') : '') }}
         </div>
