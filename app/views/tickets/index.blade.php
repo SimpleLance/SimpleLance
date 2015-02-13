@@ -2,7 +2,13 @@
 
 @section('content')
     <h1>Support Tickets</h1>
-
+    <div class="statuses">
+        @foreach($statuses as $status)
+            <a class="btn btn-default"
+               role="button"
+               href="/tickets/status/{{ $status }}">{{ $status }}</a>
+        @endforeach
+    </div>
     <table class="table table-striped table-hover">
         <thead>
             <th>Title</th>
