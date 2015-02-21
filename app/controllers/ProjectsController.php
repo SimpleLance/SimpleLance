@@ -89,9 +89,10 @@ class ProjectsController extends \BaseController {
 		} else {
 			$project = $this->project->create($input);
 
-			Session::flash('success', 'Project Created');
-
-			return Redirect::route('projects.index');
+			return Redirect::route('projects.index')->with('success', [
+				'class' => 'success',
+				'text' => 'Project Created.'
+			]);
 		}
 	}
 
@@ -168,9 +169,10 @@ class ProjectsController extends \BaseController {
 
 			$project->save();
 
-			Session::flash('success', 'Project Updated');
-
-			return Redirect::route('projects.index');
+			return Redirect::route('projects.index')->with('success', [
+				'class' => 'success',
+				'text' => 'Project Updated.'
+			]);
 		}
 	}
 
@@ -185,12 +187,22 @@ class ProjectsController extends \BaseController {
 	{
 		if ($this->project->destroy($id))
 		{
-			Session::flash('success', 'Project Deleted');
+			$status = [
+				'success' => [
+					'class' => 'success',
+					'text' => 'Ticket Deleted'
+				]
+			];
 		} else {
-			Session::flash('error', 'Unable to Delete Project');
+			$status = [
+				'error' => [
+					'class' => 'error',
+					'text' => 'Unable to Delete Ticket'
+				]
+			];
 		}
 
-		return Redirect::action('ProjectsController@index');
+		return Redirect::action('ProjectsController@index')->with($status);
 	}
 
 	public function filterByStatus($statusName)
