@@ -59,9 +59,9 @@ class StatusesController extends \BaseController {
 		} else {
 			$status = $this->status->create($input);
 
-			return Redirect::route('statuses.index')->with('flash', [
+			return Redirect::route('statuses.index')->with('success', [
 				'class' => 'success',
-				'message' => 'Status Created.'
+				'text' => 'Status Created.'
 			]);
 		}
 	}
@@ -111,9 +111,9 @@ class StatusesController extends \BaseController {
 
 			$status->save();
 
-			return Redirect::route('statuses.index')->with('flash', [
+			return Redirect::route('statuses.index')->with('success', [
 				'class' => 'success',
-				'message' => 'Status Updated.'
+				'text' => 'Status Updated.'
 			]);
 		}
 	}
@@ -129,12 +129,22 @@ class StatusesController extends \BaseController {
 	{
 		if ($this->status->destroy($id))
 		{
-			Session::flash('success', 'Status Deleted');
+			$status = [
+				'success' => [
+					'class' => 'success',
+					'text' => 'Status Deleted'
+				]
+			];
 		} else {
-			Session::flash('error', 'Unable to Delete Status');
+			$status = [
+				'error' => [
+					'class' => 'error',
+					'text' => 'Unable to Delete Status'
+				]
+			];
 		}
 
-		return Redirect::action('StatusesController@index');
+		return Redirect::action('StatusesController@index')->with($status);
 	}
 
 }
