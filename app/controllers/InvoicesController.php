@@ -79,9 +79,9 @@ class InvoicesController extends \BaseController {
 		} else {
 			$invoice = $this->invoice->create($input);
 
-			return Redirect::route('invoices.index')->with('flash', [
+			return Redirect::route('invoices.index')->with('success', [
 				'class' => 'success',
-				'message' => 'Invoice Created.'
+				'text' => 'Invoice Created.'
 			]);
 		}
 	}
@@ -155,9 +155,9 @@ class InvoicesController extends \BaseController {
 
 			$invoice->save();
 
-			return Redirect::route('invoices.index')->with('flash', [
+			return Redirect::route('invoices.index')->with('success', [
 				'class' => 'success',
-				'message' => 'Invoice Updated.'
+				'text' => 'Invoice Updated.'
 			]);
 		}
 	}
@@ -173,12 +173,22 @@ class InvoicesController extends \BaseController {
 	{
 		if ($this->invoice->destroy($id))
 		{
-			Session::flash('success', 'Invoice Deleted');
+			$status = [
+				'success' => [
+					'class' => 'success',
+					'text' => 'Invoice Deleted'
+				]
+			];
 		} else {
-			Session::flash('error', 'Unable to Delete Invoice');
+			$status = [
+				'error' => [
+					'class' => 'error',
+					'text' => 'Unable to Delete Invoice'
+				]
+			];
 		}
 
-		return Redirect::action('InvoicesController@index');
+		return Redirect::action('InvoicesController@index')->with($status);
 	}
 
 }
