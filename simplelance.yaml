@@ -11,6 +11,8 @@ keys:
 folders:
     - map: .
       to: /home/vagrant/simplelance.dev
+    - map: .
+      to: /vagrant
 
 sites:
     - map: simplelance.dev
