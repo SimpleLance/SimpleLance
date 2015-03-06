@@ -21,7 +21,7 @@
         @foreach ($projects as $project)
             @if (Sentry::inGroup(Sentry::findGroupByName('Admins')) || $project->owner_id == Sentry::getUser()->id)
                 <tr>
-                    <td>
+                    <td style="vertical-align: middle;">
                         <a href="{{ action('ProjectsController@show', array($project->id)) }}">
                             {{ $project->title }}
                         </a>
@@ -36,7 +36,7 @@
                         {{ $project->owner->username }}
                     </td>
                     <td>
-                        {{ $project->updated_at }}
+                        {{ date("D, F d Y",strtotime($project->updated_at)) }} <br> {{ date("g:h a",strtotime($project->updated_at)) }}
                     </td>
                 </tr>
             @endif
