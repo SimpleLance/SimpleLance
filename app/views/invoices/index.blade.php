@@ -21,7 +21,7 @@
                         </a>
                     </td>
                     <td>
-                        {{ $invoice->due }}
+                        {{ date("F d Y",strtotime($invoice->due)) }}
                     </td>
                     <td>
                         {{ $invoice->status->title }}
