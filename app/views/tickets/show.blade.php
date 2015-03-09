@@ -40,7 +40,7 @@
         @foreach($replies as $reply)
             <div>
                 <em>Reply by</em> <b>{{ $reply->user->username }}</b>
-                <em>on</em> <b>{{ $reply->created_at }}</b>
+                <em>on</em> <b>{{ date("D, F d Y",strtotime($ticket->created_at)) }} at {{ date("g:h a",strtotime($ticket->created_at)) }}</b>
                 <br>
                 &nbsp;{{ $reply->content }}
                 <hr>
