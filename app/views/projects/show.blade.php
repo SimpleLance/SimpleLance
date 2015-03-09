@@ -15,7 +15,7 @@
         <div class="col-md-5">
 
             <p><em>Project created: {{ date("D, F d Y",strtotime($project->created_at)) }}</em></p>
-            <p><em>Last Updated: {{ date("D, F d Y",strtotime($project->updated_at)) }} at {{ date("g:h a",strtotime($project->updated_at)) }}</em></p>
+            <p><em>Last Updated: {{ date("D, F d Y",strtotime($project->updated_at)) }} at {{ date("g:i a",strtotime($project->updated_at)) }}</em></p>
             <button id="edit-{{ $project->id }}" class="btn btn-primary" onClick="location.href='{{ action('ProjectsController@edit', array($project->id)) }}'">Edit Project</button>
         </div>
         <div class="col-md-2">

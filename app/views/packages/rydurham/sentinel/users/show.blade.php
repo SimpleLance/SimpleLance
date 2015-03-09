@@ -34,7 +34,7 @@ Home
 		</div>
 		<div class="col-md-4">
 			<p><em>Account created: {{ date("D, F d Y",strtotime($user->created_at)) }}</em></p>
-			<p><em>Last Updated: {{ date("D, F d Y",strtotime($user->updated_at)) }} at {{ date("g:h a",strtotime($user->updated_at)) }}</em></p>
+			<p><em>Last Updated: {{ date("D, F d Y",strtotime($user->updated_at)) }} at {{ date("g:i a",strtotime($user->updated_at)) }}</em></p>
 			<button class="btn btn-primary" onClick="location.href='{{ action('Sentinel\UserController@edit', array($user->id)) }}'">Edit Profile</button>
 		</div>
 	</div>

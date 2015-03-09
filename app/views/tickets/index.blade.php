@@ -40,7 +40,7 @@
                         {{ $ticket->owner->username }}
                     </td>
                     <td>
-                        {{ date("D, F d Y",strtotime($ticket->updated_at)) }} <br> {{ date("g:h a",strtotime($ticket->updated_at)) }}
+                        {{ date("D, F d Y",strtotime($ticket->updated_at)) }} <br> {{ date("g:i a",strtotime($ticket->updated_at)) }}
                     </td>
                 </tr>
             @endif

@@ -10,7 +10,7 @@
             <p><strong>Priority</strong>: {{ $ticket->priority->title }}</p>
             <p><strong>Status</strong>: {{ $ticket->status->title }}</p>
             <p><strong>Ticket created</strong>: {{ date("D, F d Y",strtotime($ticket->created_at)) }}</p>
-            <p><strong>Last Updated</strong>: {{ date("D, F d Y",strtotime($ticket->updated_at)) }} at {{ date("g:h a",strtotime($ticket->updated_at)) }}</p>
+            <p><strong>Last Updated</strong>: {{ date("D, F d Y",strtotime($ticket->updated_at)) }} at {{ date("g:i a",strtotime($ticket->updated_at)) }}</p>
 
             <button id="edit-{{ $ticket->id }}" class="btn btn-primary" onClick="location.href='{{ action('TicketsController@edit', array($ticket->id)) }}'">Edit Ticket</button>
 
@@ -31,7 +31,7 @@
     <div class="well col-md-6">
         <div>
             <em>Ticket opened by</em> <b>{{ $ticket->owner->username }}</b>
-            <em>on</em> <b>{{ date("D, F d Y",strtotime($ticket->created_at)) }} at {{ date("g:h a",strtotime($ticket->created_at)) }}</b>
+            <em>on</em> <b>{{ date("D, F d Y",strtotime($ticket->created_at)) }} at {{ date("g:i a",strtotime($ticket->created_at)) }}</b>
             <br>
             &nbsp;{{ $ticket->description }}
             <hr>
@@ -40,7 +40,7 @@
         @foreach($replies as $reply)
             <div>
                 <em>Reply by</em> <b>{{ $reply->user->username }}</b>
-                <em>on</em> <b>{{ date("D, F d Y",strtotime($ticket->created_at)) }} at {{ date("g:h a",strtotime($ticket->created_at)) }}</b>
+                <em>on</em> <b>{{ date("D, F d Y",strtotime($reply->created_at)) }} at {{ date("g:i a",strtotime($reply->created_at)) }}</b>
                 <br>
                 &nbsp;{{ $reply->content }}
                 <hr>
