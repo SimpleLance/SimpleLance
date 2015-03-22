@@ -16,11 +16,8 @@
                 <tr>
                     <td>
                         <a href="{{ action('InvoicesController@show', array($invoice->id)) }}">
-                            {{ $invoice->title }}
+                            {{ date("F d Y",strtotime($invoice->due)) }}
                         </a>
-                    </td>
-                    <td>
-                        {{ date("F d Y",strtotime($invoice->due)) }}
                     </td>
                     <td>
                         {{ $invoice->status->title }}
