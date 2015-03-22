@@ -18,7 +18,7 @@
             {{ ($errors->has('owner_id') ? $errors->first('owner_id') : '') }}
         </div>
 
-        {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
+        {{ Form::submit('Create', array('class' => 'btn btn-primary', 'id' => 'create')) }}
 
         {{ Form::close() }}
 
