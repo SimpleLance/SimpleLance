@@ -198,3 +198,7 @@ body {
 .table > tbody > tr > .thick-line {
     border-top: 2px solid;
 }
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}

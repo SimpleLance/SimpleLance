@@ -15,7 +15,12 @@
             @if (Sentry::inGroup(Sentry::findGroupByName('Admins')) || $invoice->owner_id == Sentry::getUser()->id)
                 <tr>
                     <td>
-                        {{ $invoice->due }}
+                        <a href="{{ action('InvoicesController@show', array($invoice->id)) }}">
+                            {{ $invoice->title }}
+                        </a>
+                    </td>
+                    <td>
+                        {{ date("F d Y",strtotime($invoice->due)) }}
                     </td>
                     <td>
                         {{ $invoice->status->title }}

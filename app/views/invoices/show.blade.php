@@ -31,59 +31,23 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><strong>Order summary</strong></h3>
-                </div>
-                <form role="form" action="" method="post" name="invoice_item">
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-condensed" id="invoice_items">
-                                <thead>
-                                <tr>
-                                    <td><strong>Item</strong></td>
-                                    <td class="text-center"><strong>Price</strong></td>
-                                    <td class="text-center"><strong>Quantity</strong></td>
-                                    <td class="text-right"><strong>Total</strong></td>
-                                    <td></td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($items as $item)
-                                    <tr>
-                                        <td>{{ $item->name }}</td>
-                                        <td class="text-center">{{ number_format($item->price, 2, '.', ',') }}</td>
-                                        <td class="text-center">{{ $item->quantity }}</td>
-                                        <td class="text-right">{{ number_format($item->total, 2, '.', ',') }}</td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <table class="table table-condensed">
-                                <thead>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="thick-line"></td>
-                                    <td class="thick-line"></td>
-                                    <td class="thick-line text-center"><strong>Total:</strong></td>
-                                    <td class="thick-line text-right">{{ number_format($invoice->amount, 2, '.', ',') }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </form>
-            </div>
+        <div class="col-md-4">
+            <p><em>Invoice created: {{ date("D, F d Y",strtotime($invoice->created_at)) }}</em></p>
+            <p><em>Last Updated: {{ date("D, F d Y",strtotime($invoice->updated_at)) }} at {{ date("g:i a",strtotime($invoice->updated_at)) }}</em></p>
+            <button id="edit-{{ $invoice->id }}" class="btn btn-primary" onClick="location.href='{{ action('InvoicesController@edit', array($invoice->id)) }}'">Edit Invoice</button>
+        </div>
+        <div class="col-md-2">
+            {{ Form::open(array(
+                 'action' => array('InvoicesController@destroy', $invoice->id),
+                 'method' => 'delete',
+                 'class' => $invoice->id . '-delete',
+                 'id' => $invoice->id . '-delete',
+                 'name' => $invoice->id . '-delete',
+                 'role' => ''
+                 )) }}
+
+            {{ Form::submit('Delete', ['class' => 'btn btn-danger', 'id' => 'delete-' . $invoice->id])}}
+            {{ Form::close() }}
         </div>
     </div>
 
