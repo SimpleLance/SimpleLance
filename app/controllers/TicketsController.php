@@ -237,7 +237,7 @@ class TicketsController extends \BaseController {
 			$ticket->replies = $ticket->replies +1;
 			$ticket->save();
 
-			return Redirect::route('tickets.show', $id)->with('message', [
+			return Redirect::route('tickets.index')->with('message', [
 				'class' => 'success',
 				'message' => 'Ticket Replied To.'
 			]);
