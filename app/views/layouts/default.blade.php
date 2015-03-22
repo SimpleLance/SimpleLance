@@ -10,6 +10,7 @@
     <link href="/css/jquery-ui.theme.css" rel="stylesheet">
     <link href="/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/datepicker3.css"/>
     @yield('head')
 </head>
 <body>
@@ -81,6 +82,7 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/metisMenu.min.js"></script>
 <script src="/js/scripts.js"></script>
+<script src="/js/bootstrap-datepicker.js"></script>
 @yield('footer')
 </body>
 </html>

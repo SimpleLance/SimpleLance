@@ -14,7 +14,6 @@ class InvoicesTableSeeder extends Seeder {
 			$status = Status::orderByRaw("RAND()")->first();
 			$user = User::orderByRaw("RAND()")->first();
 			Invoice::create([
-				'title' => $faker->word(),
 				'due' => $faker->date(),
 				'status_id' => $status->id,
 				'amount' => $faker->randomFloat($nbMaxDecimals = 2),

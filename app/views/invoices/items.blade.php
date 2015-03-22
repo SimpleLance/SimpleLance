@@ -18,16 +18,16 @@
                     </address>
                 </div>
                 <div class="form-group col-xs-4">
-                    <strong>Created date:</strong><br>
-                    {{ $invoice->created_at->format('Y-m-d') }}
+                        <strong>Created date:</strong><br>
+                        {{ $invoice->created_at->format('Y-m-d') }}
                 </div>
                 <div class="form-group col-xs-4">
-                    <strong>Due date:</strong><br>
-                    {{ $invoice->due }}
+                        <strong>Due date:</strong><br>
+                        {{ $invoice->due }}
                 </div>
                 <div class="form-group col-xs-4">
-                    <strong>Status:</strong><br>
-                    {{ $invoice->status->title }}
+                        <strong>Status:</strong><br>
+                        {{ $invoice->status->title }}
                 </div>
             </div>
         </div>
@@ -60,6 +60,13 @@
                                         <td class="text-right">{{ number_format($item->total, 2, '.', ',') }}</td>
                                     </tr>
                                 @endforeach
+                                <tr>
+                                    <td><label for="item"></label><input type="text" name="name" id="name" value=""></td>
+                                    <td class="text-center"><label for="price"></label><input type="text" name="price" id="price" value="" onFocus="startCalc();" onBlur="stopCalc();"></td>
+                                    <td class="text-center"><label for="quantity"></label><input type="text" name="quantity" id="quantity" value="" onFocus="startCalc();" onBlur="stopCalc();"></td>
+                                    <td class="text-right"><label for="total"></label><input type="text" name="total" id="total" value=""></td>
+                                    <td><button class="button " name="submit" type="submit">Add Item</button></td>
+                                </tr>
                                 </tbody>
                             </table>
                             <table class="table table-condensed">
@@ -86,20 +93,5 @@
             </div>
         </div>
     </div>
-
-    <div class="col-md-2">
-        {{ Form::open(array(
-             'action' => array('InvoicesController@destroy', $invoice->id),
-             'method' => 'delete',
-             'class' => $invoice->id . '-delete',
-             'id' => $invoice->id . '-delete',
-             'name' => $invoice->id . '-delete',
-             'role' => ''
-             )) }}
-
-        {{ Form::submit('Delete Invoice', ['class' => 'btn btn-danger', 'id' => 'delete-' . $invoice->id])}}
-        {{ Form::close() }}
-        <a href="/invoices{{ $invoice->id }}/send"  class="btn btn-primary">Send Invoice</a>
-        <button id="edit-{{ $invoice->id }}" class="btn btn-primary" onClick="location.href='{{ action('InvoicesController@edit', array($invoice->id)) }}'">Edit Invoice</button>
-    </div>
+    <button id="send-{{ $invoice->id }}" class="btn btn-primary" onClick="location.href='{{ action('InvoicesController@send', array($invoice->id)) }}'">Send Invoice</button>
 @stop
