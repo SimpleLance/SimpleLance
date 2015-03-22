@@ -81,9 +81,9 @@ class InvoicesController extends \BaseController {
 		} else {
 			$invoice = $this->invoice->create($input);
 
-			return Redirect::to('invoices/'.$invoice->id.'/items')->with('flash', [
+            return Redirect::route('invoices.index')->with('message', [
 				'class' => 'success',
-				'message' => 'Invoice Created.'
+				'text' => 'Invoice Created.'
 			]);
 		}
 	}
@@ -157,9 +157,9 @@ class InvoicesController extends \BaseController {
 
 			$invoice->save();
 
-			return Redirect::route('invoices.index')->with('flash', [
+			return Redirect::route('invoices.index')->with('message', [
 				'class' => 'success',
-				'message' => 'Invoice Updated.'
+				'text' => 'Invoice Updated.'
 			]);
 		}
 	}
@@ -175,12 +175,22 @@ class InvoicesController extends \BaseController {
 	{
 		if ($this->invoice->destroy($id))
 		{
-			Session::flash('success', 'Invoice Deleted');
+			$status = [
+				'success' => [
+					'class' => 'success',
+					'text' => 'Invoice Deleted'
+				]
+			];
 		} else {
-			Session::flash('error', 'Unable to Delete Invoice');
+			$status = [
+				'error' => [
+					'class' => 'error',
+					'text' => 'Unable to Delete Invoice'
+				]
+			];
 		}
 
-		return Redirect::action('InvoicesController@index');
+		return Redirect::action('InvoicesController@index')->with($status);
 	}
 
 	/**
@@ -229,7 +239,7 @@ class InvoicesController extends \BaseController {
 			$invoice->amount = $invoice->amount = $input['total'];
 			$invoice->save();
 
-			return Redirect::to('invoices/'.$id.'/items')->with('flash', [
+			return Redirect::to('invoices/'.$id.'/items')->with('message', [
 				'class' => 'success',
 				'message' => 'Invoice Updated.'
 			]);
@@ -242,7 +252,7 @@ class InvoicesController extends \BaseController {
 		$invoice->status_id = 1;
 		$invoice->save();
 
-		return Redirect::to('invoices')->with('flash', [
+		return Redirect::to('invoices')->with('message', [
 			'class' => 'success',
 			'message' => 'Invoice Sent.'
 		]);

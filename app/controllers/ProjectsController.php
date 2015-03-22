@@ -31,9 +31,15 @@ class ProjectsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$projects = $this->project->with('owner')->get();
+		$statuses = $this->status->getStatuses();
+		$projects = $this->project
+			->with('owner')
+			->where('status_id', '1')
+			->orderBy('updated_at', 'ASC')
+			->get();
 
 		return View::make('projects.index')
+			->with('statuses', $statuses)
 			->with('projects', $projects);
 	}
 
@@ -83,9 +89,10 @@ class ProjectsController extends \BaseController {
 		} else {
 			$project = $this->project->create($input);
 
-			Session::flash('success', 'Project Created');
-
-			return Redirect::route('projects.index');
+			return Redirect::route('projects.index')->with('success', [
+				'class' => 'success',
+				'text' => 'Project Created.'
+			]);
 		}
 	}
 
@@ -162,9 +169,10 @@ class ProjectsController extends \BaseController {
 
 			$project->save();
 
-			Session::flash('success', 'Project Updated');
-
-			return Redirect::route('projects.index');
+			return Redirect::route('projects.index')->with('success', [
+				'class' => 'success',
+				'text' => 'Project Updated.'
+			]);
 		}
 	}
 
@@ -179,12 +187,44 @@ class ProjectsController extends \BaseController {
 	{
 		if ($this->project->destroy($id))
 		{
-			Session::flash('success', 'Project Deleted');
+			$status = [
+				'success' => [
+					'class' => 'success',
+					'text' => 'Ticket Deleted'
+				]
+			];
 		} else {
-			Session::flash('error', 'Unable to Delete Project');
+			$status = [
+				'error' => [
+					'class' => 'error',
+					'text' => 'Unable to Delete Ticket'
+				]
+			];
 		}
 
-		return Redirect::action('ProjectsController@index');
+		return Redirect::action('ProjectsController@index')->with($status);
 	}
 
+	public function filterByStatus($statusName)
+	{
+		try {
+			$status = $this->status->getStatusByName($statusName);
+		} catch(Exception $e) {
+
+			return Redirect::route('projects.index')->with('flash', [
+				'class' => 'info',
+				'message' => 'Invalid Status Name.'
+			]);
+		}
+		$statuses = $this->status->getStatuses();
+		$projects = $this->project
+			->with('owner')
+			->where('status_id', $status->id)
+			->orderBy('updated_at', 'ASC')
+			->get();
+
+		return View::make('projects.index')
+		           ->with('statuses', $statuses)
+		           ->with('projects', $projects);
+	}
 }

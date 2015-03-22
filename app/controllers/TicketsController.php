@@ -30,10 +30,16 @@ class TicketsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$tickets = $this->ticket->with('owner')->orderBy('updated_at', 'ASC')->get();
+		$statuses = $this->status->getStatuses();
+		$tickets = $this->ticket
+			->with('owner')
+			->where('status_id', '1')
+			->orderBy('updated_at', 'ASC')
+			->get();
 
 		return View::make('tickets.index')
-		           ->with('tickets', $tickets);
+					->with('statuses', $statuses)
+					->with('tickets', $tickets);
 	}
 
 	/**
@@ -83,9 +89,9 @@ class TicketsController extends \BaseController {
 			$input['replies'] = 0;
 			$this->ticket->create($input);
 
-			return Redirect::route('tickets.index')->with('flash', [
+			return Redirect::route('tickets.index')->with('success', [
 				'class' => 'success',
-				'message' => 'Ticket Created.'
+				'text' => 'Ticket Created.'
 			]);
 		}
 	}
@@ -165,9 +171,9 @@ class TicketsController extends \BaseController {
 
 			$ticket->save();
 
-			return Redirect::route('tickets.index')->with('flash', [
+			return Redirect::route('tickets.index')->with('success', [
 				'class' => 'success',
-				'message' => 'Ticket Updated.'
+				'text' => 'Ticket Updated.'
 			]);
 		}
 	}
@@ -183,12 +189,22 @@ class TicketsController extends \BaseController {
 	{
 		if ($this->ticket->destroy($id))
 		{
-			Session::flash('success', 'Ticket Deleted');
+			$status = [
+				'success' => [
+					'class' => 'success',
+					'text' => 'Ticket Deleted'
+				]
+			];
 		} else {
-			Session::flash('error', 'Unable to Delete Ticket');
+			$status = [
+				'error' => [
+					'class' => 'error',
+					'text' => 'Unable to Delete Ticket'
+				]
+			];
 		}
 
-		return Redirect::action('TicketsController@index');
+		return Redirect::action('TicketsController@index')->with($status);
 	}
 
 	/**
@@ -206,6 +222,7 @@ class TicketsController extends \BaseController {
 
 		$rules = array(
 			'status_id' => 'required',
+			'priority_id' => 'required',
 			'content' => 'required'
 		);
 
@@ -230,11 +247,33 @@ class TicketsController extends \BaseController {
 			$ticket->replies = $ticket->replies +1;
 			$ticket->save();
 
-			return Redirect::route('tickets.index')->with('flash', [
+            return Redirect::route('tickets.index')->with('message', [
 				'class' => 'success',
-				'message' => 'Ticket Replied To.'
+				'text' => 'Ticket Replied To.'
 			]);
 		}
 	}
 
+	public function filterByStatus($statusName)
+	{
+		try {
+			$status = $this->status->getStatusByName($statusName);
+		} catch(Exception $e) {
+
+			return Redirect::route('tickets.index')->with('info', [
+				'class' => 'info',
+				'text' => 'Invalid Status Name.'
+			]);
+		}
+		$statuses = $this->status->getStatuses();
+		$tickets = $this->ticket
+			->with('owner')
+			->where('status_id', $status->id)
+			->orderBy('updated_at', 'ASC')
+			->get();
+
+		return View::make('tickets.index')
+					->with('statuses', $statuses)
+					->with('tickets', $tickets);
+	}
 }

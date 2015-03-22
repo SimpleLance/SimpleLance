@@ -59,9 +59,9 @@ class PrioritiesController extends \BaseController {
 		} else {
 			$priority = $this->priority->create($input);
 
-			return Redirect::route('priorities.index')->with('flash', [
+			return Redirect::route('priorities.index')->with('success', [
 				'class' => 'success',
-				'message' => 'Priority Created.'
+				'text' => 'Priority Created.'
 			]);
 		}
 	}
@@ -111,9 +111,9 @@ class PrioritiesController extends \BaseController {
 
 			$priority->save();
 
-			return Redirect::route('priorities.index')->with('flash', [
+			return Redirect::route('priorities.index')->with('success', [
 				'class' => 'success',
-				'message' => 'Priority Updated.'
+				'text' => 'Priority Updated.'
 			]);
 		}
 	}
@@ -129,12 +129,22 @@ class PrioritiesController extends \BaseController {
 	{
 		if ($this->priority->destroy($id))
 		{
-			Session::flash('success', 'Priority Deleted');
+			$status = [
+				'success' => [
+					'class' => 'success',
+					'text' => 'Priority Deleted'
+				]
+			];
 		} else {
-			Session::flash('error', 'Unable to Delete Priority');
+			$status = [
+				'error' => [
+					'class' => 'error',
+					'text' => 'Unable to Delete Priority'
+				]
+			];
 		}
 
-		return Redirect::action('PrioritiesController@index');
+		return Redirect::action('PrioritiesController@index')->with($status);
 	}
 
 }
