@@ -12,8 +12,8 @@
 
         </div>
         <div class="col-md-4">
-            <p><em>Invoice created: {{ $invoice->created_at }}</em></p>
-            <p><em>Last Updated: {{ $invoice->updated_at }}</em></p>
+            <p><em>Invoice created: {{ date("D, F d Y",strtotime($invoice->created_at)) }}</em></p>
+            <p><em>Last Updated: {{ date("D, F d Y",strtotime($invoice->updated_at)) }} at {{ date("g:i a",strtotime($invoice->updated_at)) }}</em></p>
             <button id="edit-{{ $invoice->id }}" class="btn btn-primary" onClick="location.href='{{ action('InvoicesController@edit', array($invoice->id)) }}'">Edit Invoice</button>
         </div>
         <div class="col-md-2">
