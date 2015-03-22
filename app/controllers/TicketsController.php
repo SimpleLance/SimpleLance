@@ -212,6 +212,7 @@ class TicketsController extends \BaseController {
 
 		$rules = array(
 			'status_id' => 'required',
+			'priority_id' => 'required',
 			'content' => 'required'
 		);
 
@@ -236,7 +237,7 @@ class TicketsController extends \BaseController {
 			$ticket->replies = $ticket->replies +1;
 			$ticket->save();
 
-			return Redirect::route('tickets.index')->with('flash', [
+			return Redirect::route('tickets.index')->with('message', [
 				'class' => 'success',
 				'message' => 'Ticket Replied To.'
 			]);
