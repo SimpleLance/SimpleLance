@@ -11,10 +11,15 @@ keys:
 folders:
     - map: .
       to: /home/vagrant/simplelance.dev
+    - map: .
+      to: /vagrant
 
 sites:
     - map: simplelance.dev
-      to: /home/vagrant/simplelance.dev
+      to: /home/vagrant/simplelance.dev/public
+
+databases:
+    - homestead
 
 variables:
     - key: APP_ENV

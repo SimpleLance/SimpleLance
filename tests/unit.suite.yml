@@ -3,4 +3,9 @@
 # suite for unit (internal) tests.
 class_name: UnitTester
 modules:
-    enabled: [Asserts, UnitHelper]
+    enabled: [Laravel4, UnitHelper, Asserts, Db]
+    config:
+        Db:
+            cleanup: true
+        Laravel4:
+            cleanup: true
