@@ -53,7 +53,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 {{ Form::hidden('id', $ticket->id) }}
-                {{ Form::submit('Submit Changes', array('class' => 'btn btn-primary'))}}
+                {{ Form::submit('Submit Changes', array('class' => 'btn btn-primary', 'id' => 'update'))}}
             </div>
         </div>
         {{ Form::close()}}
