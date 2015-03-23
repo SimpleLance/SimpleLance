@@ -10,6 +10,7 @@ modules:
         - WebDriver
         - AcceptanceHelper
         - Db
+        - Laravel4
     config:
         WebDriver:
             url: 'http://localhost/'
