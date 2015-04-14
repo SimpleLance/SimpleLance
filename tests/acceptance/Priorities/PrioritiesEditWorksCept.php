@@ -7,7 +7,7 @@ $I->click('#edit-1');
 $I->amOnPage('/priorities/1/edit');
 $I->see('Edit Priority', 'h4');
 $I->fillField('title', 'Test Priority Updated');
-$I->click('Submit Changes', '.btn');
+$I->click('Submit Changes');
 $I->amOnPage('/priorities');
 $I->see('Test Priority Updated', 'td');
 $I->dontSee('whoops');

@@ -19,17 +19,17 @@
                     <button id="edit-{{ $priority->id }}" class="btn btn-primary" onClick="location.href='{{ action('PrioritiesController@edit', array($priority->id)) }}'">Edit</button>
                 </td>
                 <td>
-                    {{ Form::open(array(
+                    {!! Form::open(array(
                          'action' => array('PrioritiesController@destroy', $priority->id),
                          'method' => 'delete',
                          'class' => $priority->id . '-delete',
                          'id' => $priority->id . '-delete',
                          'name' => $priority->id . '-delete',
                          'role' => ''
-                         )) }}
+                         )) !!}
 
-                    {{ Form::submit('Delete', ['class' => 'btn btn-danger', 'id' => 'delete-' . $priority->id])}}
-                    {{ Form::close() }}
+                    {!! Form::submit('Delete', ['class' => 'btn btn-danger', 'id' => 'delete-' . $priority->id]) !!}
+                    {!! Form::close() !!}
                 </td>
             </tr>
         @endforeach
