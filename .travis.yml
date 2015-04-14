@@ -13,7 +13,8 @@ before_script:
   - screen -S server -d -m phantomjs --webdriver=4444
   - "composer self-update"
   - "composer install --dev --no-interaction"
-  - php artisan migrate
+  - php artisan migrate --force
+  - php artisan db:seed --force
 script:
   - ./vendor/bin/codecept run
 notifications:
