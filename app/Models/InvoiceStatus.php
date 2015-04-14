@@ -1,4 +1,6 @@
 <?php
+use App\User;
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
 class InvoiceStatus extends \Eloquent {
 	protected $fillable = ['title'];

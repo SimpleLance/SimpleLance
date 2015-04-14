@@ -20,7 +20,7 @@
         </thead>
         <tbody>
         @foreach ($tickets as $ticket)
-            @if (Sentry::inGroup(Sentry::findGroupByName('Admins')) || $ticket->owner_id == Sentry::getUser()->id)
+            @if (Sentry::getUser()->hasAccess('admin') || $ticket->owner_id == Sentry::getUser()->id)
                 <tr>
                     <td>
                         <a href="{{ action('TicketsController@show', array($ticket->id)) }}">

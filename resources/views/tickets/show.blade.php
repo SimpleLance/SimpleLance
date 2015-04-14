@@ -14,17 +14,17 @@
 
             <button id="edit-{{ $ticket->id }}" class="btn btn-primary" onClick="location.href='{{ action('TicketsController@edit', array($ticket->id)) }}'">Edit Ticket</button>
 
-            {{ Form::open(array(
+            {!! Form::open(array(
                  'action' => array('TicketsController@destroy', $ticket->id),
                  'method' => 'delete',
                  'class' => $ticket->id . '-delete',
                  'id' => $ticket->id . '-delete',
                  'name' => $ticket->id . '-delete',
                  'role' => ''
-                 )) }}
+                 )) !!}
 
-            {{ Form::submit('Delete', ['class' => 'btn btn-danger', 'id' => 'delete-' . $ticket->id])}}
-            {{ Form::close() }}
+            {!! Form::submit('Delete', ['class' => 'btn btn-danger', 'id' => 'delete-' . $ticket->id]) !!}
+            {!! Form::close() !!}
         </div>
     </div>
 
@@ -48,37 +48,37 @@
         @endforeach
 
             <div>
-                {{ Form::open(array(
+                {!! Form::open(array(
                         'action' => array('TicketsController@reply', $ticket->id),
                         'method' => 'post',
                         'class' => 'form-horizontal',
                         'role' => 'form'
-                        )) }}
+                        )) !!}
 
                 <div class="form-group {{ ($errors->has('content')) ? 'has-error' : '' }}">
-                    {{ Form::textarea('content', null, array('class' => 'form-control', 'placeholder' => 'Your Reply')) }}
+                    {!! Form::textarea('content', null, array('class' => 'form-control', 'placeholder' => 'Your Reply')) !!}
                     {{ ($errors->has('content') ? $errors->first('content') : '') }}
                 </div>
 
                 <div class="form-group {{ ($errors->has('priority_id')) ? 'has-error' : '' }}" for="priority_id">
-                    {{ Form::label('edit_priority_id', 'Priority', array('class' => 'col-sm-2 control-label')) }}
+                    {!! Form::label('edit_priority_id', 'Priority', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-10">
-                        {{ Form::select('priority_id', $priorities, $ticket->priority_id) }}
+                        {!! Form::select('priority_id', $priorities, $ticket->priority_id) !!}
                     </div>
                     {{ ($errors->has('priority_id') ? $errors->first('priority_id') : '') }}
                 </div>
 
                 <div class="form-group {{ ($errors->has('status_id')) ? 'has-error' : '' }}" for="status_id">
-                    {{ Form::label('edit_status_id', 'Status', array('class' => 'col-sm-2 control-label')) }}
+                    {!! Form::label('edit_status_id', 'Status', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-10">
-                        {{ Form::select('status_id', $statuses, $ticket->status_id) }}
+                        {!! Form::select('status_id', $statuses, $ticket->status_id) !!}
                     </div>
                     {{ ($errors->has('status_id') ? $errors->first('status_id') : '') }}
                 </div>
 
-                {{ Form::submit('Submit Reply', array('class' => 'btn btn-primary')) }}
+                {!! Form::submit('Submit Reply', array('class' => 'btn btn-primary')) !!}
 
-                {{ Form::close() }}
+                {!! Form::close() !!}
             </div>
     </div>
 @stop

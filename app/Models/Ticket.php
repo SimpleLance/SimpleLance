@@ -1,4 +1,6 @@
 <?php
+use App\User;
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
 class Ticket extends \Eloquent {
 	protected $fillable = [
@@ -12,7 +14,7 @@ class Ticket extends \Eloquent {
 
 	public function owner() {
 
-		return $this->belongsTo('User');
+		return $this->belongsTo('App\User');
 	}
 
 	public function priority() {

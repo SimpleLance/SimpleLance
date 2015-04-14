@@ -1,5 +1,20 @@
 <?php namespace App\Http\Controllers;
 
+use Ticket;
+use TicketReply;
+use Project;
+use Invoice;
+use InvoiceItem;
+use InvoiceStatus;
+use Priority;
+use Status;
+use App\User;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
+
 class TicketsController extends Controller {
 
 	protected $ticket;
