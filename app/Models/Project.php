@@ -1,4 +1,6 @@
 <?php
+use App\User;
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
 class Project extends \Eloquent {
 	protected $fillable = [
@@ -11,7 +13,7 @@ class Project extends \Eloquent {
 
 	public function owner() {
 
-		return $this->belongsTo('User');
+		return $this->belongsTo('App\User');
 	}
 
 	public function status() {

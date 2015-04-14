@@ -19,17 +19,17 @@
             <button id="edit-{{ $project->id }}" class="btn btn-primary" onClick="location.href='{{ action('ProjectsController@edit', array($project->id)) }}'">Edit Project</button>
         </div>
         <div class="col-md-2">
-            {{ Form::open(array(
+            {!! Form::open(array(
                  'action' => array('ProjectsController@destroy', $project->id),
                  'method' => 'delete',
                  'class' => $project->id . '-delete',
                  'id' => $project->id . '-delete',
                  'name' => $project->id . '-delete',
                  'role' => ''
-                 )) }}
+                 )) !!}
 
-            {{ Form::submit('Delete', ['class' => 'btn btn-danger', 'id' => 'delete-' . $project->id])}}
-            {{ Form::close() }}
+            {!! Form::submit('Delete', ['class' => 'btn btn-danger', 'id' => 'delete-' . $project->id]) !!}
+            {!! Form::close() !!}
         </div>
     </div>
 @stop

@@ -1,4 +1,6 @@
 <?php
+use App\User;
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
 class Status extends \Eloquent {
 	protected $fillable = ['title'];
