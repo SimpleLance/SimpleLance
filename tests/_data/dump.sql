@@ -39,7 +39,7 @@ CREATE TABLE `groups` (
 
 LOCK TABLES `groups` WRITE;
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
-INSERT INTO `groups` VALUES (1,'Users','{\"users\":1}','2015-04-14 00:06:36','2015-04-14 00:06:36'),(2,'Admins','{\"admin\":1,\"users\":1}','2015-04-14 00:06:36','2015-04-14 00:06:36');
+INSERT INTO `groups` VALUES (1,'Users','{\"users\":1}','2015-04-14 01:51:29','2015-04-14 01:51:29'),(2,'Admins','{\"admin\":1,\"users\":1}','2015-04-14 01:51:29','2015-04-14 01:51:29');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +94,7 @@ CREATE TABLE `invoice_statuses` (
 
 LOCK TABLES `invoice_statuses` WRITE;
 /*!40000 ALTER TABLE `invoice_statuses` DISABLE KEYS */;
-INSERT INTO `invoice_statuses` VALUES (1,'Open','2015-04-14 00:06:36','2015-04-14 00:06:36'),(2,'Overdue','2015-04-14 00:06:36','2015-04-14 00:06:36'),(3,'Draft','2015-04-14 00:06:36','2015-04-14 00:06:36'),(4,'Paid','2015-04-14 00:06:36','2015-04-14 00:06:36'),(5,'Cancelled','2015-04-14 00:06:36','2015-04-14 00:06:36');
+INSERT INTO `invoice_statuses` VALUES (1,'Open','2015-04-14 01:51:30','2015-04-14 01:51:30'),(2,'Overdue','2015-04-14 01:51:30','2015-04-14 01:51:30'),(3,'Draft','2015-04-14 01:51:30','2015-04-14 01:51:30'),(4,'Paid','2015-04-14 01:51:30','2015-04-14 01:51:30'),(5,'Cancelled','2015-04-14 01:51:30','2015-04-14 01:51:30');
 /*!40000 ALTER TABLE `invoice_statuses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +123,7 @@ CREATE TABLE `invoices` (
 
 LOCK TABLES `invoices` WRITE;
 /*!40000 ALTER TABLE `invoices` DISABLE KEYS */;
-INSERT INTO `invoices` VALUES (1,'1974-02-25',2,31703257.26,2,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(2,'1971-11-11',2,4508.17,1,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(3,'2004-10-13',4,369.44,2,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(4,'1983-11-25',2,20721.43,1,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(5,'2007-08-11',1,1.11,2,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(6,'1973-04-24',4,66.12,2,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(7,'2004-12-07',3,1.70,2,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(8,'1997-09-27',1,1.98,1,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(9,'1972-09-17',2,1.32,2,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(10,'1994-12-24',2,15.46,2,'2015-04-14 00:06:36','2015-04-14 00:06:36');
+INSERT INTO `invoices` VALUES (1,'1982-10-17',2,412.58,1,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(2,'1989-03-15',2,3640.34,1,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(3,'2002-03-14',2,72.52,2,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(4,'1970-12-29',4,1.90,1,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(5,'1981-08-23',2,8.80,1,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(6,'1998-07-11',3,119417.10,2,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(7,'1972-11-15',3,217.01,1,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(8,'2010-01-13',2,99999999.99,2,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(9,'1987-03-31',3,7.60,2,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(10,'2007-04-19',3,1002.25,1,'2015-04-14 01:51:30','2015-04-14 01:51:30');
 /*!40000 ALTER TABLE `invoices` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +172,7 @@ CREATE TABLE `priorities` (
 
 LOCK TABLES `priorities` WRITE;
 /*!40000 ALTER TABLE `priorities` DISABLE KEYS */;
-INSERT INTO `priorities` VALUES (1,'Low','2015-04-14 00:06:36','2015-04-14 00:06:36'),(2,'Medium','2015-04-14 00:06:36','2015-04-14 00:06:36'),(3,'High','2015-04-14 00:06:36','2015-04-14 00:06:36'),(4,'Urgent','2015-04-14 00:06:36','2015-04-14 00:06:36'),(5,'Critical','2015-04-14 00:06:36','2015-04-14 00:06:36');
+INSERT INTO `priorities` VALUES (1,'Low','2015-04-14 01:51:30','2015-04-14 01:51:30'),(2,'Medium','2015-04-14 01:51:30','2015-04-14 01:51:30'),(3,'High','2015-04-14 01:51:30','2015-04-14 01:51:30'),(4,'Urgent','2015-04-14 01:51:30','2015-04-14 01:51:30'),(5,'Critical','2015-04-14 01:51:30','2015-04-14 01:51:30');
 /*!40000 ALTER TABLE `priorities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,7 +202,7 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES (1,'Sample Project','Test project',1,1,1,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(2,'Sample Project','Test project',1,1,1,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(3,'Sample Project','Test project',1,1,1,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(4,'Sample Project','Test project',1,1,1,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(5,'Sample Project','Test project',1,1,1,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(6,'Sample Project','Test project',2,1,1,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(7,'Sample Project','Test project',2,1,1,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(8,'Sample Project','Test project',2,1,1,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(9,'Sample Project','Test project',2,1,1,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(10,'Sample Project','Test project',2,1,1,'2015-04-14 00:06:36','2015-04-14 00:06:36');
+INSERT INTO `projects` VALUES (1,'Sample Project','Test project',1,1,1,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(2,'Sample Project','Test project',1,1,1,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(3,'Sample Project','Test project',1,1,1,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(4,'Sample Project','Test project',1,1,1,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(5,'Sample Project','Test project',1,1,1,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(6,'Sample Project','Test project',2,1,1,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(7,'Sample Project','Test project',2,1,1,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(8,'Sample Project','Test project',2,1,1,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(9,'Sample Project','Test project',2,1,1,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(10,'Sample Project','Test project',2,1,1,'2015-04-14 01:51:30','2015-04-14 01:51:30');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +228,7 @@ CREATE TABLE `statuses` (
 
 LOCK TABLES `statuses` WRITE;
 /*!40000 ALTER TABLE `statuses` DISABLE KEYS */;
-INSERT INTO `statuses` VALUES (1,'Open','2015-04-14 00:06:36','2015-04-14 00:06:36'),(2,'In Progress','2015-04-14 00:06:36','2015-04-14 00:06:36'),(3,'On Hold','2015-04-14 00:06:36','2015-04-14 00:06:36'),(4,'Closed','2015-04-14 00:06:36','2015-04-14 00:06:36');
+INSERT INTO `statuses` VALUES (1,'Open','2015-04-14 01:51:30','2015-04-14 01:51:30'),(2,'In Progress','2015-04-14 01:51:30','2015-04-14 01:51:30'),(3,'On Hold','2015-04-14 01:51:30','2015-04-14 01:51:30'),(4,'Closed','2015-04-14 01:51:30','2015-04-14 01:51:30');
 /*!40000 ALTER TABLE `statuses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -317,7 +317,7 @@ CREATE TABLE `tickets` (
 
 LOCK TABLES `tickets` WRITE;
 /*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
-INSERT INTO `tickets` VALUES (1,'Ducimus adipisci blanditiis ut quas animi tenetur.','Facere qui molestiae alias nemo.',1,1,1,0,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(2,'Doloremque fugit molestiae tenetur nisi.','Et non ut cum at qui commodi voluptatem.',1,1,1,0,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(3,'Totam temporibus dolores nostrum impedit voluptatem quo ad nisi.','Maiores non facilis sit beatae eaque dolor.',1,1,1,0,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(4,'Quidem nisi ut minus aliquam deserunt.','Asperiores et praesentium architecto corporis.',1,1,1,0,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(5,'Quibusdam magnam minima reiciendis ea rerum.','Sapiente deleniti mollitia aut rerum ut.',1,1,1,0,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(6,'Vitae ex ut ipsa autem ratione.','Quasi facilis officiis et labore.',1,1,2,0,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(7,'Impedit quia voluptas cumque perspiciatis accusamus.','Ratione sapiente temporibus voluptates recusandae fugit est sed.',1,1,2,0,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(8,'Sint excepturi qui quidem quibusdam sunt ullam.','Nostrum aut rerum vitae reprehenderit.',1,1,2,0,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(9,'Culpa labore velit libero ipsum inventore neque.','Maiores odit libero illum consequuntur et.',1,1,2,0,'2015-04-14 00:06:36','2015-04-14 00:06:36'),(10,'Repellendus consequuntur numquam aliquam impedit ea id incidunt placeat.','Sed molestias impedit ipsum molestias sequi velit placeat.',1,1,2,0,'2015-04-14 00:06:36','2015-04-14 00:06:36');
+INSERT INTO `tickets` VALUES (1,'Ea cupiditate quis sit repellendus.','Ut inventore inventore sed aut quaerat aperiam.',1,1,1,0,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(2,'Aspernatur ut est aliquid quia ab quibusdam architecto.','Et est sequi voluptate.',1,1,1,0,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(3,'Cupiditate velit numquam eos tempora.','Ut deserunt laudantium alias velit.',1,1,1,0,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(4,'Et omnis totam qui quisquam quo qui.','Ullam animi velit quas animi modi.',1,1,1,0,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(5,'Officia excepturi assumenda sint corrupti sed tenetur.','Maiores numquam animi magni deleniti at delectus et expedita.',1,1,1,0,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(6,'Ut quos quos quia inventore veritatis.','Voluptatum molestiae consequuntur qui deserunt.',1,1,2,0,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(7,'Aut veritatis tempore et quia aspernatur culpa.','Aliquid tenetur eum eaque doloremque corporis id quaerat amet.',1,1,2,0,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(8,'Est et debitis voluptatem vero exercitationem omnis.','Quaerat eaque et optio.',1,1,2,0,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(9,'Dolore sint perferendis maiores fugiat aliquam.','Exercitationem maiores perferendis molestiae quis.',1,1,2,0,'2015-04-14 01:51:30','2015-04-14 01:51:30'),(10,'Id quidem quo quidem rerum hic.','Assumenda aut ut nulla dolores odio.',1,1,2,0,'2015-04-14 01:51:30','2015-04-14 01:51:30');
 /*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -365,7 +365,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin@admin.com','$2y$10$d8U2NgxBe.Gvkgmr6Jdq9uHjsKH5lBLRrHWYQMgANsI9bx/8//KEm',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','','','2015-04-14 00:06:36','2015-04-14 00:06:36','admin'),(2,'user@user.com','$2y$10$8XS9IqyOUIRVarWK6SA9qu/EZ8hyiFJA4QHZUrlkWhAxugSPi.TgC',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','','','2015-04-14 00:06:36','2015-04-14 00:06:36','');
+INSERT INTO `users` VALUES (1,'admin@admin.com','$2y$10$qX/5W/UGQeWytlDHe/j5seySYcGB1CtgFwb8CBt5bTsbuOwGI3qY6',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','','','2015-04-14 01:51:29','2015-04-14 01:51:29','admin'),(2,'user@user.com','$2y$10$i3IwF4bd74d82qpEGOCVPuz8cMGaPgL9VMtWPT87dMkkul.phD4lO',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','','','2015-04-14 01:51:30','2015-04-14 01:51:30','user');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -402,4 +402,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-14  0:07:09
+-- Dump completed on 2015-04-14  1:52:04
