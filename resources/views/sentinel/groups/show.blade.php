@@ -1,4 +1,4 @@
-@extends(Config::get('Sentinel::config.layout'))
+@extends(config('sentinel.layout'))
 
 {{-- Web site Title --}}
 @section('title')
@@ -19,7 +19,7 @@ View Group
 	    </ul>
 	</div>
 	<div class="col-md-2">
-		<button class="btn btn-primary" onClick="location.href='{{ action('Sentinel\GroupController@edit', array($group->id)) }}'">Edit Group</button>
+		<a class="btn btn-primary" href="{{ route('sentinel.groups.edit', array($group->hash)) }}">Edit Group</a>
 	</div> 
 </div>
 <hr />

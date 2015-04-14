@@ -19,17 +19,17 @@
                     <button id="edit-{{ $status->id }}" class="btn btn-primary" onClick="location.href='{{ action('StatusesController@edit', array($status->id)) }}'">Edit</button>
                 </td>
                 <td>
-                    {{ Form::open(array(
+                    {!! Form::open(array(
                          'action' => array('StatusesController@destroy', $status->id),
                          'method' => 'delete',
                          'class' => $status->id . '-delete',
                          'id' => $status->id . '-delete',
                          'name' => $status->id . '-delete',
                          'role' => ''
-                         )) }}
+                         )) !!}
 
-                    {{ Form::submit('Delete', ['class' => 'btn btn-danger', 'id' => 'delete-' . $status->id])}}
-                    {{ Form::close() }}
+                    {!! Form::submit('Delete', ['class' => 'btn btn-danger', 'id' => 'delete-' . $status->id]) !!}
+                    {!! Form::close() !!}
                 </td>
             </tr>
         @endforeach

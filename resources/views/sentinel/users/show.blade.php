@@ -1,4 +1,4 @@
-@extends(Config::get('Sentinel::config.layout'))
+@extends(config('sentinel.layout'))
 
 {{-- Web site Title --}}
 @section('title')
@@ -8,6 +8,16 @@ Home
 
 {{-- Content --}}
 @section('content')
+
+    <?php
+        // Determine the edit profile route
+        if (($user->email == Sentry::getUser()->email)) {
+            $editAction = route('sentinel.profile.edit');
+        } else {
+            $editAction =  action('\\Sentinel\Controllers\UserController@edit', [$user->hash]);
+        }
+    ?>
+
 	<h4>Account Profile</h4>
 	
   	<div class="well clearfix">
@@ -19,23 +29,12 @@ Home
 		    	<p><strong>Last Name:</strong> {{ $user->last_name }} </p>
 			@endif
 		    <p><strong>Email:</strong> {{ $user->email }}</p>
-			@if ($user->phone)
-				<p><strong>Phone:</strong> {{ $user->phone }} </p>
-			@endif
-			@if ($user->address)
-				<p>
-					<strong>Address:</strong> <br />
-					{{ $user->address }} <br />
-					{{ $user->address2 }} <br />
-					{{ $user->city }} {{ $user->state }},  {{ $user->post_code }}<br />
-					{{ $user->country }} <br />
-				</p>
-			@endif
+		    
 		</div>
 		<div class="col-md-4">
-			<p><em>Account created: {{ date("D, F d Y",strtotime($user->created_at)) }}</em></p>
-			<p><em>Last Updated: {{ date("D, F d Y",strtotime($user->updated_at)) }} at {{ date("g:i a",strtotime($user->updated_at)) }}</em></p>
-			<button class="btn btn-primary" onClick="location.href='{{ action('Sentinel\UserController@edit', array($user->id)) }}'">Edit Profile</button>
+			<p><em>Account created: {{ $user->created_at }}</em></p>
+			<p><em>Last Updated: {{ $user->updated_at }}</em></p>
+			<button class="btn btn-primary" onClick="location.href='{{ $editAction }}'">Edit Profile</button>
 		</div>
 	</div>
 
@@ -54,4 +53,10 @@ Home
 	</div>
 	
 	<hr />
+
+	<h4>User Object</h4>
+	<div>
+		<p>{{ var_dump($user) }}</p>
+	</div>
+
 @stop
