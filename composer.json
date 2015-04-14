@@ -10,13 +10,14 @@
         "illuminate/html": "5.*"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "~4.0",
+		"phpunit/phpunit": "~4.0",w
 		"phpspec/phpspec": "~2.1",
         "barryvdh/laravel-ide-helper": "2.x",
-        "codeception/codeception":"~2.0",
+        "codeception/codeception":"*",
         "barryvdh/laravel-debugbar": "1.x",
         "fzaninotto/faker": "dev-master",
-        "way/generators": "~3.0"
+        "way/generators": "~3.0",
+        "janhenkgerritsen/codeception-laravel5": "~1.0"
 	},
 	"autoload": {
 		"classmap": [
