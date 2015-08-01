@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User;
+use SimpleLance\User;
 // Composer: "fzaninotto/faker": "v1.3.0"
 use Faker\Factory as Faker;
 
