@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use SimpleLance\User;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
 class Invoice extends \Eloquent {
@@ -14,7 +14,7 @@ class Invoice extends \Eloquent {
 
 	public function owner() {
 
-		return $this->belongsTo('App\User');
+		return $this->belongsTo('SimpleLance\User');
 	}
 
 	public function status() {

@@ -1,5 +1,5 @@
 <?php
-use App\User;
+use SimpleLance\User;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
 class TicketReply extends \Eloquent {
@@ -11,7 +11,7 @@ class TicketReply extends \Eloquent {
 
 	public function user() {
 
-		return $this->belongsTo('App\User');
+		return $this->belongsTo('SimpleLance\User');
 	}
 
 }

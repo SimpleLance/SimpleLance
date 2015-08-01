@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: SimpleLance
+        psr4_prefix: SimpleLance
         src_path: app

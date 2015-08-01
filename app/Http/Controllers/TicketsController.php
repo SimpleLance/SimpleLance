@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers;
+<?php namespace SimpleLance\Http\Controllers;
 
 use Ticket;
 use TicketReply;
@@ -8,7 +8,7 @@ use InvoiceItem;
 use InvoiceStatus;
 use Priority;
 use Status;
-use App\User;
+use SimpleLance\User;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;

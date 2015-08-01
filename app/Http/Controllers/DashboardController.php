@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers;
+<?php namespace SimpleLance\Http\Controllers;
 
 use Ticket;
 use Project;

@@ -1,5 +1,5 @@
 <?php
-use App\User;
+use SimpleLance\User;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
 class Priority extends \Eloquent {

@@ -1,4 +1,4 @@
-<?php namespace App\Commands;
+<?php namespace SimpleLance\Commands;
 
 abstract class Command {
 

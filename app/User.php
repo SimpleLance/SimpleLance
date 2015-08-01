@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace SimpleLance;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

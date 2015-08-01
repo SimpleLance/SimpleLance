@@ -1,5 +1,5 @@
 <?php
-use App\User;
+use SimpleLance\User;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
 class Ticket extends \Eloquent {
@@ -14,7 +14,7 @@ class Ticket extends \Eloquent {
 
 	public function owner() {
 
-		return $this->belongsTo('App\User');
+		return $this->belongsTo('SimpleLance\User');
 	}
 
 	public function priority() {

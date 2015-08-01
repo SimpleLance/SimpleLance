@@ -1,5 +1,5 @@
 <?php
-use App\User;
+use SimpleLance\User;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
 class Project extends \Eloquent {
@@ -13,7 +13,7 @@ class Project extends \Eloquent {
 
 	public function owner() {
 
-		return $this->belongsTo('App\User');
+		return $this->belongsTo('SimpleLance\User');
 	}
 
 	public function status() {

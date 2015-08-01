@@ -1,4 +1,4 @@
-<?php namespace App\Events;
+<?php namespace SimpleLance\Events;
 
 abstract class Event {
 

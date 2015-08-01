@@ -1,6 +1,6 @@
-<?php namespace App\Services;
+<?php namespace SimpleLance\Services;
 
-use App\User;
+use SimpleLance\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
