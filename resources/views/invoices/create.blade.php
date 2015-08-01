@@ -13,7 +13,7 @@
         </div>
 
         <div class="form-group {{ ($errors->has('owner_id')) ? 'has-error' : '' }}" for="owner_id">
-            {!! Form::label('edit_owner_id', 'Owner', array('class' => '')) !!}
+            {!! Form::label('owner_id', 'Owner', array('class' => '')) !!}
             {!! Form::select('owner_id', $owners, null) !!}
             {{ ($errors->has('owner_id') ? $errors->first('owner_id') : '') }}
         </div>

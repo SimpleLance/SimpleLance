@@ -1,9 +1,10 @@
 <?php
 
 use SimpleLance\User;
+use Illuminate\Database\Eloquent\Model;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
-class Invoice extends \Eloquent {
+class Invoice extends Model {
 	protected $fillable = [
 		'title',
 		'due',

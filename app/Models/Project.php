@@ -1,8 +1,9 @@
 <?php
 use SimpleLance\User;
+use Illuminate\Database\Eloquent\Model;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
-class Project extends \Eloquent {
+class Project extends Model {
 	protected $fillable = [
 		'title',
 		'description',
