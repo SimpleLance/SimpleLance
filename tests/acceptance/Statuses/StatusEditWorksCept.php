@@ -7,7 +7,7 @@ $I->click('#edit-1');
 $I->amOnPage('/statuses/1/edit');
 $I->see('Edit Status', 'h4');
 $I->fillField('title', 'Test Status Updated');
-$I->click('Submit Changes', '.btn');
+$I->click('Submit Changes');
 $I->amOnPage('/statuses');
 $I->see('Test Status Updated', 'td');
 $I->dontSee('whoops');

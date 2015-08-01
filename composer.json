@@ -1,31 +1,35 @@
 {
-	"name": "simplelance/simplelance",
-	"description": "A simple customer management / invoicing / project tracking tool built for freelancers.",
-	"keywords": ["freelance", "customer management"],
+	"name": "laravel/laravel",
+	"description": "The Laravel Framework.",
+	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"type": "project",
 	"require": {
-	  "laravel/framework": "4.2.*",
-	  "doctrine/dbal": "dev-master",
-	  "guzzlehttp/guzzle": "4.*",
-	  "rydurham/sentinel": "~1.4"
+		"laravel/framework": "5.0.*",
+        "rydurham/sentinel": "~2.0",
+        "illuminate/html": "5.*"
 	},
 	"require-dev": {
-	  "fzaninotto/faker": "dev-master",
-	  "way/generators": "~2.6",
-	  "mockery/mockery": "dev-master",
-	  "barryvdh/laravel-ide-helper": "1.x",
-	  "codeception/codeception":"~2.0",
-	  "barryvdh/laravel-debugbar": "1.x"
+		"phpunit/phpunit": "~4.0",
+		"phpspec/phpspec": "~2.1",
+        "barryvdh/laravel-ide-helper": "2.x",
+        "codeception/codeception":"*",
+        "barryvdh/laravel-debugbar": "1.x",
+        "fzaninotto/faker": "dev-master",
+        "way/generators": "~3.0",
+        "janhenkgerritsen/codeception-laravel5": "~1.0"
 	},
 	"autoload": {
 		"classmap": [
-			"app/commands",
-			"app/controllers",
-			"app/models",
-			"app/database/migrations",
-			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"database",
+            "app/Models"
+		],
+		"psr-4": {
+			"App\\": "app/"
+		}
+	},
+	"autoload-dev": {
+		"classmap": [
 		]
 	},
 	"scripts": {
@@ -38,11 +42,11 @@
 			"php artisan optimize"
 		],
 		"post-create-project-cmd": [
+			"php -r \"copy('.env.example', '.env');\"",
 			"php artisan key:generate"
 		]
 	},
 	"config": {
 		"preferred-install": "dist"
-	},
-	"minimum-stability": "stable"
+	}
 }

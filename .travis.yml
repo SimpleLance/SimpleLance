@@ -1,19 +1,21 @@
 language: php
 php:
-  - "5.4"
   - "5.5"
   - "5.6"
   - "hhvm"
+  - "nightly"
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y phantomjs screen
 before_script:
+  - cp .env.travis .env
   - mysql -e 'create database homestead;'
   - mysql -e "GRANT ALL PRIVILEGES ON homestead.* TO 'homestead'@'%' IDENTIFIED BY 'secret'" -uroot
   - screen -S server -d -m phantomjs --webdriver=4444
   - "composer self-update"
   - "composer install --dev --no-interaction"
-  - php artisan migrate
+  - php artisan migrate --force
+  - php artisan db:seed --force
 script:
   - ./vendor/bin/codecept run
 notifications:
