@@ -16,12 +16,11 @@
 //Route::get('home', 'HomeController@index');
 
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
 ]);
 
-Route::group(['before' => 'Sentinel\auth'], function()
-{
+Route::group(['before' => 'Sentinel\auth'], function () {
     Route::resource('projects', 'ProjectsController');
     Route::resource('tickets', 'TicketsController');
     Route::resource('invoices', 'InvoicesController');
@@ -39,8 +38,7 @@ Route::group(['before' => 'Sentinel\auth'], function()
 
 });
 
-Route::group(['before' => 'Sentinel\inGroup:Admins'], function()
-{
+Route::group(['before' => 'Sentinel\inGroup:Admins'], function () {
     Route::resource('priorities', 'PrioritiesController', ['except' => ['show']]);
     Route::resource('statuses', 'StatusesController', ['except' => ['show']]);
 });
