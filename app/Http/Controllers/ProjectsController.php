@@ -4,11 +4,10 @@ use Project;
 use Priority;
 use Status;
 use SimpleLance\User;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use SimpleLance\Http\Requests\StoreProjectRequest;
+use SimpleLance\Http\Requests\UpdateProjectRequest;
 
 class ProjectsController extends Controller
 {
@@ -131,10 +130,11 @@ class ProjectsController extends Controller
      * Update the specified resource in storage.
      * PUT /projects/{id}
      *
+     * @param UpdateProjectRequest $request
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(UpdateProjectRequest $request, $id)
     {
         $input = Input::all();
 
