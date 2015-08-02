@@ -2,7 +2,6 @@
 
 namespace SimpleLance\Http\Requests;
 
-
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use SimpleLance\Http\Requests\Request;
 use Illuminate\Support\Facades\Auth;
