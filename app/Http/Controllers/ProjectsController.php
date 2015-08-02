@@ -181,6 +181,10 @@ class ProjectsController extends Controller
         return Redirect::action('ProjectsController@index')->with($status);
     }
 
+    /**
+     * @param $statusName
+     * @return mixed
+     */
     public function filterByStatus($statusName)
     {
         try {
