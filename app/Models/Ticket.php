@@ -2,51 +2,53 @@
 use SimpleLance\User;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
-class Ticket extends \Eloquent {
-	protected $fillable = [
-		'title',
-		'description',
-		'priority_id',
-		'status_id',
-		'owner_id',
-		'replies'
-	];
+class Ticket extends \Eloquent
+{
+    protected $fillable = [
+        'title',
+        'description',
+        'priority_id',
+        'status_id',
+        'owner_id',
+        'replies'
+    ];
 
-	public function owner() {
+    public function owner()
+    {
+        return $this->belongsTo('SimpleLance\User');
+    }
 
-		return $this->belongsTo('SimpleLance\User');
-	}
+    public function priority()
+    {
+        return $this->belongsTo('Priority');
+    }
 
-	public function priority() {
+    public function status()
+    {
+        return $this->belongsTo('Status');
+    }
 
-		return $this->belongsTo('Priority');
-	}
+    public function getOpenTickets()
+    {
+        return Ticket::where('status_id', '=', '1')->get();
+    }
 
-	public function status() {
-		return $this->belongsTo('Status');
-	}
+    public function getInProgressTickets()
+    {
+        return Ticket::where('status_id', '=', '2')->get();
+    }
 
-	public function getOpenTickets() {
+    public function getOpenTicketsByUser()
+    {
+        return Ticket::where('status_id', '=', '1')
+            ->where('owner_id', '=', Sentry::getUser()->id)
+            ->get();
+    }
 
-		return Ticket::where('status_id', '=', '1')->get();
-	}
-
-	public function getInProgressTickets() {
-
-		return Ticket::where('status_id', '=', '2')->get();
-	}
-
-	public function getOpenTicketsByUser() {
-
-		return Ticket::where('status_id', '=', '1')
-			->where('owner_id', '=', Sentry::getUser()->id)
-			->get();
-	}
-
-	public function getInProgressTicketsByUser() {
-
-		return Ticket::where('status_id', '=', '2')
-			->where('owner_id', '=', Sentry::getUser()->id)
-			->get();
-	}
+    public function getInProgressTicketsByUser()
+    {
+        return Ticket::where('status_id', '=', '2')
+            ->where('owner_id', '=', Sentry::getUser()->id)
+            ->get();
+    }
 }

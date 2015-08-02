@@ -3,115 +3,122 @@
 use SimpleLance\User;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
-class Invoice extends \Eloquent {
-	protected $fillable = [
-		'title',
-		'due',
-		'status_id',
-		'amount',
-		'owner_id'
-	];
+class Invoice extends \Eloquent
+{
+    protected $fillable = [
+        'title',
+        'due',
+        'status_id',
+        'amount',
+        'owner_id'
+    ];
 
-	public function owner() {
+    public function owner()
+    {
+        return $this->belongsTo('SimpleLance\User');
+    }
 
-		return $this->belongsTo('SimpleLance\User');
-	}
+    public function status()
+    {
+        return $this->belongsTo('InvoiceStatus');
+    }
 
-	public function status() {
+    public function getOpenInvoices()
+    {
+        return Invoice::where('status_id', '=', '1')->get();
+    }
 
-		return $this->belongsTo('InvoiceStatus');
-	}
+    public function getOpenInvoicesTotalAmount()
+    {
+        $invoices = $this->getOpenInvoices();
 
-	public function getOpenInvoices() {
+        $totalAmount = 0;
 
-		return Invoice::where('status_id', '=', '1')->get();
-	}
+        foreach ($invoices as $invoice) {
+            $totalAmount = $totalAmount + $invoice->amount;
+        }
 
-	public function getOpenInvoicesTotalAmount() {
-		$invoices = $this->getOpenInvoices();
+        return $totalAmount;
+    }
 
-		$totalAmount = 0;
+    public function getOverdueInvoices()
+    {
+        $invoices = $this->getOpenInvoices();
+        $overdueInvoices = [];
+        $today = date("Y-m-d");
 
-		foreach ($invoices as $invoice) {
-			$totalAmount = $totalAmount + $invoice->amount;
-		}
+        foreach ($invoices as $invoice) {
+            if ($invoice->due < $today) {
+                $overdueInvoices[] = $invoice;
+            }
+        }
 
-		return $totalAmount;
-	}
+        return $overdueInvoices;
+    }
 
-	public function getOverdueInvoices() {
-		$invoices = $this->getOpenInvoices();
-		$overdueInvoices = [];
-		$today = date("Y-m-d");
+    public function getOverdueInvoicesTotalAmount()
+    {
+        $invoices = $this->getOverdueInvoices();
 
-		foreach ($invoices as $invoice) {
-			if($invoice->due < $today){
-				$overdueInvoices[] = $invoice;
-			}
-		}
+        $totalAmount = 0;
 
-		return $overdueInvoices;
-	}
+        foreach ($invoices as $invoice) {
+            $totalAmount = $totalAmount + $invoice->amount;
+        }
 
-	public function getOverdueInvoicesTotalAmount() {
-		$invoices = $this->getOverdueInvoices();
+        return $totalAmount;
+    }
 
-		$totalAmount = 0;
+    public function getOpenInvoicesByUser()
+    {
+        return Invoice::where('status_id', '=', '1')
+            ->where('owner_id', '=', Sentry::getUser()->id)
+            ->get();
+    }
 
-		foreach ($invoices as $invoice) {
-			$totalAmount = $totalAmount + $invoice->amount;
-		}
+    public function getOpenInvoicesTotalAmountByUser()
+    {
+        $invoices = $this->getOpenInvoicesByUser();
 
-		return $totalAmount;
-	}
+        $totalAmount = 0;
 
-	public function getOpenInvoicesByUser() {
+        foreach ($invoices as $invoice) {
+            $totalAmount = $totalAmount + $invoice->amount;
+        }
 
-		return Invoice::where('status_id', '=', '1')
-			->where('owner_id', '=', Sentry::getUser()->id)
-			->get();
-	}
+        return $totalAmount;
+    }
 
-	public function getOpenInvoicesTotalAmountByUser() {
-		$invoices = $this->getOpenInvoicesByUser();
+    public function getOverdueInvoicesByUser()
+    {
+        $invoices = $this->getOpenInvoicesByUser();
+        $overdueInvoices = [];
+        $today = date("Y-m-d");
 
-		$totalAmount = 0;
+        foreach ($invoices as $invoice) {
+            if ($invoice->due < $today) {
+                $overdueInvoices[] = $invoice;
+            }
+        }
 
-		foreach ($invoices as $invoice) {
-			$totalAmount = $totalAmount + $invoice->amount;
-		}
+        return $overdueInvoices;
+    }
 
-		return $totalAmount;
-	}
+    public function getOverdueInvoicesTotalAmountByUser()
+    {
+        $invoices = $this->getOverdueInvoicesByUser();
 
-	public function getOverdueInvoicesByUser() {
-		$invoices = $this->getOpenInvoicesByUser();
-		$overdueInvoices = [];
-		$today = date("Y-m-d");
+        $totalAmount = 0;
 
-		foreach ($invoices as $invoice) {
-			if($invoice->due < $today){
-				$overdueInvoices[] = $invoice;
-			}
-		}
+        foreach ($invoices as $invoice) {
+            $totalAmount = $totalAmount + $invoice->amount;
+        }
 
-		return $overdueInvoices;
-	}
+        return $totalAmount;
+    }
 
-	public function getOverdueInvoicesTotalAmountByUser() {
-		$invoices = $this->getOverdueInvoicesByUser();
-
-		$totalAmount = 0;
-
-		foreach ($invoices as $invoice) {
-			$totalAmount = $totalAmount + $invoice->amount;
-		}
-
-		return $totalAmount;
-	}
-
-	public function item() {
-
-		return $this->belongsTo('InvoiceItem');
-	}
+    public function item()
+    {
+        return $this->belongsTo('InvoiceItem');
+    }
 }
