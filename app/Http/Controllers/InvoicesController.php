@@ -1,7 +1,5 @@
 <?php namespace SimpleLance\Http\Controllers;
 
-use Ticket;
-use Project;
 use Invoice;
 use InvoiceItem;
 use InvoiceStatus;
@@ -10,7 +8,9 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use SimpleLance\Http\Requests\StoreInvoiceRequest;
+use SimpleLance\Http\Requests\UpdateInvoiceRequest;
+use SimpleLance\Http\Requests\StoreInvoiceItemRequest;
 
 class InvoicesController extends Controller
 {
@@ -69,34 +69,21 @@ class InvoicesController extends Controller
      * Store a newly created resource in storage.
      * POST /invoices
      *
+     * @param StoreInvoiceRequest $request
      * @return Response
      */
-    public function store()
+    public function store(StoreInvoiceRequest $request)
     {
         $input = Input::all();
 
         $input['status_id'] = 3;
 
-        $rules = array(
-            'due' => 'required',
-            'status_id' => 'required',
-            'owner_id' => 'required'
-        );
+        $invoice = $this->invoice->create($input);
 
-        $validator = Validator::make($input, $rules);
-
-        if ($validator->fails()) {
-            return Redirect::route('invoices.create')
-                           ->withErrors($validator)
-                           ->withInput($input);
-        } else {
-            $invoice = $this->invoice->create($input);
-
-            return Redirect::route('invoices.index')->with('message', [
-                'class' => 'success',
-                'text' => 'Invoice Created.'
-            ]);
-        }
+        return Redirect::route('invoices.index')->with('message', [
+            'class' => 'success',
+            'text' => 'Invoice Created.'
+        ]);
     }
 
     /**
@@ -139,38 +126,25 @@ class InvoicesController extends Controller
      * Update the specified resource in storage.
      * PUT /invoices/{id}
      *
+     * @param UpdateInvoiceRequest $request
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(UpdateInvoiceRequest $request, $id)
     {
         $input = Input::all();
 
-        $rules = array(
-            'due' => 'required',
-            'status_id' => 'required',
-            'owner_id' => 'required'
-        );
+        $invoice = $this->invoice->find($id);
+        $invoice->due = $input['due'];
+        $invoice->status_id = $input['status_id'];
+        $invoice->owner_id = $input['owner_id'];
 
-        $validator = Validator::make($input, $rules);
+        $invoice->save();
 
-        if ($validator->fails()) {
-            return Redirect::route('invoices.edit', $id)
-                           ->withErrors($validator)
-                           ->withInput($input);
-        } else {
-            $invoice = $this->invoice->find($id);
-            $invoice->due = $input['due'];
-            $invoice->status_id = $input['status_id'];
-            $invoice->owner_id = $input['owner_id'];
-
-            $invoice->save();
-
-            return Redirect::route('invoices.index')->with('message', [
-                'class' => 'success',
-                'text' => 'Invoice Updated.'
-            ]);
-        }
+        return Redirect::route('invoices.index')->with('message', [
+            'class' => 'success',
+            'text' => 'Invoice Updated.'
+        ]);
     }
 
     /**
@@ -216,40 +190,25 @@ class InvoicesController extends Controller
     }
 
     /**
+     * @param StoreInvoiceItemRequest $request
      * @param $id
      * @return mixed
      */
-    public function storeItem($id)
+    public function storeItem(StoreInvoiceItemRequest $request, $id)
     {
         $input = Input::all();
         $input['invoice_id'] = $id;
 
-        $rules = array(
-            'invoice_id' => 'required',
-            'name' => 'required',
-            'price' => 'required',
-            'quantity' => 'required',
-            'total' => 'required'
-        );
+        $this->items->create($input);
 
-        $validator = Validator::make($input, $rules);
+        $invoice = $this->invoice->find($id);
+        $invoice->amount = $invoice->amount = $input['total'];
+        $invoice->save();
 
-        if ($validator->fails()) {
-            return Redirect::to('invoices/'.$id.'/items')
-                ->withErrors($validator)
-                ->withInput($input);
-        } else {
-            $this->items->create($input);
-
-            $invoice = $this->invoice->find($id);
-            $invoice->amount = $invoice->amount = $input['total'];
-            $invoice->save();
-
-            return Redirect::to('invoices/'.$id.'/items')->with('message', [
-                'class' => 'success',
-                'message' => 'Invoice Updated.'
-            ]);
-        }
+        return Redirect::to('invoices/'.$id.'/items')->with('message', [
+            'class' => 'success',
+            'message' => 'Invoice Updated.'
+        ]);
     }
 
     public function send($id)

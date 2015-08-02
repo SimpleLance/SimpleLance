@@ -13,9 +13,15 @@
         </div>
 
         <div class="form-group {{ ($errors->has('owner_id')) ? 'has-error' : '' }}" for="owner_id">
-            {!! Form::label('edit_owner_id', 'Owner', array('class' => '')) !!}
+            {!! Form::label('owner_id', 'Owner', array('class' => '')) !!}
             {!! Form::select('owner_id', $owners, null) !!}
             {{ ($errors->has('owner_id') ? $errors->first('owner_id') : '') }}
+        </div>
+
+        <div class="form-group {{ ($errors->has('status_id')) ? 'has-error' : '' }}" for="status_id">
+            {!! Form::label('status_id', 'Status', array('class' => '')) !!}
+            {!! Form::select('status_id', $statuses, null) !!}
+            {{ ($errors->has('status_id') ? $errors->first('status_id') : '') }}
         </div>
 
         {!! Form::submit('Create', array('class' => 'btn btn-primary', 'id' => 'create')) !!}
