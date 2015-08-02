@@ -8,12 +8,12 @@
 
         <div class="form-group {{ ($errors->has('title')) ? 'has-error' : '' }}">
             {!! Form::text('title', null, array('class' => 'form-control', 'placeholder' => 'Title')) !!}
-            {{ ($errors->has('title') ? $errors->first('title') : '') !!}
+            {{ ($errors->has('title') ? $errors->first('title') : '') }}
         </div>
 
         <div class="form-group {{ ($errors->has('description')) ? 'has-error' : '' }}">
             {!! Form::textarea('description', null, array('class' => 'form-control', 'placeholder' => 'Description')) !!}
-            {{ ($errors->has('description') ? $errors->first('description') : '') !!}
+            {{ ($errors->has('description') ? $errors->first('description') : '') }}
         </div>
 
         <div class="form-group {{ ($errors->has('status_id')) ? 'has-error' : '' }}" for="status_id">
@@ -23,9 +23,9 @@
         </div>
 
         <div class="form-group {{ ($errors->has('status_id')) ? 'has-error' : '' }}" for="priority_id">
-            {!! Form::label('edit_priority_id', 'Priority', array('class' => '')) }}
+            {!! Form::label('edit_priority_id', 'Priority', array('class' => '')) !!}
             {!! Form::select('priority_id', $priorities, null) !!}
-            {{ ($errors->has('priority_id') ? $errors->first('priority_id') : '') !!}
+            {{ ($errors->has('priority_id') ? $errors->first('priority_id') : '') }}
         </div>
 
         <div class="form-group {{ ($errors->has('owner_id')) ? 'has-error' : '' }}" for="owner_id">
@@ -34,7 +34,7 @@
             {{ ($errors->has('owner_id') ? $errors->first('owner_id') : '') }}
         </div>
 
-        {!! Form::submit('Create', array('class' => 'btn btn-primary create')) !!}
+        {!! Form::submit('Create', array('class' => 'btn btn-primary', 'id' => 'create')) !!}
 
         {!! Form::close() !!}
 
