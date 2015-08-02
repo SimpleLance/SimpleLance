@@ -24,7 +24,7 @@ If you have a feature you would like to see added, please create an issue or PR
 
 ##Requirements
 
-SimpleLance requires PHP > 5.4 to run. 
+SimpleLance requires PHP > 5.5 to run. 
 
 We recommend installing and running SimpleLance on Ubuntu x64 LTS. Other server  configurations will likely work.
 
