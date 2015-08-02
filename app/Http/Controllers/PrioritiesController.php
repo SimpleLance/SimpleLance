@@ -13,151 +13,145 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
-class PrioritiesController extends Controller {
+class PrioritiesController extends Controller
+{
+    protected $priority;
 
-	protected $priority;
+    public function __construct(Priority $priority)
+    {
+        $this->priority = $priority;
+    }
 
-	public function __construct(Priority $priority)
-	{
-		$this->priority = $priority;
-	}
+    /**
+     * Display a listing of the resource.
+     * GET /priorities
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $priorities = $this->priority->all();
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /priorities
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		$priorities = $this->priority->all();
+        return View::make('priorities.index')
+                   ->with('priorities', $priorities);
+    }
 
-		return View::make('priorities.index')
-		           ->with('priorities', $priorities);
-	}
+    /**
+     * Show the form for creating a new resource.
+     * GET /priorities/create
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        return View::make('priorities.create');
+    }
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /priorities/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
+    /**
+     * Store a newly created resource in storage.
+     * POST /priorities
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        $input = Input::all();
 
-		return View::make('priorities.create');
-	}
+        $rules = array(
+            'title' => 'required'
+        );
 
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /priorities
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		$input = Input::all();
+        $validator = Validator::make($input, $rules);
 
-		$rules = array(
-			'title' => 'required'
-		);
+        if ($validator->fails()) {
+            return Redirect::route('priorities.create')
+                ->withErrors($validator)
+                ->withInput($input);
+        } else {
+            $priority = $this->priority->create($input);
 
-		$validator = Validator::make($input, $rules);
+            return Redirect::route('priorities.index')->with('success', [
+                'class' => 'success',
+                'text' => 'Priority Created.'
+            ]);
+        }
+    }
 
-		if ($validator->fails()) {
+    /**
+     * Show the form for editing the specified resource.
+     * GET /priorities/{id}/edit
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $thisPriority = $this->priority->find($id);
+        
 
-			return Redirect::route('priorities.create')
-				->withErrors($validator)
-				->withInput($input);
-		} else {
-			$priority = $this->priority->create($input);
+        return View::make('priorities.edit')
+                   ->with('priority', $thisPriority);
+    }
 
-			return Redirect::route('priorities.index')->with('success', [
-				'class' => 'success',
-				'text' => 'Priority Created.'
-			]);
-		}
-	}
+    /**
+     * Update the specified resource in storage.
+     * PUT /priorities/{id}
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update($id)
+    {
+        $input = Input::all();
 
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /priorities/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		$thisPriority = $this->priority->find($id);
-		
+        $rules = array(
+            'title' => 'required'
+        );
 
-		return View::make('priorities.edit')
-		           ->with('priority', $thisPriority);
-	}
+        $validator = Validator::make($input, $rules);
 
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /priorities/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		$input = Input::all();
+        if ($validator->fails()) {
+            return Redirect::route('priorities.edit', $id)
+                ->withErrors($validator)
+                ->withInput($input);
+        } else {
+            $priority = $this->priority->find($id);
+            $priority->title = $input['title'];
 
-		$rules = array(
-			'title' => 'required'
-		);
+            $priority->save();
 
-		$validator = Validator::make($input, $rules);
+            return Redirect::route('priorities.index')->with('success', [
+                'class' => 'success',
+                'text' => 'Priority Updated.'
+            ]);
+        }
+    }
 
-		if ($validator->fails()) {
+    /**
+     * Remove the specified resource from storage.
+     * DELETE /priorities/{id}
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        if ($this->priority->destroy($id)) {
+            $status = [
+                'success' => [
+                    'class' => 'success',
+                    'text' => 'Priority Deleted'
+                ]
+            ];
+        } else {
+            $status = [
+                'error' => [
+                    'class' => 'error',
+                    'text' => 'Unable to Delete Priority'
+                ]
+            ];
+        }
 
-			return Redirect::route('priorities.edit', $id)
-				->withErrors($validator)
-				->withInput($input);
-		} else {
-
-			$priority = $this->priority->find($id);
-			$priority->title = $input['title'];
-
-			$priority->save();
-
-			return Redirect::route('priorities.index')->with('success', [
-				'class' => 'success',
-				'text' => 'Priority Updated.'
-			]);
-		}
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 * DELETE /priorities/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		if ($this->priority->destroy($id))
-		{
-			$status = [
-				'success' => [
-					'class' => 'success',
-					'text' => 'Priority Deleted'
-				]
-			];
-		} else {
-			$status = [
-				'error' => [
-					'class' => 'error',
-					'text' => 'Unable to Delete Priority'
-				]
-			];
-		}
-
-		return Redirect::action('PrioritiesController@index')->with($status);
-	}
-
+        return Redirect::action('PrioritiesController@index')->with($status);
+    }
 }
