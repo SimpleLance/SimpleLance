@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use SimpleLance\Http\Requests\StoreProjectRequest;
 
 class ProjectsController extends Controller {
 
@@ -80,33 +81,16 @@ class ProjectsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(StoreProjectRequest $request)
 	{
 		$input = Input::all();
 
-		$rules = array(
-			'title' => 'required',
-			'description' => 'required',
-			'status_id' => 'required',
-			'priority_id' => 'required',
-			'owner_id' => 'required'
-		);
+		$project = $this->project->create($input);
 
-		$validator = Validator::make($input, $rules);
-
-		if ($validator->fails()) {
-
-			return Redirect::route('projects.create')
-				->withErrors($validator)
-				->withInput($input);
-		} else {
-			$project = $this->project->create($input);
-
-			return Redirect::route('projects.index')->with('success', [
-				'class' => 'success',
-				'text' => 'Project Created.'
-			]);
-		}
+		return Redirect::route('projects.index')->with('success', [
+			'class' => 'success',
+			'text' => 'Project Created.'
+		]);
 	}
 
 	/**
