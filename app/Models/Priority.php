@@ -1,8 +1,8 @@
 <?php
-use SimpleLance\User;
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
-class Priority extends \Eloquent
+use Illuminate\Database\Eloquent\Model;
+
+class Priority extends Model
 {
     protected $fillable = ['title'];
 

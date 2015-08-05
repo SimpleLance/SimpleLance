@@ -1,8 +1,8 @@
 <?php
-use SimpleLance\User;
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
-class Ticket extends \Eloquent
+use Illuminate\Database\Eloquent\Model;
+
+class Ticket extends Model
 {
     protected $fillable = [
         'title',
