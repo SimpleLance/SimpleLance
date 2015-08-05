@@ -25,20 +25,20 @@
             </button>
             <a class="navbar-brand" href="/">{{ Config::get('simplelance.site_name')}}</a>
         </div>
-        @if (Sentry::check())
+        @if (Auth::check())
             <ul class="nav navbar-top-links navbar-right">
-                Hello {{ Sentry::getUser()->username }}!
+                Hello {{ Auth::user()->username }}!
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu">
                         <li>
-                            <a href="/users/{{ Sentry::getUser()->id }}"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            <a href="/users/{{ Auth::user()->id }}"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <a href="{{ url('/auth/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                 </li>
@@ -46,20 +46,20 @@
         @else
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
-                    <a href="/login">Log In</a>
+                    <a href="{{ url('/auth/login') }}">Log In</a>
                 </li>
             </ul>
         @endif
         <div class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
-                    @if (Sentry::check())
-                        @if (Sentry::inGroup(Sentry::findGroupByName('Admins')))
+                    @if (Auth::check())
+                        @if (Auth::user()->is_admin)
                             <!-- Admin Menu -->
                             @include('layouts.menus.admin')
                             <!-- /admin menu -->
                         @endif
-                        @if (Sentry::inGroup(Sentry::findGroupByName('Users')) && !Sentry::inGroup(Sentry::findGroupByName('Admins')))
+                        @if (! Auth::user()->is_admin)
                             <!-- customer menu -->
                             @include('layouts.menus.user')
                             <!-- /customer menu -->
@@ -71,7 +71,7 @@
     </nav>
     <div id="page-wrapper">
         <!-- Notifications -->
-        @include('Sentinel::layouts/notifications')
+        @include('layouts/notifications')
         <!-- ./ notifications -->
 
         @yield('content')

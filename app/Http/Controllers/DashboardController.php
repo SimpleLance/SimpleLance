@@ -4,7 +4,7 @@ use Ticket;
 use Project;
 use Invoice;
 use Illuminate\Support\Facades\View;
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Auth;
 
 class DashboardController extends Controller
 {
@@ -17,8 +17,6 @@ class DashboardController extends Controller
         Project $project,
         Invoice $invoice
     ) {
-        $this->middleware('Sentinel\Middleware\SentryAuth');
-
         $this->ticket = $ticket;
         $this->project = $project;
         $this->invoice = $invoice;
@@ -26,7 +24,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        if (Sentry::inGroup(Sentry::findGroupByName('Admins'))) {
+        if (Auth::user()->is_admin) {
             $data['openTickets'] = $this->ticket->getOpenTickets();
             $data['inProgressTickets'] = $this->ticket->getInProgressTickets();
             $data['openProjects'] = $this->project->getOpenProjects();
