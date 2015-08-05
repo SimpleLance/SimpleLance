@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class InvoiceStatusesTableSeeder extends Seeder {
-
+class InvoiceStatusesTableSeeder extends Seeder
+{
     public function run()
     {
         InvoiceStatus::create([
@@ -22,5 +22,4 @@ class InvoiceStatusesTableSeeder extends Seeder {
             'title' => 'Cancelled'
         ]);
     }
-
 }

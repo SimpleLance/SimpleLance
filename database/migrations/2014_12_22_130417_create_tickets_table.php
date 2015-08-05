@@ -3,37 +3,35 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTicketsTable extends Migration {
+class CreateTicketsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('tickets', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->text('description');
+            $table->integer('priority_id');
+            $table->integer('status_id');
+            $table->integer('owner_id');
+            $table->integer('replies');
+            $table->timestamps();
+        });
+    }
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('tickets', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->string('title');
-			$table->text('description');
-			$table->integer('priority_id');
-			$table->integer('status_id');
-			$table->integer('owner_id');
-			$table->integer('replies');
-			$table->timestamps();
-		});
-	}
 
-
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('tickets');
-	}
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('tickets');
+    }
 }
