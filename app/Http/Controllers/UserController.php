@@ -2,16 +2,16 @@
 
 use Illuminate\Support\Facades\View;
 
-class UserController extends \Sentinel\UserController
+class UserController extends Controller
 {
     public function __construct()
     {
-        $this->beforeFilter('Sentinel\hasAccess:admin', ['only' => ['index', 'create', 'add', 'destroy', 'suspend', 'unsuspend', 'ban', 'unban']]);
+        $this->beforeFilter('auth', ['only' => ['index', 'create', 'add', 'destroy', 'suspend', 'unsuspend', 'ban', 'unban']]);
     }
 
     public function show($id)
     {
-        $user = Sentry::findUserById($id);
+        $user = User::find($id);
 
         if ($user == null || !is_numeric($id)) {
             // @codeCoverageIgnoreStart

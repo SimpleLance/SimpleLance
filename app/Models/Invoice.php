@@ -71,7 +71,7 @@ class Invoice extends Model
     public function getOpenInvoicesByUser()
     {
         return Invoice::where('status_id', '=', '1')
-            ->where('owner_id', '=', Sentry::getUser()->id)
+            ->where('owner_id', '=', Auth::user()->id)
             ->get();
     }
 

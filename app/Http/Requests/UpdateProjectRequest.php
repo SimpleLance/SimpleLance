@@ -13,7 +13,7 @@ class UpdateProjectRequest extends Request
      */
     public function authorize()
     {
-        return Sentry::check();
+        return Auth::check();
     }
 
     /**

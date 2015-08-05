@@ -228,7 +228,7 @@ class TicketsController extends Controller
     {
         $input = Input::all();
 
-        $user_id = Sentry::getUser()->id;
+        $user_id = Auth::user()->id;
 
         $rules = array(
             'status_id' => 'required',

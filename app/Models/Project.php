@@ -40,14 +40,14 @@ class Project extends Model
     public function getOpenProjectsByUser()
     {
         return Project::where('status_id', '=', '1')
-            ->where('owner_id', '=', Sentry::getUser()->id)
+            ->where('owner_id', '=', Auth::user()->id)
             ->get();
     }
 
     public function getInProgressProjectsByUser()
     {
         return Project::where('status_id', '=', '2')
-            ->where('owner_id', '=', Sentry::getUser()->id)
+            ->where('owner_id', '=', Auth::user()->id)
             ->get();
     }
 }
