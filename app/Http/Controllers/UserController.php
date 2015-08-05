@@ -1,7 +1,6 @@
 <?php namespace SimpleLance;
 
 use Illuminate\Support\Facades\View;
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
 class UserController extends \Sentinel\UserController
 {

@@ -3,7 +3,6 @@
 namespace SimpleLance\Http\Requests;
 
 use SimpleLance\Http\Requests\Request;
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
 class UpdateInvoiceRequest extends Request
 {
