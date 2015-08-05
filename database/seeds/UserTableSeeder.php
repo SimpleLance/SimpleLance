@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SimpleLance\User;
 
-class SentryUserSeeder extends Seeder
+
+class UserTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,18 +15,16 @@ class SentryUserSeeder extends Seeder
     {
         DB::table('users')->delete();
 
-        Sentry::getUserProvider()->create(array(
+        User::create(array(
             'email'    => 'admin@admin.com',
             'username' => 'admin',
-            'password' => 'simplelance',
-            'activated' => 1,
+            'password' => Hash::make('simplelance'),
         ));
 
-        Sentry::getUserProvider()->create(array(
+        User::create(array(
             'email'    => 'user@user.com',
             'username' => 'user',
-            'password' => 'simplelance',
-            'activated' => 1,
+            'password' => Hash::make('simplelance'),
         ));
     }
 }

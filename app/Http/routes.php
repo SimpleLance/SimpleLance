@@ -15,12 +15,16 @@
 //
 //Route::get('home', 'HomeController@index');
 
-Route::controllers([
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
-]);
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
-Route::group(['before' => 'Sentinel\auth'], function () {
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+//Route::group(['before' => 'Sentinel\auth'], function () {
     Route::resource('projects', 'ProjectsController');
     Route::resource('tickets', 'TicketsController');
     Route::resource('invoices', 'InvoicesController');
@@ -36,9 +40,9 @@ Route::group(['before' => 'Sentinel\auth'], function () {
     Route::post('/invoices/{id}/items', 'InvoicesController@storeItem');
     Route::get('/invoices{id}/send', 'InvoicesController@send');
 
-});
+//});
 
-Route::group(['before' => 'Sentinel\inGroup:Admins'], function () {
+//Route::group(['before' => 'Sentinel\inGroup:Admins'], function () {
     Route::resource('priorities', 'PrioritiesController', ['except' => ['show']]);
     Route::resource('statuses', 'StatusesController', ['except' => ['show']]);
-});
+//});

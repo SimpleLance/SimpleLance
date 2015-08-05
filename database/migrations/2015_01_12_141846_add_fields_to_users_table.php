@@ -13,13 +13,13 @@ class AddFieldsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->text('address')->after('last_name');
-            $table->text('address2')->after('last_name');
-            $table->text('city')->after('last_name');
-            $table->text('state')->after('last_name');
-            $table->text('post_code')->after('last_name');
-            $table->text('country')->after('last_name');
-            $table->text('phone')->after('last_name');
+            $table->text('address')->after('password');
+            $table->text('address2')->after('password');
+            $table->text('city')->after('password');
+            $table->text('state')->after('password');
+            $table->text('post_code')->after('password');
+            $table->text('country')->after('password');
+            $table->text('phone')->after('password');
         });
     }
 

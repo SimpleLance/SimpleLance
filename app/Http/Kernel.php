@@ -27,8 +27,6 @@ class Kernel extends HttpKernel {
 		'auth' => 'SimpleLance\Http\Middleware\Authenticate',
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
 		'guest' => 'SimpleLance\Http\Middleware\RedirectIfAuthenticated',
-        'sentry.auth' => 'Sentinel\Middleware\SentryAuth',
-        'sentry.admin' => 'Sentinel\Middleware\SentryAdminAccess',
 	];
 
 }

@@ -145,7 +145,6 @@ return [
 		'SimpleLance\Providers\ConfigServiceProvider',
 		'SimpleLance\Providers\EventServiceProvider',
 		'SimpleLance\Providers\RouteServiceProvider',
-        'Sentinel\SentinelServiceProvider',
 		'Collective\Html\HtmlServiceProvider',
 
 	],
