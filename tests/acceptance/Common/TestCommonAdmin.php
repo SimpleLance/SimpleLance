@@ -5,10 +5,9 @@ class TestCommonAdmin
     public static $password = 'simplelance';
     public static function logMeIn($I)
     {
-        $I->amOnPage('/');
-//        $I->click('Log In');
+        $I->amOnPage('/auth/login');
         $I->fillField('email', self::$username);
         $I->fillField('password', self::$password);
-        $I->click('Sign In');
+        $I->click('/html/body/div/div/div/div/div[2]/form/div[4]/div/button');
     }
 }

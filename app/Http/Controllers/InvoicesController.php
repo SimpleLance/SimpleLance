@@ -23,7 +23,7 @@ class InvoicesController extends Controller
         $this->status = $status;
         $this->items = $item;
 
-        $this->beforeFilter('Sentinel\inGroup:Admins',
+        $this->beforeFilter('auth',
             [
                 'only' => [
                     'create',

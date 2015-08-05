@@ -1,5 +1,5 @@
 <li>
-    <a href="/users/{{ Sentry::getUser()->id }}"><i class="fa fa-user fa-fw"></i> User Profile</a>
+    <a href="/users/{{ Auth::user()->id }}"><i class="fa fa-user fa-fw"></i> User Profile</a>
 </li>
 <li>
     <a href="/projects"><i class="fa fa-user fa-fw"></i> Projects</a>

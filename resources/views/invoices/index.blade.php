@@ -12,7 +12,7 @@
         </thead>
         <tbody>
         @foreach ($invoices as $invoice)
-            @if (Sentry::getUser()->hasAccess('admin') || $invoice->owner_id == Sentry::getUser()->id)
+            @if (Auth::user()->is_admin || $invoice->owner_id == Auth::user()->id)
                 <tr>
                     <td>
                         <a href="{{ action('InvoicesController@show', array($invoice->id)) }}">

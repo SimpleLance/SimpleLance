@@ -2,6 +2,7 @@
 
 namespace SimpleLance\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use SimpleLance\Http\Requests\Request;
 
 class UpdateProjectRequest extends Request

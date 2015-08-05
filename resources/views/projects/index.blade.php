@@ -19,7 +19,7 @@
         </thead>
         <tbody>
         @foreach ($projects as $project)
-            @if (Sentry::getUser()->hasAccess('admin') || $project->owner_id == Sentry::getUser()->id)
+            @if (Auth::user()->is_admin || $project->owner_id == Auth::user()->id)
                 <tr>
                     <td style="vertical-align: middle;">
                         <a href="{{ action('ProjectsController@show', array($project->id)) }}">
