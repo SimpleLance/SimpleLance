@@ -19,6 +19,7 @@ class UserTableSeeder extends Seeder
             'email'    => 'admin@admin.com',
             'username' => 'admin',
             'password' => Hash::make('simplelance'),
+            'is_admin' => true,
         ));
 
         User::create(array(
