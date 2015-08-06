@@ -1,7 +1,13 @@
 language: php
 addons:
-  artifacts: true
-  s3_region: us-west-1
+  artifacts:
+    debug: true
+    paths:
+      - PATH_TO_MY_ARTIFACT
+    target_paths: $TRAVIS_BUILD_NUMBER
+    working_dir: WORKING_DIR
+    bucket: simplelance
+    s3_region: us-west-1
 php:
   - "5.5"
   - "5.6"
