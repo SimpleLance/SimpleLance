@@ -12,7 +12,7 @@
 		"phpunit/phpunit": "~4.0",
 		"phpspec/phpspec": "~2.1",
         "barryvdh/laravel-ide-helper": "2.x",
-        "codeception/codeception":"2.0",
+        "codeception/codeception":"~2.1",
         "fzaninotto/faker": "dev-master",
         "way/generators": "~3.0",
         "janhenkgerritsen/codeception-laravel5": "~1.0"
