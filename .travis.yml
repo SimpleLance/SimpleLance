@@ -1,6 +1,7 @@
 language: php
 addons:
   artifacts: true
+    debug: true
 php:
   - "5.5"
   - "5.6"
