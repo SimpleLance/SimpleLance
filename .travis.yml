@@ -5,7 +5,6 @@ addons:
     paths:
       - ./tests/_output
       - ./composer.lock
-      - $(git ls-files -o | tr "\n" ":")
     target_paths: $TRAVIS_BUILD_NUMBER
     bucket: simplelance
     s3_region: us-west-1
