@@ -15,7 +15,7 @@ before_script:
   - mysql -e "GRANT ALL PRIVILEGES ON homestead.* TO 'homestead'@'%' IDENTIFIED BY 'secret'" -uroot
   - screen -S server -d -m phantomjs --webdriver=4444
   - "composer self-update"
-  - "composer install --dev --no-interaction"
+  - "composer install --no-interaction"
   - php artisan migrate --force
   - php artisan db:seed --force
   - ./vendor/bin/codecept build
