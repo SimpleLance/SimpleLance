@@ -1,15 +1,12 @@
 language: php
-sudo: false
 php:
   - "5.5"
   - "5.6"
   - "hhvm"
   - "nightly"
-addons:
-  apt:
-    packages:
-    - phantomjs
-    - screen
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y phantomjs screen
 before_script:
   - cp .env.travis .env
   - mysql -e 'create database homestead;'
