@@ -2,7 +2,7 @@ language: php
 addons:
   artifacts: true
     paths:
-    - tests/_output
+      - $(git ls-files -o tests/_output | tr "\n" ":")
     debug: true
 php:
   - "5.5"
