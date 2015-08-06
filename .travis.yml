@@ -1,6 +1,8 @@
 language: php
 addons:
   artifacts: true
+    paths:
+    - tests/_output
     debug: true
 php:
   - "5.5"
