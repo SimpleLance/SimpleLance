@@ -8,12 +8,11 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver
-        - AcceptanceHelper
         - Db
     config:
         WebDriver:
             url: 'http://localhost/'
-            browser: firefox
+            browser: 'phantomjs'
             window_size: 1024x750
             capabilities:
               webStorageEnabled: true
