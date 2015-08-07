@@ -1,5 +1,7 @@
 language: php
 addons:
+  hosts:
+    - simplelance.dev
   artifacts:
     debug: true
     paths:
@@ -16,6 +18,7 @@ php:
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y phantomjs screen
+  - sudo echo "\n127.0.0.1 simplelance.dev" > /etc/hosts
 before_script:
   - cp .env.travis .env
   - mysql -e 'create database homestead;'
