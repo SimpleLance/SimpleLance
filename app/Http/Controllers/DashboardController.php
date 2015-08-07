@@ -4,7 +4,7 @@ use Ticket;
 use Project;
 use Invoice;
 use Illuminate\Support\Facades\View;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
