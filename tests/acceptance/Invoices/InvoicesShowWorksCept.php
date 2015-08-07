@@ -2,7 +2,7 @@
 $I = new AcceptanceTester($scenario);
 $I->wantTo('ensure that the invoices show works');
 TestCommonAdmin::logMeIn($I);
-$I->amOnPage('/invoices/1');
+$I->amOnPage('/invoices/2');
 $I->see('Invoice', 'h2');
 $I->see('Due Date', 'strong');
 $I->see('Status', 'strong');
