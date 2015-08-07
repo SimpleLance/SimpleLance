@@ -6,8 +6,8 @@ class TestCommonAdmin
     public static function logMeIn($I)
     {
         $I->amOnPage('/auth/login');
-        $I->fillField(['name' => 'email'], self::$username);
-        $I->fillField(['name' => 'password'], self::$password);
+        $I->fillField('//*[@id="email"]', self::$username);
+        $I->fillField('//*[@id="password"]', self::$password);
         $I->click('/html/body/div/div/div/div/div[2]/form/div[4]/div/button');
     }
 }
