@@ -12,7 +12,7 @@ modules:
     config:
         WebDriver:
             url: 'http://localhost/'
-            browser: 'phantomjs'
+            browser: 'firefox'
             window_size: 1024x750
             capabilities:
               webStorageEnabled: true
