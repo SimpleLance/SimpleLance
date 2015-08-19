@@ -13,5 +13,6 @@ modules:
             window_size: 1024x768
             capabilities:
               webStorageEnabled: true
+        - \Helper\Acceptance
         - Db:
             cleanup: true
