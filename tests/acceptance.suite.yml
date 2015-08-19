@@ -14,3 +14,5 @@ modules:
             capabilities:
               webStorageEnabled: true
         - \Helper\Acceptance
+        - Db:
+            cleanup: true
