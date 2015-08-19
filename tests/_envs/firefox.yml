@@ -1,0 +1,4 @@
+modules:
+    enabled:
+         - WebDriver:
+             browser: firefox

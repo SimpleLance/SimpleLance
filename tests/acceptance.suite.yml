@@ -7,12 +7,12 @@
 class_name: AcceptanceTester
 modules:
     enabled:
-        - WebDriver:
-            url: http://simplelance.dev
-            browser: firefox
-            window_size: 1024x768
-            capabilities:
-              webStorageEnabled: true
+         - WebDriver:
+             url: http://localhost:8000
+             browser: phantomjs
+             window_size: 960x1080
+             capabilities:
+                 unexpectedAlertBehaviour: 'accept'
         - \Helper\Acceptance
         - Db:
             cleanup: true
