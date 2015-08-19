@@ -18,6 +18,7 @@ php:
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y phantomjs screen
+  - "sed 's/localhost.localdomain localhost/localhost localhost.localdomain/' /etc/hosts > /tmp/etchoststmp && cat /tmp/etchoststmp | sudo tee /etc/hosts"
 before_script:
   - cp .env.travis .env
   - mysql -e 'create database homestead;'
