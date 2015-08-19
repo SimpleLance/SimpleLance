@@ -2,14 +2,14 @@ language: php
 addons:
   hosts:
     - simplelance.dev
-  artifacts:
-    debug: true
-    paths:
-      - ./tests/_output
-      - ./composer.lock
-    target_paths: $TRAVIS_BUILD_NUMBER
-    bucket: simplelance
-    s3_region: us-west-1
+#  artifacts:
+#    debug: true
+#    paths:
+#      - ./tests/_output
+#      - ./composer.lock
+#    target_paths: $TRAVIS_BUILD_NUMBER
+#    bucket: simplelance
+#    s3_region: us-west-1
 php:
 #  - "5.5"
   - "5.6"
