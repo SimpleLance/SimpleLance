@@ -9,7 +9,7 @@ modules:
     enabled:
         - WebDriver:
             url: 'http://simplelance.dev/'
-            browser: 'firefox'
+            browser: 'phantomjs'
             window_size: 1024x768
             capabilities:
               webStorageEnabled: true
