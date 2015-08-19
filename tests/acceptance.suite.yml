@@ -8,7 +8,7 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: 'http://simplelance.dev/'
+            url: 'http://localhost/'
             browser: 'phantomjs'
             window_size: 1024x768
             capabilities:
