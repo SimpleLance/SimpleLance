@@ -34,6 +34,7 @@
         <div class="col-md-4">
             <p><em>Invoice created: {{ date("D, F d Y",strtotime($invoice->created_at)) }}</em></p>
             <p><em>Last Updated: {{ date("D, F d Y",strtotime($invoice->updated_at)) }} at {{ date("g:i a",strtotime($invoice->updated_at)) }}</em></p>
+            <a href="/invoices{{ $invoice->id }}/send"  class="btn btn-primary">Send Invoice</a>
             <button id="edit-{{ $invoice->id }}" class="btn btn-primary" onClick="location.href='{{ action('InvoicesController@edit', array($invoice->id)) }}'">Edit Invoice</button>
         </div>
         <div class="col-md-2">
@@ -49,21 +50,5 @@
             {!! Form::submit('Delete', ['class' => 'btn btn-danger', 'id' => 'delete-' . $invoice->id]) !!}
             {!! Form::close() !!}
         </div>
-    </div>
-
-    <div class="col-md-2">
-        {!! Form::open(array(
-             'action' => array('InvoicesController@destroy', $invoice->id),
-             'method' => 'delete',
-             'class' => $invoice->id . '-delete',
-             'id' => $invoice->id . '-delete',
-             'name' => $invoice->id . '-delete',
-             'role' => ''
-             )) !!}
-
-        {!! Form::submit('Delete Invoice', ['class' => 'btn btn-danger', 'id' => 'delete-' . $invoice->id]) !!}
-        {!! Form::close() !!}
-        <a href="/invoices{{ $invoice->id }}/send"  class="btn btn-primary">Send Invoice</a>
-        <button id="edit-{{ $invoice->id }}" class="btn btn-primary" onClick="location.href='{{ action('InvoicesController@edit', array($invoice->id)) }}'">Edit Invoice</button>
     </div>
 @stop
