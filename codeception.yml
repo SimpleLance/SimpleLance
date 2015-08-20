@@ -14,6 +14,12 @@ extensions:
         - Codeception\Extension\RunFailed
 modules:
     config:
+        WebDriver:
+            url: 'http://simplelance.dev/'
+            browser: 'firefox'
+            window_size: 1024x768
+            capabilities:
+                webStorageEnabled: true
         Db:
             dsn: 'mysql:host=localhost;dbname=homestead'
             user: 'homestead'
