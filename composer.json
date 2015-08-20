@@ -17,7 +17,8 @@
 	"autoload": {
 		"classmap": [
 			"database",
-            "app/Models"
+            "app/Models",
+		  	"tests/TestCase.php"
 		],
 		"psr-4": {
 			"SimpleLance\\": "app/"
