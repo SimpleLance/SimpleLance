@@ -11,10 +11,10 @@ addons:
 #    bucket: simplelance
 #    s3_region: us-west-1
 php:
-#  - "5.5"
+  - "5.5"
   - "5.6"
-#  - "hhvm"
-#  - "nightly"
+  - "hhvm"
+  - "nightly"
 before_install:
 #  - sudo apt-get update -qq
 #  - sudo apt-get install -y phantomjs screen
