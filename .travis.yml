@@ -1,28 +1,17 @@
+sudo: false
 language: php
 addons:
   hosts:
     - simplelance.dev
-#  artifacts:
-#    debug: true
-#    paths:
-#      - ./tests/_output
-#      - ./composer.lock
-#    target_paths: $TRAVIS_BUILD_NUMBER
-#    bucket: simplelance
-#    s3_region: us-west-1
 php:
   - "5.5"
   - "5.6"
   - "hhvm"
   - "nightly"
-before_install:
-#  - sudo apt-get update -qq
-#  - sudo apt-get install -y phantomjs screen
 before_script:
   - cp .env.travis .env
   - mysql -e 'create database homestead;'
   - mysql -e "GRANT ALL PRIVILEGES ON homestead.* TO 'homestead'@'%' IDENTIFIED BY 'secret'" -uroot
-#  - screen -S server -d -m phantomjs --webdriver=4444
   - "composer self-update"
   - "composer install --no-interaction"
   - php artisan migrate --force
