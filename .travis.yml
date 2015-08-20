@@ -30,4 +30,4 @@ before_script:
   - ./vendor/bin/codecept --version
   - ./vendor/bin/codecept build
 script:
-  - ./vendor/bin/codecept run --env firefox
+  - ./vendor/bin/codecept run
