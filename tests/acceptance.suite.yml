@@ -8,11 +8,11 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://localhost:8000
-            browser: phantomjs
-            window_size: 960x1080
+            url: http://localhost
+            browser: firefox
+            window_size: 1024x768
             capabilities:
-                unexpectedAlertBehaviour: 'accept'
+              webStorageEnabled: true
         - \Helper\Acceptance
         - Db:
             cleanup: true
