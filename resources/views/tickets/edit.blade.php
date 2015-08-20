@@ -56,7 +56,7 @@
                 {!! Form::submit('Submit Changes', array('class' => 'btn btn-primary', 'id' => 'update')) !!}
             </div>
         </div>
-        {!! Form::close()}}
+        {!! Form::close() !!}
     </div>
 @stop
 
