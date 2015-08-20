@@ -8,11 +8,11 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://localhost
-            browser: firefox
+            url: 'http://simplelance.dev/'
+            browser: 'firefox'
             window_size: 1024x768
             capabilities:
               webStorageEnabled: true
         - \Helper\Acceptance
-        - Db:
+        - DB
             cleanup: true
