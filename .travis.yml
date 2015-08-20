@@ -16,18 +16,16 @@ php:
 #  - "hhvm"
 #  - "nightly"
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y phantomjs screen
+#  - sudo apt-get update -qq
+#  - sudo apt-get install -y phantomjs screen
 before_script:
   - cp .env.travis .env
   - mysql -e 'create database homestead;'
   - mysql -e "GRANT ALL PRIVILEGES ON homestead.* TO 'homestead'@'%' IDENTIFIED BY 'secret'" -uroot
-  - screen -S server -d -m phantomjs --webdriver=4444
+#  - screen -S server -d -m phantomjs --webdriver=4444
   - "composer self-update"
   - "composer install --no-interaction"
   - php artisan migrate --force
   - php artisan db:seed --force
-  - ./vendor/bin/codecept --version
-  - ./vendor/bin/codecept build
 script:
-  - ./vendor/bin/codecept run
+  - ./vendor/bin/phpunit
