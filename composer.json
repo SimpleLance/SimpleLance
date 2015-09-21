@@ -18,7 +18,7 @@
 		"classmap": [
 			"database",
             "app/Models",
-		  	"tests/TestCase.php"
+		  	"unit_tests/TestCase.php"
 		],
 		"psr-4": {
 			"SimpleLance\\": "app/"
