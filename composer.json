@@ -10,9 +10,9 @@
 	},
 	"require-dev": {
 	  	"phpunit/phpunit": "4.8.*",
-        "barryvdh/laravel-ide-helper": "2.x",
         "fzaninotto/faker": "dev-master",
-        "way/generators": "~3.0"
+        "way/generators": "~3.0",
+	  	"codeception/codeception": "~2.1"
 	},
 	"autoload": {
 		"classmap": [
