@@ -26,7 +26,7 @@ class UpdateInvoiceRequest extends Request
     {
         return [
             'due' => 'required',
-            'status_id' => 'required',
+            'status_id' => 'required|exists:statuses,id',
             'owner_id' => 'required'
         ];
     }

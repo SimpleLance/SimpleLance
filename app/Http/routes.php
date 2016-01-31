@@ -11,6 +11,19 @@
 |
 */
 
+
+Route::get('/test', function () {
+
+$invoices = Invoice::with('status')->get();
+
+    foreach ($invoices as $invoice)
+    {
+        echo $invoice->status->title . '<br>';
+
+    }
+});
+
+
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -37,7 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('tickets/{id}/reply', 'TicketsController@reply');
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
     # Override Sentinel's Default user routes with our own filter requirement
-    Route::get('/users/{id}', ['as' => 'sl_user.show', 'uses' => 'SimpleLance\UserController@show'])->where('id', '[0-9]+');
+//    Route::get('/users/{id}', ['as' => 'sl_user.show', 'uses' => 'SimpleLance\UserController@show'])->where('id', '[0-9]+');
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
     # Manual routes to allow for invoice creation
     Route::get('/invoices/{id}/items', 'InvoicesController@items');
